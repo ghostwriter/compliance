@@ -1,36 +1,36 @@
-name: "Automated Compliance"
-
-on:
-  pull_request:
-  push:
-    branches:
-      - "main"
-      - "[0-9]+.[0-9]+.x"
-  schedule:
-    - cron: "0 * * * *" # Runs hourly
-
-jobs:
-  matrix:
-    name: Generate job matrix
-    runs-on: ubuntu-latest
-    outputs:
-      jobs: ${{ steps.matrix.outputs.jobs }}
-    steps:
-      - name: Determine CI Jobs
-        id: jobs
-        uses: ghostwriter/automated-compliance@main
-        with:
-          command: generate
-  qa:
-    name: QA Checks
-    needs: [matrix]
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJSON(needs.matrix.outputs.jobs) }}
-    steps:
-      - name: ${{ matrix.name }}
-        uses: ghostwriter/automated-compliance@main
-        with:
-          command: process
-          job: ${{ matrix.job }}
+#name: "Automated Compliance"
+#
+#on:
+#  pull_request:
+#  push:
+#    branches:
+#      - "main"
+#      - "[0-9]+.[0-9]+.x"
+#  schedule:
+#    - cron: "0 * * * *" # Runs hourly
+#
+#jobs:
+#  matrix:
+#    name: Generate job matrix
+#    runs-on: ubuntu-latest
+#    outputs:
+#      jobs: ${{ steps.matrix.outputs.jobs }}
+#    steps:
+#      - name: Determine CI Jobs
+#        id: jobs
+#        uses: ghostwriter/automated-compliance@main
+#        with:
+#          command: matrix
+#  qa:
+#    name: QA Checks
+#    needs: [matrix]
+#    runs-on: ${{ matrix.os }}
+#    strategy:
+#      fail-fast: false
+#      matrix: ${{ fromJSON(needs.matrix.outputs.jobs) }}
+#    steps:
+#      - name: ${{ matrix.name }}
+#        uses: ghostwriter/automated-compliance@main
+#        with:
+#          command: process
+#          job: ${{ matrix.job }}
