@@ -61,6 +61,9 @@
             "Ghostwriter\\wip\\Tests\\": "tests/"
         }
     },
+    "bin": [
+        "bin/act"
+    ],
     "config": {
         "allow-plugins": {
             "infection/extension-installer": true
