@@ -1,11 +1,12 @@
 {
-    "name": "ghostwriter/wip",
-    "description": "Here be dragons",
+    "name": "ghostwriter/automated-compliance",
+    "description": "Application to automatically configure and execute multiple CI/CD & QA Testing tools on any platform via GitHub Actions.",
     "license": "BSD-3-Clause",
-    "type": "library",
+    "type": "project",
     "keywords": [
         "ghostwriter",
-        "wip"
+        "automated-compliance",
+        "github-actions"
     ],
     "authors": [
         {
@@ -15,13 +16,13 @@
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/ghostwriter/wip",
+    "homepage": "https://github.com/ghostwriter/automated-compliance",
     "support": {
-        "issues": "https://github.com/ghostwriter/wip/issues",
-        "forum": "https://github.com/ghostwriter/wip/discussions",
-        "source": "https://github.com/ghostwriter/wip",
-        "docs": "https://github.com/ghostwriter/wip",
-        "rss": "https://github.com/ghostwriter/wip/releases.atom"
+        "issues": "https://github.com/ghostwriter/automated-compliance/issues",
+        "forum": "https://github.com/ghostwriter/automated-compliance/discussions",
+        "source": "https://github.com/ghostwriter/automated-compliance",
+        "docs": "https://github.com/ghostwriter/automated-compliance",
+        "rss": "https://github.com/ghostwriter/automated-compliance/releases.atom"
     },
     "funding": [
         {
@@ -61,7 +62,7 @@
         "files": []
     },
     "bin": [
-        "bin/act"
+        "bin/automated-compliance"
     ],
     "config": {
         "allow-plugins": {
