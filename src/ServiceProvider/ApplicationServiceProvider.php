@@ -20,12 +20,12 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
         $container->bind(DispatcherInterface::class, Dispatcher::class);
 
         $container->set('app.name', 'Automated Compliance');
-        $container->set('app.package', InstalledVersions::getRootPackage()['name'] ?? 'ghostwriter/automated-compliance');
+        $container->set('app.package', InstalledVersions::getRootPackage()['name']);
         $container->set('app.version', InstalledVersions::getPrettyVersion($container->get('app.package')));
 
         $container->extend(
             Application::class,
-            static function ($container, $application): object {
+            static function (ContainerInterface $container, object $application): Application {
                 /** @var Application $application */
                 $application->setAutoExit(false);
                 $application->setCatchExceptions(false);
