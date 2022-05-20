@@ -16,9 +16,10 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
 {
     public function __invoke(ContainerInterface $container): void
     {
+        $container->bind(Application::class);
         $container->bind(DispatcherInterface::class, Dispatcher::class);
 
-        $container->set('app.name', 'Automated Compliance Test');
+        $container->set('app.name', 'Automated Compliance');
         $container->set('app.package', InstalledVersions::getRootPackage()['name'] ?? 'ghostwriter/automated-compliance');
         $container->set('app.version', InstalledVersions::getPrettyVersion($container->get('app.package')));
 
