@@ -1,25 +1,29 @@
-# wip
+# Automated Compliance
 
-[![Continuous Integration](https://github.com/ghostwriter/wip/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/ghostwriter/wip/actions/workflows/continuous-integration.yml)
-[![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/wip?color=8892bf)](https://www.php.net/supported-versions)
-[![Type Coverage](https://shepherd.dev/github/ghostwriter/wip/coverage.svg)](https://shepherd.dev/github/ghostwriter/wip)
-[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/wip)](https://packagist.org/packages/ghostwriter/wip)
-[![Downloads](https://badgen.net/packagist/dt/ghostwriter/wip?color=blue)](https://packagist.org/packages/ghostwriter/wip)
+[![Continuous Integration](https://github.com/ghostwriter/automated-compliance/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/ghostwriter/automated-compliance/actions/workflows/continuous-integration.yml)
+[![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/automated-compliance?color=8892bf)](https://www.php.net/supported-versions)
+[![Type Coverage](https://shepherd.dev/github/ghostwriter/automated-compliance/coverage.svg)](https://shepherd.dev/github/ghostwriter/automated-compliance)
+[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/automated-compliance)](https://packagist.org/packages/ghostwriter/automated-compliance)
+[![Downloads](https://badgen.net/packagist/dt/ghostwriter/automated-compliance?color=blue)](https://packagist.org/packages/ghostwriter/automated-compliance)
 
-work in progress
+Automatically configure and execute multiple `CI/CD` & `QA Testing` tools on any platform via `GitHub Action`.
 
 ## Installation
 
 You can install the package via composer:
 
 ``` bash
-composer require ghostwriter/wip
+composer require ghostwriter/automated-compliance
 ```
 
 ## Usage
 
-```php
-// wip
+```bash
+# work in progress
+$ automated-compliance init           # Create `.github/workflows/automated-compliance.yml` workflow file
+$ automated-compliance matrix         # Determine CI Jobs for GitHub Actions
+$ automated-compliance process        # Executes all Jobs (the result of `automated-compliance matrix` command)
+$ automated-compliance process {job}  # Executes a specific Job 
 ```
 
 ## Testing
@@ -44,7 +48,7 @@ Maintaining open source software is a thankless, time-consuming job.
 
 Sponsorships are one of the best ways to contribute to the long-term sustainability of an open-source licensed project.
 
-Please consider giving back, to fund the continued development of `ghostwriter/wip`, by sponsoring me here on GitHub.
+Please consider giving back, to fund the continued development of `ghostwriter/automated-compliance`, by sponsoring me here on GitHub.
 
 [[Become a GitHub Sponsor](https://github.com/sponsors/ghostwriter)]
 
@@ -55,7 +59,7 @@ Please consider helping your company become a GitHub Sponsor, to support the ope
 ## Credits
 
 - [Nathanael Esayeas](https://github.com/ghostwriter)
-- [All Contributors](https://github.com/ghostwriter/wip/contributors)
+- [All Contributors](https://github.com/ghostwriter/automated-compliance/contributors)
 
 ## License
 
