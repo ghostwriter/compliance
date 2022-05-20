@@ -49,17 +49,15 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Ghostwriter\\wip\\": "src/"
+            "Ghostwriter\\AutomatedCompliance\\": "src/"
         },
-        "files": [
-            "src/constants.php",
-            "src/functions.php"
-        ]
+        "files": []
     },
     "autoload-dev": {
         "psr-4": {
-            "Ghostwriter\\wip\\Tests\\": "tests/"
-        }
+            "Ghostwriter\\AutomatedCompliance\\Tests\\": "tests/"
+        },
+        "files": []
     },
     "bin": [
         "bin/act"
