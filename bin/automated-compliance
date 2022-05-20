@@ -3,4 +3,4 @@
 
 declare(strict_types=1);
 
-require __DIR__ . DIRECTORY_SEPARATOR . 'act.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'automated-compliance.php';
