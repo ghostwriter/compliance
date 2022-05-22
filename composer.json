@@ -1,11 +1,12 @@
 {
-    "name": "ghostwriter/automated-compliance",
-    "description": "Application to automatically configure and execute multiple CI/CD & QA Testing tools on any platform via GitHub Actions.",
+    "name": "ghostwriter/compliance-automation",
+    "description": "Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.",
     "license": "BSD-3-Clause",
     "type": "project",
     "keywords": [
         "ghostwriter",
-        "automated-compliance",
+        "compliance-automation",
+        "continuous-integration"
         "github-actions"
     ],
     "authors": [
@@ -16,13 +17,13 @@
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/ghostwriter/automated-compliance",
+    "homepage": "https://github.com/ghostwriter/compliance-automation",
     "support": {
-        "issues": "https://github.com/ghostwriter/automated-compliance/issues",
-        "forum": "https://github.com/ghostwriter/automated-compliance/discussions",
-        "source": "https://github.com/ghostwriter/automated-compliance",
-        "docs": "https://github.com/ghostwriter/automated-compliance",
-        "rss": "https://github.com/ghostwriter/automated-compliance/releases.atom"
+        "issues": "https://github.com/ghostwriter/compliance-automation/issues",
+        "forum": "https://github.com/ghostwriter/compliance-automation/discussions",
+        "source": "https://github.com/ghostwriter/compliance-automation",
+        "docs": "https://github.com/ghostwriter/compliance-automation",
+        "rss": "https://github.com/ghostwriter/compliance-automation/releases.atom"
     },
     "funding": [
         {
@@ -62,7 +63,7 @@
         "files": []
     },
     "bin": [
-        "bin/automated-compliance"
+        "bin/ghostwriter-compliance-automation"
     ],
     "config": {
         "allow-plugins": {
