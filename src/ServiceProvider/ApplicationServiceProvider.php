@@ -31,7 +31,7 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
                 $application->setCatchExceptions(false);
 
                 foreach ($container->tagged(Command::class) as $command) {
-                    $application->add($container->get($command));
+                    $application->add($container->build($command));
                 }
 
                 return $application;
