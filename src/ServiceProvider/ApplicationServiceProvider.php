@@ -25,7 +25,7 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
 
         $container->extend(
             Application::class,
-            static function (ContainerInterface $container, object $application): Application {
+            static function (ContainerInterface $container, object $application): object {
                 /** @var Application $application */
                 $application->setAutoExit(false);
                 $application->setCatchExceptions(false);
