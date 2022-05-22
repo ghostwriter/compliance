@@ -1,6 +1,6 @@
 {
     "name": "ghostwriter/compliance",
-    "description": "Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.",
+    "description": "Compliance Automation for PHP - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.",
     "license": "BSD-3-Clause",
     "type": "project",
     "keywords": [
