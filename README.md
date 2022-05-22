@@ -1,4 +1,4 @@
-# Automated Compliance
+# Compliance Automation
 
 [![Continuous Integration](https://github.com/ghostwriter/compliance-automation/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/ghostwriter/compliance-automation/actions/workflows/continuous-integration.yml)
 [![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/compliance-automation?color=8892bf)](https://www.php.net/supported-versions)
