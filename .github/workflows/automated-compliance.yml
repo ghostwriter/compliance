@@ -1,3 +1,16 @@
+name: "Automated Compliance"
+
+on:
+  pull_request:
+  
+jobs:
+  matrix:
+    name: testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: 'echo "it works!"'
+
 #name: "Automated Compliance"
 #
 #on:
