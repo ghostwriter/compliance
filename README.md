@@ -1,10 +1,10 @@
-# Compliance Automation
+# Compliance Automation for PHP
 
-[![Continuous Integration](https://github.com/ghostwriter/compliance-automation/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/ghostwriter/compliance-automation/actions/workflows/continuous-integration.yml)
-[![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/compliance-automation?color=8892bf)](https://www.php.net/supported-versions)
-[![Type Coverage](https://shepherd.dev/github/ghostwriter/compliance-automation/coverage.svg)](https://shepherd.dev/github/ghostwriter/compliance-automation)
-[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/compliance-automation)](https://packagist.org/packages/ghostwriter/compliance-automation)
-[![Downloads](https://badgen.net/packagist/dt/ghostwriter/compliance-automation?color=blue)](https://packagist.org/packages/ghostwriter/compliance-automation)
+[![Continuous Integration](https://github.com/ghostwriter/compliance/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/ghostwriter/compliance/actions/workflows/continuous-integration.yml)
+[![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/compliance?color=8892bf)](https://www.php.net/supported-versions)
+[![Type Coverage](https://shepherd.dev/github/ghostwriter/compliance/coverage.svg)](https://shepherd.dev/github/ghostwriter/compliance)
+[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/compliance)](https://packagist.org/packages/ghostwriter/compliance)
+[![Downloads](https://badgen.net/packagist/dt/ghostwriter/compliance?color=blue)](https://packagist.org/packages/ghostwriter/compliance)
 
 Automatically configure and execute multiple `CI/CD` & `QA Testing` tools on any platform via `GitHub Action`.
 
@@ -13,17 +13,16 @@ Automatically configure and execute multiple `CI/CD` & `QA Testing` tools on any
 You can install the package via composer:
 
 ``` bash
-composer require ghostwriter/compliance-automation
+composer require ghostwriter/compliance
 ```
 
 ## Usage
 
 ```bash
-# work in progress
-$ ghostwriter-compliance-automation init           # Create `.github/workflows/compliance-automation.yml` workflow file
-$ ghostwriter-compliance-automation matrix         # Determine CI Jobs for GitHub Actions
-$ ghostwriter-compliance-automation process        # Executes all Jobs (the result of `matrix` command)
-$ ghostwriter-compliance-automation process {job}  # Executes a specific Job 
+$ ghostwriter-compliance init           # Create `.github/workflows/compliance.yml` workflow file
+$ ghostwriter-compliance matrix         # Determine CI Jobs for GitHub Actions
+$ ghostwriter-compliance process        # Executes all Jobs via GitHub Actions (the result of `matrix` command)
+$ ghostwriter-compliance process {job}  # Executes a specific Job
 ```
 
 ## Testing
@@ -48,7 +47,7 @@ Maintaining open source software is a thankless, time-consuming job.
 
 Sponsorships are one of the best ways to contribute to the long-term sustainability of an open-source licensed project.
 
-Please consider giving back, to fund the continued development of `ghostwriter/compliance-automation`, by sponsoring me here on GitHub.
+Please consider giving back, to fund the continued development of `ghostwriter/compliance`, by sponsoring me here on GitHub.
 
 [[Become a GitHub Sponsor](https://github.com/sponsors/ghostwriter)]
 
@@ -59,7 +58,7 @@ Please consider helping your company become a GitHub Sponsor, to support the ope
 ## Credits
 
 - [Nathanael Esayeas](https://github.com/ghostwriter)
-- [All Contributors](https://github.com/ghostwriter/compliance-automation/contributors)
+- [All Contributors](https://github.com/ghostwriter/compliance/contributors)
 
 ## License
 
