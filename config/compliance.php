@@ -11,9 +11,15 @@ return static function (ComplianceConfiguration $complianceConfig): void {
 
     $complianceConfig->skip([
         PhpVersion::PHP_82,
-        Tool::PHP_CS_FIXER => [PhpVersion::PHP_81],
-        Tool::COMPOSER_REQUIRE_CHECKER => [PhpVersion::PHP_81],
         Tool::CODECEPTION => [PhpVersion::PHP_80],
+        Tool::COMPOSER_REQUIRE_CHECKER => [PhpVersion::PHP_81],
+        Tool::GRUMPHP => [PhpVersion::PHP_82],
+        Tool::PHAN => [PhpVersion::PHP_82],
+        Tool::PHP_CODE_SNIFFER => [PhpVersion::PHP_82],
+        Tool::PHP_CS_FIXER => [PhpVersion::PHP_82],
+        Tool::PHP_MESS_DETECTOR => [PhpVersion::PHP_82],
+        Tool::PHP_METRICS => [PhpVersion::PHP_82],
+        Tool::PHPSTAN => [PhpVersion::PHP_82],
         __DIR__ . '*/tests/Fixture/*',
         __DIR__ . '*/vendor/*',
     ]);
