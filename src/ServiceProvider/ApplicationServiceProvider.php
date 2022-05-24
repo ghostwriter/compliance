@@ -2,42 +2,48 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\AutomatedCompliance\ServiceProvider;
+namespace Ghostwriter\Compliance\ServiceProvider;
 
-use Composer\InstalledVersions;
+use Ghostwriter\Compliance\Event\ChangeWorkingDirectoryEvent;
+use Ghostwriter\Compliance\Event\OutputEvent;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use Ghostwriter\Container\Contract\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
-use Ghostwriter\EventDispatcher\Dispatcher;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\Command;
+use Throwable;
+use const DIRECTORY_SEPARATOR;
+use function file_exists;
+use function getcwd;
 
 final class ApplicationServiceProvider implements ServiceProviderInterface
 {
+    private array $providers = [EventServiceProvider::class, ConsoleServiceProvider::class];
+
+    /**
+     * @throws Throwable
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        /** @var class-string<ServiceProviderInterface> $provider */
+        foreach ($this->providers as $provider) {
+            $container->build($provider);
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
     public function __invoke(ContainerInterface $container): void
     {
-        $container->bind(Application::class);
-        $container->bind(DispatcherInterface::class, Dispatcher::class);
+        $complianceConfigPath = getcwd() . DIRECTORY_SEPARATOR . 'compliance.php';
 
-        $container->set('app.name', 'Automated Compliance');
-        $container->set('app.package', InstalledVersions::getRootPackage()['name']);
-        $container->set('app.version', InstalledVersions::getPrettyVersion($container->get('app.package')));
+        $dispatcher = $container->get(DispatcherInterface::class);
 
-        $container->extend(
-            Application::class,
-            static function (ContainerInterface $container, object $application): object {
-                /** @var Application $application */
-                $application->setAutoExit(false);
-                $application->setCatchExceptions(false);
+        $changeWorkingDirectoryEvent = $container->build(ChangeWorkingDirectoryEvent::class);
 
-                foreach ($container->tagged(Command::class) as $command) {
-                    /** @var Command $command */
-                    $command = $container->build($command);
-                    $application->add($command);
-                }
+        $dispatcher->dispatch($changeWorkingDirectoryEvent);
 
-                return $application;
-            }
-        );
+        if (file_exists($complianceConfigPath)) {
+            $dispatcher->dispatch(new OutputEvent('Found config path: ' . $complianceConfigPath));
+        }
     }
 }

@@ -19,10 +19,14 @@ composer require ghostwriter/compliance
 ## Usage
 
 ```bash
-$ ghostwriter-compliance init           # Create `.github/workflows/compliance.yml` workflow file
-$ ghostwriter-compliance matrix         # Determine CI Jobs for GitHub Actions
-$ ghostwriter-compliance process        # Executes all Jobs via GitHub Actions (the result of `matrix` command)
-$ ghostwriter-compliance process {job}  # Executes a specific Job
+# Create `.github/workflows/compliance.yml` workflow file
+ghostwriter-compliance init
+
+# Determine CI Jobs for GitHub Actions
+ghostwriter-compliance matrix
+
+# Executes a specific Job
+ghostwriter-compliance run {job}
 ```
 
 ## Testing
