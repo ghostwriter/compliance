@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\AutomatedCompliance\Tests\Unit;
+namespace Ghostwriter\Compliance\Tests\Unit;
 
-use Ghostwriter\AutomatedCompliance\Foo;
+use Ghostwriter\Compliance\Foo;
 
 /**
- * @coversDefaultClass \Ghostwriter\AutomatedCompliance\Foo
+ * @coversDefaultClass \Ghostwriter\Compliance\Foo
  *
  * @internal
  *
