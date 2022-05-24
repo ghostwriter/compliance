@@ -1,4 +1,4 @@
-name: "Compliance Automation"
+name: Compliance Automation
 
 on:
     push:
