@@ -1,22 +1,18 @@
 name: Docker Build
 
 on:
+  pull_request:
   push:
     branches:
       - '**'
     tags:
       - 'v*.*.*'
-  pull_request:
-  workflow_dispatch:
   schedule:
     - cron: "0 * * * *" # Runs every hour, on the hour.
+  workflow_dispatch:
 
 permissions:
-  packages: "write"
-
-concurrency:
-  group: ${{ github.head_ref || github.ref }}-${{ github.workflow }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  packages: write
 
 env:
   SUPPORTED_PLATFORMS: "linux/amd64,linux/arm64,linux/arm/v7"
