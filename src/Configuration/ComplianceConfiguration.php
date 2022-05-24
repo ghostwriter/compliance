@@ -6,9 +6,10 @@ namespace Ghostwriter\Compliance\Configuration;
 
 use Ghostwriter\Compliance\Configuration\ValueObject\ComplianceConfigurationOption;
 use Ghostwriter\Compliance\ValueObject\ComposerDependency;
-use Ghostwriter\Compliance\ValueObject\ComposerOptions;
 use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use Ghostwriter\Container\Contract\ContainerInterface;
+use RuntimeException;
+use function array_key_exists;
 use function sprintf;
 
 final class ComplianceConfiguration
@@ -29,9 +30,11 @@ final class ComplianceConfiguration
      */
     public function composerDependency(string $dependency): void
     {
-//        COMPOSER_DEPENDENCY
-//        ConfigurationOption::class
-        $this->container->set($this->option(ComplianceConfigurationOption::COMPOSER_DEPENDENCY), $dependency);
+        if (! array_key_exists($dependency, ComposerDependency::OPTIONS)) {
+            throw new RuntimeException();
+        }
+
+        $this->container->set(ComposerDependency::CONFIG, $dependency);
     }
 
     /**
@@ -45,6 +48,11 @@ final class ComplianceConfiguration
     public function getExclude(): array
     {
         return $this->exclude;
+    }
+
+    public function getInclude(): array
+    {
+        return $this->include;
     }
 
     public function paths(array $array)
