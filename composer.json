@@ -35,7 +35,7 @@
     "require": {
         "php": ">=8.0,<8.2",
         "composer-runtime-api": "^2.2",
-        "composer-plugin-api": "^2.3",
+        "composer-plugin-api": "^2.2",
         "composer/semver": "^3.3.2",
         "ghostwriter/container": "^0.3.2",
         "ghostwriter/event-dispatcher": "^0.2.0",
