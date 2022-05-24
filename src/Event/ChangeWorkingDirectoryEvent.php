@@ -17,15 +17,12 @@ final class ChangeWorkingDirectoryEvent extends AbstractEvent
     /**
      * @throws Throwable
      */
-    public function __construct(DispatcherInterface $dispatcher, InputInterface $input, SymfonyStyle $output)
+    public function __construct(DispatcherInterface $dispatcher, ChangeWorkingDirectoryCommand $command, SymfonyStyle $output)
     {
-        $cwd = new ChangeWorkingDirectoryCommand($dispatcher, $output);
+        $input = new ArrayInput([
+            '--current-working-directory' => getcwd(),
+        ], $command->getDefinition());
 
-        $arrayInput = new ArrayInput([
-            //            '--current-working-directory'=>getcwd(),
-            '-cwd'=>getcwd(),
-        ], $cwd->getDefinition());
-
-        parent::__construct($dispatcher, $arrayInput, $output);
+        parent::__construct($dispatcher, $input, $output);
     }
 }
