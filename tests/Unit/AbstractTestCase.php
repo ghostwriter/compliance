@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\AutomatedCompliance\Tests\Unit;
+namespace Ghostwriter\Compliance\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
