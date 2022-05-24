@@ -6,10 +6,27 @@ namespace Ghostwriter\Compliance\ValueObject;
 
 final class PhpVersion
 {
+    /**
+     * @var string
+     */
+    public const CONFIG = 'compliance:configuration:php:version';
+
+    /**
+     * @var int
+     */
+    public const CURRENT_LATEST = self::PHP_74;
+
+    /**
+     * @var int
+     */
+    public const CURRENT_STABLE = self::PHP_74;
+
+    /**
+     * @var array<int,string>
+     */
     public const END_OF_LIFE_DATE = [
         self::PHP_10 => '2000-10-20',
         self::PHP_20 => '2000-10-20',
-
         self::PHP_30 => '2000-10-20',
         self::PHP_40 => '2001-06-23',
         self::PHP_41 => '2002-03-12',
@@ -152,10 +169,8 @@ final class PhpVersion
     public const PHP_82 = 80200;
 
     /**
-     * @var int
+     * @var array<int,string>
      */
-    public const PHP_CURRENT_STABLE = self::PHP_74;
-
     public const RELEASE_DATE = [
         self::PHP_10 => '1995-06-08',
         self::PHP_20 => '1997-11-01',
