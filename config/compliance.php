@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 use Ghostwriter\Compliance\Configuration\ComplianceConfiguration;
-use Ghostwriter\Compliance\Configuration\ValueObject\ComplianceConfigurationOption;
-use Ghostwriter\Compliance\Tool\PHPUnit;
 use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use Ghostwriter\Compliance\ValueObject\Tool;
 
@@ -12,12 +10,12 @@ return static function (ComplianceConfiguration $complianceConfig): void {
     $complianceConfig->phpVersion(PhpVersion::PHP_CURRENT_STABLE);
 
     $complianceConfig->skip([
-        PHPUnit::class => [],
-        PhpVersion::PHP_52 => [],
+        PhpVersion::PHP_82,
+        Tool::PHP_CS_FIXER => [PhpVersion::PHP_81],
+        Tool::COMPOSER_REQUIRE_CHECKER => [PhpVersion::PHP_81],
         Tool::CODECEPTION => [PhpVersion::PHP_80],
         __DIR__ . '*/tests/Fixture/*',
         __DIR__ . '*/vendor/*',
-        ComplianceConfigurationOption::class,
     ]);
 
     $complianceConfig->paths([
