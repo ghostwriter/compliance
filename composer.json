@@ -112,7 +112,7 @@
             "@docker:run"
         ],
         "docker:build": "docker buildx build --pull --tag compliance .",
-        "docker:run": "docker run -e GITHUB_TOKEN=github-token -e SIGNING_SECRET_KEY=secret-key compliance",
+        "docker:run": "docker run -v $(PWD):/github/workspace -w=/github/workspace -e GITHUB_TOKEN=github-token -e SIGNING_SECRET_KEY=secret-key compliance",
         "infection": [
             "@putenv XDEBUG_MODE=coverage",
             "roave-infection-static-analysis-plugin"
