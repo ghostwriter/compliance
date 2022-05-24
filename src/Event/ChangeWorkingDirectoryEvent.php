@@ -20,8 +20,7 @@ final class ChangeWorkingDirectoryEvent extends AbstractEvent
         DispatcherInterface $dispatcher,
         ChangeWorkingDirectoryCommand $command,
         SymfonyStyle $output
-    )
-    {
+    ) {
         $input = new ArrayInput([
             '--current-working-directory' => getcwd(),
         ], $command->getDefinition());
