@@ -7,7 +7,6 @@ namespace Ghostwriter\Compliance;
 use Composer\InstalledVersions;
 use Ghostwriter\Compliance\ServiceProvider\ApplicationServiceProvider;
 use Ghostwriter\Container\Contract\ContainerInterface;
-use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
 use RuntimeException;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
@@ -26,8 +25,6 @@ final class Compliance extends SymfonyApplication
     private const PACKAGE = 'ghostwriter/compliance';
 
     private ContainerInterface $container;
-
-    private DispatcherInterface $dispatcher;
 
     /**
      * @throws Throwable
