@@ -47,6 +47,7 @@
     },
     "require-dev": {
         "composer/composer": "^2.2||^2.3",
+        "bamarni/composer-bin-plugin": "^1.5",
         "phpbench/phpbench": "^1.2.5",
         "phpunit/phpunit": "^9.5.20",
         "psalm/plugin-phpunit": "^0.16.1",
@@ -76,7 +77,8 @@
     ],
     "config": {
         "allow-plugins": {
-            "infection/extension-installer": true
+            "infection/extension-installer": true,
+            "bamarni/composer-bin-plugin": true
         },
         "classmap-authoritative": true,
         "discard-changes": true,
