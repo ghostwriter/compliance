@@ -16,7 +16,11 @@ use function getcwd;
 
 final class ApplicationServiceProvider implements ServiceProviderInterface
 {
-    private array $providers = [EventServiceProvider::class, ConsoleServiceProvider::class];
+    private array $providers = [
+        ConsoleServiceProvider::class,
+        EventServiceProvider::class,
+        MatrixServiceProvider::class,
+    ];
 
     /**
      * @throws Throwable
