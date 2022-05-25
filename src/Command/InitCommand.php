@@ -15,7 +15,7 @@ final class InitCommand extends AbstractCommand
 {
     protected function configure(): void
     {
-        $this->setDescription('Generate a "compliance.yml" workflow file.');
+        $this->setDescription('Creates a "compliance.yml" workflow file.');
         $this->addArgument(
             'workflow',
             InputArgument::OPTIONAL,
