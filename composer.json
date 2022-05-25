@@ -89,10 +89,14 @@
         "sort-packages": true
     },
     "scripts": {
+        "box": [
+            "box compile"
+        ],
         "cache:clear": [
             "rm -fr ./.cache"
         ],
         "check": [
+            "@box",
             "@composer validate",
             "@normalizer",
             "@cs-check",
