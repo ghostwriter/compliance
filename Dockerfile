@@ -11,6 +11,8 @@ WORKDIR /app
 
 COPY / /app
 
-RUN composer install --no-autoloader --no-interaction
+RUN COMPOSER_CACHE_DIR=/dev/null composer install --no-dev --no-autoloader --no-interaction
+
+RUN composer dump-autoload -a --no-dev
 
 ENTRYPOINT ["/app/bin/compliance"]
