@@ -22,7 +22,7 @@ abstract class AbstractTool
 
     public function isPresent(): bool
     {
-        $path = dirname(__DIR__, 2);
+        $path = getcwd() ?: dirname(__DIR__, 2);
 
         $finder = clone $this->finder;
 
