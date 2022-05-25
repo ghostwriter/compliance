@@ -7,10 +7,10 @@ LABEL "org.opencontainers.image.source"="https://github.com/ghostwriter/complian
 LABEL "org.opencontainers.image.url"="https://github.com/ghostwriter/compliance"
 LABEL "org.opencontainers.image.licenses"="BSD-3-Clause"
 
-WORKDIR /app
+WORKDIR /github/workspace
 
-COPY / /app
+COPY / /github/workspace
 
 RUN composer install --no-autoloader --no-interaction
 
-ENTRYPOINT ["/app/bin/compliance"]
+ENTRYPOINT ["/github/workspace/bin/compliance"]
