@@ -1,13 +1,11 @@
 FROM ghcr.io/ghostwriter/php:8.1-composer
 
-LABEL "homepage"="https://github.com/ghostwriter/compliance"
-LABEL "maintainer"="Nathanael Esayeas <nathanael.esayeas@protonmail.com>, github.com/ghostwriter"
-LABEL "repository"="https://github.com/ghostwriter/compliance"
-
-LABEL "com.github.actions.name"="Compliance"
-LABEL "com.github.actions.description"="Compliance Automation for PHP - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions."
-LABEL "com.github.actions.icon"="triangle"
-LABEL "com.github.actions.color"="green"
+LABEL "org.opencontainers.image.title"="Compliance"
+LABEL "org.opencontainers.image.description"="Compliance Automation for PHP - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions."
+LABEL "org.opencontainers.image.authors"="Nathanael Esayeas <nathanael.esayeas@protonmail.com>, github.com/ghostwriter"
+LABEL "org.opencontainers.image.source"="https://github.com/ghostwriter/compliance"
+LABEL "org.opencontainers.image.url"="https://github.com/ghostwriter/compliance"
+LABEL "org.opencontainers.image.licenses"="BSD-3-Clause"
 
 WORKDIR /app
 
