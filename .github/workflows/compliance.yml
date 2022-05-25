@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Determine CI Jobs
         id: jobs
-        uses: ghostwriter/automated-compliance@v1
+        uses: ghostwriter/compliance@v1
         with:
           command: matrix
 #  qa:
@@ -30,7 +30,7 @@ jobs:
 #      matrix: ${{ fromJSON(needs.matrix.outputs.jobs) }}
 #    steps:
 #      - name: ${{ matrix.name }}
-#        uses: ghostwriter/automated-compliance@main
+#        uses: ghostwriter/compliance@v1
 #        with:
 #          command: check
 #          job: ${{ matrix.job }}
