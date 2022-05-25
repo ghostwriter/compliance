@@ -45,5 +45,5 @@ jobs:
 #      - name: ${{ matrix.name }}
 #        uses: ghostwriter/automated-compliance@main
 #        with:
-#          command: process
+#          command: check
 #          job: ${{ matrix.job }}
