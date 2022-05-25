@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Determine CI Jobs
         id: jobs
-        uses: ghostwriter/automated-compliance@main
+        uses: ghostwriter/automated-compliance@v1
         with:
           command: matrix
 #  qa:
