@@ -7,45 +7,36 @@ namespace Ghostwriter\Compliance\ServiceProvider;
 use Ghostwriter\Compliance\ValueObject\Tool;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use Ghostwriter\Container\Contract\ServiceProviderInterface;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
 
+use Symfony\Component\Finder\Finder;
 use function dirname;
-use function preg_match;
 use function sprintf;
 use function str_replace;
-use function strtolower;
 
 final class MatrixServiceProvider implements ServiceProviderInterface
 {
+    public function __construct(private Finder $finder)
+    {
+    }
+
     public function __invoke(ContainerInterface $container): void
     {
-        /** @var SplFileInfo $splFileInfo */
-        foreach (
-            new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator(dirname(__DIR__) . '/Tool/')
-            ) as $splFileInfo
-        ) {
-            /** @var string $path */
-            $path = $splFileInfo->getRealPath();
+        $finder = clone $this->finder;
 
-            if (! preg_match('#\.php$#', $path)) {
-                continue;
-            }
+        $finder->files()
+            ->in(dirname(__DIR__) . '/Tool/')
+            ->notName('Abstract*.php')
+            ->sortByName();
 
-            if (str_contains(strtolower($splFileInfo->getBasename()), 'abstract')) {
-                continue;
-            }
-
-            $component = sprintf(
+        foreach ($finder->getIterator() as $splFileInfo) {
+            $tool = sprintf(
                 '%s%s',
                 str_replace('ServiceProvider', 'Tool', __NAMESPACE__ . '\\'),
                 $splFileInfo->getBasename('.php')
             );
 
-            $container->bind($component);
-            $container->tag($component, [Tool::class]);
+            $container->bind($tool);
+            $container->tag($tool, [Tool::class]);
         }
     }
 }
