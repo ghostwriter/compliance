@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
-use Ghostwriter\Compliance\Command\ChangeWorkingDirectoryCommand;
+use Ghostwriter\Compliance\Command\ChangeWorkingDirectory;
 use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -18,7 +18,7 @@ final class ChangeWorkingDirectoryEvent extends AbstractEvent
      */
     public function __construct(
         DispatcherInterface $dispatcher,
-        ChangeWorkingDirectoryCommand $command,
+        ChangeWorkingDirectory $command,
         SymfonyStyle $output
     ) {
         $input = new ArrayInput([
