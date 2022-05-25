@@ -1,39 +1,26 @@
 name: Compliance Automation
 
 on:
-    push:
+  pull_request:
+  push:
+    branches:
+      - "[0-9]+.[0-9]+.x"
+      - "v[0-9]+"
+  schedule:
+    - cron: "0 * * * *" # Runs hourly
 
 jobs:
-    matrix:
-        name: testing
-        runs-on: ubuntu-latest
-        steps:
-            - name: test
-              run: 'echo "it works!"'
-
-#name: "Automated Compliance"
-#
-#on:
-#  pull_request:
-#  push:
-#    branches:
-#      - "main"
-#      - "[0-9]+.[0-9]+.x"
-#  schedule:
-#    - cron: "0 * * * *" # Runs hourly
-#
-#jobs:
-#  matrix:
-#    name: Generate job matrix
-#    runs-on: ubuntu-latest
-#    outputs:
-#      jobs: ${{ steps.matrix.outputs.jobs }}
-#    steps:
-#      - name: Determine CI Jobs
-#        id: jobs
-#        uses: ghostwriter/automated-compliance@main
-#        with:
-#          command: matrix
+  matrix:
+    name: Generate job matrix
+    runs-on: ubuntu-latest
+    outputs:
+      jobs: ${{ steps.matrix.outputs.jobs }}
+    steps:
+      - name: Determine CI Jobs
+        id: jobs
+        uses: ghostwriter/automated-compliance@main
+        with:
+          command: matrix
 #  qa:
 #    name: QA Checks
 #    needs: [matrix]
