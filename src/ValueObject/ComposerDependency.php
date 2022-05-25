@@ -7,6 +7,11 @@ namespace Ghostwriter\Compliance\ValueObject;
 final class ComposerDependency
 {
     /**
+     * @var string
+     */
+    public const CONFIG = 'compliance:configuration:composer:dependency';
+
+    /**
      * Equivalent to running "composer update".
      *
      * @var string
@@ -26,4 +31,15 @@ final class ComposerDependency
      * @var string
      */
     public const LOWEST = 'lowest';
+
+    /**
+     * Supported options.
+     *
+     * @var string
+     */
+    public const OPTIONS = [
+        self::HIGHEST=>0,
+        self::LOCKED=>0,
+        self::LOWEST=>0,
+    ];
 }

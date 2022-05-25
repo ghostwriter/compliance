@@ -7,6 +7,7 @@ namespace Ghostwriter\Compliance;
 
 use Ghostwriter\Container\Container;
 use function dirname;
+use function realpath;
 
 /** @var null|string $_composer_autoload_path */
 (static function (string $composerAutoloadPath): void {

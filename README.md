@@ -1,4 +1,4 @@
-# Compliance Automation for PHP
+# Compliance
 
 [![Continuous Integration](https://github.com/ghostwriter/compliance/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/ghostwriter/compliance/actions/workflows/continuous-integration.yml)
 [![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/compliance?color=8892bf)](https://www.php.net/supported-versions)
@@ -6,7 +6,7 @@
 [![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/compliance)](https://packagist.org/packages/ghostwriter/compliance)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/compliance?color=blue)](https://packagist.org/packages/ghostwriter/compliance)
 
-Automatically configure and execute multiple `CI/CD` & `QA Testing` tools on any platform via `GitHub Action`.
+Compliance Automation for PHP - Automatically configure and execute multiple `CI/CD` & `QA Testing` tools on any platform via `GitHub Action`.
 
 ## Installation
 
@@ -20,13 +20,13 @@ composer require ghostwriter/compliance
 
 ```bash
 # Create `.github/workflows/compliance.yml` workflow file
-ghostwriter-compliance init
+compliance init
 
 # Determine CI Jobs for GitHub Actions
-ghostwriter-compliance matrix
+compliance matrix
 
 # Executes a specific Job
-ghostwriter-compliance run {job}
+compliance run {job}
 ```
 
 ## Testing
