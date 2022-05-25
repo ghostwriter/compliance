@@ -29,6 +29,24 @@ compliance matrix
 compliance run {job}
 ```
 
+## Docker
+
+``` bash
+# Install from the command line:
+
+docker pull ghcr.io/ghostwriter/compliance:v1
+
+# Usage from the command line:
+
+docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance init
+docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance matrix
+docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance run {job}
+
+# Use as base image in Dockerfile:
+
+FROM ghcr.io/ghostwriter/compliance:v1
+```
+
 ## Testing
 
 ``` bash
