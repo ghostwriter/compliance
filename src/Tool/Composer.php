@@ -2,28 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Component\Composer;
+namespace Ghostwriter\Compliance\Tool;
 
+use Ghostwriter\Compliance\Contract\PresenceInterface;
 use const DIRECTORY_SEPARATOR;
 use function basename;
 use function getenv;
 use function trim;
 
-final class Composer
+final class Composer extends AbstractTool implements PresenceInterface
 {
-    private string $composerJsonFileName;
-
-    public function __construct(string $fileName = 'composer.json')
-    {
-        $this->composerJsonFileName = basename(trim(getenv('COMPOSER') ?: $fileName));
-    }
+    public const PRESENCE_FILES = ['composer.json'];
 
     /**
      * Retrieve the path to composer.json file.
      */
     public function getJsonFilePath(string $root): string
     {
-        return $root . DIRECTORY_SEPARATOR . $this->composerJsonFileName;
+        return $root . DIRECTORY_SEPARATOR . basename(trim(getenv('COMPOSER') ?: 'composer.json'));
     }
 
     /**

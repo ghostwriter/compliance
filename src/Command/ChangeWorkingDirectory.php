@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 use function getcwd;
 
-final class ChangeWorkingDirectoryCommand extends AbstractCommand
+final class ChangeWorkingDirectory extends AbstractCommand
 {
     protected function configure(): void
     {

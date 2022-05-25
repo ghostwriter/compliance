@@ -26,7 +26,7 @@ compliance init
 compliance matrix
 
 # Executes a specific Job
-compliance run {job}
+compliance check {job}
 ```
 
 ## Docker
@@ -40,7 +40,7 @@ docker pull ghcr.io/ghostwriter/compliance:v1
 
 docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance init
 docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance matrix
-docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance run {job}
+docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance check {job}
 
 # Use as base image in Dockerfile:
 

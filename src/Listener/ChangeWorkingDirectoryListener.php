@@ -35,7 +35,5 @@ final class ChangeWorkingDirectoryListener implements EventListenerInterface
             ));
             return;
         }
-
-        $output->comment(sprintf('Changed current working directory to "%s".', $currentWorkingDirectory));
     }
 }

@@ -15,11 +15,11 @@ inputs:
     description: |
       Command to execute: one of
        * `matrix`
-       * `run`
+       * `check`
     required: true
   job:
-    default: ""
     description: 'JSON string representing the job to run.'
+    default: "{}"
     required: false
 
 outputs:

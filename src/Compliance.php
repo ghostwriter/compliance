@@ -11,16 +11,27 @@ use RuntimeException;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
 use Throwable;
+use const PHP_EOL;
 use function ini_get;
 use function ini_set;
 use function sprintf;
-use function trim;
 
 final class Compliance extends SymfonyApplication
 {
-    private const BLACK_LIVES_MATTER = '<fg=white;bg=black;options=bold>[#Black</><fg=red;bg=black;options=bold>Lives</><fg=white;bg=black;options=bold>Matter]</>';
+    public const LOGO = <<<'CODE_SAMPLE'
+<fg=red;bg=black;options=bold>
+   ____                      _ _
+  / ___|___  _ __ ___  _ __ | (_) __ _ _ __   ___ ___
+ | |   / _ \| '_ ` _ \| '_ \| | |/ _` | '_ \ / __/ _ \
+ | |__| (_) | | | | | | |_) | | | (_| | | | | (_|  __/
+  \____\___/|_| |_| |_| .__/|_|_|\__,_|_| |_|\___\___|
+                      |_|     %s
+</>%s
+CODE_SAMPLE;
 
-    private const NAME = 'Automated Compliance - CI/CD & QA Testing via GitHub Actions.';
+    private const BLACK_LIVES_MATTER = '<fg=white;bg=black;options=bold>#Black<fg=red;bg=black;options=bold>Lives</>Matter</>';
+
+    private const NAME = '<info>Compliance Automation - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.</info>';
 
     private const PACKAGE = 'ghostwriter/compliance';
 
@@ -37,7 +48,7 @@ final class Compliance extends SymfonyApplication
             throw new RuntimeException('Invalid version!');
         }
 
-        parent::__construct(self::NAME . ' ' . self::BLACK_LIVES_MATTER, $version);
+        parent::__construct(self::NAME, $version);
 
         $this->setAutoExit(false);
         $this->setCatchExceptions(false);
@@ -55,14 +66,18 @@ final class Compliance extends SymfonyApplication
         return $this->container;
     }
 
+    public function getHelp(): string
+    {
+        return sprintf(self::LOGO, self::BLACK_LIVES_MATTER, PHP_EOL . parent::getHelp());
+    }
+
     public function getLongVersion(): string
     {
-        return trim(sprintf(
-            '<fg=blue>[</><comment>%s</comment>@<comment>%s</comment><fg=blue>]</><info>%s</info>',
+        return sprintf(
+            '<fg=cyan;bg=black;options=bold>%s</>: <fg=magenta;bg=black;options=bold>%s</>',
             self::PACKAGE,
-            $this->getVersion(),
-            $this->getName(),
-        ));
+            $this->getVersion()
+        );
     }
 
     /**
