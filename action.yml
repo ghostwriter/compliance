@@ -19,7 +19,6 @@ inputs:
     required: true
   job:
     description: 'JSON string representing the job to run.'
-    default: "{}"
     required: false
 
 outputs:
