@@ -34,6 +34,9 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.DOCKER_IMAGE }}
+          labels: |
+            maintainer=Ghostwriter
+            org.opencontainers.image.title=Compliance Automation
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=branch
