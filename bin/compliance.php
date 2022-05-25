@@ -7,7 +7,6 @@ namespace Ghostwriter\Compliance;
 
 use Ghostwriter\Container\Container;
 use function dirname;
-use function realpath;
 
 /** @var null|string $_composer_autoload_path */
 (static function (string $composerAutoloadPath): void {
@@ -16,7 +15,7 @@ use function realpath;
      *
      * @psalm-suppress UnresolvableInclude
      */
-    require realpath($composerAutoloadPath) ?: fwrite(
+    require($composerAutoloadPath) ?: fwrite(
         STDERR,
         implode(PHP_EOL, [
             '',
@@ -25,7 +24,6 @@ use function realpath;
             '',
         ]) . PHP_EOL
     ) && exit(1);
-
     /**
      * Here be dragons.
      */
