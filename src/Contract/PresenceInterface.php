@@ -8,7 +8,5 @@ use Symfony\Component\Finder\Finder;
 
 interface PresenceInterface
 {
-    public function __construct(Finder $finder);
-
     public function isPresent(): bool;
 }
