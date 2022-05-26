@@ -32,10 +32,10 @@ final class MatrixCommand extends AbstractCommand
             new GenerateMatrixEvent($this->dispatcher, $input, $this->output)
         );
 
-        echo "::set-output name=matrix::temp".PHP_EOL;
+//        echo "::set-output name=matrix::temp".PHP_EOL;
 
 //        $output->writeln(sprintf('::set-output name=matrix::%s', $generateMatrixEvent->getMatrix()));
-//        echo sprintf('::set-output name=matrix::%s', $generateMatrixEvent->getMatrix()) . PHP_EOL;
+        echo sprintf('::set-output name=matrix::%s' . PHP_EOL, $generateMatrixEvent->getMatrix());
 
         return $generateMatrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
