@@ -16,6 +16,6 @@ final class OutputListener implements EventListenerInterface
 
     public function __invoke(OutputEvent $event): void
     {
-        $this->output->writeln(['::echo::on', $event->getMessage()]);
+        $this->output->writeln(['::echo::on', $event->getMessage(), '::echo::off']);
     }
 }
