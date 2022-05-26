@@ -29,8 +29,6 @@ final class GenerateMatrixListener implements EventListenerInterface
             if ($tool->isPresent()) {
                 $event->setMatrix([$file]);
                 $output->success($file);
-            } else {
-                $output->warning($file);
             }
         }
     }
