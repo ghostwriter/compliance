@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
-use function basename;
-use function json_encode;
-use function sprintf;
-use function str_split;
 use const JSON_UNESCAPED_SLASHES;
+use function json_encode;
 
 final class GenerateMatrixEvent extends AbstractEvent
 {
@@ -26,7 +23,7 @@ final class GenerateMatrixEvent extends AbstractEvent
     public function setMatrix(array $matrices): void
     {
         /** @var string $matrix */
-        foreach ($matrices as $matrix){
+        foreach ($matrices as $matrix) {
             $this->matrix[] = $matrix;
         }
     }
