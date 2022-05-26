@@ -1,39 +1,26 @@
 name: Compliance Automation
 
 on:
+    pull_request:
     push:
+        branches:
+            - "[0-9]+.[0-9]+.x"
+            - "v[0-9]+"
+    schedule:
+        - cron: "0 * * * *" # Runs hourly
 
 jobs:
     matrix:
-        name: testing
+        name: Generate job matrix
         runs-on: ubuntu-latest
+        outputs:
+            jobs: ${{ steps.matrix.outputs.jobs }}
         steps:
-            - name: test
-              run: 'echo "it works!"'
-
-#name: "Automated Compliance"
-#
-#on:
-#  pull_request:
-#  push:
-#    branches:
-#      - "main"
-#      - "[0-9]+.[0-9]+.x"
-#  schedule:
-#    - cron: "0 * * * *" # Runs hourly
-#
-#jobs:
-#  matrix:
-#    name: Generate job matrix
-#    runs-on: ubuntu-latest
-#    outputs:
-#      jobs: ${{ steps.matrix.outputs.jobs }}
-#    steps:
-#      - name: Determine CI Jobs
-#        id: jobs
-#        uses: ghostwriter/automated-compliance@main
-#        with:
-#          command: matrix
+            - name: Determine CI Jobs
+              id: jobs
+              uses: ghostwriter/compliance@qa/test-workflow
+              with:
+                  command: matrix
 #  qa:
 #    name: QA Checks
 #    needs: [matrix]
@@ -43,7 +30,7 @@ jobs:
 #      matrix: ${{ fromJSON(needs.matrix.outputs.jobs) }}
 #    steps:
 #      - name: ${{ matrix.name }}
-#        uses: ghostwriter/automated-compliance@main
+#        uses: ghostwriter/compliance@v1
 #        with:
 #          command: check
 #          job: ${{ matrix.job }}
