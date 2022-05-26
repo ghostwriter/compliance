@@ -6,7 +6,6 @@ namespace Ghostwriter\Compliance\Listener;
 
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Event\CheckEvent;
-use Ghostwriter\Compliance\Event\ProcessJobEvent;
 use Throwable;
 
 final class CheckListener implements EventListenerInterface
