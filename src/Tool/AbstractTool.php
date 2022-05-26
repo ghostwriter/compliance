@@ -9,13 +9,9 @@ use Phar;
 use SplFileInfo;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
-use function dirname;
 use function getcwd;
 use function getenv;
-use function iterator_to_array;
 use function scandir;
-use function var_dump;
-use const PHP_EOL;
 
 abstract class AbstractTool implements PresenceInterface
 {
@@ -26,14 +22,16 @@ abstract class AbstractTool implements PresenceInterface
      */
     public const PRESENCE_FILES = [];
 
-    public function __construct(private Finder $finder, private SymfonyStyle $output)
-    {
+    public function __construct(
+        private Finder $finder,
+        private SymfonyStyle $output
+    ) {
     }
 
     public function isPresent(): bool
     {
         $phar = extension_loaded('Phar') ? Phar::running(false) : '';
-        $path = str_replace('phar://' . $phar, '', getcwd());
+        $path = str_replace('phar://' . $phar, '', getenv('GITHUB_WORKSPACE') ?: getcwd());
 
         $finder = clone $this->finder;
         $finder
