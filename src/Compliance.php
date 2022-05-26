@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance;
 
 use Composer\InstalledVersions;
+use Ghostwriter\Compliance\Command\MatrixCommand;
 use Ghostwriter\Compliance\ServiceProvider\ApplicationServiceProvider;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use RuntimeException;
@@ -58,6 +59,7 @@ CODE_SAMPLE;
             $this->add($container->get($command));
         }
 
+        $this->setDefaultCommand(MatrixCommand::getDefaultName());
         $this->container = $container;
     }
 
