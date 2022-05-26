@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Tool;
 
 use Ghostwriter\Compliance\Contract\PresenceInterface;
+use Phar;
 use SplFileInfo;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
@@ -30,7 +31,8 @@ abstract class AbstractTool implements PresenceInterface
 
     public function isPresent(): bool
     {
-        $path = getcwd();
+        $phar = extension_loaded('Phar') ? Phar::running(false) : '';
+        $path = str_replace('phar://' . $phar, '', getcwd());
 
         $finder = clone $this->finder;
         $finder
@@ -39,7 +41,7 @@ abstract class AbstractTool implements PresenceInterface
             ->depth(0)
             ->sortByName();
 
-        $this->output->section($path);
+        $this->output->error($path);
 
         /** @var SplFileInfo $file */
         foreach ($finder->getIterator() as $file){
