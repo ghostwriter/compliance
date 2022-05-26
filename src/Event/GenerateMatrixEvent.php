@@ -20,13 +20,29 @@ final class GenerateMatrixEvent extends AbstractEvent
      *     name:list<string>,
      *     name:string
      * }
+     *     {
+    "php":"7.4",
+    "dependencies":"locked",
+    "extensions":[],
+    "ini":["memory_limit=-1"],
+    "command":"./vendor/bin/phpcs"
+    }
      */
     private array $matrix = [
-        'include' => [],
+        'include' => [
+            [
+                'name' => ['PHPUnit'],
+                'php' => ['8.0'],
+                'command' => ['./vendor/bin/phpunit'],
+            ],
+            [
+                'name' => ['PHPCS'],
+                'php' => ['8.0'],
+                'command' => ['./vendor/bin/phpcs'],
+            ],
+        ],
         'exclude' => [],
-        'name' => ['PHPUnit'],
         'experimental' => [false],
-        'php' => ['8.0'],
         'dependencies' => ['latest','locked','lowest'],
         'job' => [],
         'os' => ['ubuntu-latest'],
