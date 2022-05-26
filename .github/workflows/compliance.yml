@@ -14,13 +14,13 @@ jobs:
     name: Generate job matrix
     runs-on: ubuntu-latest
     outputs:
-      jobs: ${{ steps.matrix.outputs.jobs }}
+      matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Determine CI Jobs
-        id: jobs
+        id: matrix
         uses: ghostwriter/compliance@qa/test-workflow
         with:
           command: matrix
@@ -30,7 +30,7 @@ jobs:
 #    runs-on: ${{ matrix.os }}
 #    strategy:
 #      fail-fast: false
-#      matrix: ${{ fromJSON(needs.matrix.outputs.jobs) }}
+#      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
 #    steps:
 #      - name: ${{ matrix.name }}
 #        uses: ghostwriter/compliance@v1
