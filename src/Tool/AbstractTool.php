@@ -6,6 +6,8 @@ namespace Ghostwriter\Compliance\Tool;
 
 use Symfony\Component\Finder\Finder;
 use function dirname;
+use function getcwd;
+use function getenv;
 
 abstract class AbstractTool
 {
@@ -22,7 +24,7 @@ abstract class AbstractTool
 
     public function isPresent(): bool
     {
-        $path = getcwd() ?: dirname(__DIR__, 2);
+        $path = getenv('GITHUB_WORKSPACE') ?: getcwd() ?: dirname(__DIR__, 2);
 
         $finder = clone $this->finder;
 
