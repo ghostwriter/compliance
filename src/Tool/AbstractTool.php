@@ -5,49 +5,34 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Tool;
 
 use Ghostwriter\Compliance\Contract\PresenceInterface;
-use Phar;
-use SplFileInfo;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use function getcwd;
 use function getenv;
-use function scandir;
 
 abstract class AbstractTool implements PresenceInterface
 {
     /**
      * Configuration files.
      *
-     * @var array<array-key,string>
+     * @var string[]
      */
     public const PRESENCE_FILES = [];
 
-    public function __construct(
-        private Finder $finder,
-        private SymfonyStyle $output
-    ) {
+    public function __construct(private Finder $finder)
+    {
     }
 
     public function isPresent(): bool
     {
-        $phar = extension_loaded('Phar') ? Phar::running(false) : '';
-        $path = str_replace('phar://' . $phar, '', getenv('GITHUB_WORKSPACE') ?: getcwd());
+        $path = getenv('GITHUB_WORKSPACE') ?: getcwd();
 
         $finder = clone $this->finder;
-        $finder
-            ->files()
+
+        $finder->files()
             ->in($path)
             ->depth(0)
             ->sortByName();
 
-//        $this->output->section($path);
-//        $this->output->writeln(scandir($path));
-//        /** @var SplFileInfo $file */
-//        foreach ($finder->getIterator() as $file){
-//            $this->output->writeln($file->getPathname());
-//        }
-
-        return $finder
-            ->name(static::PRESENCE_FILES)->hasResults();
+        return $finder->name(static::PRESENCE_FILES)->hasResults();
     }
 }
