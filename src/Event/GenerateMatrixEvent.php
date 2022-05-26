@@ -23,7 +23,7 @@ final class GenerateMatrixEvent extends AbstractEvent
     private array $matrix = [
         'include' => [],
         'exclude' => [],
-        'name' => [],
+        'name' => ['Step name'],
         'experimental' => [false],
         'php' => [],
         'job' => ['Job Title'],
