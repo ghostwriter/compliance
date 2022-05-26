@@ -18,5 +18,5 @@ RUN composer dump-autoload -a --no-dev
 
 #RUN composer global require ghostwriter/compliance:dev-qa/test-workflow
 
-ENTRYPOINT ["bin/compliance"]
+ENTRYPOINT ["/app/bin/compliance"]
 #ENTRYPOINT ["/root/.composer/vendor/bin/compliance"]
