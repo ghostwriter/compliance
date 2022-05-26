@@ -24,16 +24,17 @@ jobs:
         uses: ghostwriter/compliance@qa/test-workflow
         with:
           command: matrix
-#  qa:
-#    name: QA Checks
-#    needs: [matrix]
-#    runs-on: ${{ matrix.os }}
-#    strategy:
-#      fail-fast: false
-#      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
-#    steps:
-#      - name: ${{ matrix.name }}
-#        uses: ghostwriter/compliance@v1
-#        with:
-#          command: check
-#          job: ${{ matrix.job }}
+  qa:
+    name: QA Checks
+    needs: [matrix]
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+    steps:
+      - name: ${{ matrix.name }}
+        uses: ghostwriter/compliance@qa/test-workflow
+        with:
+          command: check
+          job: ${{ matrix.job }}
