@@ -32,12 +32,12 @@ final class GenerateMatrixEvent extends AbstractEvent
         'include' => [
             [
                 'name' => 'PHPUnit',
-                'php' => ['8.0'],
+                'php' => '8.0',
                 'command' => ['./vendor/bin/phpunit'],
             ],
             [
                 'name' => 'PHPCS',
-                'php' => ['8.0'],
+                'php' => '8.0',
                 'command' => ['./vendor/bin/phpcs'],
             ],
         ],
