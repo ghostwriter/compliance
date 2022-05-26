@@ -11,6 +11,7 @@ final class GenerateMatrixEvent extends AbstractEvent
 {
     /**
      * @var array{
+     *     dependencies:list<string>,
      *     exclude:list<string>,
      *     experimental:bool,
      *     include:list<string>,
@@ -23,10 +24,11 @@ final class GenerateMatrixEvent extends AbstractEvent
     private array $matrix = [
         'include' => [],
         'exclude' => [],
-        'name' => ['Name'],
+        'name' => ['PHPUnit'],
         'experimental' => [false],
         'php' => ['8.0'],
-        'job' => ['Job'],
+        'dependencies' => ['latest','locked','lowest'],
+        'job' => [],
         'os' => ['ubuntu-latest'],
     ];
 
