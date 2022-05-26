@@ -34,8 +34,8 @@ abstract class AbstractTool implements PresenceInterface
             ->depth(0)
             ->sortByName();
 
-        $this->output->section($path);
-        $this->output->writeln(scandir($path));
+//        $this->output->section($path);
+//        $this->output->writeln(scandir($path));
 //        /** @var SplFileInfo $file */
 //        foreach ($finder->getIterator() as $file){
 //            $this->output->writeln($file->getPathname());
