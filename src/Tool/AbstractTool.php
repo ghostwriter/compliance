@@ -8,6 +8,8 @@ use Symfony\Component\Finder\Finder;
 use function dirname;
 use function getcwd;
 use function getenv;
+use function var_dump;
+use const PHP_EOL;
 
 abstract class AbstractTool
 {
@@ -25,6 +27,8 @@ abstract class AbstractTool
     public function isPresent(): bool
     {
         $path = getenv('GITHUB_WORKSPACE') ?: getcwd() ?: dirname(__DIR__, 2);
+
+        echo $path.PHP_EOL;
 
         $finder = clone $this->finder;
 
