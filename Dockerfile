@@ -10,6 +10,13 @@ LABEL "org.opencontainers.image.licenses"="BSD-3-Clause"
 
 WORKDIR /app
 
-RUN composer global require ghostwriter/compliance:dev-qa/test-workflow
+COPY / /app
 
-ENTRYPOINT ["/root/.composer/vendor/bin/compliance"]
+RUN COMPOSER_CACHE_DIR=/dev/null composer install --no-dev --no-autoloader --no-interaction
+
+RUN composer dump-autoload -a --no-dev
+
+#RUN composer global require ghostwriter/compliance:dev-qa/test-workflow
+
+ENTRYPOINT ["bin/compliance"]
+#ENTRYPOINT ["/root/.composer/vendor/bin/compliance"]
