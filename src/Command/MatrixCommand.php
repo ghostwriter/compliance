@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 use function json_encode;
+use function str_replace;
 
 final class MatrixCommand extends AbstractCommand
 {
@@ -32,7 +33,7 @@ final class MatrixCommand extends AbstractCommand
             new GenerateMatrixEvent($this->dispatcher, $input, $this->output)
         );
 
-        echo "::set-output name=matrix::".json_encode($generateMatrixEvent->getMatrix());
+        echo "::set-output name=matrix::".str_replace(['[',']'],['{','}'], json_encode($generateMatrixEvent->getMatrix()));
 
         return $generateMatrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
