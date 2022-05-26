@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Tool;
 
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use function dirname;
 use function getcwd;
 use function getenv;
+use function iterator_to_array;
 use function var_dump;
 use const PHP_EOL;
 
@@ -20,7 +22,7 @@ abstract class AbstractTool
      */
     public const PRESENCE_FILES = [];
 
-    public function __construct(private Finder $finder)
+    public function __construct(private Finder $finder, private SymfonyStyle $output)
     {
     }
 
@@ -28,13 +30,17 @@ abstract class AbstractTool
     {
         $path = getenv('GITHUB_WORKSPACE') ?: getcwd() ?: dirname(__DIR__, 2);
 
-        echo $path.PHP_EOL;
-
         $finder = clone $this->finder;
+        $finder
+            ->in($path)
+            ->sortByName();
+
+        $this->output->section($path);
+        $this->output->write(iterator_to_array($finder->getIterator()));
+
+
 
         return $finder
-            ->in($path)
-            ->sortByName()
             ->name(static::PRESENCE_FILES)->hasResults();
     }
 }
