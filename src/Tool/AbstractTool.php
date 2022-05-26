@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Tool;
 
 use Ghostwriter\Compliance\Contract\PresenceInterface;
+use SplFileInfo;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use function dirname;
@@ -29,17 +30,21 @@ abstract class AbstractTool implements PresenceInterface
 
     public function isPresent(): bool
     {
-        $path = getenv('GITHUB_WORKSPACE') ?: getcwd() ?: dirname(__DIR__, 2);
+        $path = getcwd();
 
         $finder = clone $this->finder;
         $finder
+            ->files()
             ->in($path)
+            ->depth(0)
             ->sortByName();
 
         $this->output->section($path);
-        $this->output->write(iterator_to_array($finder->getIterator()));
 
-
+        /** @var SplFileInfo $file */
+        foreach ($finder->getIterator() as $file){
+            $this->output->comment($file->getPathname());
+        }
 
         return $finder
             ->name(static::PRESENCE_FILES)->hasResults();
