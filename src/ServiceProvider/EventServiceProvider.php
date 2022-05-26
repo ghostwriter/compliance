@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\ServiceProvider;
 
-use Ghostwriter\Compliance\Listener\Debug;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use Ghostwriter\Container\Contract\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\ListenerProvider;
@@ -28,8 +27,6 @@ final class EventServiceProvider implements ServiceProviderInterface
             ListenerProvider::class,
             static function (ContainerInterface $container, object $listenerProvider): ListenerProvider {
                 /** @var ListenerProvider $listenerProvider */
-                // $listenerProvider->addListener($container->get(Debug::class), 0, 'object');
-
                 $finder = clone $container->get(Finder::class);
 
                 $finder->files()
