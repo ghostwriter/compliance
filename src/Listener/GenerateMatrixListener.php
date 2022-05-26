@@ -22,11 +22,15 @@ final class GenerateMatrixListener implements EventListenerInterface
      */
     public function __invoke(GenerateMatrixEvent $event): void
     {
+        $output = $event->getOutput();
         foreach ($this->container->tagged(Tool::class) as $file) {
             /** @var PresenceInterface $tool */
             $tool = $this->container->get($file);
             if ($tool->isPresent()) {
                 $event->setMatrix([$file]);
+                $output->success($file);
+            } else {
+                $output->warning($file);
             }
         }
     }
