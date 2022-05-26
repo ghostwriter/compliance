@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Tool;
 
-use Ghostwriter\Compliance\Contract\PresenceInterface;
-
-final class MarkdownDocumentation extends AbstractTool implements PresenceInterface
+final class MarkdownDocumentation extends AbstractTool
 {
     public const PRESENCE_FILES = ['mkdocs.yml'];
 }
