@@ -25,7 +25,7 @@ final class GenerateMatrixEvent extends AbstractEvent
         'exclude' => [],
         'name' => ['Step name'],
         'experimental' => [false],
-        'php' => [],
+        'php' => ['8.0','8.1'],
         'job' => ['Job Title'],
         'os' => ['macos-latest', 'ubuntu-latest', 'windows-latest'],
     ];
