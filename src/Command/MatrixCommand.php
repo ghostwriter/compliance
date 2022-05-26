@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Command;
 
 use Ghostwriter\Compliance\Event\GenerateMatrixEvent;
+use Ghostwriter\Compliance\Event\OutputEvent;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -32,12 +33,9 @@ final class MatrixCommand extends AbstractCommand
             new GenerateMatrixEvent($this->dispatcher, $input, $this->output)
         );
 
-//        echo "::set-output name=matrix::temp".PHP_EOL;
-
-        $output->writeln([
-            '::echo::on',
-            sprintf('::set-output name=matrix::%s', $generateMatrixEvent->getMatrix())
-        ]);
+        $this->dispatcher->dispatch(
+            new OutputEvent(sprintf('::set-output name=matrix::%s', $generateMatrixEvent->getMatrix()))
+        );
 
         return $generateMatrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
