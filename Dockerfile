@@ -12,7 +12,7 @@ WORKDIR /app
 
 COPY / /app
 
-RUN COMPOSER_CACHE_DIR=/dev/null composer install --no-dev --no-autoloader --no-interaction
+RUN COMPOSER_CACHE_DIR=/dev/null composer install --no-dev --no-autoloader --no-interaction --verbose
 
 RUN composer dump-autoload -a --no-dev
 
