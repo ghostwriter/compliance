@@ -15,4 +15,4 @@ RUN COMPOSER_CACHE_DIR=/dev/null composer install --no-dev --no-autoloader --no-
 
 RUN composer dump-autoload -a --no-dev
 
-ENTRYPOINT ["/app/bin/compliance.php"]
+ENTRYPOINT ["/app/bin/compliance"]
