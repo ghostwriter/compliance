@@ -71,8 +71,7 @@ final class ConsoleServiceProvider implements ServiceProviderInterface
                 $splFileInfo->getBasename('.php')
             );
 
-            $container->bind($command);
-            $container->tag($command, [Command::class]);
+            $container->bind($command, $command, [Command::class]);
         }
     }
 }
