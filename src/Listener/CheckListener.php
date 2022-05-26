@@ -6,6 +6,7 @@ namespace Ghostwriter\Compliance\Listener;
 
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Event\CheckEvent;
+use Ghostwriter\Compliance\Event\OutputEvent;
 use Throwable;
 
 final class CheckListener implements EventListenerInterface
@@ -15,8 +16,11 @@ final class CheckListener implements EventListenerInterface
      */
     public function __invoke(CheckEvent $event): void
     {
-        $output = $event->getOutput();
+        /** @var string $job */
+        $job = $event->getInput()
+            ->getArgument('job');
 
-        $output->comment($event::class);
+        $event->getDispatcher()
+            ->dispatch(new OutputEvent($job));
     }
 }
