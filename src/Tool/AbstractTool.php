@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Tool;
 
+use Ghostwriter\Compliance\Contract\PresenceInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use function dirname;
@@ -13,7 +14,7 @@ use function iterator_to_array;
 use function var_dump;
 use const PHP_EOL;
 
-abstract class AbstractTool
+abstract class AbstractTool implements PresenceInterface
 {
     /**
      * Configuration files.
