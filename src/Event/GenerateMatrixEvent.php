@@ -6,7 +6,7 @@ namespace Ghostwriter\Compliance\Event;
 
 final class GenerateMatrixEvent extends AbstractEvent
 {
-    private array $matrix;
+    private array $matrix = [];
 
     /**
      * @return array
