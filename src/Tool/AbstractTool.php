@@ -32,7 +32,7 @@ abstract class AbstractTool implements PresenceInterface
     public function isPresent(): bool
     {
         $phar = extension_loaded('Phar') ? Phar::running(false) : '';
-        $path = str_replace('phar://' . $phar, '', getcwd());
+        $path = str_replace('phar://' . $phar, '', __DIR__);
 
         $finder = clone $this->finder;
         $finder
