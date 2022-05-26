@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
+use function sprintf;
 
 final class MatrixCommand extends AbstractCommand
 {
@@ -31,7 +32,7 @@ final class MatrixCommand extends AbstractCommand
             new GenerateMatrixEvent($this->dispatcher, $input, $this->output)
         );
 
-        echo '::set-output name=matrix::{}';
+        echo sprintf("::set-output name=matrix::%s", $generateMatrixEvent->getMatrix());
 
         return $generateMatrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
