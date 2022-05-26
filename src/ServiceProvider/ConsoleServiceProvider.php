@@ -55,7 +55,7 @@ final class ConsoleServiceProvider implements ServiceProviderInterface
             ) as $splFileInfo
         ) {
             /** @var string $path */
-            $path = $splFileInfo->getRealPath();
+            $path = $splFileInfo->getPathname();
 
             if (! preg_match('#Command\.php$#', $path)) {
                 continue;
