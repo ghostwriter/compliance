@@ -9,11 +9,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class Debug implements EventListenerInterface
 {
-    private SymfonyStyle $output;
-
-    public function __construct(SymfonyStyle $output)
+    public function __construct(private SymfonyStyle $output)
     {
-        $this->output = $output;
     }
 
     public function __invoke(object $event): void
