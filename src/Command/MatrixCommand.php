@@ -9,9 +9,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
-use const STDOUT;
-use function fwrite;
-use function json_encode;
 
 final class MatrixCommand extends AbstractCommand
 {
@@ -34,7 +31,7 @@ final class MatrixCommand extends AbstractCommand
             new GenerateMatrixEvent($this->dispatcher, $input, $this->output)
         );
 
-        fwrite(STDOUT, '::set-output name=matrix::' . json_encode($generateMatrixEvent->getMatrix()));
+        echo '::set-output name=matrix::{}';
 
         return $generateMatrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
