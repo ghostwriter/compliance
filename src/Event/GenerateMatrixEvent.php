@@ -35,11 +35,11 @@ final class GenerateMatrixEvent extends AbstractEvent
                 'php' => '8.0',
                 'command' => './vendor/bin/phpunit',
             ],
-            [
-                'name' => 'PHPCS',
-                'php' => '8.0',
-                'command' => './vendor/bin/phpcs',
-            ],
+//            [
+//                'name' => 'PHPCS',
+//                'php' => '8.0',
+//                'command' => './vendor/bin/phpcs',
+//            ],
         ],
         'exclude' => [],
         'experimental' => [false],
