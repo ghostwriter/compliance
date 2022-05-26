@@ -33,12 +33,12 @@ final class GenerateMatrixEvent extends AbstractEvent
             [
                 'name' => 'PHPUnit',
                 'php' => '8.0',
-                'command' => ['./vendor/bin/phpunit'],
+                'command' => './vendor/bin/phpunit',
             ],
             [
                 'name' => 'PHPCS',
                 'php' => '8.0',
-                'command' => ['./vendor/bin/phpcs'],
+                'command' => './vendor/bin/phpcs',
             ],
         ],
         'exclude' => [],
@@ -75,9 +75,9 @@ final class GenerateMatrixEvent extends AbstractEvent
 
     public function setMatrix(array $matrices): void
     {
-        /** @var string $matrix */
-        foreach ($matrices as $matrix) {
-            $this->matrix['job'][] = $matrix;
-        }
+//        /** @var string $matrix */
+//        foreach ($matrices as $matrix) {
+//            $this->matrix['job'][] = $matrix;
+//        }
     }
 }
