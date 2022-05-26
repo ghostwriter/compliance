@@ -14,11 +14,10 @@ use function sprintf;
     /** @psalm-suppress UnresolvableInclude */
     require $composerAutoloadPath ?: fwrite(
         STDERR,
-        sprintf(
-            '[ERROR]Cannot locate "%s"\n please run "composer install"\n',
-            $composerAutoloadPath
-        )
+        sprintf('[ERROR]Cannot locate "%s"\n please run "composer install"\n', $composerAutoloadPath)
     ) && exit(1);
-    /** #BlackLivesMatter */
+    /**
+     * #BlackLivesMatter.
+     */
     Compliance::main(Container::getInstance());
 })($_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php');
