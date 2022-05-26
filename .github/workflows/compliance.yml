@@ -25,7 +25,7 @@ jobs:
         with:
           command: matrix
   qa:
-    name: QA Checks
+    name: ${{ matrix.name }} on PHP ${{ matrix.php }} with ${{ matrix.dependencies }} dependencies
     needs: [matrix]
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
@@ -33,7 +33,7 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
     steps:
-      - name: ${{ matrix.name }} on PHP ${{ matrix.php }} with ${{ matrix.dependencies }} dependencies
+      - name: QA Check ${{ matrix.name }} on PHP ${{ matrix.php }}
         uses: ghostwriter/compliance@qa/test-workflow
         with:
           command: check
