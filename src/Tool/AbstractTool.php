@@ -13,6 +13,7 @@ use function dirname;
 use function getcwd;
 use function getenv;
 use function iterator_to_array;
+use function scandir;
 use function var_dump;
 use const PHP_EOL;
 
@@ -42,7 +43,7 @@ abstract class AbstractTool implements PresenceInterface
             ->sortByName();
 
         $this->output->section($path);
-
+        $this->output->writeln(scandir($path));
         /** @var SplFileInfo $file */
         foreach ($finder->getIterator() as $file){
             $this->output->writeln($file->getPathname());
