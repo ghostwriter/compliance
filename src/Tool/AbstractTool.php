@@ -19,8 +19,10 @@ abstract class AbstractTool implements PresenceInterface
      */
     public const PRESENCE_FILES = [];
 
-    public function __construct(private Finder $finder, private SymfonyStyle $output)
-    {
+    public function __construct(
+        private Finder $finder,
+        private SymfonyStyle $output
+    ) {
     }
 
     public function isPresent(): bool
