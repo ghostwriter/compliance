@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Tool;
 
-use Ghostwriter\Compliance\Contract\PresenceInterface;
 use const DIRECTORY_SEPARATOR;
 use function basename;
 use function getenv;
 use function trim;
 
-final class Composer extends AbstractTool implements PresenceInterface
+final class Composer extends AbstractTool
 {
     public const PRESENCE_FILES = ['composer.json'];
 
