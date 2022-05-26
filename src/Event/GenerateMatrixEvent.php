@@ -9,7 +9,26 @@ use function json_encode;
 
 final class GenerateMatrixEvent extends AbstractEvent
 {
-    private array $matrix = [];
+    /**
+     * @var array{
+     *     exclude:list<string>,
+     *     experimental:bool,
+     *     include:list<string>,
+     *     os:list<string>,
+     *     php:list<string>,
+     *     name:list<string>,
+     *     name:string
+     * }
+     */
+    private array $matrix = [
+        'include' => [],
+        'exclude' => [],
+        'name' => [],
+        'experimental' => false,
+        'php' => [],
+        'job' => ['Job Title'],
+        'os' => ['macos-latest', 'ubuntu-latest', 'windows-latest'],
+    ];
 
     public function getMatrix(): string
     {
@@ -20,11 +39,27 @@ final class GenerateMatrixEvent extends AbstractEvent
         return $result;
     }
 
+    public function include(array $matrices): void
+    {
+        /** @var string $matrix */
+        foreach ($matrices as $matrix) {
+            $this->matrix['include'][] = $matrix;
+        }
+    }
+
+    public function exclude(array $matrices): void
+    {
+        /** @var string $matrix */
+        foreach ($matrices as $matrix) {
+            $this->matrix['exclude'][] = $matrix;
+        }
+    }
+
     public function setMatrix(array $matrices): void
     {
         /** @var string $matrix */
         foreach ($matrices as $matrix) {
-            $this->matrix[] = $matrix;
+            $this->matrix['job'][] = $matrix;
         }
     }
 }
