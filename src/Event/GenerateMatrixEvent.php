@@ -44,7 +44,7 @@ final class GenerateMatrixEvent extends AbstractEvent
         'exclude' => [],
         'experimental' => [false],
         'dependencies' => ['latest','locked','lowest'],
-        'job' => [],
+        'job' => ['empty'],
         'os' => ['ubuntu-latest'],
     ];
 
