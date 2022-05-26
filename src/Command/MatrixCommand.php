@@ -35,14 +35,12 @@ final class MatrixCommand extends AbstractCommand
         fwrite(
             STDOUT,
             sprintf(
-                '::set-output name=matrix::%s%s',
-                'blm',
+                '%s::set-output name=jobs::%s%s',
+                PHP_EOL,
+                $generateMatrixEvent->getMatrix(),
                 PHP_EOL
             )
         );
-
-//        $output->write(sprintf(PHP_EOL.'::set-output name=matrix::%s;]'.PHP_EOL, 'blm'));
-//        $output->write(sprintf('##[set-output name=matrix::%s;]', $generateMatrixEvent->getMatrix()));
 
         return $generateMatrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
