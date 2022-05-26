@@ -32,7 +32,7 @@ abstract class AbstractTool implements PresenceInterface
     public function isPresent(): bool
     {
         $phar = extension_loaded('Phar') ? Phar::running(false) : '';
-        $path = str_replace('phar://' . $phar, '', __DIR__);
+        $path = str_replace('phar://' . $phar, '', getcwd());
 
         $finder = clone $this->finder;
         $finder
@@ -41,12 +41,11 @@ abstract class AbstractTool implements PresenceInterface
             ->depth(0)
             ->sortByName();
 
-//        $this->output->writeln($path);
-        $this->output->writeln(scandir($path));
+        $this->output->section($path);
 
         /** @var SplFileInfo $file */
         foreach ($finder->getIterator() as $file){
-            $this->output->comment($file->getPathname());
+            $this->output->writeln($file->getPathname());
         }
 
         return $finder
