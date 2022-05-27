@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Configuration;
 
-use Ghostwriter\Compliance\Configuration\ValueObject\ComplianceConfigurationOption;
 use Ghostwriter\Compliance\ValueObject\ComposerDependency;
 use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use Ghostwriter\Container\Contract\ContainerInterface;
@@ -34,15 +33,15 @@ final class ComplianceConfiguration
             throw new RuntimeException();
         }
 
-        $this->container->set(ComposerDependency::CONFIG, $dependency);
+        $this->container->set(ComposerDependency::CONFIG.'.dependency', $dependency);
     }
 
     /**
-     * @param array<ComposerOptions::*> $options
+     * @param array<ComposerDependency::*> $options
      */
     public function composerOptions(array $options): void
     {
-        $this->container->set($this->option(ComplianceConfigurationOption::COMPOSER_OPTIONS), $options);
+        $this->container->set(ComposerDependency::CONFIG.'.options', $options);
     }
 
     public function getExclude(): array
@@ -68,7 +67,7 @@ final class ComplianceConfiguration
      */
     public function phpVersion(int $phpVersion): void
     {
-        $this->container->set(ComplianceConfigurationOption::PHP_VERSION, $phpVersion);
+        $this->container->set(ComposerDependency::CONFIG.'.php', $phpVersion);
     }
 
     public function skip(array $array): void
@@ -77,10 +76,5 @@ final class ComplianceConfiguration
         foreach ($array as $value) {
             $this->exclude[] = $value;
         }
-    }
-
-    private function option(string $key): string
-    {
-        return sprintf('%s::%s%s', Option::CONFIG, $key, Option::CONFIG);
     }
 }
