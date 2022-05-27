@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
+use Ghostwriter\Compliance\Contract\ToolInterface;
 use const JSON_UNESCAPED_SLASHES;
 use function json_encode;
 
@@ -13,8 +14,8 @@ final class GenerateMatrixEvent extends AbstractEvent
      * @var array{
      *     dependencies:list<string>,
      *     exclude:list<string>,
-     *     experimental:bool,
-     *     include:list<string>,
+     *     experimental:list<bool>,
+     *     include:list<array{name:string,command:string}>,
      *     os:list<string>,
      *     php:list<string>,
      *     name:list<string>,
@@ -55,19 +56,11 @@ final class GenerateMatrixEvent extends AbstractEvent
         return $result;
     }
 
-    public function include(array $matrices): void
+    public function include(ToolInterface $tool): void
     {
-        /** @var string $matrix */
-        foreach ($matrices as $matrix) {
-            $this->matrix['include'][] = $matrix;
-        }
-    }
-
-    public function setMatrix(array $matrices): void
-    {
-//        /** @var string $matrix */
-//        foreach ($matrices as $matrix) {
-//            $this->matrix['job'][] = $matrix;
-//        }
+        $this->matrix['include'][] = [
+            'name' => $tool->name(),
+            'command' => $tool->command(),
+        ];
     }
 }
