@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
-use Ghostwriter\Compliance\Contract\ToolInterface;
+use Ghostwriter\Compliance\ValueObject\Job;
 use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use function json_encode;
 
@@ -50,23 +50,8 @@ final class GenerateMatrixEvent extends AbstractEvent
         return $result;
     }
 
-    public function include(ToolInterface $tool, int $phpVersion): void
+    public function include(Job $job): void
     {
-        $dependencies = ['latest', 'locked', 'lowest'];
-        foreach ($dependencies as $dependency) {
-            $this->matrix['include'][] = [
-                'name' => $tool->name(),
-                'command' => $tool->command(),
-                'os' => 'ubuntu-latest',
-                'php' => PhpVersion::TO_STRING[$phpVersion],
-                'dependencies'=> $dependency,
-                'experimental'=> false,
-            ];
-        }
-//        'dependencies' => ['latest', 'locked', 'lowest'],
-////        'php' => ['8.0', '8.1'],
-//        'os' => ['ubuntu-latest'],
-//        $this->matrix['name'][$tool::class] = $tool->name();
-//        $this->matrix['command'][$tool::class] = $tool->command();
+        $this->matrix['include'][] = $job->toArray();
     }
 }
