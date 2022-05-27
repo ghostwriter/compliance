@@ -58,7 +58,7 @@ final class GenerateMatrixEvent extends AbstractEvent
 
     public function include(ToolInterface $tool): void
     {
-        $this->matrix['include'][] = [
+        $this->matrix['include'][$tool::class] = [
             'name' => $tool->name(),
             'command' => $tool->command(),
         ];
