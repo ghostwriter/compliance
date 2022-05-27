@@ -54,8 +54,7 @@ final class ConsoleServiceProvider implements ServiceProviderInterface
                 new RecursiveDirectoryIterator(dirname(__DIR__) . '/Command/')
             ) as $splFileInfo
         ) {
-            /** @var string $path */
-            $path = $splFileInfo->getRealPath();
+            $path = $splFileInfo->getPathname();
 
             if (! preg_match('#Command\.php$#', $path)) {
                 continue;
@@ -71,8 +70,7 @@ final class ConsoleServiceProvider implements ServiceProviderInterface
                 $splFileInfo->getBasename('.php')
             );
 
-            $container->bind($command);
-            $container->tag($command, [Command::class]);
+            $container->bind($command, $command, [Command::class]);
         }
     }
 }

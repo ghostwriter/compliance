@@ -5,15 +5,19 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Command;
 
 use Ghostwriter\Compliance\Event\GenerateMatrixEvent;
+use Ghostwriter\Compliance\Event\OutputEvent;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
+use function sprintf;
 
 final class MatrixCommand extends AbstractCommand
 {
     protected function configure(): void
     {
         $this->setDescription('Generates a job matrix for Github Actions.');
+        $this->addArgument('job', InputArgument::OPTIONAL, 'JSON string representing the job to run.');
     }
 
     /**
@@ -27,6 +31,10 @@ final class MatrixCommand extends AbstractCommand
     {
         $generateMatrixEvent =  $this->dispatcher->dispatch(
             new GenerateMatrixEvent($this->dispatcher, $input, $this->output)
+        );
+
+        $this->dispatcher->dispatch(
+            new OutputEvent(sprintf('::set-output name=matrix::%s', $generateMatrixEvent->getMatrix()))
         );
 
         return $generateMatrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;

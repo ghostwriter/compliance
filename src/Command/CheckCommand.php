@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Command;
 
+use Ghostwriter\Compliance\Event\CheckEvent;
 use Ghostwriter\Compliance\Event\GenerateWorkflowFileEvent;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

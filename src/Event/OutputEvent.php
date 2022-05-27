@@ -8,23 +8,12 @@ use Ghostwriter\EventDispatcher\AbstractEvent;
 
 final class OutputEvent extends AbstractEvent
 {
-    private string $message;
-
-    private string $type;
-
-    public function __construct(string $message = 'default', string $type='info')
+    public function __construct(private string|array $message)
     {
-        $this->message = $message;
-        $this->type = $type;
     }
 
-    public function getMessage(): string
+    public function getMessage(): string|array
     {
         return $this->message;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
     }
 }

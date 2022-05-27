@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 use function getcwd;
+use function getenv;
 
 final class ChangeWorkingDirectoryEvent extends AbstractEvent
 {
@@ -22,7 +23,7 @@ final class ChangeWorkingDirectoryEvent extends AbstractEvent
         SymfonyStyle $output
     ) {
         $input = new ArrayInput([
-            '--current-working-directory' => getcwd(),
+            '--current-working-directory' => getenv('GITHUB_WORKSPACE') ?: getcwd(),
         ], $command->getDefinition());
 
         parent::__construct($dispatcher, $input, $output);

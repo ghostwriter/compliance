@@ -1,4 +1,5 @@
-FROM ghcr.io/ghostwriter/php:8.1-composer
+# syntax=docker/dockerfile:1
+FROM ghcr.io/ghostwriter/php:8.0-composer
 
 LABEL "org.opencontainers.image.title"="Compliance Automation"
 LABEL "org.opencontainers.image.description"="Compliance Automation for PHP - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions."
@@ -7,10 +8,12 @@ LABEL "org.opencontainers.image.source"="https://github.com/ghostwriter/complian
 LABEL "org.opencontainers.image.url"="https://github.com/ghostwriter/compliance"
 LABEL "org.opencontainers.image.licenses"="BSD-3-Clause"
 
-WORKDIR /github/workspace
+WORKDIR /app
 
-COPY / /github/workspace
+COPY / /app
 
-RUN composer install --no-autoloader --no-interaction
+RUN COMPOSER_CACHE_DIR=/dev/null composer install --no-dev --no-autoloader --no-interaction --verbose
 
-ENTRYPOINT ["/github/workspace/bin/compliance"]
+RUN composer dump-autoload -a --no-dev
+
+ENTRYPOINT ["/app/bin/compliance"]

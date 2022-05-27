@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\ServiceProvider;
 
-use Ghostwriter\Compliance\Listener\Debug;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use Ghostwriter\Container\Contract\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\ListenerProvider;
 use Ghostwriter\EventDispatcher\ServiceProvider\EventDispatcherServiceProvider;
 use Psr\Container\ContainerExceptionInterface;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
+use Symfony\Component\Finder\Finder;
 use function dirname;
-use function preg_match;
 use function sprintf;
 use function str_replace;
 
@@ -31,21 +27,15 @@ final class EventServiceProvider implements ServiceProviderInterface
             ListenerProvider::class,
             static function (ContainerInterface $container, object $listenerProvider): ListenerProvider {
                 /** @var ListenerProvider $listenerProvider */
-                // $listenerProvider->addListener($container->get(Debug::class), 0, 'object');
+                $finder = clone $container->get(Finder::class);
 
-                /** @var SplFileInfo $splFileInfo */
-                foreach (
-                    new RecursiveIteratorIterator(
-                        new RecursiveDirectoryIterator(dirname(__DIR__) . '/Listener/')
-                    ) as $splFileInfo
-                ) {
-                    /** @var string $path */
-                    $path = $splFileInfo->getRealPath();
+                $finder->files()
+                    ->in(dirname(__DIR__) . '/Listener/')
+                    ->name('*Listener.php')
+                    ->notName('Abstract*.php')
+                    ->sortByName();
 
-                    if (! preg_match('#Listener\.php$#', $path)) {
-                        continue;
-                    }
-
+                foreach ($finder->getIterator() as $splFileInfo) {
                     $event = sprintf(
                         '%s%sEvent',
                         str_replace('ServiceProvider', 'Event', __NAMESPACE__ . '\\'),

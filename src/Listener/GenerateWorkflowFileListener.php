@@ -29,16 +29,13 @@ final class GenerateWorkflowFileListener implements EventListenerInterface
         if ($workflowPathExists && ! $overwrite) {
             $event->stopPropagation();
             $dispatcher->dispatch(
-                new OutputEvent(
-                    $workflowPath . ' already exists; use "--overwrite|-o" to overwrite the workflow.',
-                    'error'
-                )
+                new OutputEvent($workflowPath . ' already exists; use "--overwrite|-o" to overwrite the workflow.')
             );
             return;
         }
 
         if ($workflowPathExists) {
-            $dispatcher->dispatch(new OutputEvent($workflowPath . ' already exists, overwriting!', 'warning'));
+            $dispatcher->dispatch(new OutputEvent($workflowPath . ' already exists, overwriting!'));
         }
 
         $workflowTemplatePath = dirname(__DIR__) . '/compliance.yml.dist';
@@ -47,10 +44,10 @@ final class GenerateWorkflowFileListener implements EventListenerInterface
 
         if (false === $result) {
             $event->stopPropagation();
-            $dispatcher->dispatch(new OutputEvent($workflowPath . ' Failed to write data!', 'warning'));
+            $dispatcher->dispatch(new OutputEvent($workflowPath . ' Failed to write data!'));
             return;
         }
 
-        $dispatcher->dispatch(new OutputEvent($workflowPath . ' workflow generated!', 'success'));
+        $dispatcher->dispatch(new OutputEvent($workflowPath . ' workflow generated!'));
     }
 }

@@ -35,8 +35,7 @@ final class MatrixServiceProvider implements ServiceProviderInterface
                 $splFileInfo->getBasename('.php')
             );
 
-            $container->bind($tool);
-            $container->tag($tool, [Tool::class]);
+            $container->bind($tool, $tool, [Tool::class]);
         }
     }
 }

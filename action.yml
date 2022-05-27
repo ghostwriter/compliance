@@ -19,7 +19,6 @@ inputs:
     required: true
   job:
     description: 'JSON string representing the job to run.'
-    default: "{}"
     required: false
 
 outputs:
@@ -28,7 +27,8 @@ outputs:
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/ghostwriter/compliance:v1'
+  image: 'Dockerfile'
+#  image: 'docker://ghcr.io/ghostwriter/compliance:v1'
   args:
     - ${{ inputs.command }}
     - ${{ inputs.job }}
