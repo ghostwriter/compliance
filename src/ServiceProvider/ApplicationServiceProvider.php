@@ -47,6 +47,7 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
         $dispatcher->dispatch($changeWorkingDirectoryEvent);
 
         if (file_exists($complianceConfigPath)) {
+            $container->invoke(require $complianceConfigPath);
             $dispatcher->dispatch(new OutputEvent('Found config path: ' . $complianceConfigPath));
         }
     }
