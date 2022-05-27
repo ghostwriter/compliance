@@ -32,7 +32,7 @@ CODE_SAMPLE;
 
     private const BLACK_LIVES_MATTER = '<fg=white;bg=black;options=bold>#Black<fg=red;bg=black;options=bold>Lives</>Matter</>';
 
-    private const NAME = '<info>Compliance Automation - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.</info>';
+    private const NAME = '<info>Compliance - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.</info>';
 
     private const PACKAGE = 'ghostwriter/compliance';
 
