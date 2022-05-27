@@ -26,7 +26,7 @@ final class GenerateMatrixListener implements EventListenerInterface
         foreach ($this->container->tagged(Tool::class) as $file) {
             /** @var ToolInterface $tool */
             $tool = $this->container->get($file);
-            /** @var string $phpVersion */
+            /** @var int $phpVersion */
             $phpVersion = $this->container->get(ComposerDependency::CONFIG . '.php');
             if ($tool->isPresent()) {
                 $event->include($tool, $phpVersion);
