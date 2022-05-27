@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ghcr.io/ghostwriter/php:8.0-composer
+FROM ghcr.io/ghostwriter/php:8.1-composer
 
 LABEL "org.opencontainers.image.title"="Compliance"
 LABEL "org.opencontainers.image.description"="Compliance Automation for PHP - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions."
