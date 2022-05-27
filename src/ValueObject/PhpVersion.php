@@ -14,7 +14,7 @@ final class PhpVersion
     /**
      * @var int
      */
-    public const CURRENT_LATEST = self::PHP_74;
+    public const CURRENT_LATEST = self::PHP_81;
 
     /**
      * @var int
@@ -198,5 +198,37 @@ final class PhpVersion
         self::PHP_81 => '2021-11-25',
         // Future release (eta) ↓
         self::PHP_82 => '2022-12-01',
+    ];
+
+    /**
+     * @var array<int,string>
+     */
+    public const TO_STRING = [
+        self::PHP_10 => '1.0',
+        self::PHP_20 => '2.0',
+        self::PHP_30 => '3.0',
+        self::PHP_40 => '4.0',
+        self::PHP_41 => '4.1',
+        self::PHP_42 => '4.2',
+        self::PHP_43 => '4.3',
+        self::PHP_44 => '4.4',
+        self::PHP_50 => '5.0',
+        self::PHP_51 => '5.1',
+        self::PHP_52 => '5.2',
+        self::PHP_53 => '5.3',
+        self::PHP_54 => '5.4',
+        self::PHP_55 => '5.5',
+        self::PHP_56 => '5.6',
+        self::PHP_70 => '7.0',
+        self::PHP_71 => '7.1',
+        self::PHP_72 => '7.2',
+        self::PHP_73 => '7.3',
+        // Maintained release ↓
+        self::PHP_74 => '7.4',
+        self::PHP_80 => '8.0',
+        // Latest version ↓
+        self::PHP_81 => '8.1',
+        // Future release (eta) ↓
+        self::PHP_82 => '8.2',
     ];
 }
