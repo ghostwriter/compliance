@@ -7,7 +7,8 @@ use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use Ghostwriter\Compliance\ValueObject\Tool;
 
 return static function (ComplianceConfiguration $complianceConfig): void {
-    $complianceConfig->phpVersion(PhpVersion::CURRENT_STABLE);
+//    $complianceConfig->phpVersion(PhpVersion::CURRENT_STABLE);
+    $complianceConfig->phpVersion(PhpVersion::CURRENT_LATEST);
     $complianceConfig->skip([
         PhpVersion::PHP_82,
         Tool::CODECEPTION => [PhpVersion::PHP_80],
