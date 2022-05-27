@@ -35,7 +35,7 @@ final class GenerateMatrixEvent extends AbstractEvent
         'experimental' => [false],
         'dependencies' => ['latest', 'locked', 'lowest'],
         'php' => ['8.0', '8.1'],
-        'job' => ['empty'],
+//        'job' => ['empty'],
         'os' => ['ubuntu-latest'],
     ];
 
@@ -49,7 +49,7 @@ final class GenerateMatrixEvent extends AbstractEvent
 
     public function getMatrix(): string
     {
-        $result = json_encode($this->matrix, JSON_UNESCAPED_SLASHES);
+        $result = json_encode($this->matrix);
         if (false === $result) {
             return '{}';
         }
@@ -58,9 +58,11 @@ final class GenerateMatrixEvent extends AbstractEvent
 
     public function include(ToolInterface $tool): void
     {
-        $this->matrix['include'][$tool::class] = [
+        $this->matrix['include'][] = [
             'name' => $tool->name(),
             'command' => $tool->command(),
         ];
+//        $this->matrix['name'][$tool::class] = $tool->name();
+//        $this->matrix['command'][$tool::class] = $tool->command();
     }
 }
