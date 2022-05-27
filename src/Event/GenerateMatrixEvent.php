@@ -35,18 +35,26 @@ final class GenerateMatrixEvent extends AbstractEvent
                 'php' => '8.0',
                 'command' => './vendor/bin/phpunit',
             ],
-//            [
-//                'name' => 'PHPCS',
-//                'php' => '8.0',
-//                'command' => './vendor/bin/phpcs',
-//            ],
+            //            [
+            //                'name' => 'PHPCS',
+            //                'php' => '8.0',
+            //                'command' => './vendor/bin/phpcs',
+            //            ],
         ],
         'exclude' => [],
         'experimental' => [false],
-        'dependencies' => ['latest','locked','lowest'],
+        'dependencies' => ['latest', 'locked', 'lowest'],
         'job' => ['empty'],
         'os' => ['ubuntu-latest'],
     ];
+
+    public function exclude(array $matrices): void
+    {
+        /** @var string $matrix */
+        foreach ($matrices as $matrix) {
+            $this->matrix['exclude'][] = $matrix;
+        }
+    }
 
     public function getMatrix(): string
     {
@@ -62,14 +70,6 @@ final class GenerateMatrixEvent extends AbstractEvent
         /** @var string $matrix */
         foreach ($matrices as $matrix) {
             $this->matrix['include'][] = $matrix;
-        }
-    }
-
-    public function exclude(array $matrices): void
-    {
-        /** @var string $matrix */
-        foreach ($matrices as $matrix) {
-            $this->matrix['exclude'][] = $matrix;
         }
     }
 
