@@ -29,17 +29,7 @@ final class GenerateMatrixEvent extends AbstractEvent
     }
      */
     private array $matrix = [
-        'include' => [
-            [
-                'name' => 'PHPUnit',
-                'command' => './vendor/bin/phpunit',
-            ],
-            //            [
-            //                'name' => 'PHPCS',
-            //                'php' => '8.0',
-            //                'command' => './vendor/bin/phpcs',
-            //            ],
-        ],
+        'include' => [],
         'exclude' => [],
         'experimental' => [false],
         'dependencies' => ['latest', 'locked', 'lowest'],
@@ -69,7 +59,7 @@ final class GenerateMatrixEvent extends AbstractEvent
     {
         /** @var string $matrix */
         foreach ($matrices as $matrix) {
-            $this->matrix['include'][] = $matrix;
+            $this->matrix['include'][] = json_encode($matrix, JSON_UNESCAPED_SLASHES);
         }
     }
 
