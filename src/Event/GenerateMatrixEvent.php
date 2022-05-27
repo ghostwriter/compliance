@@ -7,6 +7,7 @@ namespace Ghostwriter\Compliance\Event;
 use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use function json_encode;
+use const JSON_PRETTY_PRINT;
 
 final class GenerateMatrixEvent extends AbstractEvent
 {
@@ -30,12 +31,7 @@ final class GenerateMatrixEvent extends AbstractEvent
      */
     private array $matrix = [
         'include' => [],
-        'exclude' => [],
-        'experimental' => [false],
-        'dependencies' => ['latest', 'locked', 'lowest'],
-        'php' => ['8.0', '8.1'],
-        //        'job' => ['empty'],
-        'os' => ['ubuntu-latest'],
+        'exclude' => []
     ];
 
     public function exclude(array $matrices): void
@@ -57,11 +53,21 @@ final class GenerateMatrixEvent extends AbstractEvent
 
     public function include(ToolInterface $tool, int $phpVersion): void
     {
-        $this->matrix['include'][] = [
-            'name' => $tool->name(),
-            'command' => $tool->command(),
-            'php' => PhpVersion::TO_STRING[$phpVersion],
-        ];
+        $dependencies = ['latest', 'locked', 'lowest'];
+        foreach ($dependencies as $dependency){
+            $this->matrix['include'][] = [
+                'name' => $tool->name(),
+                'command' => $tool->command(),
+                'os' => 'ubuntu-latest',
+                'php' => PhpVersion::TO_STRING[$phpVersion],
+                'dependencies'=> $dependency,
+                'experimental'=> false
+            ];
+
+        }
+//        'dependencies' => ['latest', 'locked', 'lowest'],
+////        'php' => ['8.0', '8.1'],
+//        'os' => ['ubuntu-latest'],
 //        $this->matrix['name'][$tool::class] = $tool->name();
 //        $this->matrix['command'][$tool::class] = $tool->command();
     }
