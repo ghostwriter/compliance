@@ -8,6 +8,10 @@
 
 Compliance Automation for PHP - Automatically configure and execute multiple `CI/CD` & `QA Testing` tools on any platform via `GitHub Action`.
 
+> WIP:
+> 
+> This project is not finished yet, work in progress.
+
 ## Installation
 
 You can install the package via composer:
