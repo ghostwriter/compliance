@@ -1,6 +1,6 @@
 # Compliance
 
-[![Continuous Integration](https://github.com/ghostwriter/compliance/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/ghostwriter/compliance/actions/workflows/continuous-integration.yml)
+[![Compliance](https://github.com/ghostwriter/compliance/actions/workflows/compliance.yml/badge.svg)](https://github.com/ghostwriter/compliance/actions/workflows/compliance.yml)
 [![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/compliance?color=8892bf)](https://www.php.net/supported-versions)
 [![Type Coverage](https://shepherd.dev/github/ghostwriter/compliance/coverage.svg)](https://shepherd.dev/github/ghostwriter/compliance)
 [![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/compliance)](https://packagist.org/packages/ghostwriter/compliance)
