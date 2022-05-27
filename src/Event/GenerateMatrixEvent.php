@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Event;
 
 use Ghostwriter\Compliance\Contract\ToolInterface;
-use const JSON_UNESCAPED_SLASHES;
+use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use function json_encode;
 
 final class GenerateMatrixEvent extends AbstractEvent
@@ -18,8 +18,7 @@ final class GenerateMatrixEvent extends AbstractEvent
      *     include:list<array{name:string,command:string}>,
      *     os:list<string>,
      *     php:list<string>,
-     *     name:list<string>,
-     *     name:string
+     *     name:list<string>
      * }
      *     {
     "php":"7.4",
@@ -35,7 +34,7 @@ final class GenerateMatrixEvent extends AbstractEvent
         'experimental' => [false],
         'dependencies' => ['latest', 'locked', 'lowest'],
         'php' => ['8.0', '8.1'],
-//        'job' => ['empty'],
+        //        'job' => ['empty'],
         'os' => ['ubuntu-latest'],
     ];
 
@@ -56,11 +55,12 @@ final class GenerateMatrixEvent extends AbstractEvent
         return $result;
     }
 
-    public function include(ToolInterface $tool): void
+    public function include(ToolInterface $tool, int $phpVersion): void
     {
         $this->matrix['include'][] = [
             'name' => $tool->name(),
             'command' => $tool->command(),
+            'php' => PhpVersion::TO_STRING[$phpVersion],
         ];
 //        $this->matrix['name'][$tool::class] = $tool->name();
 //        $this->matrix['command'][$tool::class] = $tool->command();
