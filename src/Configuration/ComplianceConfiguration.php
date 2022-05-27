@@ -9,7 +9,6 @@ use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use RuntimeException;
 use function array_key_exists;
-use function sprintf;
 
 final class ComplianceConfiguration
 {
@@ -33,7 +32,7 @@ final class ComplianceConfiguration
             throw new RuntimeException();
         }
 
-        $this->container->set(ComposerDependency::CONFIG.'.dependency', $dependency);
+        $this->container->set(ComposerDependency::CONFIG . '.dependency', $dependency);
     }
 
     /**
@@ -41,7 +40,7 @@ final class ComplianceConfiguration
      */
     public function composerOptions(array $options): void
     {
-        $this->container->set(ComposerDependency::CONFIG.'.options', $options);
+        $this->container->set(ComposerDependency::CONFIG . '.options', $options);
     }
 
     public function getExclude(): array
@@ -67,7 +66,7 @@ final class ComplianceConfiguration
      */
     public function phpVersion(int $phpVersion): void
     {
-        $this->container->set(ComposerDependency::CONFIG.'.php', $phpVersion);
+        $this->container->set(ComposerDependency::CONFIG . '.php', $phpVersion);
     }
 
     public function skip(array $array): void
