@@ -32,7 +32,6 @@ final class GenerateMatrixEvent extends AbstractEvent
         'include' => [
             [
                 'name' => 'PHPUnit',
-                'php' => '8.0',
                 'command' => './vendor/bin/phpunit',
             ],
             //            [
@@ -44,6 +43,7 @@ final class GenerateMatrixEvent extends AbstractEvent
         'exclude' => [],
         'experimental' => [false],
         'dependencies' => ['latest', 'locked', 'lowest'],
+        'php' => ['8.0', '8.1'],
         'job' => ['empty'],
         'os' => ['ubuntu-latest'],
     ];
