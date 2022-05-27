@@ -16,7 +16,4 @@ RUN COMPOSER_CACHE_DIR=/dev/null composer install --no-dev --no-autoloader --no-
 
 RUN composer dump-autoload -a --no-dev
 
-#RUN composer global require ghostwriter/compliance:dev-qa/test-workflow
-
 ENTRYPOINT ["/app/bin/compliance"]
-#ENTRYPOINT ["/root/.composer/vendor/bin/compliance"]
