@@ -18,6 +18,8 @@ abstract class AbstractTool implements ToolInterface
      */
     public const PRESENCE_FILES = [];
 
+    protected string $phpVersion;
+
     public function __construct(private Finder $finder)
     {
     }
@@ -39,5 +41,10 @@ abstract class AbstractTool implements ToolInterface
     public function name(): string
     {
         return str_replace(__NAMESPACE__ . '\\', '', static::class);
+    }
+
+    public function phpVersion(): string
+    {
+        return $this->phpVersion;
     }
 }
