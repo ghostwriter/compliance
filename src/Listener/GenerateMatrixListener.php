@@ -7,6 +7,7 @@ namespace Ghostwriter\Compliance\Listener;
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Compliance\Event\GenerateMatrixEvent;
+use Ghostwriter\Compliance\ValueObject\ComposerDependency;
 use Ghostwriter\Compliance\ValueObject\Tool;
 use Ghostwriter\Container\Container;
 use Throwable;
@@ -25,8 +26,10 @@ final class GenerateMatrixListener implements EventListenerInterface
         foreach ($this->container->tagged(Tool::class) as $file) {
             /** @var ToolInterface $tool */
             $tool = $this->container->get($file);
+            /** @var string $phpVersion */
+            $phpVersion = $this->container->get(ComposerDependency::CONFIG . '.php');
             if ($tool->isPresent()) {
-                $event->include($tool);
+                $event->include($tool, $phpVersion);
             }
         }
     }
