@@ -11,4 +11,6 @@ interface ToolInterface
     public function isPresent(): bool;
 
     public function name(): string;
+
+    public function phpVersion(): string;
 }
