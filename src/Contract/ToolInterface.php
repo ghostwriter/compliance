@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Contract;
 
-interface PresenceInterface
+interface ToolInterface
 {
+    public function command(): string;
+
     public function isPresent(): bool;
+
+    public function name(): string;
 }

@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Tool;
 
-use Ghostwriter\Compliance\Contract\PresenceInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
+use Ghostwriter\Compliance\Contract\ToolInterface;
 use Symfony\Component\Finder\Finder;
 use function getcwd;
 use function getenv;
 
-abstract class AbstractTool implements PresenceInterface
+abstract class AbstractTool implements ToolInterface
 {
     /**
      * Configuration files.
@@ -19,10 +18,8 @@ abstract class AbstractTool implements PresenceInterface
      */
     public const PRESENCE_FILES = [];
 
-    public function __construct(
-        private Finder $finder,
-        private SymfonyStyle $output
-    ) {
+    public function __construct(private Finder $finder)
+    {
     }
 
     public function isPresent(): bool
@@ -36,13 +33,11 @@ abstract class AbstractTool implements PresenceInterface
             ->depth(0)
             ->sortByName();
 
-//        $this->output->section($path);
-//        $this->output->writeln(scandir($path));
-//        /** @var SplFileInfo $file */
-//        foreach ($finder->getIterator() as $file){
-//            $this->output->writeln($file->getPathname());
-//        }
-
         return $finder->name(static::PRESENCE_FILES)->hasResults();
+    }
+
+    public function name(): string
+    {
+        return str_replace(__NAMESPACE__ . '\\', '', static::class);
     }
 }

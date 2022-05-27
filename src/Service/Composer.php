@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Tool;
+namespace Ghostwriter\Compliance\Service;
 
 use const DIRECTORY_SEPARATOR;
 use function basename;
 use function getenv;
+use function pathinfo;
+use function substr;
 use function trim;
 
-final class Composer extends AbstractTool
+final class Composer
 {
-    public const PRESENCE_FILES = ['composer.json'];
+    public const PRESENCE_FILES = ['composer.json', 'composer.lock'];
 
     /**
      * Retrieve the path to composer.json file.
