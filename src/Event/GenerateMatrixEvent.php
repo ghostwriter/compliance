@@ -59,7 +59,7 @@ final class GenerateMatrixEvent extends AbstractEvent
     {
         /** @var string $matrix */
         foreach ($matrices as $matrix) {
-            $this->matrix['include'][] = json_encode($matrix, JSON_UNESCAPED_SLASHES);
+            $this->matrix['include'][] = $matrix;
         }
     }
 
