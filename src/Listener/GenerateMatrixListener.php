@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Listener;
 
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
-use Ghostwriter\Compliance\Contract\PresenceInterface;
 use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Compliance\Event\GenerateMatrixEvent;
 use Ghostwriter\Compliance\ValueObject\Tool;
@@ -29,7 +28,7 @@ final class GenerateMatrixListener implements EventListenerInterface
             if ($tool->isPresent()) {
                 $event->include([
                     'name' => $tool->name(),
-                    'command' => $tool->name(),
+                    'command' => $tool->command(),
                 ]);
             }
         }
