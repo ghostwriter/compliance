@@ -26,10 +26,7 @@ final class GenerateMatrixListener implements EventListenerInterface
             /** @var ToolInterface $tool */
             $tool = $this->container->get($file);
             if ($tool->isPresent()) {
-                $event->include([
-                    'name' => $tool->name(),
-                    'command' => $tool->command(),
-                ]);
+                $event->include($tool);
             }
         }
     }
