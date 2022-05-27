@@ -2,7 +2,7 @@
     "main": "bin/compliance.php",
     "output": "bin/compliance",
     "banner": [
-        "This file is part of the Compliance Automation project https://github.com/ghostwriter/compliance.",
+        "This file is part of the Compliance project. https://github.com/ghostwriter/compliance",
         "",
         "(c) Nathanael Esayeas <nathanael.esayeas@protonmail.com>",
         "",
