@@ -21,7 +21,7 @@ jobs:
 
       - name: Determine CI Jobs
         id: matrix
-        uses: ghostwriter/compliance@qa/test-workflow
+        uses: ghostwriter/compliance@v1
         with:
           command: matrix
   qa:
