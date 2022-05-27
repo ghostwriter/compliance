@@ -73,7 +73,7 @@ return static function (ECSConfig $ecsConfig): void {
     $ecsConfig->parallel();
     $ecsConfig->paths([
         __DIR__ . '/bin',
-        __DIR__ . '/config/compliance.php',
+        __DIR__ . '/compliance.php',
         __DIR__ . '/ecs.php',
         __DIR__ . '/rector.php',
         __DIR__ . '/src',
