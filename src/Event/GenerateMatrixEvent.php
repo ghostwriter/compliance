@@ -11,21 +11,16 @@ final class GenerateMatrixEvent extends AbstractEvent
 {
     /**
      * @var array{
-     *     dependencies:list<string>,
      *     exclude:list<string>,
-     *     experimental:list<bool>,
-     *     include:list<array{name:string,command:string}>,
-     *     os:list<string>,
-     *     php:list<string>,
-     *     name:list<string>
+     *     include:list<array{
+     *     name:string,
+     *     command:string,
+     *     os:string,
+     *     php:string,
+     *     dependency:string,
+     *     experimental:bool
+     * }>,
      * }
-     *     {
-    "php":"7.4",
-    "dependencies":"locked",
-    "extensions":[],
-    "ini":["memory_limit=-1"],
-    "command":"./vendor/bin/phpcs"
-    }
      */
     private array $matrix = [
         'include' => [],
