@@ -18,7 +18,7 @@ use function getcwd;
 final class ApplicationServiceProvider implements ServiceProviderInterface
 {
     /**
-     * @var string[]
+     * @var array<class-string<ServiceProviderInterface>>
      */
     private const PROVIDERS = [
         ConsoleServiceProvider::class,
