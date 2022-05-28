@@ -23,9 +23,6 @@ final class ComplianceConfiguration
         $this->container = $container;
     }
 
-    /**
-     * @param ComposerDependency::* $dependency
-     */
     public function composerDependency(string $dependency): void
     {
         if (! array_key_exists($dependency, ComposerDependency::OPTIONS)) {
@@ -53,7 +50,7 @@ final class ComplianceConfiguration
         return $this->include;
     }
 
-    public function paths(array $array)
+    public function paths(array $array): void
     {
         /** @var string $value */
         foreach ($array as $value) {
@@ -61,9 +58,6 @@ final class ComplianceConfiguration
         }
     }
 
-    /**
-     * @param PhpVersion::* $phpVersion
-     */
     public function phpVersion(int $phpVersion): void
     {
         $this->container->set(ComposerDependency::CONFIG . '.php', $phpVersion);
