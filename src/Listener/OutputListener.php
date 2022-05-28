@@ -10,12 +10,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class OutputListener implements EventListenerInterface
 {
-    public function __construct(private SymfonyStyle $output)
+    public function __construct(private SymfonyStyle $symfonyStyle)
     {
     }
 
-    public function __invoke(OutputEvent $event): void
+    public function __invoke(OutputEvent $outputEvent): void
     {
-        $this->output->writeln(['::echo::on', $event->getMessage(), '::echo::off']);
+        $this->symfonyStyle->writeln(['::echo::on', $outputEvent->getMessage(), '::echo::off']);
     }
 }
