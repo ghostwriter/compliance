@@ -52,7 +52,7 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
 
         if (file_exists($complianceConfigPath)) {
             /** @var callable(ComplianceConfiguration) $config */
-            $config = require $complianceConfigPath;
+            $config = include $complianceConfigPath;
             $container->invoke($config);
             $dispatcher->dispatch(new OutputEvent('Found config path: ' . $complianceConfigPath));
         }
