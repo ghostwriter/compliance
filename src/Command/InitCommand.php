@@ -40,7 +40,6 @@ final class InitCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var GenerateWorkflowFileEvent $generateWorkflowFileEvent */
         $generateWorkflowFileEvent =  $this->dispatcher->dispatch(
             new GenerateWorkflowFileEvent($this->dispatcher, $input, $this->output)
         );
