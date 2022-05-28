@@ -28,11 +28,9 @@ final class CheckCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var GenerateWorkflowFileEvent $generateWorkflowFileEvent */
-        $generateWorkflowFileEvent =  $this->dispatcher->dispatch(
-            new CheckEvent($this->dispatcher, $input, $this->output)
-        );
+        /** @var GenerateWorkflowFileEvent $checkEvent */
+        $checkEvent =  $this->dispatcher->dispatch(new CheckEvent($this->dispatcher, $input, $this->output));
 
-        return $generateWorkflowFileEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
+        return $checkEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
 }
