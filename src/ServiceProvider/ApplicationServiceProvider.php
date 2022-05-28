@@ -17,7 +17,10 @@ use function getcwd;
 
 final class ApplicationServiceProvider implements ServiceProviderInterface
 {
-    private array $providers = [
+    /**
+     * @var string[]
+     */
+    private const PROVIDERS = [
         ConsoleServiceProvider::class,
         EventServiceProvider::class,
         MatrixServiceProvider::class,
@@ -29,7 +32,7 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
     public function __construct(ContainerInterface $container)
     {
         /** @var class-string<ServiceProviderInterface> $provider */
-        foreach ($this->providers as $provider) {
+        foreach (self::PROVIDERS as $provider) {
             $container->build($provider);
         }
     }
