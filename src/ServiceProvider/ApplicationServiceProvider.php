@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\ServiceProvider;
 
+use Ghostwriter\Compliance\Configuration\ComplianceConfiguration;
 use Ghostwriter\Compliance\Event\ChangeWorkingDirectoryEvent;
 use Ghostwriter\Compliance\Event\OutputEvent;
 use Ghostwriter\Container\Contract\ContainerInterface;
@@ -47,7 +48,9 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
         $dispatcher->dispatch($changeWorkingDirectoryEvent);
 
         if (file_exists($complianceConfigPath)) {
-            $container->invoke(require $complianceConfigPath);
+            /** @var callable(ComplianceConfiguration) $config */
+            $config = require $complianceConfigPath;
+            $container->invoke($config);
             $dispatcher->dispatch(new OutputEvent('Found config path: ' . $complianceConfigPath));
         }
     }
