@@ -16,24 +16,23 @@ final class ChangeWorkingDirectoryListener implements EventListenerInterface
     /**
      * @throws Throwable
      */
-    public function __invoke(ChangeWorkingDirectoryEvent $event): void
+    public function __invoke(ChangeWorkingDirectoryEvent $changeWorkingDirectoryEvent): void
     {
-        $input = $event->getInput();
-        $output = $event->getOutput();
+        $input = $changeWorkingDirectoryEvent->getInput();
+        $output = $changeWorkingDirectoryEvent->getOutput();
 
         /** @var string $currentWorkingDirectory */
         $currentWorkingDirectory = $input->getOption('current-working-directory');
 
         $result = @chdir($currentWorkingDirectory);
 
-        if (false === $result) {
-            $event->stopPropagation();
+        if (! $result) {
+            $changeWorkingDirectoryEvent->stopPropagation();
             $output->error(sprintf(
                 'Unable to change current working directory; %s; "%s" given.',
                 error_get_last()['message'] ?? 'No such file or directory',
                 $currentWorkingDirectory
             ));
-            return;
         }
     }
 }
