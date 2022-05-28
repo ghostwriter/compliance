@@ -19,7 +19,7 @@ final class ChangeWorkingDirectoryListener implements EventListenerInterface
     public function __invoke(ChangeWorkingDirectoryEvent $changeWorkingDirectoryEvent): void
     {
         $input = $changeWorkingDirectoryEvent->getInput();
-        $output = $changeWorkingDirectoryEvent->getOutput();
+        $symfonyStyle = $changeWorkingDirectoryEvent->getOutput();
 
         /** @var string $currentWorkingDirectory */
         $currentWorkingDirectory = $input->getOption('current-working-directory');
@@ -28,7 +28,7 @@ final class ChangeWorkingDirectoryListener implements EventListenerInterface
 
         if (! $result) {
             $changeWorkingDirectoryEvent->stopPropagation();
-            $output->error(sprintf(
+            $symfonyStyle->error(sprintf(
                 'Unable to change current working directory; %s; "%s" given.',
                 error_get_last()['message'] ?? 'No such file or directory',
                 $currentWorkingDirectory
