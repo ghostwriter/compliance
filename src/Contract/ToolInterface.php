@@ -11,7 +11,7 @@ interface ToolInterface
     /**
      * Configuration files.
      *
-     * @return array<array-key,string>
+     * @return string[]
      */
     public function configuration(): array;
 
