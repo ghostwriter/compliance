@@ -13,6 +13,9 @@ use function trim;
 
 final class Composer
 {
+    /**
+     * @var string[]
+     */
     public const PRESENCE_FILES = ['composer.json', 'composer.lock'];
 
     /**
