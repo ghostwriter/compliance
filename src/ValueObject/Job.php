@@ -9,7 +9,7 @@ final class Job
     public function __construct(
         private string $name,
         private string $command,
-        private array $dependencies,
+        private string $dependency,
         private int $php = PhpVersion::CURRENT_STABLE,
         private bool $experimental =false,
         private string $os = 'ubuntu-latest'
@@ -23,8 +23,8 @@ final class Job
             'command' => $this->command,
             'os' => $this->os,
             'php' => PhpVersion::TO_STRING[$this->php],
-            'dependencies'=>$this->dependencies,
-            'experimental'=> $this->experimental,
+            'dependency' => $this->dependency,
+            'experimental' => $this->experimental,
         ];
     }
 }
