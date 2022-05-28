@@ -16,20 +16,14 @@ use Throwable;
  */
 abstract class AbstractEvent extends EventDispatcherAbstractEvent
 {
-    protected DispatcherInterface $dispatcher;
-
-    protected InputInterface $input;
-
-    protected SymfonyStyle $output;
-
     /**
      * @throws Throwable
      */
-    public function __construct(DispatcherInterface $dispatcher, InputInterface $input, SymfonyStyle $output)
-    {
-        $this->dispatcher = $dispatcher;
-        $this->input = $input;
-        $this->output = $output;
+    public function __construct(
+        protected DispatcherInterface $dispatcher,
+        protected InputInterface $input,
+        protected SymfonyStyle $symfonyStyle
+    ) {
     }
 
     public function getDispatcher(): DispatcherInterface
@@ -44,6 +38,6 @@ abstract class AbstractEvent extends EventDispatcherAbstractEvent
 
     public function getOutput(): SymfonyStyle
     {
-        return $this->output;
+        return $this->symfonyStyle;
     }
 }
