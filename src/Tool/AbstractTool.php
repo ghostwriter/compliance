@@ -11,40 +11,27 @@ use function getenv;
 
 abstract class AbstractTool implements ToolInterface
 {
-    /**
-     * Configuration files.
-     *
-     * @var string[]
-     */
-    public const PRESENCE_FILES = [];
+    private Finder $finder;
 
-    protected string $phpVersion;
-
-    public function __construct(private Finder $finder)
+    public function __construct(Finder $finder)
     {
+        $this->finder = clone $finder;
     }
 
     public function isPresent(): bool
     {
         $path = getenv('GITHUB_WORKSPACE') ?: getcwd();
 
-        $finder = clone $this->finder;
-
-        $finder->files()
+        return $this->finder->files()
             ->in($path)
             ->depth(0)
-            ->sortByName();
-
-        return $finder->name(static::PRESENCE_FILES)->hasResults();
+            ->sortByName()
+            ->name($this->configuration())
+            ->hasResults();
     }
 
     public function name(): string
     {
         return str_replace(__NAMESPACE__ . '\\', '', static::class);
-    }
-
-    public function phpVersion(): string
-    {
-        return $this->phpVersion;
     }
 }
