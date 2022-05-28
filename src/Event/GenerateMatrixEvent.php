@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Event;
 
 use Ghostwriter\Compliance\ValueObject\Job;
-use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use function json_encode;
 
 final class GenerateMatrixEvent extends AbstractEvent
