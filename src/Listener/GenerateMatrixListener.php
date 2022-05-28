@@ -15,6 +15,11 @@ use Throwable;
 
 final class GenerateMatrixListener implements EventListenerInterface
 {
+    /**
+     * @var string[]
+     */
+    private const DEPENDENCIES = ['latest', 'locked', 'lowest'];
+
     public function __construct(private Container $container)
     {
     }
@@ -22,17 +27,16 @@ final class GenerateMatrixListener implements EventListenerInterface
     /**
      * @throws Throwable
      */
-    public function __invoke(GenerateMatrixEvent $event): void
+    public function __invoke(GenerateMatrixEvent $generateMatrixEvent): void
     {
-        foreach ($this->container->tagged(Tool::class) as $file) {
+        foreach ($this->container->tagged(Tool::class) as $traversable) {
             /** @var ToolInterface $tool */
-            $tool = $this->container->get($file);
+            $tool = $this->container->get($traversable);
             if ($tool->isPresent()) {
                 /** @var int $phpVersion */
                 $phpVersion = $this->container->get(ComposerDependency::CONFIG . '.php');
-                $dependencies = ['latest', 'locked', 'lowest'];
-                foreach ($dependencies as $dependency) {
-                    $event->include(new Job($tool->name(), $tool->command(), $dependency, $phpVersion));
+                foreach (self::DEPENDENCIES as $dependency) {
+                    $generateMatrixEvent->include(new Job($tool->name(), $tool->command(), $dependency, $phpVersion));
                 }
             }
         }
