@@ -6,10 +6,10 @@ use Ghostwriter\Compliance\Configuration\ComplianceConfiguration;
 use Ghostwriter\Compliance\ValueObject\PhpVersion;
 use Ghostwriter\Compliance\ValueObject\Tool;
 
-return static function (ComplianceConfiguration $complianceConfig): void {
+return static function (ComplianceConfiguration $complianceConfiguration): void {
 //    $complianceConfig->phpVersion(PhpVersion::CURRENT_STABLE);
-    $complianceConfig->phpVersion(PhpVersion::CURRENT_LATEST);
-    $complianceConfig->skip([
+    $complianceConfiguration->phpVersion(PhpVersion::CURRENT_LATEST);
+    $complianceConfiguration->skip([
         PhpVersion::PHP_82,
         Tool::CODECEPTION => [PhpVersion::PHP_80],
         Tool::COMPOSER_REQUIRE_CHECKER => [PhpVersion::PHP_81],
