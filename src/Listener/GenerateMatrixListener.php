@@ -30,7 +30,10 @@ final class GenerateMatrixListener implements EventListenerInterface
             if ($tool->isPresent()) {
                 /** @var int $phpVersion */
                 $phpVersion = $this->container->get(ComposerDependency::CONFIG . '.php');
-                $event->include(new Job($tool->name(), $tool->command(), ['latest', 'locked', 'lowest'], $phpVersion));
+                $dependencies = ['latest', 'locked', 'lowest'];
+                foreach ($dependencies as $dependency) {
+                    $event->include(new Job($tool->name(), $tool->command(), $dependency, $phpVersion));
+                }
             }
         }
     }
