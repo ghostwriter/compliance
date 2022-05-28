@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "870a163313b8f7fabef321886cf4e3e6",
+    "content-hash": "76613e86e90582efcf8fd597db3a6dc8",
     "packages": [
         {
             "name": "composer/semver",
@@ -158,16 +158,16 @@
         },
         {
             "name": "ghostwriter/event-dispatcher",
-            "version": "0.2.3",
+            "version": "0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/event-dispatcher.git",
-                "reference": "01e468572d8d29eccf206c81af8b84ece564eddb"
+                "reference": "77b133808bba649f20be435185b16f9e5fa64868"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/01e468572d8d29eccf206c81af8b84ece564eddb",
-                "reference": "01e468572d8d29eccf206c81af8b84ece564eddb",
+                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/77b133808bba649f20be435185b16f9e5fa64868",
+                "reference": "77b133808bba649f20be435185b16f9e5fa64868",
                 "shasum": ""
             },
             "require": {
@@ -227,7 +227,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-26T14:28:51+00:00"
+            "time": "2022-05-28T02:40:12+00:00"
         },
         {
             "name": "ghostwriter/option",
