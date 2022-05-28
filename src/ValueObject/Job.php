@@ -16,6 +16,16 @@ final class Job
     ) {
     }
 
+    /**
+     * @return array{
+     *     name:string,
+     *     command:string,
+     *     os:string,
+     *     php:string,
+     *     dependency:string,
+     *     experimental:bool
+     * }
+     */
     public function toArray(): array
     {
         return [
