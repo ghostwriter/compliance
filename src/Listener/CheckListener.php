@@ -14,13 +14,13 @@ final class CheckListener implements EventListenerInterface
     /**
      * @throws Throwable
      */
-    public function __invoke(CheckEvent $event): void
+    public function __invoke(CheckEvent $checkEvent): void
     {
         /** @var string $job */
-        $job = $event->getInput()
+        $job = $checkEvent->getInput()
             ->getArgument('job');
 
-        $event->getDispatcher()
+        $checkEvent->getDispatcher()
             ->dispatch(new OutputEvent($job));
     }
 }
