@@ -6,10 +6,13 @@ namespace Ghostwriter\Compliance\Tool;
 
 final class Infection extends AbstractTool
 {
-    public const PRESENCE_FILES = ['infection.json', 'infection.json.dist'];
-
     public function command(): string
     {
         return 'phpdbg -qrr ./vendor/bin/infection';
+    }
+
+    public function configuration(): array
+    {
+        return ['infection.json', 'infection.json.dist'];
     }
 }
