@@ -8,9 +8,14 @@ interface ToolInterface
 {
     public function command(): string;
 
+    /**
+     * Configuration files.
+     *
+     * @return array<array-key,string>
+     */
+    public function configuration(): array;
+
     public function isPresent(): bool;
 
     public function name(): string;
-
-    public function phpVersion(): string;
 }
