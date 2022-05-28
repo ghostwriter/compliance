@@ -37,13 +37,13 @@
         "composer-plugin-api": ">=2.2",
         "composer-runtime-api": ">=2.2",
         "composer/semver": "^3.3.2",
-        "ghostwriter/container": "^0.4",
-        "ghostwriter/event-dispatcher": "^0.2",
+        "ghostwriter/container": "^0.4.0",
+        "ghostwriter/event-dispatcher": "^0.2.4",
         "ghostwriter/option": "^0.1.0",
         "ghostwriter/result": "^0.1.0",
-        "symfony/console": "^6.1",
-        "symfony/finder": "^6.1",
-        "symfony/process": "^6.1"
+        "symfony/console": "^6.1.0",
+        "symfony/finder": "^6.1.0",
+        "symfony/process": "^6.1.0"
     },
     "require-dev": {
         "composer/composer": "^2.2 || ^2.3",
