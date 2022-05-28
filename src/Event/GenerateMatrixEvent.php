@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Event;
 
 use Ghostwriter\Compliance\ValueObject\Job;
+use JsonException;
 use function json_encode;
 
 final class GenerateMatrixEvent extends AbstractEvent
@@ -35,13 +36,12 @@ final class GenerateMatrixEvent extends AbstractEvent
         }
     }
 
+    /**
+     * @throws JsonException
+     */
     public function getMatrix(): string
     {
-        $result = json_encode($this->matrix);
-        if (false === $result) {
-            return '{}';
-        }
-        return $result;
+        return json_encode($this->matrix, JSON_THROW_ON_ERROR);
     }
 
     public function include(Job $job): void
