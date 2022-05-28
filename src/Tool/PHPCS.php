@@ -6,10 +6,13 @@ namespace Ghostwriter\Compliance\Tool;
 
 final class PHPCS extends AbstractTool
 {
-    public const PRESENCE_FILES = ['phpcs.xml.dist', 'phpcs.xml'];
-
     public function command(): string
     {
         return './vendor/bin/phpcs -q --report=checkstyle | cs2pr';
+    }
+
+    public function configuration(): array
+    {
+        return ['phpcs.xml.dist', 'phpcs.xml'];
     }
 }
