@@ -19,13 +19,15 @@ final class ChangeWorkingDirectoryEvent extends AbstractEvent
      */
     public function __construct(
         DispatcherInterface $dispatcher,
-        ChangeWorkingDirectory $command,
-        SymfonyStyle $output
+        ChangeWorkingDirectory $changeWorkingDirectory,
+        SymfonyStyle $symfonyStyle
     ) {
-        $input = new ArrayInput([
-            '--current-working-directory' => getenv('GITHUB_WORKSPACE') ?: getcwd(),
-        ], $command->getDefinition());
-
-        parent::__construct($dispatcher, $input, $output);
+        parent::__construct(
+            $dispatcher,
+            new ArrayInput([
+                '--current-working-directory' => getenv('GITHUB_WORKSPACE') ?: getcwd(),
+            ], $changeWorkingDirectory->getDefinition()),
+            $symfonyStyle
+        );
     }
 }
