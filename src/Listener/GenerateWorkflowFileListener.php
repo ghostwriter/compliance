@@ -16,10 +16,10 @@ final class GenerateWorkflowFileListener implements EventListenerInterface
     /**
      * @throws Throwable
      */
-    public function __invoke(GenerateWorkflowFileEvent $event): void
+    public function __invoke(GenerateWorkflowFileEvent $generateWorkflowFileEvent): void
     {
-        $dispatcher = $event->getDispatcher();
-        $input = $event->getInput();
+        $dispatcher = $generateWorkflowFileEvent->getDispatcher();
+        $input = $generateWorkflowFileEvent->getInput();
 
         $workflowPath = (string) $input->getArgument('workflow');
 
@@ -27,7 +27,7 @@ final class GenerateWorkflowFileListener implements EventListenerInterface
         $overwrite = (bool) $input->getOption('overwrite');
 
         if ($workflowPathExists && ! $overwrite) {
-            $event->stopPropagation();
+            $generateWorkflowFileEvent->stopPropagation();
             $dispatcher->dispatch(
                 new OutputEvent($workflowPath . ' already exists; use "--overwrite|-o" to overwrite the workflow.')
             );
@@ -43,7 +43,7 @@ final class GenerateWorkflowFileListener implements EventListenerInterface
         $result = file_put_contents($workflowPath, file_get_contents($workflowTemplatePath));
 
         if (false === $result) {
-            $event->stopPropagation();
+            $generateWorkflowFileEvent->stopPropagation();
             $dispatcher->dispatch(new OutputEvent($workflowPath . ' Failed to write data!'));
             return;
         }
