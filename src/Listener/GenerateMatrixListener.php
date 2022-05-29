@@ -37,9 +37,10 @@ final class GenerateMatrixListener implements EventListenerInterface
                 $phpVersion = $this->container->get(ComposerDependency::CONFIG . '.php');
                 foreach (self::DEPENDENCIES as $dependency) {
                     // Todo: support including/excluding $dependency
-                    if($dependency === 'latest')
-                    {
-                        $generateMatrixEvent->include(new Job($tool->name(), $tool->command(), $dependency, $phpVersion));
+                    if ('latest' === $dependency) {
+                        $generateMatrixEvent->include(
+                            new Job($tool->name(), $tool->command(), $dependency, $phpVersion)
+                        );
                     }
                 }
             }
