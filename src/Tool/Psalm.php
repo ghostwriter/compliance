@@ -11,6 +11,9 @@ final class Psalm extends AbstractTool
         return './vendor/bin/psalm --shepherd --stats --output-format=github --no-cache';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['psalm.xml.dist', 'psalm.xml'];
