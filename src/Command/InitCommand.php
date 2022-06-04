@@ -41,7 +41,7 @@ final class InitCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $generateWorkflowFileEvent =  $this->dispatcher->dispatch(
-            new GenerateWorkflowFileEvent($this->dispatcher, $input, $this->output)
+            new GenerateWorkflowFileEvent($this->dispatcher, $input, $this->symfonyStyle)
         );
 
         return $generateWorkflowFileEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
