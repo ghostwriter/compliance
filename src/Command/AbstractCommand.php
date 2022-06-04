@@ -12,8 +12,10 @@ use function strtolower;
 
 abstract class AbstractCommand extends Command
 {
-    public function __construct(protected DispatcherInterface $dispatcher, protected SymfonyStyle $symfonyStyle)
-    {
+    public function __construct(
+        protected DispatcherInterface $dispatcher,
+        protected SymfonyStyle $symfonyStyle
+    ) {
         parent::__construct(self::getDefaultName());
     }
 
