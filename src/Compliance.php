@@ -19,6 +19,9 @@ use function sprintf;
 
 final class Compliance extends SymfonyApplication
 {
+    /**
+     * @var string
+     */
     public const LOGO = <<<'CODE_SAMPLE'
 <fg=red;bg=black;options=bold>
    ____                      _ _
@@ -30,10 +33,19 @@ final class Compliance extends SymfonyApplication
 </>%s
 CODE_SAMPLE;
 
+    /**
+     * @var string
+     */
     private const BLACK_LIVES_MATTER = '<fg=white;bg=black;options=bold>#Black<fg=red;bg=black;options=bold>Lives</>Matter</>';
 
+    /**
+     * @var string
+     */
     private const NAME = '<info>Compliance - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.</info>';
 
+    /**
+     * @var string
+     */
     private const PACKAGE = 'ghostwriter/compliance';
 
     private ContainerInterface $container;
@@ -90,6 +102,7 @@ CODE_SAMPLE;
         if (! ini_get('date.timezone')) {
             ini_set('date.timezone', 'UTC');
         }
+
         $container->build(ApplicationServiceProvider::class);
         $container->get(self::class)->run();
     }
