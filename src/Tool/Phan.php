@@ -11,6 +11,9 @@ final class Phan extends AbstractTool
         return './vendor/bin/phan';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['.phan/config.php'];
