@@ -10,10 +10,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
-/**
- * @template TPropagationStopped of bool
- * @extends EventDispatcherAbstractEvent<TPropagationStopped>
- */
 abstract class AbstractEvent extends EventDispatcherAbstractEvent
 {
     /**
