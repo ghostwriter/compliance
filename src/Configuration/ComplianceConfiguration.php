@@ -36,6 +36,7 @@ final class ComplianceConfiguration
 
     public function phpVersion(int $phpVersion): void
     {
+        $this->container->remove(ComposerDependency::CONFIG . '.php');
         $this->container->set(ComposerDependency::CONFIG . '.php', $phpVersion);
     }
 
