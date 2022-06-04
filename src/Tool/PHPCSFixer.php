@@ -11,6 +11,9 @@ final class PHPCSFixer extends AbstractTool
         return './vendor/bin/php-cs-fixer';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['.php-cs-fixer.php', '.php-cs-fixer.dist.php'];
