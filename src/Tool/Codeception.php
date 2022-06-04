@@ -11,6 +11,9 @@ final class Codeception extends AbstractTool
         return './vendor/bin/codecept run';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['codeception.yml.dist', 'codeception.yml'];
