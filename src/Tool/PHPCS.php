@@ -11,6 +11,9 @@ final class PHPCS extends AbstractTool
         return './vendor/bin/phpcs -q --report=checkstyle | cs2pr';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['phpcs.xml.dist', 'phpcs.xml'];
