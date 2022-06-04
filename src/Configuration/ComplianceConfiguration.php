@@ -14,7 +14,7 @@ final class ComplianceConfiguration
 {
     public function __construct(private ContainerInterface $container)
     {
-        $this->container->set(ComposerDependency::CONFIG . '.php', PhpVersion::CURRENT_LATEST);
+        $this->container->set(ComposerDependency::CONFIG . '.php', PhpVersion::CURRENT_STABLE);
     }
 
     public function composerDependency(string $dependency): void
