@@ -29,7 +29,7 @@ final class CheckCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var GenerateWorkflowFileEvent $checkEvent */
-        $checkEvent =  $this->dispatcher->dispatch(new CheckEvent($this->dispatcher, $input, $this->output));
+        $checkEvent =  $this->dispatcher->dispatch(new CheckEvent($this->dispatcher, $input, $this->symfonyStyle));
 
         return $checkEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
