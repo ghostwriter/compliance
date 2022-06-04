@@ -11,6 +11,9 @@ final class ComposerRequireChecker extends AbstractTool
         return './vendor/bin/composer-require-checker check --config-file=composer-require-checker.json -n -v composer.json';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['composer-require-checker.json'];
