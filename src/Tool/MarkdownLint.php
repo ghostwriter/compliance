@@ -13,6 +13,9 @@ final class MarkdownLint extends AbstractTool
         return 'yamllint -d relaxed --no-warnings mkdocs.yml';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['mkdocs.yml'];
