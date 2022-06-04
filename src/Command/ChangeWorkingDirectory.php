@@ -35,7 +35,7 @@ final class ChangeWorkingDirectory extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         return $this->dispatcher
-            ->dispatch(new GenerateWorkflowFileEvent($this->dispatcher, $input, $this->output))
+            ->dispatch(new GenerateWorkflowFileEvent($this->dispatcher, $input, $this->symfonyStyle))
             ->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
 }
