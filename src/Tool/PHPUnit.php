@@ -11,6 +11,9 @@ final class PHPUnit extends AbstractTool
         return './vendor/bin/phpunit';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['phpunit.xml.dist', 'phpunit.xml'];
