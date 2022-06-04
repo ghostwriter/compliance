@@ -11,6 +11,9 @@ final class GrumPHP extends AbstractTool
         return './vendor/bin/grumphp run';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['grumphp.xml.dist', 'grumphp.xml'];
