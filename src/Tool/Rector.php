@@ -11,8 +11,11 @@ final class Rector extends AbstractTool
         return './vendor/bin/rector process';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
-        return ['rector.php'];
+        return ['rector.php.dist'];
     }
 }
