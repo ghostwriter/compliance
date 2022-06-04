@@ -31,7 +31,6 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
      */
     public function __construct(ContainerInterface $container)
     {
-        /** @var class-string<ServiceProviderInterface> $provider */
         foreach (self::PROVIDERS as $provider) {
             $container->build($provider);
         }
