@@ -11,6 +11,9 @@ final class Infection extends AbstractTool
         return 'phpdbg -qrr ./vendor/bin/infection';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['infection.json', 'infection.json.dist'];
