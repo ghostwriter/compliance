@@ -11,6 +11,9 @@ final class PHPBench extends AbstractTool
         return './vendor/bin/phpbench run --revs=2 --iterations=2 --report=aggregate';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['phpbench.json'];
