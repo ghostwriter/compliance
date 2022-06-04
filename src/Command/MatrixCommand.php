@@ -30,7 +30,7 @@ final class MatrixCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $generateMatrixEvent =  $this->dispatcher->dispatch(
-            new GenerateMatrixEvent($this->dispatcher, $input, $this->output)
+            new GenerateMatrixEvent($this->dispatcher, $input, $this->symfonyStyle)
         );
 
         $this->dispatcher->dispatch(
