@@ -11,6 +11,9 @@ final class EasyCodingStandard extends AbstractTool
         return './vendor/bin/ecs check';
     }
 
+    /**
+     * @return string[]
+     */
     public function configuration(): array
     {
         return ['ecs.php'];
