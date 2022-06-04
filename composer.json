@@ -38,7 +38,7 @@
         "composer-runtime-api": ">=2.2",
         "composer/semver": "^3.3.2",
         "ghostwriter/container": "^0.4.0",
-        "ghostwriter/event-dispatcher": "^0.3.1",
+        "ghostwriter/event-dispatcher": "^0.3.2",
         "ghostwriter/option": "^0.1.0",
         "ghostwriter/result": "^0.1.0",
         "symfony/console": "^6.1.0",
