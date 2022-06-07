@@ -14,16 +14,26 @@ use function trim;
 final class Composer
 {
     /**
+     * @var string
+     */
+    public const FILE_JSON = 'composer.json';
+
+    /**
+     * @var string
+     */
+    public const FILE_LOCK = 'composer.lock';
+
+    /**
      * @var string[]
      */
-    public const PRESENCE_FILES = ['composer.json', 'composer.lock'];
+    public const PRESENCE_FILES = [self::FILE_JSON, self::FILE_LOCK];
 
     /**
      * Retrieve the path to composer.json file.
      */
     public function getJsonFilePath(string $root): string
     {
-        return $root . DIRECTORY_SEPARATOR . basename(trim(getenv('COMPOSER') ?: 'composer.json'));
+        return $root . DIRECTORY_SEPARATOR . basename(trim(getenv('COMPOSER') ?: self::FILE_JSON));
     }
 
     /**

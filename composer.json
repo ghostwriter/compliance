@@ -46,30 +46,27 @@
         "symfony/process": "^6.1.0"
     },
     "require-dev": {
-        "composer/composer": "^2.2 || ^2.3",
+        "composer/composer": ">=2.2",
         "phpbench/phpbench": "^1.2.5",
         "phpunit/phpunit": "^9.5.20",
         "psalm/plugin-phpunit": "^0.16.1",
         "rector/rector": "^0.13.4",
         "roave/infection-static-analysis-plugin": "^1.19.0",
         "roave/security-advisories": "dev-latest",
-        "symplify/easy-coding-standard": "^10.2.8",
+        "symplify/easy-coding-standard": "^10.2.10",
         "vimeo/psalm": "^4.23.0"
     },
-    "replace": {},
     "minimum-stability": "stable",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Ghostwriter\\Compliance\\": "src/"
-        },
-        "files": []
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "Ghostwriter\\Compliance\\Tests\\": "tests/"
-        },
-        "files": []
+        }
     },
     "bin": [
         "bin/compliance"

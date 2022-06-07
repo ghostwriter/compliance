@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Command;
 
-use Ghostwriter\Compliance\Event\GenerateWorkflowFileEvent;
+use Ghostwriter\Compliance\Event\WorkflowEvent;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
-final class InitCommand extends AbstractCommand
+final class WorkflowCommand extends AbstractCommand
 {
     protected function configure(): void
     {
@@ -40,10 +40,8 @@ final class InitCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $generateWorkflowFileEvent =  $this->dispatcher->dispatch(
-            new GenerateWorkflowFileEvent($this->dispatcher, $input, $this->symfonyStyle)
-        );
-
-        return $generateWorkflowFileEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
+        return $this->dispatcher->dispatch(
+            new WorkflowEvent($this->dispatcher, $input, $this->symfonyStyle)
+        )->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
 }

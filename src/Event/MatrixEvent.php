@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Event;
 
 use Ghostwriter\Compliance\ValueObject\Job;
-use JsonException;
+use Throwable;
+use const JSON_THROW_ON_ERROR;
 use function json_encode;
 
-final class GenerateMatrixEvent extends AbstractEvent
+final class MatrixEvent extends AbstractEvent
 {
     /**
      * @var array{
@@ -37,7 +38,7 @@ final class GenerateMatrixEvent extends AbstractEvent
     }
 
     /**
-     * @throws JsonException
+     * @throws Throwable
      */
     public function getMatrix(): string
     {

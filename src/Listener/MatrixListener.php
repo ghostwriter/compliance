@@ -6,14 +6,14 @@ namespace Ghostwriter\Compliance\Listener;
 
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Contract\ToolInterface;
-use Ghostwriter\Compliance\Event\GenerateMatrixEvent;
+use Ghostwriter\Compliance\Event\MatrixEvent;
 use Ghostwriter\Compliance\ValueObject\ComposerDependency;
 use Ghostwriter\Compliance\ValueObject\Job;
 use Ghostwriter\Compliance\ValueObject\Tool;
 use Ghostwriter\Container\Container;
 use Throwable;
 
-final class GenerateMatrixListener implements EventListenerInterface
+final class MatrixListener implements EventListenerInterface
 {
     /**
      * @var string[]
@@ -27,7 +27,7 @@ final class GenerateMatrixListener implements EventListenerInterface
     /**
      * @throws Throwable
      */
-    public function __invoke(GenerateMatrixEvent $generateMatrixEvent): void
+    public function __invoke(MatrixEvent $generateMatrixEvent): void
     {
         foreach ($this->container->tagged(Tool::class) as $traversable) {
             /** @var ToolInterface $tool */

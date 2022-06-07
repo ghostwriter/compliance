@@ -24,7 +24,10 @@ composer require ghostwriter/compliance
 
 ```bash
 # Create `.github/workflows/compliance.yml` workflow file
-compliance init
+compliance workflow
+
+# Create `./compliance.php` configuration file
+compliance config
 
 # Determine CI Jobs for GitHub Actions
 compliance matrix
@@ -42,7 +45,8 @@ docker pull ghcr.io/ghostwriter/compliance:v1
 
 # Usage from the command line:
 
-docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance init
+docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance workflow
+docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance config
 docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance matrix
 docker run -v $(PWD):/app -w=/app ghcr.io/ghostwriter/compliance check {job}
 
