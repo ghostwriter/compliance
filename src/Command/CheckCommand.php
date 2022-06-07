@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Command;
 
 use Ghostwriter\Compliance\Event\CheckEvent;
-use Ghostwriter\Compliance\Event\GenerateWorkflowFileEvent;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,9 +27,7 @@ final class CheckCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var GenerateWorkflowFileEvent $checkEvent */
-        $checkEvent =  $this->dispatcher->dispatch(new CheckEvent($this->dispatcher, $input, $this->symfonyStyle));
-
-        return $checkEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
+        return $this->dispatcher->dispatch(new CheckEvent($this->dispatcher, $input, $this->symfonyStyle))
+            ->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
 }
