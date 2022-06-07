@@ -7,6 +7,7 @@ namespace Ghostwriter\Compliance\Event;
 use Ghostwriter\Compliance\ValueObject\Job;
 use JsonException;
 use function json_encode;
+use const JSON_THROW_ON_ERROR;
 
 final class MatrixEvent extends AbstractEvent
 {
@@ -41,6 +42,7 @@ final class MatrixEvent extends AbstractEvent
      */
     public function getMatrix(): string
     {
+        /** @return string  */
         return json_encode($this->matrix, JSON_THROW_ON_ERROR);
     }
 
