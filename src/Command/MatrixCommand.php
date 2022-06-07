@@ -30,18 +30,19 @@ final class MatrixCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $generateMatrixEvent =  $this->dispatcher->dispatch(
+        /** @var MatrixEvent $matrixEvent */
+        $matrixEvent =  $this->dispatcher->dispatch(
             new MatrixEvent($this->dispatcher, $input, $this->symfonyStyle)
         );
 
         $this->write(
             (
                 $this->container->has(Compliance::PATH_CONFIG) ?
-                'Registered config path: ' . $this->container->get(Compliance::PATH_CONFIG) . PHP_EOL
-                : ''
-            ) . sprintf('::set-output name=matrix::%s', $generateMatrixEvent->getMatrix())
+                    'Registered config path: ' . $this->container->get(Compliance::PATH_CONFIG) . PHP_EOL
+                    : ''
+            ) . sprintf('::set-output name=matrix::%s', $matrixEvent->getMatrix())
         );
 
-        return $generateMatrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
+        return $matrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
 }
