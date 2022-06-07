@@ -16,6 +16,6 @@ final class OutputListener implements EventListenerInterface
 
     public function __invoke(OutputEvent $outputEvent): void
     {
-        $this->symfonyStyle->writeln(['::echo::on', $outputEvent->getMessage(), '::echo::off']);
+        $this->symfonyStyle->writeln($outputEvent->getMessage());
     }
 }
