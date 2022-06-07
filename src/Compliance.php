@@ -22,6 +22,16 @@ final class Compliance extends SymfonyApplication
     /**
      * @var string
      */
+    public const BLACK_LIVES_MATTER = '<fg=white;bg=black;options=bold>#Black<fg=red;bg=black;options=bold>Lives</>Matter</>';
+
+    /**
+     * @var string
+     */
+    public const CURRENT_WORKING_DIRECTORY = 'Compliance.CurrentWorkingDirectory';
+
+    /**
+     * @var string
+     */
     public const LOGO = <<<'CODE_SAMPLE'
 <fg=red;bg=black;options=bold>
    ____                      _ _
@@ -36,17 +46,27 @@ CODE_SAMPLE;
     /**
      * @var string
      */
-    private const BLACK_LIVES_MATTER = '<fg=white;bg=black;options=bold>#Black<fg=red;bg=black;options=bold>Lives</>Matter</>';
+    public const NAME = '<info>Compliance - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.</info>';
 
     /**
      * @var string
      */
-    private const NAME = '<info>Compliance - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.</info>';
+    public const PACKAGE = 'ghostwriter/compliance';
 
     /**
      * @var string
      */
-    private const PACKAGE = 'ghostwriter/compliance';
+    public const PATH_CONFIG = 'Compliance.ConfigPath';
+
+    /**
+     * @var string
+     */
+    public const TEMPLATE_CONFIG = 'Compliance.ConfigTemplate';
+
+    /**
+     * @var string
+     */
+    public const TEMPLATE_WORKFLOW = 'Compliance.WorkflowTemplate';
 
     private ContainerInterface $container;
 
