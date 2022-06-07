@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Command;
 
-use Ghostwriter\Compliance\Event\GenerateMatrixEvent;
-use Ghostwriter\Compliance\Event\OutputEvent;
+use Ghostwriter\Compliance\Compliance;
+use Ghostwriter\Compliance\Event\MatrixEvent;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
+use const PHP_EOL;
 use function sprintf;
 
 final class MatrixCommand extends AbstractCommand
@@ -29,13 +30,16 @@ final class MatrixCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var GenerateMatrixEvent $generateMatrixEvent */
         $generateMatrixEvent =  $this->dispatcher->dispatch(
-            new GenerateMatrixEvent($this->dispatcher, $input, $this->symfonyStyle)
+            new MatrixEvent($this->dispatcher, $input, $this->symfonyStyle)
         );
 
-        $this->dispatcher->dispatch(
-            new OutputEvent(sprintf('::set-output name=matrix::%s', $generateMatrixEvent->getMatrix()))
+        $this->write(
+            (
+                $this->container->has(Compliance::PATH_CONFIG) ?
+                'Registered config path: ' . $this->container->get(Compliance::PATH_CONFIG) . PHP_EOL
+                : ''
+            ) . sprintf('::set-output name=matrix::%s', $generateMatrixEvent->getMatrix())
         );
 
         return $generateMatrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
