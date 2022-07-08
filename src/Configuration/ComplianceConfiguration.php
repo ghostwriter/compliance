@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Configuration;
 
-use Ghostwriter\Compliance\ValueObject\ComposerDependency;
-use Ghostwriter\Compliance\ValueObject\PhpVersion;
+use Ghostwriter\Compliance\Option\ComposerDependency;
+use Ghostwriter\Compliance\Option\PhpVersion;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use RuntimeException;
 use function array_key_exists;
