@@ -19,7 +19,6 @@ final class CheckListener implements EventListenerInterface
         /** @var string $job */
         $job = $checkEvent->getInput()
             ->getArgument('job');
-
         $checkEvent->getDispatcher()
             ->dispatch(new OutputEvent($job));
     }
