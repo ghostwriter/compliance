@@ -7,6 +7,7 @@ namespace Ghostwriter\Compliance;
 use Composer\InstalledVersions;
 use Ghostwriter\Compliance\Command\MatrixCommand;
 use Ghostwriter\Compliance\ServiceProvider\ApplicationServiceProvider;
+use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use RuntimeException;
 use Symfony\Component\Console\Application as SymfonyApplication;
@@ -117,13 +118,17 @@ CODE_SAMPLE;
     /**
      * @throws Throwable
      */
-    public static function main(ContainerInterface $container): void
+    public static function main(?ContainerInterface $container = null): void
     {
         if (! ini_get('date.timezone')) {
             ini_set('date.timezone', 'UTC');
         }
 
-        $container->build(ApplicationServiceProvider::class);
-        $container->get(self::class)->run();
+        $container ??= Container::getInstance();
+
+        $container->invoke(static function (ContainerInterface $container): void {
+            $container->register(ApplicationServiceProvider::class);
+            $container->get(self::class)->run();
+        });
     }
 }
