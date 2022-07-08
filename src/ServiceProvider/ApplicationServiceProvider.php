@@ -34,10 +34,10 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
     /**
      * @throws Throwable
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(private ContainerInterface $container)
     {
         foreach (self::PROVIDERS as $provider) {
-            $container->build($provider);
+            $this->container->register($provider);
         }
     }
 
@@ -50,14 +50,15 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
 
         $result = @chdir($currentWorkingDirectory);
 
-        $dispatcher = $container->get(DispatcherInterface::class);
-        if (! $result) {
-            $dispatcher->dispatch(new OutputEvent(sprintf(
-                'Unable to change current working directory; %s; "%s" given.',
-                error_get_last()['message'] ?? 'No such file or directory',
-                $currentWorkingDirectory
-            )));
+        if (false === $result) {
+            $container->get(DispatcherInterface::class)
+                ->dispatch(new OutputEvent(sprintf(
+                    'Unable to change current working directory; %s; "%s" given.',
+                    error_get_last()['message'] ?? 'No such file or directory',
+                    $currentWorkingDirectory
+                )));
         }
+
         $container->set(Compliance::CURRENT_WORKING_DIRECTORY, $currentWorkingDirectory);
 
         $complianceConfigPath = $currentWorkingDirectory . DIRECTORY_SEPARATOR . 'compliance.php';
@@ -65,7 +66,7 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
             $container->set(Compliance::PATH_CONFIG, $complianceConfigPath);
 
             /** @var callable(ComplianceConfiguration):void $config */
-            $config = include $complianceConfigPath;
+            $config = require $complianceConfigPath;
 
             $container->invoke($config);
         }
