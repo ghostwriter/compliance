@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\ServiceProvider;
 
+use Ghostwriter\Container\Contract\ContainerExceptionInterface;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use Ghostwriter\Container\Contract\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\ListenerProvider;
 use Ghostwriter\EventDispatcher\ServiceProvider\EventDispatcherServiceProvider;
-use Psr\Container\ContainerExceptionInterface;
 use Symfony\Component\Finder\Finder;
 use function dirname;
 use function sprintf;
@@ -21,8 +21,9 @@ final class EventServiceProvider implements ServiceProviderInterface
      */
     public function __invoke(ContainerInterface $container): void
     {
-        $container->build(EventDispatcherServiceProvider::class);
+        $container->register(EventDispatcherServiceProvider::class);
 
+        /** @param ListenerProvider $listenerProvider */
         $container->extend(
             ListenerProvider::class,
             static function (ContainerInterface $container, object $listenerProvider): ListenerProvider {
@@ -43,12 +44,12 @@ final class EventServiceProvider implements ServiceProviderInterface
                     );
 
                     $listener =  sprintf(
-                        '%s%s',
-                        str_replace('ServiceProvider', 'Listener', __NAMESPACE__ . '\\'),
+                        "%s\%s",
+                        str_replace('ServiceProvider', 'Listener', __NAMESPACE__),
                         $splFileInfo->getBasename('.php')
                     );
 
-                    $listenerProvider->addListener($container->get($listener), 0, $event);
+                    $listenerProvider->addListenerService($event, $listener);
                 }
 
                 return $listenerProvider;
