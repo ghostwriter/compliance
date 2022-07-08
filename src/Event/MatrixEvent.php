@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
-use Ghostwriter\Compliance\ValueObject\Job;
+use Ghostwriter\Compliance\Option\Job;
 use Throwable;
 use const JSON_THROW_ON_ERROR;
 use function json_encode;
