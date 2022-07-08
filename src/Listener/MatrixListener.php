@@ -7,9 +7,9 @@ namespace Ghostwriter\Compliance\Listener;
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Compliance\Event\MatrixEvent;
-use Ghostwriter\Compliance\ValueObject\ComposerDependency;
-use Ghostwriter\Compliance\ValueObject\Job;
-use Ghostwriter\Compliance\ValueObject\Tool;
+use Ghostwriter\Compliance\Option\ComposerDependency;
+use Ghostwriter\Compliance\Option\Job;
+use Ghostwriter\Compliance\Option\Tool;
 use Ghostwriter\Container\Container;
 use Throwable;
 
