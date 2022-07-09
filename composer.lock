@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd2bca773e41c9e75f18d5a1e962fb43",
+    "content-hash": "01c42e7ddea5e19a1a00d17e20f135ee",
     "packages": [
         {
             "name": "composer/pcre",
@@ -353,16 +353,16 @@
         },
         {
             "name": "ghostwriter/environment",
-            "version": "0.1.1",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/environment.git",
-                "reference": "75ce30de02f0deeae82c7ef2fc13db33d08cb40d"
+                "reference": "f1cfd078e40443027b28889197dc52a949507822"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/environment/zipball/75ce30de02f0deeae82c7ef2fc13db33d08cb40d",
-                "reference": "75ce30de02f0deeae82c7ef2fc13db33d08cb40d",
+                "url": "https://api.github.com/repos/ghostwriter/environment/zipball/f1cfd078e40443027b28889197dc52a949507822",
+                "reference": "f1cfd078e40443027b28889197dc52a949507822",
                 "shasum": ""
             },
             "require": {
@@ -416,7 +416,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-08T16:54:13+00:00"
+            "time": "2022-07-09T21:45:30+00:00"
         },
         {
             "name": "ghostwriter/event-dispatcher",
