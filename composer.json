@@ -39,7 +39,7 @@
         "composer/semver": "^3.3.2",
         "ghostwriter/collection": "^0.2.0",
         "ghostwriter/container": "^0.6.0",
-        "ghostwriter/environment": "^0.1.1",
+        "ghostwriter/environment": "^0.2.0",
         "ghostwriter/event-dispatcher": "^0.4.2",
         "ghostwriter/option": "^0.1.0",
         "ghostwriter/result": "^0.1.0",
