@@ -41,6 +41,7 @@
         "ghostwriter/container": "^0.6.0",
         "ghostwriter/environment": "^0.2.0",
         "ghostwriter/event-dispatcher": "^0.4.2",
+        "ghostwriter/json": "^0.1.0",
         "ghostwriter/option": "^0.1.0",
         "ghostwriter/result": "^0.1.0",
         "infection/infection": "^0.26.13",
