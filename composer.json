@@ -37,9 +37,9 @@
         "composer-plugin-api": ">=2.2",
         "composer-runtime-api": ">=2.2",
         "composer/semver": "^3.3.2",
-        "ghostwriter/collection": "^0.2.0",
+        "ghostwriter/collection": "^0.4.1",
         "ghostwriter/container": "^0.6.0",
-        "ghostwriter/environment": "^0.2.0",
+        "ghostwriter/environment": "^0.3.0",
         "ghostwriter/event-dispatcher": "^0.4.2",
         "ghostwriter/json": "^0.1.0",
         "ghostwriter/option": "^0.1.0",
@@ -118,7 +118,7 @@
         "docker:run": "docker run -v $(PWD):/github/workspace -w=/github/workspace -e GITHUB_TOKEN=github-token -e SIGNING_SECRET_KEY=secret-key compliance",
         "infection": [
             "@putenv XDEBUG_MODE=coverage",
-            "roave-infection-static-analysis-plugin"
+            "vendor/bin/infection --verbose"
         ],
         "missing-returntypes": "psalm --alter --issues=MissingReturnType",
         "normalizer": "composer normalize --no-check-lock",
