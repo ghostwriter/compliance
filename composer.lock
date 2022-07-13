@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f2c6821d6966ddbc01b02c0acbce68a",
+    "content-hash": "cd22c0e7d2f4e00e031049b98519a396",
     "packages": [
         {
             "name": "composer/pcre",
@@ -226,30 +226,29 @@
         },
         {
             "name": "ghostwriter/collection",
-            "version": "0.2.0",
+            "version": "0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/collection.git",
-                "reference": "b7b002c1f8ded61905c8d33967f6bbf49354796b"
+                "reference": "6ea7d8419d027a7790c11851714407cd51ecd5ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/collection/zipball/b7b002c1f8ded61905c8d33967f6bbf49354796b",
-                "reference": "b7b002c1f8ded61905c8d33967f6bbf49354796b",
+                "url": "https://api.github.com/repos/ghostwriter/collection/zipball/6ea7d8419d027a7790c11851714407cd51ecd5ac",
+                "reference": "6ea7d8419d027a7790c11851714407cd51ecd5ac",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0,<8.2"
             },
             "require-dev": {
+                "infection/infection": "^0.26.13",
                 "phpbench/phpbench": "^1.2.5",
                 "phpunit/phpunit": "^9.5.21",
                 "psalm/plugin-phpunit": "^0.17.0",
-                "rector/rector": "^0.13.6",
-                "roave/infection-static-analysis-plugin": "^1.20.0",
-                "roave/security-advisories": "dev-latest",
-                "symplify/easy-coding-standard": "^11.0.5",
-                "vimeo/psalm": "^4.23.0"
+                "rector/rector": "^0.13.8",
+                "symplify/easy-coding-standard": "^11.0.8",
+                "vimeo/psalm": "^4.24.0"
             },
             "type": "library",
             "autoload": {
@@ -288,7 +287,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-06-23T02:27:39+00:00"
+            "time": "2022-07-13T06:35:23+00:00"
         },
         {
             "name": "ghostwriter/container",
@@ -353,19 +352,20 @@
         },
         {
             "name": "ghostwriter/environment",
-            "version": "0.2.0",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/environment.git",
-                "reference": "f1cfd078e40443027b28889197dc52a949507822"
+                "reference": "62acea4c788f6bc6ae85d2de38893ad62d8b55ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/environment/zipball/f1cfd078e40443027b28889197dc52a949507822",
-                "reference": "f1cfd078e40443027b28889197dc52a949507822",
+                "url": "https://api.github.com/repos/ghostwriter/environment/zipball/62acea4c788f6bc6ae85d2de38893ad62d8b55ae",
+                "reference": "62acea4c788f6bc6ae85d2de38893ad62d8b55ae",
                 "shasum": ""
             },
             "require": {
+                "ghostwriter/collection": "^0.4.1",
                 "php": ">=8.0,<8.2"
             },
             "require-dev": {
@@ -396,12 +396,13 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Environment Variables for PHP",
+            "description": "Provides Environment Variables derived from `$_ENV` and `$_SERVER` super-globals",
             "homepage": "https://github.com/ghostwriter/environment",
             "keywords": [
                 "environment",
                 "environment-variables",
-                "ghostwriter"
+                "ghostwriter",
+                "server-variables"
             ],
             "support": {
                 "docs": "https://github.com/ghostwriter/environment",
@@ -416,7 +417,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-09T21:45:30+00:00"
+            "time": "2022-07-13T06:51:36+00:00"
         },
         {
             "name": "ghostwriter/event-dispatcher",
@@ -4219,16 +4220,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "b7648d4ee9321665acaf112e49da9fd93df8fbd5"
+                "reference": "8dbba631fa32f4b289404469c2afd6122fd61d67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b7648d4ee9321665acaf112e49da9fd93df8fbd5",
-                "reference": "b7648d4ee9321665acaf112e49da9fd93df8fbd5",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8dbba631fa32f4b289404469c2afd6122fd61d67",
+                "reference": "8dbba631fa32f4b289404469c2afd6122fd61d67",
                 "shasum": ""
             },
             "require": {
@@ -4254,7 +4255,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.8.0"
+                "source": "https://github.com/phpstan/phpstan/tree/1.8.1"
             },
             "funding": [
                 {
@@ -4274,7 +4275,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-29T08:53:31+00:00"
+            "time": "2022-07-12T16:08:06+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
