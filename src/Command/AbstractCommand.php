@@ -13,7 +13,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 use function sprintf;
 use function str_replace;
-use function strtolower;
 
 abstract class AbstractCommand extends Command
 {
@@ -27,7 +26,7 @@ abstract class AbstractCommand extends Command
 
     public static function getDefaultName(): string
     {
-        return strtolower(str_replace([__NAMESPACE__ . '\\', 'Command'], '', static::class));
+        return mb_strtolower(str_replace([__NAMESPACE__ . '\\', 'Command'], '', static::class));
     }
 
     /**
