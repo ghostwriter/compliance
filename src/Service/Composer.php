@@ -8,7 +8,6 @@ use const DIRECTORY_SEPARATOR;
 use function basename;
 use function getenv;
 use function pathinfo;
-use function substr;
 use function trim;
 
 final class Composer
@@ -39,7 +38,7 @@ final class Composer
         $composerJsonPath = $this->getJsonFilePath($root);
 
         return 'json' === pathinfo($composerJsonPath, PATHINFO_EXTENSION)
-            ? substr($composerJsonPath, 0, -4) . 'lock'
+            ? mb_substr($composerJsonPath, 0, -4) . 'lock'
             : $composerJsonPath . '.lock';
     }
 }
