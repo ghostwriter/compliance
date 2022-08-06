@@ -27,7 +27,6 @@ use function dirname;
 use function preg_match;
 use function sprintf;
 use function str_replace;
-use function strtolower;
 
 final class ConsoleServiceProvider implements ServiceProviderInterface
 {
@@ -60,7 +59,7 @@ final class ConsoleServiceProvider implements ServiceProviderInterface
                 continue;
             }
 
-            if (str_contains(strtolower($path), 'abstract')) {
+            if (str_contains(mb_strtolower($path), 'abstract')) {
                 continue;
             }
 
