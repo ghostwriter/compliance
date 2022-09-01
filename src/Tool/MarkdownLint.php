@@ -8,8 +8,8 @@ final class MarkdownLint extends AbstractTool
 {
     public function command(): string
     {
-//        'markdownlint doc/book/**/*.md'
-//        'markdownlint docs/book/**/*.md'
+        //        'markdownlint doc/book/**/*.md'
+        //        'markdownlint docs/book/**/*.md'
         return 'yamllint -d relaxed --no-warnings mkdocs.yml';
     }
 
