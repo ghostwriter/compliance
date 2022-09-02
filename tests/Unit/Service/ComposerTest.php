@@ -12,6 +12,7 @@ use function getcwd;
  * @internal
  *
  * @small
+ *
  * @coversDefaultClass \Ghostwriter\Compliance\Service\Composer
  */
 final class ComposerTest extends AbstractTestCase
