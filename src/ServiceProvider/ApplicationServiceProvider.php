@@ -34,8 +34,9 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
     /**
      * @throws Throwable
      */
-    public function __construct(private ContainerInterface $container)
-    {
+    public function __construct(
+        private ContainerInterface $container
+    ) {
         foreach (self::PROVIDERS as $provider) {
             $this->container->register($provider);
         }
