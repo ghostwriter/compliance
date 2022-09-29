@@ -15,8 +15,9 @@ use function str_replace;
 
 final class MatrixServiceProvider implements ServiceProviderInterface
 {
-    public function __construct(private Finder $finder)
-    {
+    public function __construct(
+        private Finder $finder
+    ) {
     }
 
     public function __invoke(ContainerInterface $container): void
