@@ -14,8 +14,9 @@ use function realpath;
 
 final class WorkflowListener implements EventListenerInterface
 {
-    public function __construct(private Container $container)
-    {
+    public function __construct(
+        private Container $container
+    ) {
     }
 
     /**
