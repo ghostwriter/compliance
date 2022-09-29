@@ -8,8 +8,9 @@ use Ghostwriter\EventDispatcher\AbstractEvent;
 
 final class OutputEvent extends AbstractEvent
 {
-    public function __construct(private string|array $message)
-    {
+    public function __construct(
+        private string|array $message
+    ) {
     }
 
     public function getMessage(): string|array
