@@ -14,8 +14,9 @@ use function realpath;
 
 final class ConfigListener implements EventListenerInterface
 {
-    public function __construct(private Container $container)
-    {
+    public function __construct(
+        private Container $container
+    ) {
     }
 
     /**
