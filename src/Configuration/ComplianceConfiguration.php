@@ -12,8 +12,9 @@ use function array_key_exists;
 
 final class ComplianceConfiguration
 {
-    public function __construct(private ContainerInterface $container)
-    {
+    public function __construct(
+        private ContainerInterface $container
+    ) {
         $this->container->set(ComposerDependency::CONFIG . '.php', PhpVersion::CURRENT_LATEST);
     }
 
