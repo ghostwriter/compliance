@@ -30,9 +30,8 @@ final class MatrixListener implements EventListenerInterface
      */
     public function __invoke(MatrixEvent $generateMatrixEvent): void
     {
-        foreach ($this->container->tagged(Tool::class) as $traversable) {
-            /** @var ToolInterface $tool */
-            $tool = $this->container->get($traversable);
+        /** @var ToolInterface $tool */
+        foreach ($this->container->tagged(Tool::class) as $tool) {
             if ($tool->isPresent()) {
                 /** @var int $phpVersion */
                 $phpVersion = $this->container->get(ComposerDependency::CONFIG . '.php');
