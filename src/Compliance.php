@@ -127,7 +127,7 @@ CODE_SAMPLE;
         $container ??= Container::getInstance();
 
         $container->call(static function (ContainerInterface $container): void {
-            $container->build(ApplicationServiceProvider::class);
+            $container->register(ApplicationServiceProvider::class);
             $container->get(self::class)->run();
         });
     }
