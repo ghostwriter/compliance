@@ -1,2 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.23.0@f1fe6ff483bf325c803df9f510d09a03fd796f88"/>
+<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
+  <file src="src/Listener/ConfigListener.php">
+    <UnevaluatedCode occurrences="4">
+      <code>$contents = file_get_contents($configTemplatePath);</code>
+      <code>$dispatcher-&gt;dispatch(new OutputEvent($configPath . ' config generated!'));</code>
+      <code>$result = file_put_contents($configPath, $contents);</code>
+    </UnevaluatedCode>
+    <UnusedVariable occurrences="1">
+      <code>$configTemplatePath</code>
+    </UnusedVariable>
+  </file>
+  <file src="src/Listener/MatrixListener.php">
+    <UnevaluatedCode occurrences="1"/>
+    <UnusedVariable occurrences="1">
+      <code>$phpVersion</code>
+    </UnusedVariable>
+  </file>
+  <file src="src/Listener/WorkflowListener.php">
+    <NoValue occurrences="1">
+      <code>$workflowTemplatePath</code>
+    </NoValue>
+  </file>
+  <file src="src/Option/ComposerDependency.php">
+    <InvalidConstantAssignmentValue occurrences="1"/>
+  </file>
+  <file src="src/ServiceProvider/EventServiceProvider.php">
+    <InvalidCast occurrences="1">
+      <code>$event</code>
+    </InvalidCast>
+  </file>
+</files>
