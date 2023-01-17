@@ -7,7 +7,6 @@ namespace Ghostwriter\Compliance\Listener;
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Compliance\Event\MatrixEvent;
-use Ghostwriter\Compliance\Option\ComposerDependency;
 use Ghostwriter\Compliance\Option\Job;
 use Ghostwriter\Compliance\Option\PhpVersion;
 use Ghostwriter\Compliance\Option\Tool;
@@ -35,7 +34,6 @@ final class MatrixListener implements EventListenerInterface
         /** @var ToolInterface $tool */
         foreach ($this->container->tagged(Tool::class) as $tool) {
             if ($tool->isPresent()) {
-
                 foreach ($phpVersions as $phpVersion) {
                     foreach (self::DEPENDENCIES as $dependency) {
                         if ('latest' === $dependency) {
