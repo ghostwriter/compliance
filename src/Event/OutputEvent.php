@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
-use Ghostwriter\EventDispatcher\AbstractEvent;
-
 final class OutputEvent extends AbstractEvent
 {
     public function __construct(
