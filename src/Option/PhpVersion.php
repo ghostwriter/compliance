@@ -14,12 +14,12 @@ final class PhpVersion
     /**
      * @var int
      */
-    public const CURRENT_LATEST = self::PHP_81;
+    public const CURRENT_LATEST = self::PHP_82;
 
     /**
      * @var int
      */
-    public const CURRENT_STABLE = self::PHP_74;
+    public const CURRENT_STABLE = self::PHP_81;
 
     /**
      * @var array<int,string>
