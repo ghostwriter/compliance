@@ -9,6 +9,7 @@ use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Compliance\Event\MatrixEvent;
 use Ghostwriter\Compliance\Option\ComposerDependency;
 use Ghostwriter\Compliance\Option\Job;
+use Ghostwriter\Compliance\Option\PhpVersion;
 use Ghostwriter\Compliance\Option\Tool;
 use Ghostwriter\Container\Container;
 use Throwable;
@@ -30,21 +31,23 @@ final class MatrixListener implements EventListenerInterface
      */
     public function __invoke(MatrixEvent $generateMatrixEvent): void
     {
+        $phpVersions = [PhpVersion::CURRENT_STABLE, PhpVersion::CURRENT_LATEST];
         /** @var ToolInterface $tool */
         foreach ($this->container->tagged(Tool::class) as $tool) {
             if ($tool->isPresent()) {
-                /** @var int $phpVersion */
-                $phpVersion = $this->container->get(ComposerDependency::CONFIG . '.php');
-                foreach (self::DEPENDENCIES as $dependency) {
-                    if ('latest' === $dependency) {
-                        $generateMatrixEvent->include(
-                            new Job($tool->name(), $tool->command(), $dependency, $phpVersion)
-                        );
+
+                foreach ($phpVersions as $phpVersion) {
+                    foreach (self::DEPENDENCIES as $dependency) {
+                        if ('latest' === $dependency) {
+                            $generateMatrixEvent->include(
+                                new Job($tool->name(), $tool->command(), $dependency, $phpVersion)
+                            );
+                        }
+                        // Todo: support including/excluding $dependency
+                        // $generateMatrixEvent->include(
+                        //     new Job($tool->name(), $tool->command(), $dependency, $phpVersion)
+                        // );
                     }
-                    // Todo: support including/excluding $dependency
-                    // $generateMatrixEvent->include(
-                    //     new Job($tool->name(), $tool->command(), $dependency, $phpVersion)
-                    // );
                 }
             }
         }
