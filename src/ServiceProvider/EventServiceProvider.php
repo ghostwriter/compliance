@@ -42,7 +42,7 @@ final class EventServiceProvider implements ServiceProviderInterface
             ListenerProvider::class,
             static function (ContainerInterface $container, object $listenerProvider): ListenerProvider {
                 /** @var ListenerProvider $listenerProvider */
-                $finder = $container->build(Finder::class);
+                $finder = clone $container->get(Finder::class);
 
                 $finder->files()
                     ->in(dirname(__DIR__) . '/Listener/')
