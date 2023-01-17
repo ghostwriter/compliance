@@ -8,6 +8,7 @@ use Ghostwriter\Container\Contract\ContainerExceptionInterface;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use Ghostwriter\Container\Contract\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
+use Ghostwriter\EventDispatcher\Contract\EventInterface;
 use Ghostwriter\EventDispatcher\Contract\ListenerProviderInterface;
 use Ghostwriter\EventDispatcher\Dispatcher;
 use Ghostwriter\EventDispatcher\ListenerProvider;
@@ -48,12 +49,14 @@ final class EventServiceProvider implements ServiceProviderInterface
                     ->sortByName();
 
                 foreach ($finder->getIterator() as $splFileInfo) {
+                    /** @var class-string<EventInterface<bool>> $event */
                     $event = sprintf(
                         '%s%sEvent',
                         str_replace('ServiceProvider', 'Event', __NAMESPACE__ . '\\'),
                         $splFileInfo->getBasename('Listener.php')
                     );
 
+                    /** @var callable-string $listener */
                     $listener =  sprintf(
                         "%s\%s",
                         str_replace('ServiceProvider', 'Listener', __NAMESPACE__),
