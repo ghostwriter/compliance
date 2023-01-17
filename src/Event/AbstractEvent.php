@@ -11,6 +11,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
+/**
+ * @implements EventInterface<bool>
+ */
 abstract class AbstractEvent implements EventInterface
 {
     use EventTrait;
