@@ -45,9 +45,10 @@ final class ConfigListener implements EventListenerInterface
             $dispatcher->dispatch(new OutputEvent($configPath . ' already exists, overwriting!'));
         }
 
+        /** @var string $configTemplatePath */
         $configTemplatePath = $this->container->get(Compliance::TEMPLATE_CONFIG);
-
-        $result = file_put_contents($configPath, file_get_contents($configTemplatePath));
+        $contents = file_get_contents($configTemplatePath);
+        $result = file_put_contents($configPath, $contents);
 
         if (false === $result) {
             $configEvent->stopPropagation();
