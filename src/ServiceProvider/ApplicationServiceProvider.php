@@ -69,7 +69,7 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
             /** @var callable(ComplianceConfiguration):void $config */
             $config = require $complianceConfigurationPath;
 
-            $container->invoke($config, [
+            $container->call($config, [
                 'complianceConfiguration' => $complianceConfiguration,
             ]);
         }
