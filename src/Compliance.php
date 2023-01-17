@@ -87,9 +87,9 @@ CODE_SAMPLE;
         $this->setAutoExit(false);
         $this->setCatchExceptions(false);
 
-        /** @var class-string<Command> $command */
+        /** @var Command $command */
         foreach ($container->tagged(Command::class) as $command) {
-            $this->add($container->get($command));
+            $this->add($command);
         }
 
         $this->setDefaultCommand(MatrixCommand::getDefaultName());
@@ -126,8 +126,8 @@ CODE_SAMPLE;
 
         $container ??= Container::getInstance();
 
-        $container->invoke(static function (ContainerInterface $container): void {
-            $container->register(ApplicationServiceProvider::class);
+        $container->call(static function (ContainerInterface $container): void {
+            $container->build(ApplicationServiceProvider::class);
             $container->get(self::class)->run();
         });
     }
