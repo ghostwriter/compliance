@@ -30,13 +30,15 @@ final class MatrixServiceProvider implements ServiceProviderInterface
             ->sortByName();
 
         foreach ($finder->getIterator() as $splFileInfo) {
-            $tool = sprintf(
-                '%s%s',
-                str_replace('ServiceProvider', 'Tool', __NAMESPACE__ . '\\'),
-                $splFileInfo->getBasename('.php')
+            $container->bind(
+                sprintf(
+                    '%s%s',
+                    str_replace('ServiceProvider', 'Tool', __NAMESPACE__ . '\\'),
+                    $splFileInfo->getBasename('.php')
+                ),
+                null,
+                [Tool::class]
             );
-
-            $container->bind($tool, $tool, [Tool::class]);
         }
     }
 }
