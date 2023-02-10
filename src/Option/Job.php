@@ -35,6 +35,7 @@ final class Job
             'php' => PhpVersion::TO_STRING[$this->php],
             'dependency' => $this->dependency,
             'experimental' => $this->experimental,
+            'extensions' => 'xdebug',
         ];
     }
 }
