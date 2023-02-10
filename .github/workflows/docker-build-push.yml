@@ -7,8 +7,6 @@ on:
       - 'v[0-9]+'
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
-  schedule:
-    - cron: "0 * * * *" # Runs every hour, on the hour.
   workflow_dispatch:
 
 concurrency:
