@@ -24,6 +24,7 @@ final class Job
      *     php:string,
      *     dependency:string,
      *     experimental:bool
+     *     extensions:array
      * }
      */
     public function toArray(): array
@@ -35,7 +36,7 @@ final class Job
             'php' => PhpVersion::TO_STRING[$this->php],
             'dependency' => $this->dependency,
             'experimental' => $this->experimental,
-            'extensions' => 'xdebug',
+            'extensions' => ['xdebug'],
         ];
     }
 }
