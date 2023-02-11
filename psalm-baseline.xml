@@ -1,32 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
+<files psalm-version="5.6.0@e784128902dfe01d489c4123d69918a9f3c1eac5">
+  <file src="src/Command/AbstractCommand.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Command/CheckCommand.php">
+    <UnusedClass>
+      <code>CheckCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Command/ConfigCommand.php">
+    <UnusedClass>
+      <code>ConfigCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Command/WorkflowCommand.php">
+    <UnusedClass>
+      <code>WorkflowCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Compliance.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getContainer</code>
+      <code>main</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Configuration/ComplianceConfiguration.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>composerDependency</code>
+      <code>composerOptions</code>
+      <code>phpVersion</code>
+      <code>skip</code>
+    </PossiblyUnusedMethod>
+    <UnusedParam>
+      <code>$array</code>
+    </UnusedParam>
+  </file>
+  <file src="src/Contract/ToolInterface.php">
+    <PossiblyUnusedMethod>
+      <code>configuration</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Event/AbstractEvent.php">
+    <PossiblyUnusedMethod>
+      <code>getOutput</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Event/MatrixEvent.php">
+    <PossiblyUnusedMethod>
+      <code>exclude</code>
+    </PossiblyUnusedMethod>
+    <PropertyTypeCoercion>
+      <code>$this-&gt;matrix</code>
+    </PropertyTypeCoercion>
+  </file>
+  <file src="src/Listener/CheckListener.php">
+    <UnusedClass>
+      <code>CheckListener</code>
+    </UnusedClass>
+  </file>
   <file src="src/Listener/ConfigListener.php">
-    <UnevaluatedCode occurrences="4">
+    <UnevaluatedCode>
       <code>$contents = file_get_contents($configTemplatePath);</code>
       <code>$dispatcher-&gt;dispatch(new OutputEvent($configPath . ' config generated!'));</code>
       <code>$result = file_put_contents($configPath, $contents);</code>
+      <code>if (false === $result) {
+            $configEvent-&gt;stopPropagation();
+            $dispatcher-&gt;dispatch(new OutputEvent($configPath . ' Failed to write data!'));
+            return;
+        }</code>
     </UnevaluatedCode>
-    <UnusedVariable occurrences="1">
+    <UnusedClass>
+      <code>ConfigListener</code>
+    </UnusedClass>
+    <UnusedVariable>
       <code>$configTemplatePath</code>
     </UnusedVariable>
   </file>
+  <file src="src/Listener/Debug.php">
+    <UnusedClass>
+      <code>Debug</code>
+    </UnusedClass>
+  </file>
   <file src="src/Listener/MatrixListener.php">
-    <UnevaluatedCode occurrences="1"/>
-    <UnusedVariable occurrences="1">
-      <code>$phpVersion</code>
-    </UnusedVariable>
+    <UnusedClass>
+      <code>MatrixListener</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Listener/OutputListener.php">
+    <UnusedClass>
+      <code>OutputListener</code>
+    </UnusedClass>
   </file>
   <file src="src/Listener/WorkflowListener.php">
-    <NoValue occurrences="1">
+    <NoValue>
       <code>$workflowTemplatePath</code>
     </NoValue>
+    <UnusedClass>
+      <code>WorkflowListener</code>
+    </UnusedClass>
   </file>
   <file src="src/Option/ComposerDependency.php">
-    <InvalidConstantAssignmentValue occurrences="1"/>
+    <InvalidConstantAssignmentValue>
+      <code>OPTIONS = [
+        self::HIGHEST=&gt;true,
+        self::LOCKED=&gt;true,
+        self::LOWEST=&gt;true,
+    ]</code>
+    </InvalidConstantAssignmentValue>
+  </file>
+  <file src="src/Option/Job.php">
+    <LessSpecificReturnStatement>
+      <code>[
+            'name' =&gt; $this-&gt;name,
+            'command' =&gt; $this-&gt;command,
+            'os' =&gt; $this-&gt;os,
+            'php' =&gt; PhpVersion::TO_STRING[$this-&gt;php],
+            'dependency' =&gt; $this-&gt;dependency,
+            'experimental' =&gt; $this-&gt;experimental,
+            'extensions' =&gt; $this-&gt;extensions,
+        ]</code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code>array{
+     *     name:string,
+     *     command:string,
+     *     extensions:array&lt;string&gt;,
+     *     os:string,
+     *     php:string,
+     *     dependency:string,
+     *     experimental:bool
+     * }</code>
+    </MoreSpecificReturnType>
+  </file>
+  <file src="src/ServiceProvider/ApplicationServiceProvider.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <UnusedProperty>
+      <code>$container</code>
+    </UnusedProperty>
   </file>
   <file src="src/ServiceProvider/EventServiceProvider.php">
-    <InvalidCast occurrences="1">
+    <InvalidCast>
       <code>$event</code>
     </InvalidCast>
+  </file>
+  <file src="src/ServiceProvider/MatrixServiceProvider.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Tool/AbstractTool.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
   </file>
 </files>
