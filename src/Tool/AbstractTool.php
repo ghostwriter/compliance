@@ -18,6 +18,11 @@ abstract class AbstractTool implements ToolInterface
         $this->finder = clone $finder;
     }
 
+    public function extensions(): array
+    {
+        return ['xdebug'];
+    }
+
     public function isPresent(): bool
     {
         $path = getenv('GITHUB_WORKSPACE') ?: getcwd();
