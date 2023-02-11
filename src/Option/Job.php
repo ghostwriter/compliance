@@ -7,12 +7,13 @@ namespace Ghostwriter\Compliance\Option;
 final class Job
 {
     public function __construct(
-        private string $name,
-        private string $command,
-        private string $dependency,
-        private int $php = PhpVersion::CURRENT_STABLE,
-        private bool $experimental =false,
-        private string $os = 'ubuntu-latest'
+        private readonly string $name,
+        private readonly string $command,
+        private readonly array $extensions,
+        private readonly string $dependency,
+        private readonly int $php = PhpVersion::CURRENT_STABLE,
+        private readonly bool $experimental =false,
+        private readonly string $os = 'ubuntu-latest'
     ) {
     }
 
@@ -20,11 +21,11 @@ final class Job
      * @return array{
      *     name:string,
      *     command:string,
+     *     extensions:array<string>,
      *     os:string,
      *     php:string,
      *     dependency:string,
      *     experimental:bool
-     *     extensions:array
      * }
      */
     public function toArray(): array
@@ -36,7 +37,7 @@ final class Job
             'php' => PhpVersion::TO_STRING[$this->php],
             'dependency' => $this->dependency,
             'experimental' => $this->experimental,
-            'extensions' => ['xdebug'],
+            'extensions' => $this->extensions,
         ];
     }
 }
