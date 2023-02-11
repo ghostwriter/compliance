@@ -7,8 +7,6 @@ namespace Ghostwriter\Compliance\Event;
 use Ghostwriter\Compliance\Option\Job;
 use Ghostwriter\Json\Json;
 use Throwable;
-use const JSON_THROW_ON_ERROR;
-use function json_encode;
 
 final class MatrixEvent extends AbstractEvent
 {
