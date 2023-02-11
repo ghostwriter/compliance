@@ -9,6 +9,7 @@ on:
       - "v[0-9]+"
   schedule:
     - cron: "0 * * * *" # Runs hourly
+  workflow_dispatch:
 
 jobs:
   matrix:
