@@ -8,12 +8,11 @@ interface ToolInterface
 {
     public function command(): string;
 
-    /**
-     * Configuration files.
-     *
-     * @return string[]
-     */
+    /** @return array<string> */
     public function configuration(): array;
+
+    /** @return array<string> */
+    public function extensions(): array;
 
     public function isPresent(): bool;
 
