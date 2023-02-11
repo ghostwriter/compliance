@@ -6,6 +6,8 @@ namespace Ghostwriter\Compliance\Command;
 
 use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Event\MatrixEvent;
+use Ghostwriter\Environment\Environment;
+use Ghostwriter\Json\Json;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -35,12 +37,20 @@ final class MatrixCommand extends AbstractCommand
             new MatrixEvent($this->dispatcher, $input, $this->symfonyStyle)
         );
 
-        $this->write(
-            (
-                $this->container->has(Compliance::PATH_CONFIG) ?
-                    'Registered config path: ' . $this->container->get(Compliance::PATH_CONFIG) . PHP_EOL
-                    : ''
-            ) . sprintf('::set-output name=matrix::%s', $matrixEvent->getMatrix())
+        $gitHubOutput = (
+            $this->container->has(Compliance::PATH_CONFIG) ?
+            'Registered config path: ' . $this->container->get(Compliance::PATH_CONFIG) . PHP_EOL :
+            ''
+        ) . sprintf('::set-output name=matrix::%s', $matrixEvent->getMatrix());
+
+        $this->write($gitHubOutput);
+
+        $environment = new Environment();
+
+        file_put_contents(
+            $environment->getEnvironmentVariable('GITHUB_OUTPUT'),
+            'matrix=' . Json::encode($matrixEvent->getMatrix()) . "\n",
+            FILE_APPEND
         );
 
         return $matrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
