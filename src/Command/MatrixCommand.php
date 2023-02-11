@@ -37,21 +37,23 @@ final class MatrixCommand extends AbstractCommand
             new MatrixEvent($this->dispatcher, $input, $this->symfonyStyle)
         );
 
-        $gitHubOutput = (
-            $this->container->has(Compliance::PATH_CONFIG) ?
-            'Registered config path: ' . $this->container->get(Compliance::PATH_CONFIG) . PHP_EOL :
-            ''
-        ) . sprintf('::set-output name=matrix::%s', $matrixEvent->getMatrix());
-
-        $this->write($gitHubOutput);
-
         $environment = new Environment();
 
+        $matrix = sprintf("matrix=%s".PHP_EOL, $matrixEvent->getMatrix());
         file_put_contents(
-            $environment->getEnvironmentVariable('GITHUB_OUTPUT'),
-            'matrix=' . Json::encode($matrixEvent->getMatrix()) . "\n",
+            $environment->getServerVariable(
+                'GITHUB_OUTPUT',
+                tempnam(sys_get_temp_dir(),'GITHUB_OUTPUT')
+            ),
+            $matrix,
             FILE_APPEND
         );
+
+        $gitHubOutput = $this->container->has(Compliance::PATH_CONFIG) ?
+            'Registered config path: ' . $this->container->get(Compliance::PATH_CONFIG) . PHP_EOL.PHP_EOL :
+            '';
+
+        $this->write($gitHubOutput.$matrix);
 
         return $matrixEvent->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
