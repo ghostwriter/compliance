@@ -87,7 +87,6 @@ CODE_SAMPLE;
         $this->setAutoExit(false);
         $this->setCatchExceptions(false);
 
-        /** @var Command $command */
         foreach ($container->tagged(Command::class) as $command) {
             $this->add($command);
         }
