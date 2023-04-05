@@ -33,19 +33,19 @@ final class ConsoleServiceProvider implements ServiceProviderInterface
     public function __invoke(ContainerInterface $container): void
     {
         $container->bind(Compliance::class);
-        $container->alias(Compliance::class, SymfonyApplication::class);
+        $container->alias(SymfonyApplication::class, Compliance::class);
         // Input
         $container->bind(ArgvInput::class);
         $container->bind(ArrayInput::class);
         $container->bind(StringInput::class);
-        $container->alias(ArgvInput::class, Input::class);
-        $container->alias(Input::class, InputInterface::class);
+        $container->alias(Input::class, ArgvInput::class);
+        $container->alias(InputInterface::class, Input::class);
         // Output
         $container->bind(ConsoleOutput::class);
         $container->bind(NullOutput::class);
         $container->bind(SymfonyStyle::class);
-        $container->alias(ConsoleOutput::class, Output::class);
-        $container->alias(Output::class, OutputInterface::class);
+        $container->alias(Output::class, ConsoleOutput::class);
+        $container->alias(OutputInterface::class, Output::class);
         // Commands
         /** @var SplFileInfo $splFileInfo */
         foreach (
