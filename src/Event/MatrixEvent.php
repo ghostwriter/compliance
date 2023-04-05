@@ -12,8 +12,8 @@ final class MatrixEvent extends AbstractEvent
 {
     /**
      * @var array{
-     *     exclude:list<string>,
-     *     include:list<array{
+     *     exclude:array<array-key,string>,
+     *     include:array<array-key,array{
      *     name:string,
      *     command:string,
      *     os:string,
