@@ -24,17 +24,7 @@ final class EventServiceProvider implements ServiceProviderInterface
      */
     public function __invoke(ContainerInterface $container): void
     {
-        $container->bind(ListenerProvider::class);
         $container->alias(ListenerProviderInterface::class, ListenerProvider::class);
-        $container->set(
-            Dispatcher::class,
-            static fn (ContainerInterface $container): object => $container->build(
-                Dispatcher::class,
-                [
-                    'listenerProvider' => $container->get(ListenerProviderInterface::class),
-                ]
-            )
-        );
         $container->alias(DispatcherInterface::class, Dispatcher::class);
 
         /** @param ListenerProvider $listenerProvider */
