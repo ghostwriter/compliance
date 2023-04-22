@@ -12,6 +12,8 @@ use RecursiveIteratorIterator;
 use SplFileInfo;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Formatter\OutputFormatter;
+use Symfony\Component\Console\Formatter\OutputFormatterInterface;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\Input;
@@ -32,18 +34,12 @@ final class ConsoleServiceProvider implements ServiceProviderInterface
 {
     public function __invoke(ContainerInterface $container): void
     {
-        $container->bind(Compliance::class);
         $container->alias(SymfonyApplication::class, Compliance::class);
         // Input
-        $container->bind(ArgvInput::class);
-        $container->bind(ArrayInput::class);
-        $container->bind(StringInput::class);
         $container->alias(Input::class, ArgvInput::class);
         $container->alias(InputInterface::class, Input::class);
         // Output
-        $container->bind(ConsoleOutput::class);
-        $container->bind(NullOutput::class);
-        $container->bind(SymfonyStyle::class);
+        $container->alias(OutputFormatterInterface::class, OutputFormatter::class);
         $container->alias(Output::class, ConsoleOutput::class);
         $container->alias(OutputInterface::class, Output::class);
         // Commands
