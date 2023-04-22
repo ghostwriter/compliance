@@ -61,7 +61,6 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
         }
 
         $container->set(Compliance::CURRENT_WORKING_DIRECTORY, $currentWorkingDirectory);
-        $complianceConfiguration = $container->get(ComplianceConfiguration::class);
         $complianceConfigurationPath = $currentWorkingDirectory . DIRECTORY_SEPARATOR . 'compliance.php';
         if (file_exists($complianceConfigurationPath)) {
             $container->set(Compliance::PATH_CONFIG, $complianceConfigurationPath);
@@ -69,9 +68,7 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
             /** @var callable(ComplianceConfiguration):void $config */
             $config = require $complianceConfigurationPath;
 
-            $container->call($config, [
-                'complianceConfiguration' => $complianceConfiguration,
-            ]);
+            $container->call($config, [$container->get(ComplianceConfiguration::class)]);
         }
 
         $complianceConfigTemplate = $currentWorkingDirectory . DIRECTORY_SEPARATOR . 'src/compliance.php.dist';
