@@ -36,6 +36,7 @@ final class ConsoleServiceProvider implements ServiceProviderInterface
     {
         $container->alias(SymfonyApplication::class, Compliance::class);
         // Input
+        $container->set(ArgvInput::class, new ArgvInput());
         $container->alias(Input::class, ArgvInput::class);
         $container->alias(InputInterface::class, Input::class);
         // Output
