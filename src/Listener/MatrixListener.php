@@ -36,7 +36,7 @@ final class MatrixListener implements EventListenerInterface
             if ($tool->isPresent()) {
                 foreach ($phpVersions as $phpVersion) {
                     foreach (self::DEPENDENCIES as $dependency) {
-                        if ('latest' === $dependency) {
+                        if ($dependency === 'latest') {
                             $generateMatrixEvent->include(
                                 new Job($tool->name(), $tool->command(), $tool->extensions(), $dependency, $phpVersion)
                             );

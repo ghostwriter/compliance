@@ -51,7 +51,7 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
 
         $result = @chdir($currentWorkingDirectory);
 
-        if (false === $result) {
+        if ($result === false) {
             $container->get(DispatcherInterface::class)
                 ->dispatch(new OutputEvent(sprintf(
                     'Unable to change current working directory; %s; "%s" given.',

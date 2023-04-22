@@ -37,7 +37,7 @@ final class Composer
     {
         $composerJsonPath = $this->getJsonFilePath($root);
 
-        return 'json' === pathinfo($composerJsonPath, PATHINFO_EXTENSION)
+        return pathinfo($composerJsonPath, PATHINFO_EXTENSION) === 'json'
             ? mb_substr($composerJsonPath, 0, -4) . 'lock'
             : $composerJsonPath . '.lock';
     }

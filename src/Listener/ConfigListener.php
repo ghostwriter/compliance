@@ -29,7 +29,7 @@ final class ConfigListener implements EventListenerInterface
 
         $configPath = realpath((string) $input->getArgument('config'));
 
-        $configPathExists = false !== $configPath;
+        $configPathExists = $configPath !== false;
 
         $overwrite = (bool) $input->getOption('overwrite');
 
@@ -50,7 +50,7 @@ final class ConfigListener implements EventListenerInterface
         $contents = file_get_contents($configTemplatePath);
         $result = file_put_contents($configPath, $contents);
 
-        if (false === $result) {
+        if ($result === false) {
             $configEvent->stopPropagation();
             $dispatcher->dispatch(new OutputEvent($configPath . ' Failed to write data!'));
             return;

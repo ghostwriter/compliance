@@ -78,7 +78,7 @@ CODE_SAMPLE;
     {
         $version = InstalledVersions::getPrettyVersion(self::PACKAGE);
 
-        if (null === $version) {
+        if ($version === null) {
             throw new RuntimeException('Invalid version!');
         }
 

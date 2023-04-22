@@ -28,7 +28,7 @@ final class WorkflowListener implements EventListenerInterface
         $input = $workflowEvent->getInput();
         $workflowPath = realpath((string) $input->getArgument('workflow'));
 
-        $workflowPathExists = false !== $workflowPath;
+        $workflowPathExists = $workflowPath !== false;
 
         $overwrite = (bool) $input->getOption('overwrite');
 
@@ -48,7 +48,7 @@ final class WorkflowListener implements EventListenerInterface
 
         $result = file_put_contents($workflowPath, file_get_contents($workflowTemplatePath));
 
-        if (false === $result) {
+        if ($result === false) {
             $workflowEvent->stopPropagation();
             $dispatcher->dispatch(new OutputEvent($workflowPath . ' Failed to write data!'));
             return;
