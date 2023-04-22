@@ -67,7 +67,7 @@
       <code>$contents = file_get_contents($configTemplatePath);</code>
       <code><![CDATA[$dispatcher->dispatch(new OutputEvent($configPath . ' config generated!'));]]></code>
       <code>$result = file_put_contents($configPath, $contents);</code>
-      <code><![CDATA[if (false === $result) {
+      <code><![CDATA[if ($result === false) {
             $configEvent->stopPropagation();
             $dispatcher->dispatch(new OutputEvent($configPath . ' Failed to write data!'));
             return;
@@ -137,6 +137,9 @@
     </MoreSpecificReturnType>
   </file>
   <file src="src/ServiceProvider/ApplicationServiceProvider.php">
+    <InvalidArgument>
+      <code><![CDATA[[$container->get(ComplianceConfiguration::class)]]]></code>
+    </InvalidArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
