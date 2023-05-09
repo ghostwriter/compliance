@@ -12,8 +12,6 @@ on:
   workflow_dispatch:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
-        required: true
       INFECTION_DASHBOARD_API_KEY:
         required: false
       STRYKER_DASHBOARD_API_KEY:
