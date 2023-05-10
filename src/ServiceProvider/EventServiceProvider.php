@@ -31,7 +31,6 @@ final class EventServiceProvider implements ServiceProviderInterface
         $container->extend(
             ListenerProvider::class,
             static function (ContainerInterface $container, object $listenerProvider): ListenerProvider {
-                /** @var ListenerProvider $listenerProvider */
                 $finder = clone $container->get(Finder::class);
 
                 $finder->files()
