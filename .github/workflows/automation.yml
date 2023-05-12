@@ -12,8 +12,6 @@ on:
   workflow_dispatch:
   workflow_call:
     secrets:
-      INFECTION_DASHBOARD_API_KEY:
-        required: false
       STRYKER_DASHBOARD_API_KEY:
         required: false
       CODECOV_TOKEN:
@@ -48,7 +46,6 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY }}
           STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
         with:
           job: '{"php":"${{ matrix.php }}","dependencies":"${{ matrix.dependency }}","extensions":${{ toJSON(matrix.extensions) }},"ini":[],"command":"${{ matrix.command }}"}'
