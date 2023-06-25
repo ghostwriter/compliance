@@ -26,9 +26,8 @@ outputs:
     description: 'JSON string representing a job matrix for Github Actions.'
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-#  image: 'docker://ghcr.io/ghostwriter/compliance:v1'
   args:
     - ${{ inputs.command }}
     - ${{ inputs.job }}
+  image: docker://ghcr.io/ghostwriter/compliance:v1
+  using: docker
