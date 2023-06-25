@@ -29,7 +29,7 @@ jobs:
 
       - name: Determine CI Jobs
         id: matrix
-        uses: ghostwriter/compliance@v1
+        uses: docker://ghcr.io/ghostwriter/compliance:v1
         with:
           command: matrix
   qa:
