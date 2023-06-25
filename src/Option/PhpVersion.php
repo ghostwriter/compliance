@@ -44,13 +44,11 @@ final class PhpVersion
         self::PHP_71 => '2019-12-01',
         self::PHP_72 => '2020-11-30',
         self::PHP_73 => '2021-12-06',
-        // Maintained release ↓
         self::PHP_74 => '2022-11-28',
         self::PHP_80 => '2023-11-26',
-        // Latest version ↓
         self::PHP_81 => '2024-11-25',
-        // Future release (eta) ↓
         self::PHP_82 => '2025-12-01',
+        self::PHP_83 => '9999-12-01',
     ];
 
     /**
@@ -169,6 +167,11 @@ final class PhpVersion
     public const PHP_82 = 80200;
 
     /**
+     * @var int
+     */
+    public const PHP_83 = 80300;
+
+    /**
      * @var array<int,string>
      */
     public const RELEASE_DATE = [
@@ -191,13 +194,11 @@ final class PhpVersion
         self::PHP_71 => '2016-12-01',
         self::PHP_72 => '2017-11-30',
         self::PHP_73 => '2018-12-06',
-        // Maintained release ↓
         self::PHP_74 => '2019-11-28',
         self::PHP_80 => '2020-11-26',
-        // Latest version ↓
         self::PHP_81 => '2021-11-25',
-        // Future release (eta) ↓
         self::PHP_82 => '2022-12-01',
+        self::PHP_83 => '9999-12-01',
     ];
 
     /**
@@ -223,12 +224,10 @@ final class PhpVersion
         self::PHP_71 => '7.1',
         self::PHP_72 => '7.2',
         self::PHP_73 => '7.3',
-        // Maintained release ↓
         self::PHP_74 => '7.4',
         self::PHP_80 => '8.0',
-        // Latest version ↓
         self::PHP_81 => '8.1',
-        // Future release (eta) ↓
         self::PHP_82 => '8.2',
+        self::PHP_83 => '8.3',
     ];
 }
