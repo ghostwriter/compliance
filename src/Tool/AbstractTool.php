@@ -12,8 +12,9 @@ use function getenv;
 abstract class AbstractTool implements ToolInterface
 {
     public function __construct(
-        private readonly Finder $finder
+        private Finder $finder
     ) {
+        $this->finder = clone $finder;
     }
 
     public function extensions(): array
