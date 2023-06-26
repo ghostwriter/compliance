@@ -27,7 +27,6 @@ final class CheckCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->dispatcher->dispatch(new CheckEvent($this->dispatcher, $input, $this->symfonyStyle))
-            ->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
+        return $this->dispatch(new CheckEvent($this->dispatcher, $input, $this->symfonyStyle));
     }
 }
