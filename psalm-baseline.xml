@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.11.0@c9b192ab8400fdaf04b2b13d110575adc879aa90">
+<files psalm-version="5.12.0@f90118cdeacd0088e7215e64c0c99ceca819e176">
   <file src="src/Command/AbstractCommand.php">
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+    <PossiblyUnusedReturnValue>
+      <code>int</code>
+    </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Command/CheckCommand.php">
     <UnusedClass>
@@ -26,6 +29,9 @@
       <code>getContainer</code>
       <code>main</code>
     </PossiblyUnusedMethod>
+    <UnusedParam>
+      <code>$container</code>
+    </UnusedParam>
   </file>
   <file src="src/Configuration/ComplianceConfiguration.php">
     <PossiblyUnusedMethod>
@@ -43,6 +49,16 @@
     <PossiblyUnusedMethod>
       <code>configuration</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Enum/OperatingSystem.php">
+    <UnusedClass>
+      <code>OperatingSystem</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Enum/PhpVersion.php">
+    <UnusedClass>
+      <code>PhpVersion</code>
+    </UnusedClass>
   </file>
   <file src="src/Event/AbstractEvent.php">
     <PossiblyUnusedMethod>
