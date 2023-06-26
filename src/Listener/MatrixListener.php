@@ -32,7 +32,7 @@ final class MatrixListener implements EventListenerInterface
     {
         $phpVersions = [
             PhpVersion::PHP_81,
-            PhpVersion::PHP_82, 
+            PhpVersion::PHP_82,
             // PhpVersion::PHP_83
         ];
 
