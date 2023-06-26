@@ -119,15 +119,14 @@ CODE_SAMPLE;
      */
     public static function main(?ContainerInterface $container = null): void
     {
-        if (! ini_get('date.timezone')) {
+        if (ini_get('date.timezone') === false) {
             ini_set('date.timezone', 'UTC');
         }
 
-        $container ??= Container::getInstance();
+        Container::getInstance()
+            ->call(ApplicationServiceProvider::class);
 
-        $container->call(static function (ContainerInterface $container): void {
-            $container->register(ApplicationServiceProvider::class);
-            $container->get(self::class)->run();
-        });
+        Container::getInstance()
+            ->get(self::class)->run();
     }
 }
