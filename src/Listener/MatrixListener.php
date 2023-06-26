@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Listener;
 
+use Composer\InstalledVersions;
+use Composer\Package\Version\VersionParser;
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Compliance\Event\MatrixEvent;
@@ -30,7 +32,8 @@ final class MatrixListener implements EventListenerInterface
      */
     public function __invoke(MatrixEvent $generateMatrixEvent): void
     {
-        $phpVersions = [PhpVersion::PHP_80, PhpVersion::PHP_81, PhpVersion::PHP_82, PhpVersion::PHP_83];
+        $phpVersions = [PhpVersion::PHP_81, PhpVersion::PHP_82, PhpVersion::PHP_83];
+
         /** @var ToolInterface $tool */
         foreach ($this->container->tagged(Tool::class) as $tool) {
             if ($tool->isPresent()) {
@@ -38,7 +41,7 @@ final class MatrixListener implements EventListenerInterface
                     foreach (self::DEPENDENCIES as $dependency) {
                         if ($dependency === 'latest') {
                             $generateMatrixEvent->include(
-                                new Job($tool->name(), $tool->command(), $tool->extensions(), $dependency, $phpVersion)
+                                new Job($tool->name(), $tool->command(), $tool->extensions(), $dependency, $phpVersion, $phpVersion === PhpVersion::PHP_83 ? true : false)
                             );
                         }
                         // Todo: support including/excluding $dependency
