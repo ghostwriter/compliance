@@ -102,6 +102,13 @@
     </UnusedClass>
   </file>
   <file src="src/Listener/MatrixListener.php">
+    <RedundantCondition>
+      <code>false</code>
+    </RedundantCondition>
+    <TypeDoesNotContainType>
+      <code>$phpVersion === PhpVersion::PHP_83</code>
+      <code>$phpVersion === PhpVersion::PHP_83</code>
+    </TypeDoesNotContainType>
     <UnusedClass>
       <code>MatrixListener</code>
     </UnusedClass>
