@@ -8,6 +8,7 @@ use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Event\OutputEvent;
 use Ghostwriter\Container\Contract\ContainerInterface;
 use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
+use Ghostwriter\EventDispatcher\Contract\EventInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
@@ -24,17 +25,28 @@ abstract class AbstractCommand extends Command
         parent::__construct(self::getDefaultName());
     }
 
+    /**
+     * @throws Throwable
+     *
+     * @return int 0 if everything went fine, or an exit code
+     */
+    public function dispatch(EventInterface $event): int
+    {
+        return $this->dispatcher
+            ->dispatch($event)
+            ->isPropagationStopped()
+            ? self::FAILURE
+            : self::SUCCESS;
+    }
+
     public static function getDefaultName(): string
     {
         return mb_strtolower(str_replace([__NAMESPACE__ . '\\', 'Command'], '', static::class));
     }
 
-    /**
-     * @throws Throwable
-     */
-    public function write(string $message): void
+    public function write(string $message): int
     {
-        $this->dispatcher->dispatch(
+        return $this->dispatch(
             new OutputEvent([
                 '::echo::on',
                 sprintf('::group::%s %s', Compliance::NAME, Compliance::BLACK_LIVES_MATTER),
