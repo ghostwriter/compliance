@@ -37,6 +37,19 @@ jobs:
     needs: [matrix]
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
+    
+    # Docs: https://docs.github.com/en/actions/using-containerized-services
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: 'toor'
+          MYSQL_DATABASE: 'testdb'
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
@@ -49,6 +62,38 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: xdebug
+          tools: psalm, phpstan, cs2pr, phpcs, phpunit
+
+
+#         Local MySQL service in GitHub hosted environments is disabled by default.
+#         If you are using it instead of service containers, make sure you start it.
+#       - name: Start mysql service
+#         run: sudo systemctl start mysql.service
+
+#       - name: Run Migration
+#         run: |
+#           php bin/console migrations:migrate || echo "No migrations found or migration failed"
+#         env:
+#           DATABASE_URL: mysql://root:toor@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/testdb
+
+#       - name: Run phpcs
+#         run: phpcs -q --report=checkstyle src | cs2pr
+
+#       - name: Run Psalm
+#         run: psalm --output-format=github
+#         if: true
+
+#       - name: Run PHPStan
+#         run: phpstan analyse src
+        
+#       - name: Run PHPUnit
+#         run: phpunit
+      
+      - name: Setup problem matchers for PHP
+        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          
+      - name: Setup Problem Matchers
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Get composer cache directory
         id: composer-cache
@@ -60,11 +105,14 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
+          # prefer-lowest and prefer-stable
+         # key: ${{ runner.os }}-composer-${{ matrix.prefer }}-${{ hashFiles('**/composer.lock') }}
+         # restore-keys: ${{ runner.os }}-composer-${{ matrix.prefer }}-
 
       - name: Install dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader --ignore-platform-req=php
 
-      - name: Run command
+      - name: Run ${{ matrix.name }} command
         run: ${{ matrix.command }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
