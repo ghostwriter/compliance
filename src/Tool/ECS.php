@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Tool;
 
-final class EasyCodingStandard extends AbstractTool
+final class ECS extends AbstractTool
 {
     public function command(): string
     {

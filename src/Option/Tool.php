@@ -6,7 +6,7 @@ namespace Ghostwriter\Compliance\Option;
 
 use Ghostwriter\Compliance\Tool\Codeception;
 use Ghostwriter\Compliance\Tool\ComposerRequireChecker;
-use Ghostwriter\Compliance\Tool\EasyCodingStandard;
+use Ghostwriter\Compliance\Tool\ECS;
 use Ghostwriter\Compliance\Tool\GrumPHP;
 use Ghostwriter\Compliance\Tool\Infection;
 use Ghostwriter\Compliance\Tool\MarkdownLint;
@@ -33,7 +33,7 @@ final class Tool
     /**
      * @var string
      */
-    public const EASY_CODING_STANDARD = EasyCodingStandard::class;
+    public const EASY_CODING_STANDARD = ECS::class;
 
     /**
      * @var string
