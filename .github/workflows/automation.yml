@@ -39,16 +39,16 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     
     # Docs: https://docs.github.com/en/actions/using-containerized-services
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: 'toor'
-          MYSQL_DATABASE: 'testdb'
-        ports:
-          - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    # services:
+    #   mysql:
+    #     image: mysql:latest
+    #     env:
+    #       MYSQL_ALLOW_EMPTY_PASSWORD: false
+    #       MYSQL_ROOT_PASSWORD: 'toor'
+    #       MYSQL_DATABASE: 'testdb'
+    #     ports:
+    #       - 3306/tcp
+    #     options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     strategy:
       fail-fast: false
@@ -95,22 +95,10 @@ jobs:
       - name: Setup Problem Matchers
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-      
-      - name: Cache composer dependencies
-        uses: actions/cache@v3
+      - name: Install ${{ matrix.dependencies }} dependencies
+        uses: "ramsey/composer-install@v2"
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-          # prefer-lowest and prefer-stable
-         # key: ${{ runner.os }}-composer-${{ matrix.prefer }}-${{ hashFiles('**/composer.lock') }}
-         # restore-keys: ${{ runner.os }}-composer-${{ matrix.prefer }}-
-
-      - name: Install dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader --ignore-platform-req=php
+          dependency-versions: "${{ matrix.dependencies }}"
 
       - name: Run ${{ matrix.name }} command
         run: ${{ matrix.command }}
