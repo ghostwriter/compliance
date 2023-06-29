@@ -18,7 +18,9 @@ final class MatrixListener implements EventListenerInterface
     /**
      * @var string[]
      */
-    private const DEPENDENCIES = ['latest', 'locked', 'lowest'];
+    private const DEPENDENCIES = [
+        'highest', 'locked', 'lowest'
+    ];
 
     public function __construct(
         private Container $container
@@ -41,18 +43,17 @@ final class MatrixListener implements EventListenerInterface
             if ($tool->isPresent()) {
                 foreach ($phpVersions as $phpVersion) {
                     foreach (self::DEPENDENCIES as $dependency) {
-                        if ($dependency === 'latest') {
-                            $generateMatrixEvent->include(
-                                new Job(
-                                    $tool->name(),
-                                    $tool->command(),
-                                    $tool->extensions(),
-                                    $dependency,
-                                    $phpVersion,
-                                    $phpVersion === PhpVersion::PHP_83 ? true : false
-                                )
-                            );
-                        }
+                        // if ($dependency === 'latest') {}
+                        $generateMatrixEvent->include(
+                            new Job(
+                                $tool->name(),
+                                $tool->command(),
+                                $tool->extensions(),
+                                $dependency,
+                                $phpVersion,
+                                $phpVersion === PhpVersion::PHP_83 ? true : false
+                            )
+                        );
                         // Todo: support including/excluding $dependency
                         // $generateMatrixEvent->include(
                         //     new Job($tool->name(), $tool->command(), $dependency, $phpVersion)
