@@ -18,9 +18,7 @@ final class MatrixListener implements EventListenerInterface
     /**
      * @var string[]
      */
-    private const DEPENDENCIES = [
-        'highest', 'locked', 'lowest'
-    ];
+    private const DEPENDENCIES = ['highest', 'locked', 'lowest'];
 
     public function __construct(
         private Container $container
