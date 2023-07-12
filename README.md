@@ -11,13 +11,39 @@ Compliance Automation for PHP - Automatically configure and execute multiple `CI
 > **Warning**
 > 
 > This project is not finished yet, work in progress.
+>
+
+## Workflow
+
+```yml
+# .github/workflows/compliance.yml
+name: Compliance
+
+on:
+  pull_request:
+    branches:
+      - "**"
+  push:
+    branches:
+      - "main"
+      - "[0-9]+.[0-9]+.x" # 1.2.x
+      - "v[0-9]+" # v1
+  workflow_dispatch: # Manually Trigger workflow
+
+jobs:
+  Automation:
+    uses: ghostwriter/compliance/.github/workflows/automation.yml@v1
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
+```
 
 ## Installation
 
 You can install the package via composer:
 
 ``` bash
-composer require ghostwriter/compliance
+composer require ghostwriter/compliance --dev
 ```
 
 ## Usage
