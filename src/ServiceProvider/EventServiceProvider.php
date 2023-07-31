@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\ServiceProvider;
 
-use Ghostwriter\Container\ExceptionInterface;
 use Ghostwriter\Container\ContainerInterface;
+use Ghostwriter\Container\ExceptionInterface;
 use Ghostwriter\Container\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
 use Ghostwriter\EventDispatcher\Contract\EventInterface;
