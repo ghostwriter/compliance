@@ -41,7 +41,7 @@
         "ghostwriter/config": "^0.3",
         "ghostwriter/container": "^1.6",
         "ghostwriter/environment": "^1.1",
-        "ghostwriter/event-dispatcher": "^1.4.2",
+        "ghostwriter/event-dispatcher": "^1.5.0",
         "ghostwriter/json": "^1.1",
         "ghostwriter/option": "^1.5.1",
         "symfony/console": "^6.3.2",
