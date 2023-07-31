@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\ServiceProvider;
 
-use Ghostwriter\Container\ContainerExceptionInterface;
+use Ghostwriter\Container\ExceptionInterface;
 use Ghostwriter\Container\ContainerInterface;
 use Ghostwriter\Container\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
@@ -20,7 +20,7 @@ use function str_replace;
 final class EventServiceProvider implements ServiceProviderInterface
 {
     /**
-     * @throws ContainerExceptionInterface
+     * @throws ExceptionInterface
      */
     public function __invoke(ContainerInterface $container): void
     {
