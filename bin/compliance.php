@@ -19,5 +19,10 @@ use function sprintf;
     /**
      * #BlackLivesMatter.
      */
-    Compliance::main();
+    try{
+        Compliance::main();
+    }catch(\Throwable $throwable){
+        fwrite(STDERR, $throwable->getMessage());
+        exit(1);
+    }
 })($_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php');
