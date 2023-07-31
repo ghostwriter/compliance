@@ -178,11 +178,6 @@
       <code>$container</code>
     </UnusedProperty>
   </file>
-  <file src="src/ServiceProvider/EventServiceProvider.php">
-    <UndefinedDocblockClass>
-      <code>ContainerExceptionInterface</code>
-    </UndefinedDocblockClass>
-  </file>
   <file src="src/ServiceProvider/MatrixServiceProvider.php">
     <PossiblyUnusedMethod>
       <code>__construct</code>
