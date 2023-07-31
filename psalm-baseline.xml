@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.12.0@f90118cdeacd0088e7215e64c0c99ceca819e176">
+<files psalm-version="5.14.0@b2942cefed8443002bd3f245c4cd0a54193716d8">
   <file src="src/Command/AbstractCommand.php">
     <PossiblyUnusedMethod>
       <code>__construct</code>
@@ -29,6 +29,10 @@
       <code>getContainer</code>
       <code>main</code>
     </PossiblyUnusedMethod>
+    <UnevaluatedCode>
+      <code><![CDATA[Container::getInstance()
+            ->get(self::class)->run();]]></code>
+    </UnevaluatedCode>
     <UnusedParam>
       <code>$container</code>
     </UnusedParam>
@@ -167,15 +171,17 @@
     </UnusedClass>
   </file>
   <file src="src/ServiceProvider/ApplicationServiceProvider.php">
-    <InvalidArgument>
-      <code><![CDATA[[$container->get(ComplianceConfiguration::class)]]]></code>
-    </InvalidArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
     <UnusedProperty>
       <code>$container</code>
     </UnusedProperty>
+  </file>
+  <file src="src/ServiceProvider/EventServiceProvider.php">
+    <UndefinedDocblockClass>
+      <code>ContainerExceptionInterface</code>
+    </UndefinedDocblockClass>
   </file>
   <file src="src/ServiceProvider/MatrixServiceProvider.php">
     <PossiblyUnusedMethod>

@@ -8,7 +8,7 @@ use Composer\InstalledVersions;
 use Ghostwriter\Compliance\Command\MatrixCommand;
 use Ghostwriter\Compliance\ServiceProvider\ApplicationServiceProvider;
 use Ghostwriter\Container\Container;
-use Ghostwriter\Container\Contract\ContainerInterface;
+use Ghostwriter\Container\ContainerInterface;
 use RuntimeException;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;

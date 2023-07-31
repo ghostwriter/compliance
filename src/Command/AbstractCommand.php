@@ -6,7 +6,7 @@ namespace Ghostwriter\Compliance\Command;
 
 use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Event\OutputEvent;
-use Ghostwriter\Container\Contract\ContainerInterface;
+use Ghostwriter\Container\ContainerInterface;
 use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
 use Ghostwriter\EventDispatcher\Contract\EventInterface;
 use Symfony\Component\Console\Command\Command;
