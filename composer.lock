@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69dc6258f7bfc07b4b99cb5b4c16f24c",
+    "content-hash": "b8a0ae96a01928395aa66f3c6f0a9dc3",
     "packages": [
         {
             "name": "composer/semver",
@@ -326,20 +326,20 @@
         },
         {
             "name": "ghostwriter/event-dispatcher",
-            "version": "1.4.2",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/event-dispatcher.git",
-                "reference": "231a92c3f07ef97e0a55cf0a57ab6e8186a08da1"
+                "reference": "d612d5d8099c116d45c157a2a12de25b0d9ff69b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/231a92c3f07ef97e0a55cf0a57ab6e8186a08da1",
-                "reference": "231a92c3f07ef97e0a55cf0a57ab6e8186a08da1",
+                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/d612d5d8099c116d45c157a2a12de25b0d9ff69b",
+                "reference": "d612d5d8099c116d45c157a2a12de25b0d9ff69b",
                 "shasum": ""
             },
             "require": {
-                "ghostwriter/container": "^1.5",
+                "ghostwriter/container": "^1.6",
                 "ghostwriter/option": "^1.5.1",
                 "php": ">=8.1 <8.4"
             },
@@ -383,7 +383,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-11T10:44:18+00:00"
+            "time": "2023-07-31T17:40:47+00:00"
         },
         {
             "name": "ghostwriter/json",
