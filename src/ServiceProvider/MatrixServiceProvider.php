@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\ServiceProvider;
 
 use Ghostwriter\Compliance\Option\Tool;
-use Ghostwriter\Container\Contract\ContainerInterface;
-use Ghostwriter\Container\Contract\ServiceProviderInterface;
+use Ghostwriter\Container\ContainerInterface;
+use Ghostwriter\Container\ServiceProviderInterface;
 
 use Symfony\Component\Finder\Finder;
 use function dirname;

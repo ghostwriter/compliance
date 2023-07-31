@@ -36,13 +36,15 @@ jobs:
     name: ${{ matrix.name }} on PHP ${{ matrix.php }} with ${{ matrix.dependency }} dependencies
     needs: [matrix]
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.experimental }}
+    continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup PHP ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
@@ -50,17 +52,57 @@ jobs:
           coverage: pcov
           ini-values: assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On
           php-version: ${{ matrix.php }}
-          tools: psalm, phpstan, cs2pr, phpcs, phpunit
+          tools: composer:v2
 
       - name: Setup problem matchers
         run: |
             echo "::add-matcher::${{ runner.tool_cache }}/php.json"
             echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - name: Install ${{ matrix.dependencies }} dependencies
-        uses: ramsey/composer-install@v2
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          dependency-versions: "${{ matrix.dependencies }}"
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-
+
+      - name: Validate composer.json file
+        working-directory: ${{ github.workspace }}
+        run: |
+          if [ ! -f "composer.json" ]; then
+            echo "composer.json does not exist"
+            exit 1
+          fi
+
+          composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict
+
+      - name: Install ${{ matrix.dependency }} dependencies
+        working-directory: ${{ github.workspace }}
+        run: |
+          composerDependency="${{ matrix.dependency }}"
+          composerCommand="update"
+          composerOptions=("--no-interaction" "--no-progress" "--ansi")
+
+          case ${composerDependency} in
+              highest) composerCommand="update" ;;
+              lowest) composerOptions+=("--prefer-lowest" "--prefer-stable") ;;
+              *) composerCommand="install" ;;
+          esac
+
+          # Use the `update` if there is a composer.lock file
+          if [ ! -f "composer.lock" ]; then
+            composerCommand="update"
+          fi
+
+          fullCommand="composer ${composerCommand} ${composerOptions[*]}"
+
+          echo "Running: ${fullCommand}"
+
+          ${fullCommand}
 
       - name: Run ${{ matrix.name }} command
         run: ${{ matrix.command }}
@@ -69,41 +111,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
 
-      # - name: ${{ matrix.name }} on PHP ${{ matrix.php }}
-      #   uses: ghostwriter/laminas-continuous-integration-action@temp
-      #   env:
-      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
-      #   with:
-      #     job: '{"php":"${{ matrix.php }}","dependencies":"${{ matrix.dependency }}","extensions":${{ toJSON(matrix.extensions) }},"ini":[],"command":"${{ matrix.command }}"}'
-#      - name: QA Check ${{ matrix.name }} on PHP ${{ matrix.php }}
-#        uses: ghostwriter/compliance@qa/test-workflow
-#        with:
-#          command: check
-#          job: ${{ matrix.command }}
-
-
-  codecov:
-    name: Upload coverage to Codecov
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up php 8.2
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-
-      - name: Install dependencies
-        uses: ramsey/composer-install@v2
-
-      - name: Run tests and collect coverage
-        run: composer phpunit
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+        if: ${{ matrix.php == '8.2' && matrix.dependency == 'locked' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ${{ github.workspace }}/.cache/phpunit/

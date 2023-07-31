@@ -6,7 +6,7 @@ namespace Ghostwriter\Compliance\Configuration;
 
 use Ghostwriter\Compliance\Option\ComposerDependency;
 use Ghostwriter\Compliance\Option\PhpVersion;
-use Ghostwriter\Container\Contract\ContainerInterface;
+use Ghostwriter\Container\ContainerInterface;
 use RuntimeException;
 use function array_key_exists;
 
