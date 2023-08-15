@@ -17,6 +17,8 @@ abstract class AbstractTool implements ToolInterface
         $this->finder = clone $finder;
     }
 
+    abstract public function configuration(): array;
+
     public function extensions(): array
     {
         return ['xdebug'];
