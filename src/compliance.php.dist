@@ -3,14 +3,34 @@
 declare(strict_types=1);
 
 use Ghostwriter\Compliance\Configuration\ComplianceConfiguration;
-use Ghostwriter\Compliance\ValueObject\PhpVersion;
-use Ghostwriter\Compliance\ValueObject\Tool;
+use Ghostwriter\Compliance\Option\ComposerDependency;
+use Ghostwriter\Compliance\Option\PhpVersion;
+use Ghostwriter\Compliance\Tool\PHPUnit;
+use Ghostwriter\Compliance\Tool\Psalm;
+use Ghostwriter\Compliance\Tool\Rector;
 
 return static function (ComplianceConfiguration $complianceConfiguration): void {
-    // $complianceConfiguration->phpVersion(PhpVersion::CURRENT_STABLE);
-    $complianceConfiguration->phpVersion(PhpVersion::CURRENT_LATEST);
+    // $complianceConfiguration->phpVersion(PhpVersion::PHP_82);
+    // $complianceConfiguration->phpVersion(PhpVersion::DEV);
+    // $complianceConfiguration->phpVersion(PhpVersion::STABLE);
+    $complianceConfiguration->phpVersion(PhpVersion::LATEST);
+
     $complianceConfiguration->skip([
-        PhpVersion::PHP_82,
-        Tool::RECTOR => [PhpVersion::PHP_82],
+        PhpVersion::DEV,
+        PHPUnit::class => [
+            PhpVersion::PHP_82 => [
+                ComposerDependency::HIGHEST,
+                ComposerDependency::LOCKED,
+                ComposerDependency::LOWEST,
+            ]
+        ],
+    ]);
+
+    $complianceConfiguration->configure([
+        PHPUnit::class => [
+            PhpVersion::PHP_ALL => ComposerDependency::ALL
+        ],
+        Psalm::class => [PhpVersion::STABLE => ComposerDependency::LOCKED],
+        Rector::class => [PhpVersion::LATEST => ComposerDependency::LOCKED],
     ]);
 };
