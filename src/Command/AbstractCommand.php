@@ -12,6 +12,7 @@ use Ghostwriter\EventDispatcher\Contract\EventInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
+use function mb_strtolower;
 use function sprintf;
 use function str_replace;
 
@@ -26,6 +27,9 @@ abstract class AbstractCommand extends Command
     }
 
     /**
+     *
+     * @param EventInterface<bool> $event
+     *
      * @throws Throwable
      *
      * @return int 0 if everything went fine, or an exit code
