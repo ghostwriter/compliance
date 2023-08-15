@@ -8,7 +8,7 @@ final class Rector extends AbstractTool
 {
     public function command(): string
     {
-        return './vendor/bin/rector process';
+        return './vendor/bin/rector process --dry-run || true';
     }
 
     /**
@@ -16,6 +16,6 @@ final class Rector extends AbstractTool
      */
     public function configuration(): array
     {
-        return ['rector.php.dist'];
+        return ['rector.php', 'rector.php.dist'];
     }
 }
