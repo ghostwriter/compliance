@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance;
 
+use Ghostwriter\Container\Container;
 use function dirname;
 use function sprintf;
 
@@ -20,7 +21,9 @@ use function sprintf;
      * #BlackLivesMatter.
      */
     try{
-        Compliance::main();
+        Compliance::main(
+            Container::getInstance()
+        );
     }catch(\Throwable $throwable){
         fwrite(STDERR, $throwable->getMessage());
         exit(1);
