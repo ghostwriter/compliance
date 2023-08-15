@@ -37,10 +37,27 @@ final class ComplianceConfiguration
     }
 
     /**
-     * @param array<int|array<class-string<ToolInterface>,list<int>> $array
+     * @param array<class-string<ToolInterface>,array<int,list<string>>> $options
      */
-    public function configure(array $array): void
+    public function configure(array $options): void
     {
+        foreach ($options as $tool => $option) {
+            foreach ($option as $phpVersion => $composerDependencies) {
+                if ($phpVersion === PhpVersion::ANY) {
+                    foreach(PhpVersion::SUPPORTED as $supportedPhpVersion) {
+                        $supportedPhpVersionString = PhpVersion::TO_STRING[$supportedPhpVersion];
+                        foreach ($composerDependencies as $dependency) {
+                            $this->container->set($tool . '.' . $supportedPhpVersionString . '.' .$dependency, true);
+                        }
+                    }
+                    continue;
+                }
+                $phpVersionString = PhpVersion::TO_STRING[$phpVersion];
+                foreach ($composerDependencies as $dependency) {
+                    $this->container->set($tool . '.' . $phpVersionString . '.' .$dependency, true);
+                }
+            }
+        }
     }
 
     public function phpVersion(int $phpVersion): void
@@ -50,9 +67,9 @@ final class ComplianceConfiguration
     }
 
     /**
-     * @param array<int|array<class-string<ToolInterface>,list<int>> $array
+     * @param array<int|string|class-string<ToolInterface>,int|string|array<int,list<string>>> $options
      */
-    public function skip(array $array): void
+    public function skip(array $options): void
     {
     }
 }
