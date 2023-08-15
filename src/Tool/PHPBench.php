@@ -16,6 +16,6 @@ final class PHPBench extends AbstractTool
      */
     public function configuration(): array
     {
-        return ['phpbench.json'];
+        return ['phpbench.json', 'phpbench.json.dist'];
     }
 }
