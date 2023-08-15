@@ -10,6 +10,8 @@ use Ghostwriter\Compliance\Event\OutputEvent;
 use Ghostwriter\Compliance\Event\WorkflowEvent;
 use Ghostwriter\Container\Container;
 use Throwable;
+use function file_get_contents;
+use function file_put_contents;
 use function realpath;
 
 final class WorkflowListener implements EventListenerInterface
@@ -19,9 +21,6 @@ final class WorkflowListener implements EventListenerInterface
     ) {
     }
 
-    /**
-     * @throws Throwable
-     */
     public function __invoke(WorkflowEvent $workflowEvent): void
     {
         $dispatcher = $workflowEvent->getDispatcher();
@@ -44,10 +43,22 @@ final class WorkflowListener implements EventListenerInterface
             $dispatcher->dispatch(new OutputEvent($workflowPath . ' already exists, overwriting!'));
         }
 
-        $workflowTemplatePath = $this->container->get(Compliance::TEMPLATE_WORKFLOW);
+        try {
+            /** @var string $workflowTemplatePath */
+            $workflowTemplatePath = $this->container->get(Compliance::TEMPLATE_WORKFLOW);
+        } catch (Throwable $e) {
+            $dispatcher->dispatch(new OutputEvent($e->getMessage()));
+            return;
+        }
 
-        $result = file_put_contents($workflowPath, file_get_contents($workflowTemplatePath));
+        $workflowContents = file_get_contents($workflowTemplatePath);
+        if ($workflowContents === false) {
+            $workflowEvent->stopPropagation();
+            $dispatcher->dispatch(new OutputEvent($workflowTemplatePath . ' Failed to read data!'));
+            return;
+        }
 
+        $result = file_put_contents($workflowPath, $workflowContents);
         if ($result === false) {
             $workflowEvent->stopPropagation();
             $dispatcher->dispatch(new OutputEvent($workflowPath . ' Failed to write data!'));
