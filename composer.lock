@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8a0ae96a01928395aa66f3c6f0a9dc3",
+    "content-hash": "090a7edfab99db825676a49e05e47387",
     "packages": [
         {
             "name": "composer/semver",
@@ -2305,12 +2305,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "1e585b132366110fc56693daad39e60cd178f284"
+                "reference": "8694293c78da4d30c6213d4f0b29f90f17789d94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/1e585b132366110fc56693daad39e60cd178f284",
-                "reference": "1e585b132366110fc56693daad39e60cd178f284",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/8694293c78da4d30c6213d4f0b29f90f17789d94",
+                "reference": "8694293c78da4d30c6213d4f0b29f90f17789d94",
                 "shasum": ""
             },
             "require": {
@@ -2364,7 +2364,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-15T10:46:06+00:00"
+            "time": "2023-08-15T16:54:02+00:00"
         },
         {
             "name": "ghostwriter/psalm-plugin",
@@ -5397,7 +5397,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.1 <8.3",
+        "php": ">=8.2 <8.3",
         "composer-plugin-api": "^2.2.2",
         "composer-runtime-api": "^2.2.2"
     },
