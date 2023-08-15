@@ -18,7 +18,6 @@ final readonly class Job
         private readonly bool $experimental = false,
         private readonly string $os = 'ubuntu-latest'
     ) {
-        $this->experimental = $experimental || $php === PhpVersion::DEV;
     }
 
     /**
