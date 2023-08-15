@@ -40,6 +40,6 @@ final class ConfigCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->dispatch(new ConfigEvent($this->dispatcher, $input, $this->symfonyStyle));
+        return $this->dispatch(new ConfigEvent($input, $this->symfonyStyle));
     }
 }
