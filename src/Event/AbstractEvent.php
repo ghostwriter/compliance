@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
-use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
 use Ghostwriter\EventDispatcher\Contract\EventInterface;
 use Ghostwriter\EventDispatcher\Traits\EventTrait;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,15 +21,9 @@ abstract class AbstractEvent implements EventInterface
      * @throws Throwable
      */
     public function __construct(
-        protected DispatcherInterface $dispatcher,
-        protected InputInterface $input,
-        protected SymfonyStyle $symfonyStyle
+        protected readonly InputInterface $input,
+        protected readonly SymfonyStyle $symfonyStyle
     ) {
-    }
-
-    public function getDispatcher(): DispatcherInterface
-    {
-        return $this->dispatcher;
     }
 
     public function getInput(): InputInterface
