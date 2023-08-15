@@ -16,6 +16,6 @@ final class ECS extends AbstractTool
      */
     public function configuration(): array
     {
-        return ['ecs.php'];
+        return ['ecs.php', 'ecs.php.dist'];
     }
 }
