@@ -31,16 +31,20 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Configuration/ComplianceConfiguration.php">
+    <PossiblyInvalidArgument>
+      <code>$skips[$tool] ?? []</code>
+      <code>$skips[$tool][$phpVersion]</code>
+      <code>$skips[$tool][$supportedPhpVersion] ?? []</code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidArrayAccess>
+      <code>$skips[$tool][$phpVersion]</code>
+      <code>$skips[$tool][$supportedPhpVersion]</code>
+    </PossiblyInvalidArrayAccess>
     <PossiblyUnusedMethod>
       <code>__construct</code>
       <code>composerDependency</code>
       <code>composerOptions</code>
-      <code>phpVersion</code>
-      <code>skip</code>
     </PossiblyUnusedMethod>
-    <UnusedParam>
-      <code>$array</code>
-    </UnusedParam>
   </file>
   <file src="src/Enum/OperatingSystem.php">
     <UnusedClass>
