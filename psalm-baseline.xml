@@ -41,9 +41,6 @@
     <UnusedParam>
       <code>$array</code>
     </UnusedParam>
-    <UnusedProperty>
-      <code>$config</code>
-    </UnusedProperty>
   </file>
   <file src="src/Enum/OperatingSystem.php">
     <UnusedClass>
@@ -109,14 +106,6 @@
     <UnusedClass>
       <code>GithubActionOutput</code>
     </UnusedClass>
-  </file>
-  <file src="src/ServiceProvider/ApplicationServiceProvider.php">
-    <PossiblyUnusedMethod>
-      <code>__construct</code>
-    </PossiblyUnusedMethod>
-    <UnusedProperty>
-      <code>$container</code>
-    </UnusedProperty>
   </file>
   <file src="src/ServiceProvider/MatrixServiceProvider.php">
     <PossiblyUnusedMethod>
