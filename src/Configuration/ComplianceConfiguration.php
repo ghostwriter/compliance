@@ -37,39 +37,47 @@ final class ComplianceConfiguration
     }
 
     /**
-     * @param array<class-string<ToolInterface>,array<int,list<string>>> $options
+     * @param array<class-string<ToolInterface>,array<int,list<string>>> $checks
+     * @param array<class-string<ToolInterface>|int|string,array<int,list<string>>|int|string> $skips
      */
-    public function configure(array $options): void
+    public function __invoke(array $checks, array $skips): void
     {
-        foreach ($options as $tool => $option) {
+        foreach ($checks as $tool => $option) {
             foreach ($option as $phpVersion => $composerDependencies) {
                 if ($phpVersion === PhpVersion::ANY) {
-                    foreach(PhpVersion::SUPPORTED as $supportedPhpVersion) {
-                        $supportedPhpVersionString = PhpVersion::TO_STRING[$supportedPhpVersion];
+                    foreach (PhpVersion::SUPPORTED as $supportedPhpVersion) {
                         foreach ($composerDependencies as $dependency) {
-                            $this->container->set($tool . '.' . $supportedPhpVersionString . '.' .$dependency, true);
+                            if (in_array($dependency, $skips[$tool][$supportedPhpVersion] ?? [], true)) {
+                                continue;
+                            }
+
+                            $this->container->set(
+                                $this->getKey($tool, $supportedPhpVersion, $dependency),
+                                true
+                            );
                         }
                     }
                     continue;
                 }
-                $phpVersionString = PhpVersion::TO_STRING[$phpVersion];
+
                 foreach ($composerDependencies as $dependency) {
-                    $this->container->set($tool . '.' . $phpVersionString . '.' .$dependency, true);
+                    if (array_key_exists($phpVersion, $skips[$tool] ?? [])) {
+                        if (in_array($dependency, $skips[$tool][$phpVersion], true)) {
+                            continue;
+                        }
+                    }
+
+                    $this->container->set(
+                        $this->getKey($tool, $phpVersion, $dependency),
+                        true
+                    );
                 }
             }
         }
     }
 
-    public function phpVersion(int $phpVersion): void
+    private function getKey(string $tool, int $phpVersion, string $dependency): string
     {
-        $this->container->remove(ComposerDependency::CONFIG . '.php');
-        $this->container->set(ComposerDependency::CONFIG . '.php', $phpVersion);
-    }
-
-    /**
-     * @param array<int|string|class-string<ToolInterface>,int|string|array<int,list<string>>> $options
-     */
-    public function skip(array $options): void
-    {
+        return $tool . '.' . PhpVersion::TO_STRING[$phpVersion] . '.' . $dependency;
     }
 }
