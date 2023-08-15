@@ -24,7 +24,7 @@ final class Job
      * @return array{
      *     name:string,
      *     command:string,
-     *     extensions:array<string>,
+     *     extensions:array<int,string>,
      *     os:string,
      *     php:string,
      *     dependency:string,
