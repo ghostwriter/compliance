@@ -7,6 +7,11 @@ namespace Ghostwriter\Compliance\Option;
 final class PhpVersion
 {
     /**
+     * @var int
+     */
+    public const ANY = 0;
+
+    /**
      * @var string
      */
     public const CONFIG = 'compliance:configuration:php:version';
@@ -46,7 +51,7 @@ final class PhpVersion
         self::PHP_83 => '9999-12-01',
         self::PHP_84 => '9999-12-01',
         self::PHP_90 => '9999-12-01',
-        self::PHP_ALL => '9999-12-01',
+        self::ANY => '9999-12-01',
     ];
 
     /**
@@ -185,11 +190,6 @@ final class PhpVersion
     public const PHP_90 = 90000;
 
     /**
-     * @var int
-     */
-    public const PHP_ALL = 0;
-
-    /**
      * @var array<int,string>
      */
     public const RELEASE_DATE = [
@@ -219,7 +219,7 @@ final class PhpVersion
         self::PHP_83 => '9999-12-01',
         self::PHP_84 => '9999-12-01',
         self::PHP_90 => '9999-12-01',
-        self::PHP_ALL => '9999-12-01',
+        self::ANY => '9999-12-01',
     ];
 
     /**
@@ -257,6 +257,6 @@ final class PhpVersion
         self::PHP_83 => '8.3',
         self::PHP_84 => '8.3',
         self::PHP_90 => '9.0',
-        self::PHP_ALL => '*',
+        self::ANY => '*',
     ];
 }
