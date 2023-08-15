@@ -10,8 +10,8 @@ use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Compliance\Event\MatrixEvent;
 use Ghostwriter\Compliance\Option\Job;
 use Ghostwriter\Compliance\Option\PhpVersion;
-use Ghostwriter\Compliance\Option\Tool;
 use Ghostwriter\Compliance\Service\Composer;
+use Ghostwriter\Compliance\Tool\PHPUnit;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Json\Json;
 use RuntimeException;
@@ -58,29 +58,47 @@ final class MatrixListener implements EventListenerInterface
         /** @var string $constraints */
         $constraints = Json::decode($composerJson)[Composer::REQUIRE][Composer::PHP] ?? '*';
 
-        /** @var ToolInterface $tool */
-        foreach ($this->container->tagged(Tool::class) as $tool) {
+        foreach ($this->container->tagged(ToolInterface::class) as $tool) {
             if (! $tool->isPresent()) {
                 continue;
             }
 
-            foreach ($phpVersions as $phpVersion) {
-                if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
-                    continue;
+            $name = $tool->name();
+            $command = $tool->command();
+            $extensions = $tool->extensions();
+            if ($tool instanceof PHPUnit) {
+                foreach ($phpVersions as $phpVersion) {
+                    if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
+                        continue;
+                    }
+
+                    $isExperimental = $phpVersion === PhpVersion::DEV;
+
+                    foreach (self::DEPENDENCIES as $dependency) {
+                        $generateMatrixEvent->include(
+                            new Job(
+                                $name,
+                                $command,
+                                $extensions,
+                                $dependency,
+                                $phpVersion,
+                                $isExperimental
+                            )
+                        );
+                    }
                 }
-                foreach (self::DEPENDENCIES as $dependency) {
-                    $generateMatrixEvent->include(
-                        new Job(
-                            $tool->name(),
-                            $tool->command(),
-                            $tool->extensions(),
-                            $dependency,
-                            $phpVersion,
-                            $phpVersion === PhpVersion::PHP_83 ? true : false
-                        )
-                    );
-                }
+                continue;
             }
+
+            $generateMatrixEvent->include(
+                new Job(
+                    $name,
+                    $tool->command(),
+                    $tool->extensions(),
+                    'locked',
+                    PhpVersion::LATEST
+                )
+            );
         }
     }
 }
