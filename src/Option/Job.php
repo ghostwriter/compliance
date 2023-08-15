@@ -14,7 +14,7 @@ final class Job
         private readonly string $command,
         private readonly array $extensions,
         private readonly string $dependency,
-        private readonly int $php = PhpVersion::CURRENT_STABLE,
+        private readonly int $php = PhpVersion::STABLE,
         private readonly bool $experimental =false,
         private readonly string $os = 'ubuntu-latest'
     ) {
