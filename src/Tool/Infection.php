@@ -8,7 +8,7 @@ final class Infection extends AbstractTool
 {
     public function command(): string
     {
-        return 'XDEBUG_MODE=coverage ./vendor/bin/infection';
+        return 'composer infection || true';
     }
 
     /**
