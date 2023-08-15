@@ -124,7 +124,7 @@ CODE_SAMPLE;
         }
 
         Container::getInstance()
-            ->call(ApplicationServiceProvider::class);
+            ->register(ApplicationServiceProvider::class);
 
         Container::getInstance()
             ->get(self::class)->run();
