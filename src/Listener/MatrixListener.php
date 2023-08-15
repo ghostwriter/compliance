@@ -14,6 +14,7 @@ use Ghostwriter\Compliance\Option\Tool;
 use Ghostwriter\Compliance\Service\Composer;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Json\Json;
+use RuntimeException;
 use Throwable;
 use function getcwd;
 
@@ -43,7 +44,7 @@ final class MatrixListener implements EventListenerInterface
         $root = getcwd();
 
         if ($root === false) {
-            throw new \RuntimeException('Could not get current working directory');
+            throw new RuntimeException('Could not get current working directory');
         }
 
         $composerJson = file_get_contents(
@@ -51,7 +52,7 @@ final class MatrixListener implements EventListenerInterface
         );
 
         if ($composerJson === false) {
-            throw new \RuntimeException('Could not find composer.json');
+            throw new RuntimeException('Could not find composer.json');
         }
 
         /** @var string $constraints */
@@ -64,8 +65,7 @@ final class MatrixListener implements EventListenerInterface
             }
 
             foreach ($phpVersions as $phpVersion) {
-                if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints))
-                {
+                if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
                     continue;
                 }
                 foreach (self::DEPENDENCIES as $dependency) {
