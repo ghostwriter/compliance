@@ -7,15 +7,12 @@ namespace Ghostwriter\Compliance;
 use Composer\InstalledVersions;
 use Ghostwriter\Compliance\Command\MatrixCommand;
 use Ghostwriter\Compliance\ServiceProvider\ApplicationServiceProvider;
-use Ghostwriter\Container\Container;
 use Ghostwriter\Container\ContainerInterface;
 use RuntimeException;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
 use Throwable;
 use const PHP_EOL;
-use function ini_get;
-use function ini_set;
 use function sprintf;
 
 final class Compliance extends SymfonyApplication
@@ -69,13 +66,12 @@ CODE_SAMPLE;
      */
     public const TEMPLATE_WORKFLOW = 'Compliance.WorkflowTemplate';
 
-    private ContainerInterface $container;
-
     /**
      * @throws Throwable
      */
-    public function __construct(ContainerInterface $container)
-    {
+    public function __construct(
+        private readonly ContainerInterface $container
+    ) {
         $version = InstalledVersions::getPrettyVersion(self::PACKAGE);
 
         if ($version === null) {
@@ -92,7 +88,6 @@ CODE_SAMPLE;
         }
 
         $this->setDefaultCommand(MatrixCommand::getDefaultName());
-        $this->container = $container;
     }
 
     public function getContainer(): ContainerInterface
@@ -117,16 +112,9 @@ CODE_SAMPLE;
     /**
      * @throws Throwable
      */
-    public static function main(?ContainerInterface $container = null): void
+    public static function main(ContainerInterface $container): void
     {
-        if (ini_get('date.timezone') === false) {
-            ini_set('date.timezone', 'UTC');
-        }
-
-        Container::getInstance()
-            ->register(ApplicationServiceProvider::class);
-
-        Container::getInstance()
-            ->get(self::class)->run();
+        $container->register(ApplicationServiceProvider::class);
+        $container->get(self::class)->run();
     }
 }
