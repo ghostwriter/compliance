@@ -9,6 +9,7 @@ use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Event\OutputEvent;
 use Ghostwriter\Compliance\Event\WorkflowEvent;
 use Ghostwriter\Container\Container;
+use Ghostwriter\EventDispatcher\Dispatcher;
 use Throwable;
 use function file_get_contents;
 use function file_put_contents;
@@ -17,13 +18,13 @@ use function realpath;
 final class WorkflowListener implements EventListenerInterface
 {
     public function __construct(
-        private Container $container
+        private Container $container,
+        private Dispatcher $dispatcher
     ) {
     }
 
     public function __invoke(WorkflowEvent $workflowEvent): void
     {
-        $dispatcher = $workflowEvent->getDispatcher();
         $input = $workflowEvent->getInput();
         $workflowPath = realpath((string) $input->getArgument('workflow'));
 
@@ -33,38 +34,38 @@ final class WorkflowListener implements EventListenerInterface
 
         if ($workflowPathExists && ! $overwrite) {
             $workflowEvent->stopPropagation();
-            $dispatcher->dispatch(new OutputEvent(
+            $this->dispatcher->dispatch(new OutputEvent(
                 $workflowPath . ' already exists; use "--overwrite|-o" to overwrite the workflow file.'
             ));
             return;
         }
 
         if ($workflowPathExists) {
-            $dispatcher->dispatch(new OutputEvent($workflowPath . ' already exists, overwriting!'));
+            $this->dispatcher->dispatch(new OutputEvent($workflowPath . ' already exists, overwriting!'));
         }
 
         try {
             /** @var string $workflowTemplatePath */
             $workflowTemplatePath = $this->container->get(Compliance::TEMPLATE_WORKFLOW);
         } catch (Throwable $e) {
-            $dispatcher->dispatch(new OutputEvent($e->getMessage()));
+            $this->dispatcher->dispatch(new OutputEvent($e->getMessage()));
             return;
         }
 
         $workflowContents = file_get_contents($workflowTemplatePath);
         if ($workflowContents === false) {
             $workflowEvent->stopPropagation();
-            $dispatcher->dispatch(new OutputEvent($workflowTemplatePath . ' Failed to read data!'));
+            $this->dispatcher->dispatch(new OutputEvent($workflowTemplatePath . ' Failed to read data!'));
             return;
         }
 
         $result = file_put_contents($workflowPath, $workflowContents);
         if ($result === false) {
             $workflowEvent->stopPropagation();
-            $dispatcher->dispatch(new OutputEvent($workflowPath . ' Failed to write data!'));
+            $this->dispatcher->dispatch(new OutputEvent($workflowPath . ' Failed to write data!'));
             return;
         }
 
-        $dispatcher->dispatch(new OutputEvent($workflowPath . ' workflow generated!'));
+        $this->dispatcher->dispatch(new OutputEvent($workflowPath . ' workflow generated!'));
     }
 }
