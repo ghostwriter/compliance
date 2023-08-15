@@ -33,7 +33,7 @@ final class MatrixCommand extends AbstractCommand
     {
         /** @var MatrixEvent $matrixEvent */
         $matrixEvent =  $this->dispatcher->dispatch(
-            new MatrixEvent($this->dispatcher, $input, $this->symfonyStyle)
+            new MatrixEvent($input, $this->symfonyStyle)
         );
 
         $environment = new Environment();
