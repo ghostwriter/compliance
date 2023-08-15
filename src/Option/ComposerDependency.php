@@ -35,7 +35,7 @@ final class ComposerDependency
     /**
      * Supported options.
      *
-     * @var array<string, int>
+     * @var array<string, bool>
      */
     public const OPTIONS = [
         self::HIGHEST=>true,
