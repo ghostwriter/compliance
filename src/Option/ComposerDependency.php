@@ -7,6 +7,17 @@ namespace Ghostwriter\Compliance\Option;
 final class ComposerDependency
 {
     /**
+     * Supported options.
+     *
+     * @var list<string>
+     */
+    public const ALL = [
+        self::HIGHEST,
+        self::LOCKED,
+        self::LOWEST,
+    ];
+
+    /**
      * @var string
      */
     public const CONFIG = 'compliance:configuration:composer:dependency';
