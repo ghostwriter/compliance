@@ -23,6 +23,16 @@ final class Composer
     public const FILE_LOCK = 'composer.lock';
 
     /**
+     * @var string
+     */
+    public const PHP = 'php';
+
+    /**
+     * @var string
+     */
+    public const REQUIRE = 'require';
+
+    /**
      * Retrieve the path to composer.json file.
      */
     public function getJsonFilePath(string $root): string
