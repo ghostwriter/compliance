@@ -228,6 +228,16 @@ final class PhpVersion
     public const STABLE = self::PHP_81;
 
     /**
+     * @var list<int>
+     */
+    public const SUPPORTED = [
+        self::PHP_83,
+        self::PHP_82,
+        self::PHP_81,
+        self::PHP_80,
+    ];
+
+    /**
      * @var array<int,string>
      */
     public const TO_STRING = [
