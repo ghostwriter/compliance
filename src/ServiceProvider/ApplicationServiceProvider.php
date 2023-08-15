@@ -20,7 +20,7 @@ use function getenv;
 use function realpath;
 use function sprintf;
 
-final class ApplicationServiceProvider implements ServiceProviderInterface
+final readonly class ApplicationServiceProvider implements ServiceProviderInterface
 {
     /**
      * @var array<class-string<ServiceProviderInterface>>
@@ -34,19 +34,12 @@ final class ApplicationServiceProvider implements ServiceProviderInterface
     /**
      * @throws Throwable
      */
-    public function __construct(
-        private ContainerInterface $container
-    ) {
-        foreach (self::PROVIDERS as $provider) {
-            $this->container->register($provider);
-        }
-    }
-
-    /**
-     * @throws Throwable
-     */
     public function __invoke(ContainerInterface $container): void
     {
+        foreach (self::PROVIDERS as $provider) {
+            $container->register($provider);
+        }
+
         $currentWorkingDirectory = getenv('GITHUB_WORKSPACE') ?: getcwd() ?: __DIR__;
 
         $result = @chdir($currentWorkingDirectory);
