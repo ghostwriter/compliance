@@ -9,13 +9,15 @@ use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Event\ConfigEvent;
 use Ghostwriter\Compliance\Event\OutputEvent;
 use Ghostwriter\Container\Container;
+use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
 use Throwable;
 use function realpath;
 
 final class ConfigListener implements EventListenerInterface
 {
     public function __construct(
-        private Container $container
+        private Container $container,
+        private DispatcherInterface $dispatcher
     ) {
     }
 
@@ -24,7 +26,6 @@ final class ConfigListener implements EventListenerInterface
      */
     public function __invoke(ConfigEvent $configEvent): void
     {
-        $dispatcher = $configEvent->getDispatcher();
         $input = $configEvent->getInput();
 
         $configPath = realpath((string) $input->getArgument('config'));
@@ -35,27 +36,48 @@ final class ConfigListener implements EventListenerInterface
 
         if ($configPathExists && ! $overwrite) {
             $configEvent->stopPropagation();
-            $dispatcher->dispatch(new OutputEvent(
-                $configPath . ' already exists; use "--overwrite|-o" to overwrite the configuration file.'
-            ));
+
+            $this->write($configPath . ' already exists; use "--overwrite|-o" to overwrite the configuration file.');
             return;
         }
 
         if ($configPathExists) {
-            $dispatcher->dispatch(new OutputEvent($configPath . ' already exists, overwriting!'));
+            $this->write($configPath . ' already exists, overwriting!');
         }
 
-        /** @var string $configTemplatePath */
-        $configTemplatePath = $this->container->get(Compliance::TEMPLATE_CONFIG);
+        try {
+            /** @var string $configTemplatePath */
+            $configTemplatePath = $this->container->get(Compliance::TEMPLATE_CONFIG);
+        } catch (Throwable $e) {
+            $configEvent->stopPropagation();
+
+            $this->write($e->getMessage());
+            return;
+        }
+
         $contents = file_get_contents($configTemplatePath);
+
+        if ($contents === false) {
+            $configEvent->stopPropagation();
+
+            $this->write($configTemplatePath . ' Failed to read data!');
+            return;
+        }
+
         $result = file_put_contents($configPath, $contents);
 
         if ($result === false) {
             $configEvent->stopPropagation();
-            $dispatcher->dispatch(new OutputEvent($configPath . ' Failed to write data!'));
+
+            $this->write($configPath . ' Failed to write data!');
             return;
         }
 
-        $dispatcher->dispatch(new OutputEvent($configPath . ' config generated!'));
+        $this->write($configPath . ' config generated!');
+    }
+
+    public function write(string $message): void
+    {
+        $this->dispatcher->dispatch(new OutputEvent($message));
     }
 }
