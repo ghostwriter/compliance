@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Option;
 
-final class Job
+final readonly class Job
 {
     /**
      * @param array<string> $extensions
@@ -15,9 +15,10 @@ final class Job
         private readonly array $extensions,
         private readonly string $dependency,
         private readonly int $php = PhpVersion::STABLE,
-        private readonly bool $experimental =false,
+        private readonly bool $experimental = false,
         private readonly string $os = 'ubuntu-latest'
     ) {
+        $this->experimental = $experimental || $php === PhpVersion::DEV;
     }
 
     /**
