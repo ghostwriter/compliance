@@ -14,12 +14,7 @@ final class PhpVersion
     /**
      * @var int
      */
-    public const CURRENT_LATEST = self::PHP_82;
-
-    /**
-     * @var int
-     */
-    public const CURRENT_STABLE = self::PHP_81;
+    public const DEV = self::PHP_83;
 
     /**
      * @var array<int,string>
@@ -49,7 +44,15 @@ final class PhpVersion
         self::PHP_81 => '2024-11-25',
         self::PHP_82 => '2025-12-01',
         self::PHP_83 => '9999-12-01',
+        self::PHP_84 => '9999-12-01',
+        self::PHP_90 => '9999-12-01',
+        self::PHP_ALL => '9999-12-01',
     ];
+
+    /**
+     * @var int
+     */
+    public const LATEST = self::PHP_82;
 
     /**
      * @var int
@@ -172,6 +175,21 @@ final class PhpVersion
     public const PHP_83 = 80300;
 
     /**
+     * @var int
+     */
+    public const PHP_84 = 80400;
+
+    /**
+     * @var int
+     */
+    public const PHP_90 = 90000;
+
+    /**
+     * @var int
+     */
+    public const PHP_ALL = 0;
+
+    /**
      * @var array<int,string>
      */
     public const RELEASE_DATE = [
@@ -199,7 +217,15 @@ final class PhpVersion
         self::PHP_81 => '2021-11-25',
         self::PHP_82 => '2022-12-01',
         self::PHP_83 => '9999-12-01',
+        self::PHP_84 => '9999-12-01',
+        self::PHP_90 => '9999-12-01',
+        self::PHP_ALL => '9999-12-01',
     ];
+
+    /**
+     * @var int
+     */
+    public const STABLE = self::PHP_81;
 
     /**
      * @var array<int,string>
@@ -229,5 +255,8 @@ final class PhpVersion
         self::PHP_81 => '8.1',
         self::PHP_82 => '8.2',
         self::PHP_83 => '8.3',
+        self::PHP_84 => '8.3',
+        self::PHP_90 => '9.0',
+        self::PHP_ALL => '*',
     ];
 }
