@@ -84,13 +84,9 @@ FROM ghcr.io/ghostwriter/compliance:v1
 ## Supported Tools
 
 ``` php
-Ghostwriter\Compliance\Tool\Codeception;
 Ghostwriter\Compliance\Tool\ComposerRequireChecker;
 Ghostwriter\Compliance\Tool\ECS;
-Ghostwriter\Compliance\Tool\GrumPHP;
 Ghostwriter\Compliance\Tool\Infection;
-Ghostwriter\Compliance\Tool\MarkdownLint;
-Ghostwriter\Compliance\Tool\Phan;
 Ghostwriter\Compliance\Tool\PHPBench;
 Ghostwriter\Compliance\Tool\PHPCS;
 Ghostwriter\Compliance\Tool\PHPCSFixer;
