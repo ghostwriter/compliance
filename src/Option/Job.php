@@ -7,7 +7,7 @@ namespace Ghostwriter\Compliance\Option;
 final class Job
 {
     /**
-     * @param array<int,string> $extensions
+     * @param array<string> $extensions
      */
     public function __construct(
         private readonly string $name,
@@ -24,7 +24,7 @@ final class Job
      * @return array{
      *     name:string,
      *     command:string,
-     *     extensions:array<int,string>,
+     *     extensions:array<string>,
      *     os:string,
      *     php:string,
      *     dependency:string,
