@@ -9,7 +9,7 @@ final class PhpVersion
     /**
      * @var int
      */
-    public const ANY = 0;
+    public const ANY = -1;
 
     /**
      * @var string
