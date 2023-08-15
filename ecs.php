@@ -12,7 +12,7 @@ use Symplify\EasyCodingStandard\Config\ECSConfig;
 return static function (ECSConfig $ecsConfig): void {
     $ecsConfig->import(__DIR__ . '/vendor/ghostwriter/coding-standard/ecs.php');
     $ecsConfig->parallel();
-    $ecsConfig->paths([__DIR__ . '/rector.php', __DIR__ . '/ecs.php', __DIR__ . '/src', __DIR__ . '/tests']);
+    $ecsConfig->paths([__DIR__ . '/bin', __DIR__ . '/rector.php', __DIR__ . '/ecs.php', __DIR__ . '/src', __DIR__ . '/tests']);
     $ecsConfig->skip([
         '*/tests/Fixture/*',
         '*/vendor/*',
