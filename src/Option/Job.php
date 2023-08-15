@@ -6,6 +6,9 @@ namespace Ghostwriter\Compliance\Option;
 
 final class Job
 {
+    /**
+     * @param array<int,string> $extensions
+     */
     public function __construct(
         private readonly string $name,
         private readonly string $command,
