@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\ServiceProvider;
 
-use Ghostwriter\Compliance\Option\Tool;
+use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Container\ContainerInterface;
 use Ghostwriter\Container\ServiceProviderInterface;
 
@@ -37,7 +37,7 @@ final class MatrixServiceProvider implements ServiceProviderInterface
                     $splFileInfo->getBasename('.php')
                 ),
                 null,
-                [Tool::class]
+                [ToolInterface::class]
             );
         }
     }
