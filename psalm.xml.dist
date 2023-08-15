@@ -13,6 +13,7 @@
     cacheDirectory=".cache/psalm"
 >
     <projectFiles>
+        <file name="compliance.php"/>
         <directory name="src"/>
         <directory name="tests"/>
         <ignoreFiles>
