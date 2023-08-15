@@ -101,8 +101,8 @@ final class GithubActionOutput
             '::%s file=%s,line=%s,col=%s::%s',
             $type,
             strtr($file, self::ESCAPED_PROPERTIES),
-            strtr($line ?? 1, self::ESCAPED_PROPERTIES),
-            strtr($col ?? 0, self::ESCAPED_PROPERTIES),
+            strtr((string) ($line ?? 1), self::ESCAPED_PROPERTIES),
+            strtr((string) ($col ?? 0), self::ESCAPED_PROPERTIES),
             $message
         ));
     }
