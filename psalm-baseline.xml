@@ -29,9 +29,6 @@
       <code>getContainer</code>
       <code>main</code>
     </PossiblyUnusedMethod>
-    <UnusedParam>
-      <code>$container</code>
-    </UnusedParam>
   </file>
   <file src="src/Configuration/ComplianceConfiguration.php">
     <PossiblyUnusedMethod>
@@ -44,6 +41,9 @@
     <UnusedParam>
       <code>$array</code>
     </UnusedParam>
+    <UnusedProperty>
+      <code>$config</code>
+    </UnusedProperty>
   </file>
   <file src="src/Enum/OperatingSystem.php">
     <UnusedClass>
@@ -74,22 +74,9 @@
     </UnusedClass>
   </file>
   <file src="src/Listener/ConfigListener.php">
-    <UnevaluatedCode>
-      <code>$contents = file_get_contents($configTemplatePath);</code>
-      <code><![CDATA[$dispatcher->dispatch(new OutputEvent($configPath . ' config generated!'));]]></code>
-      <code>$result = file_put_contents($configPath, $contents);</code>
-      <code><![CDATA[if ($result === false) {
-            $configEvent->stopPropagation();
-            $dispatcher->dispatch(new OutputEvent($configPath . ' Failed to write data!'));
-            return;
-        }]]></code>
-    </UnevaluatedCode>
     <UnusedClass>
       <code>ConfigListener</code>
     </UnusedClass>
-    <UnusedVariable>
-      <code>$configTemplatePath</code>
-    </UnusedVariable>
   </file>
   <file src="src/Listener/Debug.php">
     <UnusedClass>
@@ -119,10 +106,6 @@
     </UnusedClass>
   </file>
   <file src="src/Service/GithubActionOutput.php">
-    <InvalidArgument>
-      <code>$col ?? 0</code>
-      <code>$line ?? 1</code>
-    </InvalidArgument>
     <UnusedClass>
       <code>GithubActionOutput</code>
     </UnusedClass>
