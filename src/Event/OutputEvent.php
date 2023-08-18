@@ -7,7 +7,7 @@ namespace Ghostwriter\Compliance\Event;
 final class OutputEvent extends AbstractEvent
 {
     public function __construct(
-        private string|array $message
+        private readonly string|array $message
     ) {
     }
 
