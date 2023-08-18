@@ -6,28 +6,18 @@ namespace Ghostwriter\Compliance\Tests\Unit\Service;
 
 use Ghostwriter\Compliance\Service\Composer;
 use Ghostwriter\Compliance\Tests\Unit\AbstractTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use function getcwd;
 
-/**
- * @internal
- *
- * @small
- *
- * @coversDefaultClass \Ghostwriter\Compliance\Service\Composer
- */
+#[CoversClass(Composer::class)]
 final class ComposerTest extends AbstractTestCase
 {
-    /** @covers \Ghostwriter\Compliance\Service\Composer::getJsonFilePath */
     public function testGetJsonFilePath(): void
     {
         $root = getcwd();
         self::assertSame((new Composer())->getJsonFilePath($root), $root . '/composer.json');
     }
 
-    /**
-     * @covers \Ghostwriter\Compliance\Service\Composer::getJsonFilePath
-     * @covers \Ghostwriter\Compliance\Service\Composer::getLockFilePath
-     */
     public function testGetLockFilePath(): void
     {
         $root = getcwd();
