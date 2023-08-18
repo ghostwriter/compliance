@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Tool;
 
-use Ghostwriter\Compliance\Contract\ToolInterface;
+use Ghostwriter\Compliance\ToolInterface;
 use Symfony\Component\Finder\Finder;
 use function getcwd;
 use function getenv;
