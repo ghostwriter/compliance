@@ -231,10 +231,13 @@ final class PhpVersion
      * @var list<int>
      */
     public const SUPPORTED = [
-        self::PHP_83,
-        self::PHP_82,
-        self::PHP_81,
+        self::PHP_72,
+        self::PHP_73,
+        self::PHP_74,
         self::PHP_80,
+        self::PHP_81,
+        self::PHP_82,
+        self::PHP_83,
     ];
 
     /**
