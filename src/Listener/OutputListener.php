@@ -11,7 +11,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class OutputListener implements EventListenerInterface
 {
     public function __construct(
-        private SymfonyStyle $symfonyStyle
+        private readonly SymfonyStyle $symfonyStyle
     ) {
     }
 
