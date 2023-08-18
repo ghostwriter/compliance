@@ -6,13 +6,13 @@ namespace Ghostwriter\Compliance\Listener;
 
 use Composer\Semver\Semver;
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
-use Ghostwriter\Compliance\Contract\ToolInterface;
 use Ghostwriter\Compliance\Event\MatrixEvent;
 use Ghostwriter\Compliance\Option\Job;
 use Ghostwriter\Compliance\Option\PhpVersion;
 use Ghostwriter\Compliance\Service\Composer;
 use Ghostwriter\Compliance\Tool\PHPUnit;
-use Ghostwriter\Container\Container;
+use Ghostwriter\Compliance\ToolInterface;
+use Ghostwriter\Container\ContainerInterface;
 use Ghostwriter\Json\Json;
 use RuntimeException;
 use Throwable;
@@ -27,8 +27,8 @@ final class MatrixListener implements EventListenerInterface
     private const DEPENDENCIES = ['highest', 'locked', 'lowest'];
 
     public function __construct(
-        private Container $container,
-        private Composer $composer
+        private readonly ContainerInterface $container,
+        private readonly Composer $composer
     ) {
     }
 
