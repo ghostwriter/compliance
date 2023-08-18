@@ -67,39 +67,39 @@ final class MatrixListener implements EventListenerInterface
             $name = $tool->name();
             $command = $tool->command();
             $extensions = $tool->extensions();
-            if ($tool instanceof PHPUnit) {
-                foreach ($phpVersions as $phpVersion) {
-                    if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
-                        continue;
-                    }
-
-                    $isExperimental = $phpVersion === PhpVersion::DEV;
-
-                    foreach (self::DEPENDENCIES as $dependency) {
-                        $generateMatrixEvent->include(
-                            new Job(
-                                $name,
-                                $command,
-                                $extensions,
-                                $dependency,
-                                $phpVersion,
-                                $isExperimental || $dependency === 'lowest'
-                            )
-                        );
-                    }
+            // if ($tool instanceof PHPUnit) {
+            foreach ($phpVersions as $phpVersion) {
+                if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
+                    continue;
                 }
-                continue;
-            }
 
-            $generateMatrixEvent->include(
-                new Job(
-                    $name,
-                    $tool->command(),
-                    $tool->extensions(),
-                    'locked',
-                    PhpVersion::LATEST
-                )
-            );
+                $isExperimental = $phpVersion === PhpVersion::DEV;
+
+                foreach (self::DEPENDENCIES as $dependency) {
+                    $generateMatrixEvent->include(
+                        new Job(
+                            $name,
+                            $command,
+                            $extensions,
+                            $dependency,
+                            $phpVersion,
+                            $isExperimental || $dependency === 'lowest'
+                        )
+                    );
+                }
+            }
+            continue;
+            // }
+
+            // $generateMatrixEvent->include(
+            //     new Job(
+            //         $name,
+            //         $tool->command(),
+            //         $tool->extensions(),
+            //         'locked',
+            //         PhpVersion::LATEST
+            //     )
+            // );
         }
     }
 }
