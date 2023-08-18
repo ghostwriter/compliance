@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\ServiceProvider;
 
-use Ghostwriter\Compliance\Contract\ToolInterface;
+use Ghostwriter\Compliance\ToolInterface;
 use Ghostwriter\Container\ContainerInterface;
 use Ghostwriter\Container\ServiceProviderInterface;
 
@@ -16,7 +16,7 @@ use function str_replace;
 final class MatrixServiceProvider implements ServiceProviderInterface
 {
     public function __construct(
-        private Finder $finder
+        private readonly Finder $finder
     ) {
     }
 
