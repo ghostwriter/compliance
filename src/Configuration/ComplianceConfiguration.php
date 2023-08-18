@@ -9,12 +9,13 @@ use Ghostwriter\Compliance\Option\ComposerDependency;
 use Ghostwriter\Compliance\Option\PhpVersion;
 use Ghostwriter\Container\ContainerInterface;
 use RuntimeException;
+
 use function array_key_exists;
 
 final class ComplianceConfiguration
 {
     public function __construct(
-        private ContainerInterface $container
+        private readonly ContainerInterface $container
     ) {
         $this->container->set(ComposerDependency::CONFIG . '.php', PhpVersion::LATEST);
     }
