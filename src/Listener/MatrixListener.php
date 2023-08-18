@@ -27,7 +27,8 @@ final class MatrixListener implements EventListenerInterface
     private const DEPENDENCIES = ['highest', 'locked', 'lowest'];
 
     public function __construct(
-        private Container $container
+        private Container $container,
+        private Composer $composer
     ) {
     }
 
@@ -36,12 +37,6 @@ final class MatrixListener implements EventListenerInterface
      */
     public function __invoke(MatrixEvent $generateMatrixEvent): void
     {
-        $phpVersions = [
-            PhpVersion::PHP_81,
-            PhpVersion::PHP_82,
-            PhpVersion::PHP_83,
-        ];
-
         $root = getcwd();
 
         if ($root === false) {
@@ -49,7 +44,7 @@ final class MatrixListener implements EventListenerInterface
         }
 
         $composerJson = file_get_contents(
-            $this->container->get(Composer::class)->getJsonFilePath($root)
+            $this->composer->getJsonFilePath($root)
         );
 
         if ($composerJson === false) {
@@ -67,8 +62,22 @@ final class MatrixListener implements EventListenerInterface
             $name = $tool->name();
             $command = $tool->command();
             $extensions = $tool->extensions();
-            // if ($tool instanceof PHPUnit) {
-            foreach ($phpVersions as $phpVersion) {
+
+            if (! $tool instanceof PHPUnit) {
+                $generateMatrixEvent->include(
+                    new Job(
+                        $name,
+                        $command,
+                        $extensions,
+                        'locked',
+                        PhpVersion::LATEST
+                    )
+                );
+
+                continue;
+            }
+
+            foreach (PhpVersion::SUPPORTED as $phpVersion) {
                 if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
                     continue;
                 }
@@ -88,18 +97,6 @@ final class MatrixListener implements EventListenerInterface
                     );
                 }
             }
-            continue;
-            // }
-
-            // $generateMatrixEvent->include(
-            //     new Job(
-            //         $name,
-            //         $tool->command(),
-            //         $tool->extensions(),
-            //         'locked',
-            //         PhpVersion::LATEST
-            //     )
-            // );
         }
     }
 }
