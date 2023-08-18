@@ -8,8 +8,8 @@ use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Event\OutputEvent;
 use Ghostwriter\Compliance\Event\WorkflowEvent;
-use Ghostwriter\Container\Container;
-use Ghostwriter\EventDispatcher\Dispatcher;
+use Ghostwriter\Container\ContainerInterface;
+use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
 use Throwable;
 use function file_get_contents;
 use function file_put_contents;
@@ -18,8 +18,8 @@ use function realpath;
 final class WorkflowListener implements EventListenerInterface
 {
     public function __construct(
-        private Container $container,
-        private Dispatcher $dispatcher
+        private readonly ContainerInterface $container,
+        private readonly DispatcherInterface $dispatcher
     ) {
     }
 
