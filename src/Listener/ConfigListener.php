@@ -8,7 +8,7 @@ use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Event\ConfigEvent;
 use Ghostwriter\Compliance\Event\OutputEvent;
-use Ghostwriter\Container\Container;
+use Ghostwriter\Container\ContainerInterface;
 use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
 use Throwable;
 use function realpath;
@@ -16,8 +16,8 @@ use function realpath;
 final class ConfigListener implements EventListenerInterface
 {
     public function __construct(
-        private Container $container,
-        private DispatcherInterface $dispatcher
+        private readonly ContainerInterface $container,
+        private readonly DispatcherInterface $dispatcher
     ) {
     }
 
