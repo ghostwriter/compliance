@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Configuration;
 
-use Ghostwriter\Compliance\Contract\ToolInterface;
+use Ghostwriter\Compliance\ToolInterface;
 use Ghostwriter\Compliance\Option\ComposerDependency;
 use Ghostwriter\Compliance\Option\PhpVersion;
 use Ghostwriter\Container\ContainerInterface;
