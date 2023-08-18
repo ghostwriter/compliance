@@ -20,6 +20,9 @@ on:
 jobs:
   matrix:
     name: Generate job matrix
+    concurrency:
+     group: ${{ github.head_ref || github.ref }}
+     cancel-in-progress: true
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
