@@ -16,6 +16,7 @@ use Ghostwriter\Container\Container;
 use Ghostwriter\Json\Json;
 use RuntimeException;
 use Throwable;
+
 use function getcwd;
 
 final class MatrixListener implements EventListenerInterface
@@ -82,7 +83,7 @@ final class MatrixListener implements EventListenerInterface
                                 $extensions,
                                 $dependency,
                                 $phpVersion,
-                                $isExperimental
+                                $isExperimental || $dependency === 'lowest'
                             )
                         );
                     }
