@@ -63,19 +63,18 @@ final class MatrixListener implements EventListenerInterface
             $command = $tool->command();
             $extensions = $tool->extensions();
 
-            if (! $tool instanceof PHPUnit) {
-                $generateMatrixEvent->include(
-                    new Job(
-                        $name,
-                        $command,
-                        $extensions,
-                        'locked',
-                        PhpVersion::LATEST
-                    )
-                );
-
-                continue;
-            }
+            // if (! $tool instanceof PHPUnit) {
+            //     $generateMatrixEvent->include(
+            //         new Job(
+            //             $name,
+            //             $command,
+            //             $extensions,
+            //             'locked',
+            //             PhpVersion::LATEST
+            //         )
+            //     );
+            //     continue;
+            // }
 
             foreach (PhpVersion::SUPPORTED as $phpVersion) {
                 if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
