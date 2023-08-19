@@ -21,7 +21,7 @@ jobs:
   matrix:
     name: Generate job matrix
     concurrency:
-     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+     group: ${{ github.workflow }}
      cancel-in-progress: true
     runs-on: ubuntu-latest
     outputs:
