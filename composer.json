@@ -79,7 +79,10 @@
         "preferred-install": "dist",
         "prepend-autoloader": true,
         "process-timeout": 5000,
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2.999"
+        }
     },
     "scripts": {
         "cache:clear": [
