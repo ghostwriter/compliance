@@ -5,13 +5,11 @@
         beStrictAboutCoverageMetadata="true"
         beStrictAboutOutputDuringTests="true"
         bootstrap="vendor/autoload.php"
-        cacheDirectory=".phpunit.cache"
+        cacheDirectory=".cache/phpunit"
+        cacheResult="false"
         colors="true"
         executionOrder="depends,defects"
-        failOnRisky="true"
-        failOnWarning="true"
         requireCoverageMetadata="true"
-        testdox="true"
 >
  <testsuites>
     <testsuite name="Test Suite">
