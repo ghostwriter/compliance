@@ -16,11 +16,11 @@ use Ghostwriter\Compliance\Tool\Psalm;
 return static function (ComplianceConfiguration $complianceConfiguration): void {
     ($complianceConfiguration)([
         ComposerRequireChecker::class => [PhpVersion::STABLE => [ComposerDependency::LOCKED]],
-        Infection::class => [PhpVersion::ANY => ComposerDependency::ALL],
-        PHPBench::class => [PhpVersion::ANY => ComposerDependency::ALL],
+        Infection::class => [PhpVersion::ANY => ComposerDependency::SUPPORTED],
+        PHPBench::class => [PhpVersion::ANY => ComposerDependency::SUPPORTED],
         PHPCS::class => [PhpVersion::STABLE => [ComposerDependency::LOCKED]],
         PHPCSFixer::class => [PhpVersion::STABLE => [ComposerDependency::LOCKED]],
-        PHPUnit::class => [PhpVersion::ANY => ComposerDependency::ALL],
+        PHPUnit::class => [PhpVersion::ANY => ComposerDependency::SUPPORTED],
         Psalm::class => [PhpVersion::LATEST => [ComposerDependency::LOCKED]],
     ],
     [
