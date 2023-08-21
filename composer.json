@@ -45,9 +45,9 @@
         "ghostwriter/event-dispatcher": "^1.5.0",
         "ghostwriter/json": "^1.1",
         "ghostwriter/option": "^1.5.1",
-        "symfony/console": "^6.3.2",
-        "symfony/finder": "^6.3.3",
-        "symfony/process": "^6.3.2"
+        "symfony/console": "^6.3",
+        "symfony/finder": "^6.3",
+        "symfony/process": "^6.3"
     },
     "require-dev": {
         "composer/composer": ">=2.5.8",
@@ -69,10 +69,6 @@
         "bin/compliance"
     ],
     "config": {
-        "allow-plugins": {
-            "infection/extension-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        },
         "classmap-authoritative": true,
         "discard-changes": true,
         "optimize-autoloader": true,
