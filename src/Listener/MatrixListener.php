@@ -92,7 +92,7 @@ final class MatrixListener implements EventListenerInterface
                             $extensions,
                             $dependency,
                             $phpVersion,
-                            $isExperimental || $dependency === 'lowest'
+                            $isExperimental || $dependency === ComposerDependency::LOWEST
                         )
                     );
                 }
