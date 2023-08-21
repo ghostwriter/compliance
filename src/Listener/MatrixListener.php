@@ -7,6 +7,7 @@ namespace Ghostwriter\Compliance\Listener;
 use Composer\Semver\Semver;
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Event\MatrixEvent;
+use Ghostwriter\Compliance\Option\ComposerDependency;
 use Ghostwriter\Compliance\Option\Job;
 use Ghostwriter\Compliance\Option\PhpVersion;
 use Ghostwriter\Compliance\Service\Composer;
@@ -83,7 +84,7 @@ final class MatrixListener implements EventListenerInterface
 
                 $isExperimental = $phpVersion === PhpVersion::DEV;
 
-                foreach (self::DEPENDENCIES as $dependency) {
+                foreach (ComposerDependency::SUPPORTED as $dependency) {
                     $generateMatrixEvent->include(
                         new Job(
                             $name,
