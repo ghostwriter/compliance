@@ -11,7 +11,7 @@ final class ComposerDependency
      *
      * @var list<string>
      */
-    public const ALL = [
+    public const SUPPORTED = [
         self::HIGHEST,
         self::LOCKED,
         self::LOWEST,
