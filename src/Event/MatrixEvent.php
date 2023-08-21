@@ -16,6 +16,7 @@ final class MatrixEvent extends AbstractEvent
      *     include:array<array-key,array{
      *     name:string,
      *     command:string,
+     *     extensions:array<string>,
      *     os:string,
      *     php:string,
      *     dependency:string,
@@ -28,6 +29,9 @@ final class MatrixEvent extends AbstractEvent
         'exclude' => [],
     ];
 
+    /**
+     * @param array $matrices
+     */
     public function exclude(array $matrices): void
     {
         /** @var string $matrix */
@@ -41,6 +45,11 @@ final class MatrixEvent extends AbstractEvent
      */
     public function getMatrix(): string
     {
+        $matrix = $this->matrix['include'];
+        if ($matrix === []) {
+            $this->include(new Job('No tests', 'echo "No tests"', [], 'locked'));
+        }
+
         return Json::encode($this->matrix);
     }
 
