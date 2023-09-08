@@ -96,6 +96,11 @@
       <code>WorkflowListener</code>
     </UnusedClass>
   </file>
+  <file src="src/Service/Composer.php">
+    <PossiblyUnusedMethod>
+      <code>getLockFilePath</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Service/GithubActionOutput.php">
     <UnusedClass>
       <code>GithubActionOutput</code>
@@ -110,5 +115,18 @@
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="tests/Unit/AbstractTestCase.php">
+    <PossiblyUnusedMethod>
+      <code>setUp</code>
+    </PossiblyUnusedMethod>
+    <UndefinedClass>
+      <code>TestCase</code>
+    </UndefinedClass>
+  </file>
+  <file src="tests/Unit/Service/ComposerTest.php">
+    <MissingDependency>
+      <code>AbstractTestCase</code>
+    </MissingDependency>
   </file>
 </files>
