@@ -6,7 +6,6 @@ namespace Ghostwriter\Compliance\Command;
 
 use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Event\MatrixEvent;
-use Ghostwriter\Environment\Environment;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -36,11 +35,18 @@ final class MatrixCommand extends AbstractCommand
             new MatrixEvent($input, $this->symfonyStyle)
         );
 
-        $environment = new Environment();
+        $gitHubOutput = getenv('GITHUB_OUTPUT')?: tempnam(sys_get_temp_dir(), 'GITHUB_OUTPUT');
+
+        if (! is_string($gitHubOutput)) {
+            $this->write('GITHUB_OUTPUT environment variable not set.');
+
+            return self::FAILURE;
+        }
 
         $matrix = sprintf('matrix=%s' . PHP_EOL, $matrixEvent->getMatrix());
+
         file_put_contents(
-            $environment->getServerVariable('GITHUB_OUTPUT', tempnam(sys_get_temp_dir(), 'GITHUB_OUTPUT')),
+            $gitHubOutput,
             $matrix,
             FILE_APPEND
         );
