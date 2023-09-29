@@ -82,7 +82,7 @@ final class MatrixListener implements EventListenerInterface
                     continue;
                 }
 
-                $isExperimental = $phpVersion === PhpVersion::DEV;
+                $isExperimental = $phpVersion >= PhpVersion::DEV;
 
                 foreach (ComposerDependency::SUPPORTED as $dependency) {
                     $generateMatrixEvent->include(
