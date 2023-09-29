@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
   <file src="src/Command/AbstractCommand.php">
+    <MissingThrowsDocblock>
+      <code>dispatch</code>
+      <code>parent::__construct(self::getDefaultName())</code>
+    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -9,16 +13,32 @@
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Command/CheckCommand.php">
+    <MissingThrowsDocblock>
+      <code>addArgument</code>
+    </MissingThrowsDocblock>
     <UnusedClass>
       <code>CheckCommand</code>
     </UnusedClass>
   </file>
   <file src="src/Command/ConfigCommand.php">
+    <MissingThrowsDocblock>
+      <code>addArgument</code>
+      <code>addOption</code>
+    </MissingThrowsDocblock>
     <UnusedClass>
       <code>ConfigCommand</code>
     </UnusedClass>
   </file>
+  <file src="src/Command/MatrixCommand.php">
+    <MissingThrowsDocblock>
+      <code>addArgument</code>
+    </MissingThrowsDocblock>
+  </file>
   <file src="src/Command/WorkflowCommand.php">
+    <MissingThrowsDocblock>
+      <code>addArgument</code>
+      <code>addOption</code>
+    </MissingThrowsDocblock>
     <UnusedClass>
       <code>WorkflowCommand</code>
     </UnusedClass>
@@ -31,6 +51,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Configuration/ComplianceConfiguration.php">
+    <MissingThrowsDocblock>
+      <code>throw new RuntimeException();</code>
+    </MissingThrowsDocblock>
     <PossiblyInvalidArgument>
       <code>$skips[$tool] ?? []</code>
       <code>$skips[$tool][$phpVersion]</code>
@@ -72,6 +95,16 @@
     </UnusedClass>
   </file>
   <file src="src/Listener/ConfigListener.php">
+    <MissingThrowsDocblock>
+      <code>dispatch</code>
+    </MissingThrowsDocblock>
+    <PossiblyFalseArgument>
+      <code>$configPath</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand>
+      <code>$configPath</code>
+      <code>$configPath</code>
+    </PossiblyFalseOperand>
     <UnusedClass>
       <code>ConfigListener</code>
     </UnusedClass>
@@ -92,41 +125,76 @@
     </UnusedClass>
   </file>
   <file src="src/Listener/WorkflowListener.php">
+    <MissingThrowsDocblock>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>getArgument</code>
+      <code>getOption</code>
+    </MissingThrowsDocblock>
+    <PossiblyFalseArgument>
+      <code>$workflowPath</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand>
+      <code>$workflowPath</code>
+      <code>$workflowPath</code>
+    </PossiblyFalseOperand>
     <UnusedClass>
       <code>WorkflowListener</code>
     </UnusedClass>
-  </file>
-  <file src="src/Service/Composer.php">
-    <PossiblyUnusedMethod>
-      <code>getLockFilePath</code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Service/GithubActionOutput.php">
     <UnusedClass>
       <code>GithubActionOutput</code>
     </UnusedClass>
   </file>
+  <file src="src/ServiceProvider/ConsoleServiceProvider.php">
+    <MissingThrowsDocblock>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+    </MissingThrowsDocblock>
+  </file>
   <file src="src/ServiceProvider/MatrixServiceProvider.php">
+    <MissingThrowsDocblock>
+      <code>getIterator</code>
+      <code>in</code>
+    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Tool/AbstractTool.php">
+    <MissingThrowsDocblock>
+      <code>in</code>
+    </MissingThrowsDocblock>
+    <PossiblyFalseArgument>
+      <code>$path</code>
+    </PossiblyFalseArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="tests/Unit/AbstractTestCase.php">
-    <PossiblyUnusedMethod>
-      <code>setUp</code>
-    </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code>TestCase</code>
-    </UndefinedClass>
-  </file>
   <file src="tests/Unit/Service/ComposerTest.php">
-    <MissingDependency>
-      <code>AbstractTestCase</code>
-    </MissingDependency>
+    <PossiblyFalseArgument>
+      <code>$root</code>
+      <code>$root</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand>
+      <code>$root</code>
+      <code>$root</code>
+    </PossiblyFalseOperand>
   </file>
 </files>
