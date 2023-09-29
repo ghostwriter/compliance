@@ -78,10 +78,6 @@ final class MatrixListener implements EventListenerInterface
             // }
 
             foreach (PhpVersion::SUPPORTED as $phpVersion) {
-                if (! $tool instanceof PHPUnit) {
-                    continue;
-                }
-                
                 if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
                     continue;
                 }
