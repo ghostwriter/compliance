@@ -269,7 +269,7 @@ final class PhpVersion
         self::PHP_81 => '8.1',
         self::PHP_82 => '8.2',
         self::PHP_83 => '8.3',
-        self::PHP_84 => '8.3',
+        self::PHP_84 => '8.4',
         self::PHP_90 => '9.0',
         self::ANY => '*',
     ];
