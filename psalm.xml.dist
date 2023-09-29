@@ -1,16 +1,25 @@
 <?xml version="1.0"?>
 <psalm
+    xmlns="https://getpsalm.org/schema/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://getpsalm.org/schema/config https://getpsalm.org/schema/config"
+    cacheDirectory=".cache/psalm"
+    checkForThrowsDocblock="true"
+    checkForThrowsInGlobalScope="true"
+    disableSuppressAll="true"
+    errorBaseline="psalm-baseline.xml"
     errorLevel="1"
-    phpVersion="8.2"
-    findUnusedPsalmSuppress="true"
     findUnusedBaselineEntry="true"
     findUnusedCode="true"
+    findUnusedPsalmSuppress="true"
     findUnusedVariablesAndParams="true"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="https://getpsalm.org/schema/config"
-    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
-    errorBaseline="psalm-baseline.xml"
-    cacheDirectory=".cache/psalm"
+    strictBinaryOperands="true"
+    ensureArrayIntOffsetsExist="true"
+    ensureArrayStringOffsetsExist="true"
+    ignoreInternalFunctionFalseReturn="false"
+    ignoreInternalFunctionNullReturn="false"
+    sealAllMethods="true"
+    sealAllProperties="true"
 >
     <projectFiles>
         <file name="compliance.php"/>
