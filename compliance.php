@@ -9,7 +9,6 @@ use Ghostwriter\Compliance\Tool\ComposerRequireChecker;
 use Ghostwriter\Compliance\Tool\Infection;
 use Ghostwriter\Compliance\Tool\PHPBench;
 use Ghostwriter\Compliance\Tool\PHPCS;
-use Ghostwriter\Compliance\Tool\PHPCSFixer;
 use Ghostwriter\Compliance\Tool\PHPUnit;
 use Ghostwriter\Compliance\Tool\Psalm;
 
@@ -19,7 +18,6 @@ return static function (ComplianceConfiguration $complianceConfiguration): void 
         Infection::class => [PhpVersion::ANY => ComposerDependency::SUPPORTED],
         PHPBench::class => [PhpVersion::ANY => ComposerDependency::SUPPORTED],
         PHPCS::class => [PhpVersion::STABLE => [ComposerDependency::LOCKED]],
-        PHPCSFixer::class => [PhpVersion::STABLE => [ComposerDependency::LOCKED]],
         PHPUnit::class => [PhpVersion::ANY => ComposerDependency::SUPPORTED],
         Psalm::class => [PhpVersion::LATEST => [ComposerDependency::LOCKED]],
     ],
