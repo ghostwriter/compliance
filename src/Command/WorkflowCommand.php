@@ -40,6 +40,6 @@ final class WorkflowCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->dispatch(new WorkflowEvent($input, $this->symfonyStyle));
+        return $this->dispatch(WorkflowEvent::class);
     }
 }
