@@ -29,9 +29,14 @@ use function sprintf;
      * #BlackLivesMatter.
      */
     try {
-        Compliance::main(Container::getInstance());
+        Compliance::main();
     } catch (Throwable $throwable) {
-        fwrite(STDERR, $throwable->getMessage());
+        fwrite(STDERR, sprintf(
+            '[%s] %s',
+            $throwable::class,
+            $throwable->getMessage(),
+        ));
+
         exit(1);
     }
 })($_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php');
