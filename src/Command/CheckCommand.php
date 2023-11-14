@@ -27,6 +27,6 @@ final class CheckCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->dispatch(new CheckEvent($input, $this->symfonyStyle));
+        return $this->dispatch(CheckEvent::class);
     }
 }
