@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Command;
 
 use Ghostwriter\Compliance\Compliance;
+use Ghostwriter\Compliance\Event\ConfigEvent;
 use Ghostwriter\Compliance\Event\OutputEvent;
-use Ghostwriter\Container\ContainerInterface;
-use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
-use Ghostwriter\EventDispatcher\Contract\EventInterface;
+use Ghostwriter\Container\Interface\ContainerInterface;
+use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
+use Ghostwriter\EventDispatcher\Interface\EventInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
@@ -23,24 +24,22 @@ abstract class AbstractCommand extends Command
         protected DispatcherInterface $dispatcher,
         protected SymfonyStyle $symfonyStyle
     ) {
-        parent::__construct(self::getDefaultName());
+        parent::__construct(static::getDefaultName());
     }
 
     /**
      *
-     * @param EventInterface<bool> $event
+     * @param class-string<EventInterface<bool>> $event
      *
      * @throws Throwable
      *
      * @return int 0 if everything went fine, or an exit code
      */
-    public function dispatch(EventInterface $event): int
+    public function dispatch(string $event): int
     {
-        return $this->dispatcher
-            ->dispatch($event)
-            ->isPropagationStopped()
-            ? self::FAILURE
-            : self::SUCCESS;
+        return $this->dispatcher->dispatch(
+            $this->container->build($event)
+        )->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
 
     public static function getDefaultName(): string
@@ -48,6 +47,9 @@ abstract class AbstractCommand extends Command
         return mb_strtolower(str_replace([__NAMESPACE__ . '\\', 'Command'], '', static::class));
     }
 
+    /**
+     * @throws Throwable
+     */
     public function write(string $message): int
     {
         return $this->dispatch(
