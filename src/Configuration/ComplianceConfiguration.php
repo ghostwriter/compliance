@@ -7,19 +7,18 @@ namespace Ghostwriter\Compliance\Configuration;
 use Ghostwriter\Compliance\ToolInterface;
 use Ghostwriter\Compliance\Option\ComposerDependency;
 use Ghostwriter\Compliance\Option\PhpVersion;
-use Ghostwriter\Container\ContainerInterface;
+use Ghostwriter\Config\Contract\ConfigInterface;
 use RuntimeException;
 
 use function array_key_exists;
 
-final class ComplianceConfiguration
+final readonly class ComplianceConfiguration
 {
     public function __construct(
-        private readonly ContainerInterface $container
+        private ConfigInterface $config
     ) {
-        $this->container->set(ComposerDependency::CONFIG . '.php', PhpVersion::LATEST);
+        $this->config->set(ComposerDependency::CONFIG . '.php', PhpVersion::LATEST);
     }
-
     /**
      * @param array<class-string<ToolInterface>,array<int,list<string>>>                       $checks
      * @param array<class-string<ToolInterface>|int|string,array<int,list<string>>|int|string> $skips
@@ -35,7 +34,7 @@ final class ComplianceConfiguration
                                 continue;
                             }
 
-                            $this->container->set(
+                            $this->config->set(
                                 $this->getKey($tool, $supportedPhpVersion, $dependency),
                                 true
                             );
@@ -51,7 +50,7 @@ final class ComplianceConfiguration
                         }
                     }
 
-                    $this->container->set(
+                    $this->config->set(
                         $this->getKey($tool, $phpVersion, $dependency),
                         true
                     );
@@ -66,7 +65,7 @@ final class ComplianceConfiguration
             throw new RuntimeException();
         }
 
-        $this->container->set(ComposerDependency::CONFIG . '.dependency', $dependency);
+        $this->config->set(ComposerDependency::CONFIG . '.dependency', $dependency);
     }
 
     /**
@@ -74,7 +73,7 @@ final class ComplianceConfiguration
      */
     public function composerOptions(array $options): void
     {
-        $this->container->set(ComposerDependency::CONFIG . '.options', $options);
+        $this->config->set(ComposerDependency::CONFIG . '.options', $options);
     }
 
     private function getKey(string $tool, int $phpVersion, string $dependency): string
