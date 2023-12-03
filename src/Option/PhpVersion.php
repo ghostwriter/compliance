@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Option;
 
-final class PhpVersion
+final readonly class PhpVersion
 {
     /**
      * @var int
@@ -19,7 +19,7 @@ final class PhpVersion
     /**
      * @var int
      */
-    public const DEV = self::PHP_83;
+    public const DEV = self::PHP_84;
 
     /**
      * @var array<int,string>
@@ -57,7 +57,7 @@ final class PhpVersion
     /**
      * @var int
      */
-    public const LATEST = self::PHP_82;
+    public const LATEST = self::PHP_83;
 
     /**
      * @var int
@@ -238,7 +238,7 @@ final class PhpVersion
         self::PHP_81,
         self::PHP_82,
         self::PHP_83,
-        // self::PHP_84,
+        self::PHP_84,
     ];
 
     /**
