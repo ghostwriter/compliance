@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "879b16c2e053a826ed8b2f292af70d5d",
+    "content-hash": "fcf10acdca8343d2b77d287646c08bad",
     "packages": [
         {
             "name": "composer/semver",
@@ -148,66 +148,6 @@
             "time": "2023-09-29T03:22:58+00:00"
         },
         {
-            "name": "ghostwriter/collection",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ghostwriter/collection.git",
-                "reference": "489a8a81ba84a8e58900d11477a1604387927bb8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/collection/zipball/489a8a81ba84a8e58900d11477a1604387927bb8",
-                "reference": "489a8a81ba84a8e58900d11477a1604387927bb8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1"
-            },
-            "require-dev": {
-                "ghostwriter/coding-standard": "dev-main",
-                "ghostwriter/psalm-plugin": "^0.1 || ^0.2 || ^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ghostwriter\\Collection\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nathanael Esayeas",
-                    "email": "nathanael.esayeas@protonmail.com",
-                    "homepage": "https://github.com/ghostwriter",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Provides a Collection implementation for PHP",
-            "homepage": "https://github.com/ghostwriter/collection",
-            "keywords": [
-                "collection",
-                "ghostwriter"
-            ],
-            "support": {
-                "docs": "https://github.com/ghostwriter/collection",
-                "forum": "https://github.com/ghostwriter/collection/discussions",
-                "issues": "https://github.com/ghostwriter/collection/issues",
-                "rss": "https://github.com/ghostwriter/collection/releases.atom",
-                "source": "https://github.com/ghostwriter/collection"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/ghostwriter",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-08-23T11:06:51+00:00"
-        },
-        {
             "name": "ghostwriter/config",
             "version": "0.4.1",
             "source": {
@@ -325,21 +265,20 @@
         },
         {
             "name": "ghostwriter/environment",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/environment.git",
-                "reference": "1f86dfe3bf760be135f5d7c1515f17699cbf3e79"
+                "reference": "ec688cd948c45653b5942adfc8cc38a8fa14592e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/environment/zipball/1f86dfe3bf760be135f5d7c1515f17699cbf3e79",
-                "reference": "1f86dfe3bf760be135f5d7c1515f17699cbf3e79",
+                "url": "https://api.github.com/repos/ghostwriter/environment/zipball/ec688cd948c45653b5942adfc8cc38a8fa14592e",
+                "reference": "ec688cd948c45653b5942adfc8cc38a8fa14592e",
                 "shasum": ""
             },
             "require": {
-                "ghostwriter/collection": "^1.2",
-                "php": ">=8.1,<8.3"
+                "php": ">=8.1 <8.3"
             },
             "require-dev": {
                 "ghostwriter/coding-standard": "dev-main"
@@ -383,7 +322,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-17T05:31:38+00:00"
+            "time": "2023-05-08T17:26:47+00:00"
         },
         {
             "name": "ghostwriter/event-dispatcher",

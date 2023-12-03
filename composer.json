@@ -42,7 +42,7 @@
         "ghostwriter/clock": "^1.1",
         "ghostwriter/config": "^0.4",
         "ghostwriter/container": "^2.0",
-        "ghostwriter/environment": "^1.1",
+        "ghostwriter/environment": "^2.0",
         "ghostwriter/event-dispatcher": "^3.0",
         "ghostwriter/json": "^1.2",
         "ghostwriter/option": "^1.5",
