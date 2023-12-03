@@ -8,7 +8,7 @@ final class Psalm extends AbstractTool
 {
     public function command(): string
     {
-        return './vendor/bin/psalm --shepherd --stats --output-format=github --no-cache';
+        return './vendor/ghostwriter/coding-standard/tools/psalm --shepherd --stats --output-format=github --no-cache';
     }
 
     /**
