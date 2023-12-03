@@ -31,11 +31,13 @@ on:
   workflow_dispatch: # Manually Trigger workflow
 
 jobs:
-  Automation:
+  automation:
     uses: ghostwriter/compliance/.github/workflows/automation.yml@v1
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY }}
 ```
 
 ## Installation
