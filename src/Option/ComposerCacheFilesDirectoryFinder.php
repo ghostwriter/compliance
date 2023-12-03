@@ -39,10 +39,13 @@ final readonly class ComposerCacheFilesDirectoryFinder
             $composerGlobalHomePath . DIRECTORY_SEPARATOR . 'composer.json';
 
         if (!file_exists($composerGlobalComposerJsonFilePath)) {
-            throw new \RuntimeException(sprintf(
-                'Could not find composer global composer.json file: %s',
-                $composerGlobalComposerJsonFilePath
-            ));
+            
+            
+            $this->process->execute([$composerExecutable, 'global', 'require', 'ghostwriter/psalm-plugin', '--no-interaction']);
+            // throw new \RuntimeException(sprintf(
+            //     'Could not find composer global composer.json file: %s',
+            //     $composerGlobalComposerJsonFilePath
+            // ));
         }
 
         $command = [$composerExecutable, 'config', 'cache-files-dir'];
