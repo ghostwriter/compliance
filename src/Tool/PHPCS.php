@@ -8,7 +8,7 @@ final class PHPCS extends AbstractTool
 {
     public function command(): string
     {
-        return './vendor/bin/phpcs -q --report=checkstyle | cs2pr';
+        return './vendor/ghostwriter/coding-standard/tools/phpcs -q --report=checkstyle | cs2pr';
     }
 
     /**
