@@ -23,7 +23,6 @@ final readonly class ComposerGlobalComposerJsonFilePathFinder
             ($this->composerExecutableFinder)(),
             '-n',
             'config',
-            '--global',
             'home',
         ]);
 
