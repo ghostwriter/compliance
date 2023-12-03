@@ -1,19 +1,42 @@
-name: Compliance
+# name: Compliance Automation
+name: Automation
 
 on:
   pull_request:
   push:
     branches:
-      - "**"
+      - "main"
       - "[0-9]+.[0-9]+.x"
       - "v[0-9]+"
   schedule:
     - cron: "0 * * * *" # Runs hourly
   workflow_dispatch:
+  workflow_call:
+    secrets:
+      GPG_PRIVATE_KEY:
+        required: false
+      INFECTION_DASHBOARD_API_KEY:
+        required: false
+      CODECOV_TOKEN:
+        required: false # For public repositories, no token is needed
+
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  actions: write #  permits an action to cancel a workflow run.
+  checks: write # permits an action to create a check run.
+  contents: write # allows the action to create a release.
+  discussions: write # permits an action to close or delete a discussion.
+  pull-requests: write # permits an action to add a label to a pull request.
+  issues: write # permits an action to add a comment to an issue
+  packages: write # permits an action to upload and publish packages on GitHub Packages.
+  pages: write # permits an action to request a GitHub Pages build.
 
 jobs:
   matrix:
     name: Generate job matrix
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event_name }}
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
@@ -23,24 +46,92 @@ jobs:
 
       - name: Determine CI Jobs
         id: matrix
-        uses: ghostwriter/compliance@v1
+        uses: docker://ghcr.io/ghostwriter/compliance:v1
         with:
           command: matrix
   qa:
-    name: ${{ matrix.name }} on PHP ${{ matrix.php }} with ${{ matrix.dependency }} dependencies
+    name: "[${{ matrix.os }}]${{ matrix.name }} on PHP ${{ matrix.php }} - ${{ matrix.dependency }}"
     needs: [matrix]
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.experimental }}
+    continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
     steps:
-      - name: ${{ matrix.name }} on PHP ${{ matrix.php }}
-        uses: ghostwriter/laminas-continuous-integration-action@temp
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          job: '{"php":"${{ matrix.php }}","dependencies":"${{ matrix.dependency }}","extensions":${{ toJSON(matrix.extensions) }},"ini":[],"command":"${{ matrix.command }}"}'
-#      - name: QA Check ${{ matrix.name }} on PHP ${{ matrix.php }}
-#        uses: ghostwriter/compliance@qa/test-workflow
-#        with:
-#          command: check
-#          job: ${{ matrix.command }}
+          fetch-depth: 0
+
+      - name: Setup PHP ${{ matrix.php }} with ${{ matrix.extensions }} extensions.
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: pcov
+          ini-values: assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On
+          php-version: ${{ matrix.php }}
+          extensions: ${{ matrix.extensions }}
+
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-
+
+      - name: Validate composer.json file
+        working-directory: ${{ github.workspace }}
+        run: |
+          if [ ! -f "composer.json" ]; then
+            echo "composer.json does not exist"
+            exit 1
+          fi
+
+          composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict
+
+      - name: Install ${{ matrix.dependency }} dependencies
+        working-directory: ${{ github.workspace }}
+        run: |
+          composerDependency="${{ matrix.dependency }}"
+          composerCommand="update"
+          composerOptions=("--no-interaction" "--no-progress" "--ansi")
+
+          case ${composerDependency} in
+              highest) composerCommand="update" ;;
+              lowest) composerOptions+=("--prefer-lowest" "--prefer-stable") ;;
+              *) composerCommand="install" ;;
+          esac
+
+          # Use `update` if there is no composer.lock file
+          if [ ! -f "composer.lock" ]; then
+            composerCommand="update"
+          fi
+
+          fullCommand="composer ${composerCommand} ${composerOptions[*]}"
+
+          echo "Running: ${fullCommand}"
+
+          ${fullCommand}
+
+      - name: Run ${{ matrix.name }} command
+        run: ${{ matrix.command }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY }}
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        if: ${{ matrix.php == '8.3' && matrix.dependency == 'locked' }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ${{ github.workspace }}/.cache/phpunit/
+          verbose: true
