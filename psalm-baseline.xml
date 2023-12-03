@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
+<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591">
   <file src="src/Command/AbstractCommand.php">
     <MissingThrowsDocblock>
-      <code>dispatch</code>
-      <code>parent::__construct(self::getDefaultName())</code>
+      <code>parent::__construct(static::getDefaultName())</code>
     </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code>__construct</code>
+      <code>write</code>
     </PossiblyUnusedMethod>
-    <PossiblyUnusedReturnValue>
-      <code>int</code>
-    </PossiblyUnusedReturnValue>
+    <PossiblyUnusedProperty>
+      <code>$symfonyStyle</code>
+    </PossiblyUnusedProperty>
   </file>
   <file src="src/Command/CheckCommand.php">
     <MissingThrowsDocblock>
@@ -18,15 +18,6 @@
     </MissingThrowsDocblock>
     <UnusedClass>
       <code>CheckCommand</code>
-    </UnusedClass>
-  </file>
-  <file src="src/Command/ConfigCommand.php">
-    <MissingThrowsDocblock>
-      <code>addArgument</code>
-      <code>addOption</code>
-    </MissingThrowsDocblock>
-    <UnusedClass>
-      <code>ConfigCommand</code>
     </UnusedClass>
   </file>
   <file src="src/Command/MatrixCommand.php">
@@ -45,8 +36,6 @@
   </file>
   <file src="src/Compliance.php">
     <PossiblyUnusedMethod>
-      <code>__construct</code>
-      <code>getContainer</code>
       <code>main</code>
     </PossiblyUnusedMethod>
   </file>
@@ -63,11 +52,9 @@
       <code>$skips[$tool][$phpVersion]</code>
       <code>$skips[$tool][$supportedPhpVersion]</code>
     </PossiblyInvalidArrayAccess>
-    <PossiblyUnusedMethod>
-      <code>__construct</code>
-      <code>composerDependency</code>
-      <code>composerOptions</code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code>ComplianceConfiguration</code>
+    </UnusedClass>
   </file>
   <file src="src/Enum/OperatingSystem.php">
     <UnusedClass>
@@ -80,13 +67,90 @@
     </UnusedClass>
   </file>
   <file src="src/Event/AbstractEvent.php">
+    <MissingTemplateParam>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <MissingThrowsDocblock>
+      <code>dispatch</code>
+    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getDispatcher</code>
       <code>getOutput</code>
     </PossiblyUnusedMethod>
+    <PossiblyUnusedReturnValue>
+      <code>EventInterface</code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Event/ConfigEvent.php">
+    <UnusedClass>
+      <code>ConfigEvent</code>
+    </UnusedClass>
   </file>
   <file src="src/Event/MatrixEvent.php">
+    <InvalidPropertyAssignmentValue>
+      <code><![CDATA[$this->matrix]]></code>
+    </InvalidPropertyAssignmentValue>
     <PossiblyUnusedMethod>
       <code>exclude</code>
+    </PossiblyUnusedMethod>
+    <TooFewArguments>
+      <code><![CDATA[new Job('No tests', 'echo "No tests"', [], 'locked')]]></code>
+      <code><![CDATA[new Job('No tests', 'echo "No tests"', [], 'locked')]]></code>
+    </TooFewArguments>
+  </file>
+  <file src="src/Extension/ListenerProviderExtension.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[sprintf(
+                    '%s%sEvent',
+                    str_replace(
+                        'Extension', 'Event', __NAMESPACE__ . '\\'
+                    ),
+                    $file->getBasename('Listener.php')
+                )]]></code>
+      <code><![CDATA[sprintf(
+                    '%s\%s',
+                    str_replace(
+                        'Extension', 'Listener', __NAMESPACE__
+                    ),
+                    $file->getBasename('.php')
+                )]]></code>
+    </ArgumentTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Extension/SymfonyApplicationExtension.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$container->get(
+                    sprintf(
+                        '%s%s',
+                        str_replace(
+                            'Extension',
+                            'Command',
+                            __NAMESPACE__ . '\\'
+                        ),
+                        $file->getBasename('.php')
+                    )
+                )]]></code>
+      <code><![CDATA[sprintf(
+                        '%s%s',
+                        str_replace(
+                            'Extension',
+                            'Command',
+                            __NAMESPACE__ . '\\'
+                        ),
+                        $file->getBasename('.php')
+                    )]]></code>
+    </ArgumentTypeCoercion>
+    <ImplementedParamTypeMismatch>
+      <code>$service</code>
+    </ImplementedParamTypeMismatch>
+    <ImplementedReturnTypeMismatch>
+      <code>SymfonyApplication</code>
+    </ImplementedReturnTypeMismatch>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Listener/CheckListener.php">
@@ -94,27 +158,15 @@
       <code>CheckListener</code>
     </UnusedClass>
   </file>
-  <file src="src/Listener/ConfigListener.php">
-    <MissingThrowsDocblock>
-      <code>dispatch</code>
-    </MissingThrowsDocblock>
-    <PossiblyFalseArgument>
-      <code>$configPath</code>
-    </PossiblyFalseArgument>
-    <PossiblyFalseOperand>
-      <code>$configPath</code>
-      <code>$configPath</code>
-    </PossiblyFalseOperand>
-    <UnusedClass>
-      <code>ConfigListener</code>
-    </UnusedClass>
-  </file>
   <file src="src/Listener/Debug.php">
-    <UnusedClass>
-      <code>Debug</code>
-    </UnusedClass>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Listener/MatrixListener.php">
+    <UnnecessaryVarAnnotation>
+      <code>string</code>
+    </UnnecessaryVarAnnotation>
     <UnusedClass>
       <code>MatrixListener</code>
     </UnusedClass>
@@ -125,25 +177,202 @@
     </UnusedClass>
   </file>
   <file src="src/Listener/WorkflowListener.php">
-    <MissingThrowsDocblock>
-      <code>dispatch</code>
-      <code>dispatch</code>
-      <code>dispatch</code>
-      <code>dispatch</code>
-      <code>dispatch</code>
-      <code>dispatch</code>
-      <code>getArgument</code>
-      <code>getOption</code>
-    </MissingThrowsDocblock>
-    <PossiblyFalseArgument>
-      <code>$workflowPath</code>
-    </PossiblyFalseArgument>
-    <PossiblyFalseOperand>
-      <code>$workflowPath</code>
-      <code>$workflowPath</code>
-    </PossiblyFalseOperand>
+    <MixedArgument>
+      <code><![CDATA[$input->getArgument('workflow')]]></code>
+      <code><![CDATA[$this->config->get(Compliance::CURRENT_WORKING_DIRECTORY)]]></code>
+    </MixedArgument>
     <UnusedClass>
       <code>WorkflowListener</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/Composer.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+      <code>getPhpVersionConstraint</code>
+      <code>getRequire</code>
+      <code>getRequireDev</code>
+      <code>readLockFile</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Service/Composer/ComposerJson.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$contents['name']]]></code>
+      <code><![CDATA[$contents['require']]]></code>
+      <code><![CDATA[$contents['require-dev']]]></code>
+      <code><![CDATA[$contents['version']]]></code>
+      <code><![CDATA[$this->contents['license']]]></code>
+    </InvalidArrayOffset>
+    <MixedArgument>
+      <code><![CDATA[$contents['name']]]></code>
+      <code><![CDATA[$contents['require']['php'] ?? '*']]></code>
+      <code><![CDATA[$contents['version'] ??
+            InstalledVersions::getPrettyVersion($dependencyName->__toString())]]></code>
+      <code>$name</code>
+      <code>$name</code>
+      <code><![CDATA[$this->contents['license']]]></code>
+      <code>$version</code>
+      <code>$version</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$this->require]]></code>
+      <code><![CDATA[$this->requireDev]]></code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAssignment>
+      <code>$requireDev[$name]</code>
+      <code>$require[$name]</code>
+    </MixedArrayAssignment>
+    <MixedAssignment>
+      <code>$dependency</code>
+      <code>$name</code>
+      <code>$name</code>
+      <code>$require</code>
+      <code>$requireDev</code>
+      <code><![CDATA[$this->require]]></code>
+      <code><![CDATA[$this->requireDev]]></code>
+      <code>$version</code>
+      <code>$version</code>
+    </MixedAssignment>
+    <PossiblyNullArgument>
+      <code><![CDATA[$contents['version'] ??
+            InstalledVersions::getPrettyVersion($dependencyName->__toString())]]></code>
+    </PossiblyNullArgument>
+    <PossiblyUnusedMethod>
+      <code>getComposerJsonPath</code>
+      <code>getContents</code>
+      <code>getLicense</code>
+      <code>getPackage</code>
+      <code>getVersion</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Service/Composer/ComposerJsonReader.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new \InvalidArgumentException(
+                'Composer JSON file does not exist: ' . $composerJsonPath
+            );]]></code>
+      <code><![CDATA[throw new \InvalidArgumentException('Composer JSON file could not be read');]]></code>
+    </MissingThrowsDocblock>
+    <MixedArgument>
+      <code>Json::decode($composerJsonContents)</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Service/Composer/ComposerLock.php">
+    <PossiblyUnusedMethod>
+      <code>getComposerJsonPath</code>
+      <code>getContents</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Service/Composer/ComposerLockReader.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new \InvalidArgumentException('Composer JSON file could not be read');]]></code>
+      <code><![CDATA[throw new \InvalidArgumentException('Composer JSON file does not exist');]]></code>
+    </MissingThrowsDocblock>
+    <MixedArgument>
+      <code>Json::decode($composerJsonContents)</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Service/Composer/Dependency.php">
+    <PossiblyUnusedMethod>
+      <code>name</code>
+      <code>version</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Service/Composer/DependencyName.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new \InvalidArgumentException('Name cannot be empty');]]></code>
+    </MissingThrowsDocblock>
+  </file>
+  <file src="src/Service/Composer/DependencyVersion.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new \InvalidArgumentException('Version cannot be empty');]]></code>
+    </MissingThrowsDocblock>
+  </file>
+  <file src="src/Service/Composer/ExtensionFinder.php">
+    <MixedAssignment>
+      <code>$dependency</code>
+    </MixedAssignment>
+    <UnusedClass>
+      <code>ExtensionFinder</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/Composer/Extensions.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new InvalidArgumentException('Extensions cannot be empty');]]></code>
+    </MissingThrowsDocblock>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$this->jsonSerialize()]]></code>
+    </MixedArgumentTypeCoercion>
+  </file>
+  <file src="src/Service/Composer/License.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new \InvalidArgumentException('Version cannot be empty');]]></code>
+    </MissingThrowsDocblock>
+  </file>
+  <file src="src/Service/Composer/Package.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[[$this->name => $this->version]]]></code>
+    </InvalidArrayOffset>
+  </file>
+  <file src="src/Service/Composer/Packages.php">
+    <UnusedClass>
+      <code>Packages</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/ComposerFileField.php">
+    <UnusedClass>
+      <code>ComposerFileField</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/ComposerJsonFile.php">
+    <UnusedClass>
+      <code>ComposerJsonFile</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/ComposerLockFile.php">
+    <UnusedClass>
+      <code>ComposerLockFile</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/ConfigPlatformPhp.php">
+    <UnusedClass>
+      <code>ConfigPlatformPhp</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/Finder.php">
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[Generator<SplFileInfo>]]></code>
+    </MixedReturnTypeCoercion>
+  </file>
+  <file src="src/Service/GPG/Fingerprint.php">
+    <UnusedClass>
+      <code>Fingerprint</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/GPG/GnuPG2.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new RuntimeException(sprintf('GnuPG binary "%s" does not exist', $binary));]]></code>
+    </MissingThrowsDocblock>
+    <UnusedClass>
+      <code>GnuPG2</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/GPG/ImportPrivateKey.php">
+    <UnusedClass>
+      <code>ImportPrivateKey</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/GPG/ImportPublicKey.php">
+    <UnusedClass>
+      <code>ImportPublicKey</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/GPG/PrivateKey.php">
+    <UnusedClass>
+      <code>PrivateKey</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Service/GPG/PublicKey.php">
+    <UnusedClass>
+      <code>PublicKey</code>
     </UnusedClass>
   </file>
   <file src="src/Service/GithubActionOutput.php">
@@ -152,26 +381,14 @@
     </UnusedClass>
   </file>
   <file src="src/ServiceProvider/ConsoleServiceProvider.php">
-    <MissingThrowsDocblock>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-      <code>alias</code>
-    </MissingThrowsDocblock>
+    <InvalidArgument>
+      <code>extend</code>
+    </InvalidArgument>
   </file>
   <file src="src/ServiceProvider/MatrixServiceProvider.php">
-    <MissingThrowsDocblock>
-      <code>getIterator</code>
-      <code>in</code>
-    </MissingThrowsDocblock>
+    <ArgumentTypeCoercion>
+      <code>$service</code>
+    </ArgumentTypeCoercion>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -183,18 +400,53 @@
     <PossiblyFalseArgument>
       <code>$path</code>
     </PossiblyFalseArgument>
+    <PossiblyNullArgument>
+      <code><![CDATA[preg_replace(
+                    '#([a-zA-Z])(?=[A-Z])#',
+                    '$1-',
+                    $this->name()
+                )]]></code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Tool/ComposerRequireChecker.php">
+    <UnusedClass>
+      <code>ComposerRequireChecker</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Tool/Infection.php">
+    <UnusedClass>
+      <code>Infection</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Tool/PHPBench.php">
+    <UnusedClass>
+      <code>PHPBench</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Tool/PHPCS.php">
+    <UnusedClass>
+      <code>PHPCS</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Tool/Psalm.php">
+    <UnusedClass>
+      <code>Psalm</code>
+    </UnusedClass>
+  </file>
+  <file src="tests/Unit/AbstractTestCase.php">
+    <PossiblyUnusedMethod>
+      <code>setUp</code>
+    </PossiblyUnusedMethod>
+    <UndefinedClass>
+      <code>TestCase</code>
+    </UndefinedClass>
+  </file>
   <file src="tests/Unit/Service/ComposerTest.php">
-    <PossiblyFalseArgument>
-      <code>$root</code>
-      <code>$root</code>
-    </PossiblyFalseArgument>
-    <PossiblyFalseOperand>
-      <code>$root</code>
-      <code>$root</code>
-    </PossiblyFalseOperand>
+    <MissingDependency>
+      <code>AbstractTestCase</code>
+    </MissingDependency>
   </file>
 </files>
