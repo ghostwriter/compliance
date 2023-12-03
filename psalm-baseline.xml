@@ -94,10 +94,6 @@
     <PossiblyUnusedMethod>
       <code>exclude</code>
     </PossiblyUnusedMethod>
-    <TooFewArguments>
-      <code><![CDATA[new Job('No tests', 'echo "No tests"', [], 'locked')]]></code>
-      <code><![CDATA[new Job('No tests', 'echo "No tests"', [], 'locked')]]></code>
-    </TooFewArguments>
   </file>
   <file src="src/Extension/ListenerProviderExtension.php">
     <ArgumentTypeCoercion>
@@ -184,6 +180,114 @@
     <UnusedClass>
       <code>WorkflowListener</code>
     </UnusedClass>
+  </file>
+  <file src="src/Option/ComposerCacheFilesDirectoryFinder.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <UnusedProperty>
+      <code>$filesystem</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Option/Filesystem.php">
+    <ArgumentTypeCoercion>
+      <code>$flags</code>
+      <code>$levels</code>
+    </ArgumentTypeCoercion>
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::append() failed to write to path: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::chgrp() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::chmod() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::chown() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::copy() failed because the source path does not exist: %s',
+                $source
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::create() failed because the path already exists: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::createDirectory() failed because the path already exists: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::delete() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::deleteDirectory() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::directories() failed to scan directory: %s',
+                $directory
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::files() failed to scan directory: %s',
+                $directory
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::glob() failed to glob pattern: %s',
+                $pattern
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::move() failed because the source path does not exist: %s',
+                $source
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::prepend() failed to write to path: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::read() failed to read from path: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new \RuntimeException(sprintf(
+                'Filesystem::write() failed to write to path: %s',
+                $path
+            ));]]></code>
+    </MissingThrowsDocblock>
+    <MixedArgument>
+      <code>$directory</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$directory</code>
+      <code>$file</code>
+    </MixedAssignment>
+    <MixedOperand>
+      <code>$file</code>
+    </MixedOperand>
+    <PossiblyFalseArgument>
+      <code>scandir($path)</code>
+    </PossiblyFalseArgument>
+    <PossiblyUnusedMethod>
+      <code>allFiles</code>
+      <code>append</code>
+      <code>chgrp</code>
+      <code>chmod</code>
+      <code>chown</code>
+      <code>copy</code>
+      <code>createFile</code>
+      <code>delete</code>
+      <code>exists</code>
+      <code>glob</code>
+      <code>missing</code>
+      <code>move</code>
+      <code>prepend</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Service/Composer.php">
     <PossiblyUnusedMethod>
@@ -379,6 +483,17 @@
     <UnusedClass>
       <code>GithubActionOutput</code>
     </UnusedClass>
+  </file>
+  <file src="src/Service/Process.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new RuntimeException('Failed to execute command: ' . implode(' ', $command));]]></code>
+      <code><![CDATA[throw new RuntimeException('proc_open is not available');]]></code>
+    </MissingThrowsDocblock>
+    <PossiblyUndefinedIntArrayOffset>
+      <code>$pipes[0]</code>
+      <code>$pipes[1]</code>
+      <code>$pipes[2]</code>
+    </PossiblyUndefinedIntArrayOffset>
   </file>
   <file src="src/ServiceProvider/ConsoleServiceProvider.php">
     <InvalidArgument>
