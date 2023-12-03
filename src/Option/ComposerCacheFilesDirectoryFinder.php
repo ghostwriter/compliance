@@ -20,7 +20,8 @@ final readonly class ComposerCacheFilesDirectoryFinder
     public function __construct(
         private Process $process,
         private ComposerExecutableFinder $composerExecutableFinder,
-        private ComposerGlobalHomePathFinder $composerGlobalHomePathFinder,
+        private ComposerGlobalComposerJsonFilePathFinder $composerGlobalComposerJsonFilePathFinder,
+        private Filesystem $filesystem,
     ) {
     }
 
@@ -29,34 +30,21 @@ final readonly class ComposerCacheFilesDirectoryFinder
      */
     public function __invoke(): string
     {
-        $isWindowsOS = PHP_OS_FAMILY === 'Windows';
+        $composerGlobalComposerJsonFilePath = ($this->composerGlobalComposerJsonFilePathFinder)();
 
-        $composerExecutable = ($this->composerExecutableFinder)($isWindowsOS);
-
-        $composerGlobalHomePath = ($this->composerGlobalHomePathFinder)($composerExecutable);
-
-        $composerGlobalComposerJsonFilePath =
-            $composerGlobalHomePath . DIRECTORY_SEPARATOR . 'composer.json';
-
-        if (!file_exists($composerGlobalComposerJsonFilePath)) {
-            
-            
-            [$out, $err] = $this->process->execute([$composerExecutable, 'global', 'require', 'ghostwriter/psalm-plugin', '--no-interaction']);
-            throw new \RuntimeException(sprintf(
-                'Could not find composer global composer.json file: %s%s%s',
-                $composerGlobalComposerJsonFilePath,
-                $out,
-                $err
-            ));
+        if ($this->filesystem->missing($composerGlobalComposerJsonFilePath)) {
+            $this->filesystem->write($composerGlobalComposerJsonFilePath, '{}');
         }
 
-        $command = [$composerExecutable, 'config', 'cache-files-dir'];
-
-        [$stdout, $stderr] = $this->process->execute($command);
+        [$stdout, $stderr] = $this->process->execute([
+            ($this->composerExecutableFinder)(), 
+            'config', 
+            'cache-files-dir'
+        ]);
 
         if (trim($stderr) !== '') {
             throw new \RuntimeException(sprintf(
-                'Could not find composer cache files directory: %s%s%s',
+                'Could not find composer cache files directory: %s%s%s%s',
                 PHP_EOL,
                 $stderr,
                 PHP_EOL,
