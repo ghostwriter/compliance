@@ -8,7 +8,7 @@ final class PHPUnit extends AbstractTool
 {
     public function command(): string
     {
-        return 'XDEBUG_MODE=coverage ./vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always --stop-on-failure';
+        return './vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always --stop-on-failure';
     }
 
     /**
