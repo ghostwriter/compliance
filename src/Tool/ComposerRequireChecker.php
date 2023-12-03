@@ -8,7 +8,7 @@ final class ComposerRequireChecker extends AbstractTool
 {
     public function command(): string
     {
-        return './vendor/bin/composer-require-checker check --config-file=composer-require-checker.json -n -v composer.json';
+        return './vendor/ghostwriter/coding-standard/tools/composer-require-checker check --config-file=composer-require-checker.json -n -v composer.json';
     }
 
     /**
