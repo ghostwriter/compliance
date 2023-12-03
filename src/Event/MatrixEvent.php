@@ -47,8 +47,7 @@ final class MatrixEvent extends AbstractEvent
     {
         $matrix = $this->matrix['include'];
         if ($matrix === []) {
-            $tempPath = sys_get_temp_dir();
-            $this->include(new Job('No tests', 'echo "No tests"', [], $tempPath, $tempPath, $tempPath, 'locked'));
+            $this->include(Job::noop('Noop: success.'));
         }
 
         return Json::encode($this->matrix);
