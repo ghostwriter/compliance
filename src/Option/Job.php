@@ -10,13 +10,13 @@ final readonly class Job
      * @param array<string> $extensions
      */
     public function __construct(
-        private readonly string $name,
-        private readonly string $command,
-        private readonly array $extensions,
-        private readonly string $dependency,
-        private readonly int $php = PhpVersion::STABLE,
-        private readonly bool $experimental = false,
-        private readonly string $os = 'ubuntu-latest'
+        private string $name,
+        private string $command,
+        private array  $extensions,
+        private string $dependency,
+        private int    $php = PhpVersion::STABLE,
+        private bool   $experimental = false,
+        private string $os = 'ubuntu-latest'
     ) {
     }
 
