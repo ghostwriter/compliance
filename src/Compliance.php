@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance;
 
-use Composer\InstalledVersions;
-use Ghostwriter\Compliance\Command\MatrixCommand;
 use Ghostwriter\Compliance\ServiceProvider\ApplicationServiceProvider;
-use Ghostwriter\Container\ContainerInterface;
-use RuntimeException;
-use Symfony\Component\Console\Application as SymfonyApplication;
-use Symfony\Component\Console\Command\Command;
+use Ghostwriter\Container\Container;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
-use const PHP_EOL;
-use function sprintf;
 
-final class Compliance extends SymfonyApplication
+final class Compliance
 {
     /**
      * @var string
@@ -51,70 +47,33 @@ CODE_SAMPLE;
      */
     public const PACKAGE = 'ghostwriter/compliance';
 
-    /**
-     * @var string
-     */
-    public const PATH_CONFIG = 'Compliance.ConfigPath';
 
     /**
      * @var string
      */
-    public const TEMPLATE_CONFIG = 'Compliance.ConfigTemplate';
-
-    /**
-     * @var string
-     */
-    public const TEMPLATE_WORKFLOW = 'Compliance.WorkflowTemplate';
+    public const WORKFLOW_TEMPLATE = 'Compliance.WorkflowTemplate';
 
     /**
      * @throws Throwable
      */
-    public function __construct(
-        private readonly ContainerInterface $container
-    ) {
-        $version = InstalledVersions::getPrettyVersion(self::PACKAGE);
+    public static function main(
+        ?InputInterface $input = null,
+        ?OutputInterface $output = null,
+    ): void
+    {
+        $container = Container::getInstance();
 
-        if ($version === null) {
-            throw new RuntimeException('Invalid version!');
+        $container->provide(ApplicationServiceProvider::class);
+
+        if ($input instanceof InputInterface) {
+            $container->set(InputInterface::class, $input);
         }
 
-        parent::__construct(self::NAME, $version);
-
-        $this->setAutoExit(false);
-        $this->setCatchExceptions(false);
-
-        foreach ($container->tagged(Command::class) as $command) {
-            $this->add($command);
+        if ($output instanceof OutputInterface) {
+            $container->set(OutputInterface::class, $output);
         }
 
-        $this->setDefaultCommand(MatrixCommand::getDefaultName());
-    }
-
-    public function getContainer(): ContainerInterface
-    {
-        return $this->container;
-    }
-
-    public function getHelp(): string
-    {
-        return sprintf(self::LOGO, self::BLACK_LIVES_MATTER, PHP_EOL . parent::getHelp());
-    }
-
-    public function getLongVersion(): string
-    {
-        return sprintf(
-            '<fg=cyan;bg=black;options=bold>%s</>: <fg=magenta;bg=black;options=bold>%s</>',
-            self::PACKAGE,
-            $this->getVersion()
-        );
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public static function main(ContainerInterface $container): void
-    {
-        $container->register(ApplicationServiceProvider::class);
-        $container->get(self::class)->run();
+        $container->get(Application::class)
+                ->run($container->get(InputInterface::class), $container->get(OutputInterface::class));
     }
 }
