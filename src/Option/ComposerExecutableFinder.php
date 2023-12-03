@@ -12,24 +12,26 @@ final readonly class ComposerExecutableFinder
     public function __construct(
         private Process $process,
         private WhereExecutableFinder $whereExecutableFinder,
+        private bool $isWindowsOsFamily,
     ) {
     }
     /**
      * @throws Throwable
      */
-    public function __invoke(bool $isWindowsOsFamily = false): string
+    public function __invoke(): string
     {
-        $where = ($this->whereExecutableFinder)($isWindowsOsFamily);
-
-        [$stdout, $stderr] = $this->process->execute([$where, 'composer']);
+        [$stdout, $stderr] = $this->process->execute([
+            ($this->whereExecutableFinder)($this->isWindowsOsFamily),
+            'composer'
+        ]);
 
         if (trim($stderr) !== '') {
             throw new \RuntimeException(sprintf(
-                'Could not find composer executable: %s%s%s',
+                'Could not find composer executable: %s%s%s%s',
                 PHP_EOL,
                 $stderr,
                 PHP_EOL,
-                $stdout 
+                $stdout
             ));
         }
 
