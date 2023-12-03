@@ -21,6 +21,19 @@ final readonly class SymfonyApplicationFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, array $arguments = []): SymfonyApplication
     {
+//        $config = $container->get(ConfigInterface::class);
+// later we'll connect the config file, lets first get the app running
+
+//        $parameters = [
+//            $config->get('app.name', Compliance::NAME),
+//            $config->get('app.version',
+//
+//            ), ...$arguments
+//        ];
+        // Woot! This works!
+
+
+//        Lets extract the factory implementation from the vendor directory into the actual project.
         return new SymfonyApplication(
             Compliance::NAME,
                 InstalledVersions::getPrettyVersion(Compliance::PACKAGE) ??
