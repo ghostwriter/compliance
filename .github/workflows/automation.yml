@@ -88,13 +88,7 @@ jobs:
 
       - name: Validate composer.json file
         working-directory: ${{ github.workspace }}
-        run: |
-          if [ ! -f "composer.json" ]; then
-            echo "composer.json does not exist"
-            exit 1
-          fi
-
-          composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict
+        run: ${{ matrix.validateCommand }}
 
       - name: Install ${{ matrix.dependency }} dependencies
         working-directory: ${{ github.workspace }}
