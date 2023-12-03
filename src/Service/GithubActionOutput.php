@@ -90,6 +90,13 @@ final class GithubActionOutput
         // Some values must be encoded.
         $message = strtr($message, self::ESCAPED_DATA);
 
+        if (! self::isGithubActionEnvironment()) {
+            // output the message solely: not in actions
+            $this->output->writeln($message);
+
+            return;
+        }
+
         if (! $file) {
             // No file provided, output the message solely:
             $this->output->writeln(sprintf('::%s::%s', $type, $message));
