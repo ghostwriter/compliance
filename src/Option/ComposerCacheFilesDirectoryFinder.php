@@ -20,7 +20,6 @@ final readonly class ComposerCacheFilesDirectoryFinder
     public function __construct(
         private Process $process,
         private ComposerExecutableFinder $composerExecutableFinder,
-        private ComposerGlobalComposerJsonFilePathFinder $composerGlobalComposerJsonFilePathFinder,
         private Filesystem $filesystem,
     ) {
     }
@@ -30,28 +29,23 @@ final readonly class ComposerCacheFilesDirectoryFinder
      */
     public function __invoke(): string
     {
-        $composerGlobalComposerJsonFilePath = ($this->composerGlobalComposerJsonFilePathFinder)();
-
-        if ($this->filesystem->missing($composerGlobalComposerJsonFilePath)) {
-            $this->filesystem->write($composerGlobalComposerJsonFilePath, '{}');
-        }
-
         [$stdout, $stderr] = $this->process->execute([
             ($this->composerExecutableFinder)(), 
             'config', 
-            'cache-files-dir'
+            'cache-files-dir',
+            '--no-interaction',
         ]);
 
-        if (trim($stderr) !== '') {
+        $output = trim($stdout);
+
+        if ($output === '') {
             throw new \RuntimeException(sprintf(
-                'Could not find composer cache files directory: %s%s%s%s',
+                'Could not find composer cache files directory: %s%s',
                 PHP_EOL,
                 $stderr,
-                PHP_EOL,
-                $stdout
             ));
         }
 
-        return trim($stdout);
+        return $output;
     }
 }
