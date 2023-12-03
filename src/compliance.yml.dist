@@ -1,4 +1,3 @@
-# name: Compliance Automation
 name: Automation
 
 on:
@@ -50,7 +49,7 @@ jobs:
         with:
           command: matrix
   qa:
-    name: "[${{ matrix.os }}]${{ matrix.name }} on PHP ${{ matrix.php }} - ${{ matrix.dependency }}"
+    name: "${{ matrix.name }} on PHP ${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency }}"
     needs: [matrix]
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental }}
@@ -69,7 +68,7 @@ jobs:
           coverage: pcov
           ini-values: assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On
           php-version: ${{ matrix.php }}
-          extensions: ${{ matrix.extensions }}
+          extensions: ${{ join(matrix.extensions, ', ') }}
 
       - name: Setup problem matchers
         run: |
@@ -124,6 +123,7 @@ jobs:
       - name: Run ${{ matrix.name }} command
         run: ${{ matrix.command }}
         env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY }}
