@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Option;
 
+use Ghostwriter\Compliance\Option\ComposerCacheFilesDirectoryFinder;
+
 final readonly class Job
 {
     /**
@@ -31,7 +33,7 @@ final readonly class Job
             name: $name,
             command: sprintf('echo "%s"', $name),
             extensions: [],
-            composerCacheFilesDirectory: '~/.cache/composer/files',
+            composerCacheFilesDirectory: container()->invoke(ComposerCacheFilesDirectoryFinder::class),
             composerJsonPath: $currentDirectory,
             composerLockPath: $currentDirectory,
             dependency: 'locked'
