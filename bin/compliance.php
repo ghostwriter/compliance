@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance;
 
-use Ghostwriter\Container\Container;
 use Throwable;
 use const STDERR;
 use function dirname;
@@ -32,9 +31,11 @@ use function sprintf;
         Compliance::main();
     } catch (Throwable $throwable) {
         fwrite(STDERR, sprintf(
-            '[%s] %s',
+            '[%s] %s%s%s'.PHP_EOL,
             $throwable::class,
             $throwable->getMessage(),
+            PHP_EOL,
+            $throwable->getTraceAsString(),
         ));
 
         exit(1);
