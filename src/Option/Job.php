@@ -23,9 +23,9 @@ final readonly class Job
     ) {
     }
 
-    public static function noop(
-        string $name
-    ): self {
+    public static function noop(): self
+    {
+        $name = 'Noop';
         $currentDirectory = getcwd() ?: '.';
         return new self(
             name: $name,
