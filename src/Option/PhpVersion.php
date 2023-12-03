@@ -225,7 +225,7 @@ final readonly class PhpVersion
     /**
      * @var int
      */
-    public const STABLE = self::PHP_81;
+    public const STABLE = self::PHP_82;
 
     /**
      * @var list<int>
