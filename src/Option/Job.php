@@ -13,17 +13,21 @@ final readonly class Job
         private string $name,
         private string $command,
         private array  $extensions,
+        private string $composerJsonPath,
+        private string $composerLockPath,
         private string $dependency,
         private int    $php = PhpVersion::STABLE,
         private bool   $experimental = false,
-        private string $os = 'ubuntu-latest'
+        private string $os = 'ubuntu-latest',
     ) {
     }
 
     /**
      * @return array{
      *     name:string,
-     *     command:string,
+     *     runCommand:string,
+     *     installCommand:string,
+     *     validateCommand:string,
      *     extensions:array<string>,
      *     os:string,
      *     php:string,
@@ -33,14 +37,40 @@ final readonly class Job
      */
     public function toArray(): array
     {
+        $composerDependency = $this->dependency;
+        $composerOptions = ['--no-interaction', '--no-progress', '--ansi'];
+        switch ($composerDependency) {
+            case 'highest':
+                $composerCommand = 'update';
+                break;
+            case 'lowest':
+                $composerCommand = 'update';
+                $composerOptions[] = '--prefer-lowest';
+                $composerOptions[] = '--prefer-stable';
+                break;
+            default:
+                $composerCommand = 'install';
+                break;
+        };
+
+        if (!file_exists($this->composerLockPath)) {
+            $composerCommand = 'update';
+        }
+
+        $validateCommand = file_exists($this->composerJsonPath) ?
+            'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict' :
+            'echo "composer.json does not exist" && exit 1;';
+
         return [
             'name' => $this->name,
-            'command' => $this->command,
+            'runCommand' => $this->command,
             'os' => $this->os,
             'php' => PhpVersion::TO_STRING[$this->php],
             'dependency' => $this->dependency,
             'experimental' => $this->experimental,
             'extensions' => $this->extensions,
+            'validateCommand' => $validateCommand,
+            'installCommand' => sprintf('composer %s %s', $composerCommand, implode(' ', $composerOptions))
         ];
     }
 }
