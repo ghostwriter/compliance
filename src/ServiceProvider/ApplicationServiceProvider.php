@@ -4,74 +4,21 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\ServiceProvider;
 
-use Ghostwriter\Compliance\Compliance;
-use Ghostwriter\Compliance\Configuration\ComplianceConfiguration;
-use Ghostwriter\Compliance\Event\OutputEvent;
-use Ghostwriter\Container\ContainerInterface;
-use Ghostwriter\Container\ServiceProviderInterface;
-use Ghostwriter\EventDispatcher\Contract\DispatcherInterface;
+use Ghostwriter\Compliance\Extension\ComplianceExtension;
+use Ghostwriter\Container\Interface\ContainerInterface;
+use Ghostwriter\Container\Interface\ServiceProviderInterface;
 use Throwable;
-use const DIRECTORY_SEPARATOR;
-use function chdir;
-use function error_get_last;
-use function file_exists;
-use function getcwd;
-use function getenv;
-use function realpath;
-use function sprintf;
 
 final readonly class ApplicationServiceProvider implements ServiceProviderInterface
 {
-    /**
-     * @var array<class-string<ServiceProviderInterface>>
-     */
-    private const PROVIDERS = [
-        ConsoleServiceProvider::class,
-        EventServiceProvider::class,
-        MatrixServiceProvider::class,
-    ];
-
     /**
      * @throws Throwable
      */
     public function __invoke(ContainerInterface $container): void
     {
-        foreach (self::PROVIDERS as $provider) {
-            $container->register($provider);
-        }
-
-        $currentWorkingDirectory = getenv('GITHUB_WORKSPACE') ?: getcwd() ?: __DIR__;
-
-        $result = @chdir($currentWorkingDirectory);
-
-        if ($result === false) {
-            $container->get(DispatcherInterface::class)
-                ->dispatch(new OutputEvent(sprintf(
-                    'Unable to change current working directory; %s; "%s" given.',
-                    error_get_last()['message'] ?? 'No such file or directory',
-                    $currentWorkingDirectory
-                )));
-        }
-
-        $container->set(Compliance::CURRENT_WORKING_DIRECTORY, $currentWorkingDirectory);
-        $complianceConfigurationPath = $currentWorkingDirectory . DIRECTORY_SEPARATOR . 'compliance.php';
-        if (file_exists($complianceConfigurationPath)) {
-            $container->set(Compliance::PATH_CONFIG, $complianceConfigurationPath);
-
-            /** @var callable(ComplianceConfiguration):void $config */
-            $config = require $complianceConfigurationPath;
-
-            $container->call($config, [$container->get(ComplianceConfiguration::class)]);
-        }
-
-        $complianceConfigTemplate = $currentWorkingDirectory . DIRECTORY_SEPARATOR . 'src/compliance.php.dist';
-        if (file_exists($complianceConfigTemplate)) {
-            $container->set(Compliance::TEMPLATE_CONFIG, realpath($complianceConfigTemplate));
-        }
-
-        $complianceWorkflowTemplate = $currentWorkingDirectory . DIRECTORY_SEPARATOR . 'src/compliance.yml.dist';
-        if (file_exists($complianceWorkflowTemplate)) {
-            $container->set(Compliance::TEMPLATE_WORKFLOW, realpath($complianceWorkflowTemplate));
-        }
+        $container->provide(ConsoleServiceProvider::class);
+        $container->provide(EventServiceProvider::class);
+        $container->provide(ConfigServiceProvider::class);
+        $container->provide(MatrixServiceProvider::class);
     }
 }
