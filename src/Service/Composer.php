@@ -9,35 +9,29 @@ use function basename;
 use function getenv;
 use function pathinfo;
 use function trim;
+use Ghostwriter\Compliance\Service\Composer\ComposerJsonReader;
+use Ghostwriter\Compliance\Service\Composer\ComposerLockReader;
+use Ghostwriter\Compliance\Service\Composer\ComposerLock;
+use Ghostwriter\Compliance\Service\Composer\ComposerJson;
+use Ghostwriter\Compliance\Service\Composer\RequireDevList;
+use Ghostwriter\Compliance\Service\Composer\RequireList;
 
-final class Composer
+final readonly class Composer
 {
-    /**
-     * @var string
-     */
-    public const FILE_JSON = 'composer.json';
-
-    /**
-     * @var string
-     */
-    public const FILE_LOCK = 'composer.lock';
-
-    /**
-     * @var string
-     */
-    public const PHP = 'php';
-
-    /**
-     * @var string
-     */
-    public const REQUIRE = 'require';
+    public function __construct(
+        private ComposerJsonReader $composerJsonReader = new ComposerJsonReader(),
+        private ComposerLockReader $composerLockReader = new ComposerLockReader(),
+    ) {
+    }
 
     /**
      * Retrieve the path to composer.json file.
      */
     public function getJsonFilePath(string $root): string
     {
-        return $root . DIRECTORY_SEPARATOR . basename(trim(getenv('COMPOSER') ?: self::FILE_JSON));
+        return $root . DIRECTORY_SEPARATOR . basename(
+            trim(getenv('COMPOSER') ?: ComposerFile::JSON)
+        );
     }
 
     /**
@@ -47,8 +41,37 @@ final class Composer
     {
         $composerJsonPath = $this->getJsonFilePath($root);
 
-        return pathinfo($composerJsonPath, PATHINFO_EXTENSION) === 'json'
+        return pathinfo($composerJsonPath, PATHINFO_EXTENSION) === ComposerFileType::JSON
             ? mb_substr($composerJsonPath, 0, -4) . 'lock'
             : $composerJsonPath . '.lock';
+    }
+
+    public function readJsonFile(string $path): ComposerJson
+    {
+        $composerJsonPath = $this->getJsonFilePath($path);
+
+        return $this->composerJsonReader->read($composerJsonPath);
+    }
+
+    public function readLockFile(string $path): ComposerLock
+    {
+        $composerLockPath = $this->getLockFilePath($path);
+
+        return $this->composerLockReader->read($composerLockPath);
+    }
+
+    public function getPhpVersionConstraint(string $path): PhpVersionConstraint
+    {
+        return $this->readJsonFile($path)->getPhpVersionConstraint();
+    }
+
+    public function getRequire(string $path): RequireList
+    {
+        return $this->readJsonFile($path)->getRequire();
+    }
+
+    public function getRequireDev(string $path): RequireDevList
+    {
+        return $this->readJsonFile($path)->getRequireDev();
     }
 }
