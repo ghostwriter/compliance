@@ -55,8 +55,7 @@
         "composer/composer": ">=2.6.5",
         "ghostwriter/coding-standard": "dev-main",
         "ghostwriter/psalm-plugin": "^0.2 || ^0.3 || ^1.0",
-        "symfony/var-dumper": "^7.0",
-        "vimeo/psalm": "^5.16"
+        "symfony/var-dumper": "^7.0"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -109,19 +108,19 @@
         "docker:run": "docker run -v $(PWD):/github/workspace -w=/github/workspace -e GITHUB_TOKEN=github-token -e SIGNING_SECRET_KEY=secret-key compliance",
         "infection": [
             "@putenv XDEBUG_MODE=coverage",
-            "vendor/bin/infection --verbose"
+            "vendor/ghostwriter/coding-standard/tools/infection --verbose"
         ],
-        "missing-returntypes": "psalm --alter --issues=MissingReturnType",
-        "normalize": "composer normalize --no-check-lock",
-        "phpbench": "phpbench run",
-        "phpunit": "phpunit --colors=always --do-not-cache-result",
-        "phpunit:stop-on-failure": "phpunit --colors=always --do-not-cache-result --stop-on-failure",
+        "missing-returntypes": "vendor/ghostwriter/coding-standard/tools/psalm --alter --issues=MissingReturnType",
+        "normalize": "vendor/ghostwriter/coding-standard/tools/composer-normalize --no-check-lock",
+        "phpbench": "vendor/ghostwriter/coding-standard/tools/phpbench run",
+        "phpunit": "vendor/ghostwriter/coding-standard/tools/phpunit --colors=always --do-not-cache-result",
+        "phpunit:stop-on-failure": "vendor/ghostwriter/coding-standard/tools/phpunit --colors=always --do-not-cache-result --stop-on-failure",
         "psalm": "@psalm:shepherd",
-        "psalm:baseline": "psalm --no-diff --no-cache --set-baseline=psalm-baseline.xml",
-        "psalm:dry-run": "psalm --alter --issues=all --dry-run",
-        "psalm:missing": "psalm --alter --issues=MissingReturnType",
-        "psalm:security": "psalm --taint-analysis",
-        "psalm:shepherd": "psalm --shepherd --stats --no-diff --no-cache",
+        "psalm:baseline": "vendor/ghostwriter/coding-standard/tools/psalm --no-diff --no-cache --set-baseline=psalm-baseline.xml",
+        "psalm:dry-run": "vendor/ghostwriter/coding-standard/tools/psalm --alter --issues=all --dry-run",
+        "psalm:missing": "vendor/ghostwriter/coding-standard/tools/psalm --alter --issues=MissingReturnType",
+        "psalm:security": "vendor/ghostwriter/coding-standard/tools/psalm --taint-analysis",
+        "psalm:shepherd": "vendor/ghostwriter/coding-standard/tools/psalm --shepherd --stats --no-diff --no-cache",
         "test": [
             "@xdebug",
             "@phpunit:stop-on-failure"
