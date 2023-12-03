@@ -12,6 +12,8 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows: ["Docker Build"]
+    types:
+      - completed
   workflow_call:
     secrets:
       GPG_PRIVATE_KEY:
