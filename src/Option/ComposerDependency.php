@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Option;
 
-final class ComposerDependency
+final readonly class ComposerDependency
 {
     /**
      * Supported options.
