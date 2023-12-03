@@ -24,6 +24,7 @@ use function getcwd;
 use Ghostwriter\Compliance\Service\Composer\ComposerJsonReader;
 use Ghostwriter\Compliance\Service\Composer\Extension;
 use Ghostwriter\Compliance\Tool\PHPUnit;
+use Ghostwriter\Compliance\Option\ComposerCacheFilesDirectoryFinder;
 
 final readonly class MatrixListener implements EventListenerInterface
 {
@@ -51,6 +52,7 @@ final readonly class MatrixListener implements EventListenerInterface
             throw new RuntimeException('Could not get current working directory');
         }
 
+        $composerCacheFilesDirectory = (new ComposerCacheFilesDirectoryFinder)->find();
         $composerJsonPath = $this->composer->getJsonFilePath($root);
         $composerLockPath = $this->composer->getLockFilePath($root);
 
@@ -83,6 +85,7 @@ final readonly class MatrixListener implements EventListenerInterface
                         $name,
                         $command,
                         [...$requiredPhpExtensions, ...$extensions],
+                        $composerCacheFilesDirectory,
                         $composerJsonPath,
                         $composerLockPath,
                         'locked',
@@ -106,6 +109,7 @@ final readonly class MatrixListener implements EventListenerInterface
                                 $name,
                                 $command,
                                 [...$requiredPhpExtensions, ...$extensions],
+                                $composerCacheFilesDirectory,
                                 $composerJsonPath,
                                 $composerLockPath,
                                 $dependency,
