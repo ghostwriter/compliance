@@ -19,9 +19,11 @@ final readonly class ComposerCacheFilesDirectoryFinder
 
         if (trim($stderr) !== '') {
             throw new \RuntimeException(sprintf(
-                'Could not find composer cache files directory: %s%s',
+                'Could not find composer cache files directory: %s%s%s',
                 PHP_EOL,
-                $stderr
+                $stderr,
+                PHP_EOL,
+                $stdout 
             ));
         }
 
