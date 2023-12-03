@@ -37,7 +37,7 @@ final readonly class MatrixListener implements EventListenerInterface
         // remove the damn container im using it to get the tools that were tagged
         private ContainerInterface $container,
         private Composer           $composer,
-        private ComposerCacheFilesDirectoryFinder $composerCacheFilesDirectoryFinder = new ComposerCacheFilesDirectoryFinder(),
+        private ComposerCacheFilesDirectoryFinder $composerCacheFilesDirectoryFinder,
     )
     {
     }
