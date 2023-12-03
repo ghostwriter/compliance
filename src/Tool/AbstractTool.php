@@ -40,4 +40,19 @@ abstract class AbstractTool implements ToolInterface
     {
         return str_replace(__NAMESPACE__ . '\\', '', static::class);
     }
+
+    public function command(): string
+    {
+        return 'composer ' . str_replace(
+                'p-h-p-',
+                'php',
+                mb_strtolower(
+                    preg_replace(
+                    '#([a-zA-Z])(?=[A-Z])#',
+                    '$1-',
+                    $this->name()
+                )
+            )
+        );
+    }
 }
