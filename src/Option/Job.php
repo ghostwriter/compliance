@@ -17,10 +17,25 @@ final readonly class Job
         private string $composerJsonPath,
         private string $composerLockPath,
         private string $dependency,
-        private int    $php = PhpVersion::STABLE,
+        private int    $php = PhpVersion::LATEST,
         private bool   $experimental = false,
         private string $os = 'ubuntu-latest',
     ) {
+    }
+
+    public static function noop(
+        string $name
+    ): self {
+        $currentDirectory = getcwd() ?: '.';
+        return new self(
+            name: $name,
+            command: sprintf('echo "%s"', $name),
+            extensions: [],
+            composerCacheFilesDirectory: '~/.cache/composer/files',
+            composerJsonPath: $currentDirectory,
+            composerLockPath: $currentDirectory,
+            dependency: 'locked'
+        );
     }
 
     /**
