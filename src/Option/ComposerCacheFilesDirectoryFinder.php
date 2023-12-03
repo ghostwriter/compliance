@@ -7,6 +7,12 @@ namespace Ghostwriter\Compliance\Option;
 use Ghostwriter\Compliance\Service\Process;
 use function compact;
 use Ghostwriter\Compliance\Option\ComposerGlobalHomePathFinder;
+use function file_exists;
+use function getenv;
+use function realpath;
+use function implode;
+use function trim;
+use function sprintf;
 
 final readonly class ComposerCacheFilesDirectoryFinder
 {
@@ -17,11 +23,9 @@ final readonly class ComposerCacheFilesDirectoryFinder
     ) {
     }
 
-    public function find(): string
+    public function __invoke(): string
     {
-        $isWindowsOS = PHP_OS_FAMILY === 'Windows';
-
-        $composerExecutable = ($this->composerExecutableFinder)($this->process, $isWindowsOS);
+        $composerExecutable = ($this->composerExecutableFinder)($this->process);
 
         $composerGlobalHomePath = ($this->composerGlobalHomePathFinder)($this->process, $composerExecutable);
 
@@ -52,15 +56,6 @@ final readonly class ComposerCacheFilesDirectoryFinder
             ));
         }
 
-        $composerCacheFilesDirectory = trim($stdout);
-
-        if ('' === $composerCacheFilesDirectory) {
-            $composerCacheFilesDirectory = implode(
-                DIRECTORY_SEPARATOR,
-                [getenv('HOME') ?: realpath('~/'), '.composer', 'cache', 'files']
-            );
-        }
-
-        return $composerCacheFilesDirectory;
+        return trim($stdout);
     }
 }
