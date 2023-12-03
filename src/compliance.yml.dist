@@ -62,7 +62,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup PHP ${{ matrix.php }} with ${{ matrix.extensions }} extensions.
+      - name: Setup PHP ${{ matrix.php }} with ${{ join(matrix.extensions, ', ') }} extensions.
         uses: shivammathur/setup-php@v2
         with:
           coverage: pcov
