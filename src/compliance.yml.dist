@@ -98,30 +98,10 @@ jobs:
 
       - name: Install ${{ matrix.dependency }} dependencies
         working-directory: ${{ github.workspace }}
-        run: |
-          composerDependency="${{ matrix.dependency }}"
-          composerCommand="update"
-          composerOptions=("--no-interaction" "--no-progress" "--ansi")
-
-          case ${composerDependency} in
-              highest) composerCommand="update" ;;
-              lowest) composerOptions+=("--prefer-lowest" "--prefer-stable") ;;
-              *) composerCommand="install" ;;
-          esac
-
-          # Use `update` if there is no composer.lock file
-          if [ ! -f "composer.lock" ]; then
-            composerCommand="update"
-          fi
-
-          fullCommand="composer ${composerCommand} ${composerOptions[*]}"
-
-          echo "Running: ${fullCommand}"
-
-          ${fullCommand}
+        run: ${{ matrix.installCommand }}
 
       - name: Run ${{ matrix.name }} command
-        run: ${{ matrix.command }}
+        run: ${{ matrix.runCommand }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
