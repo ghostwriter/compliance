@@ -8,7 +8,7 @@ final class PHPBench extends AbstractTool
 {
     public function command(): string
     {
-        return './vendor/bin/phpbench run --revs=2 --iterations=2 --report=aggregate';
+        return './vendor/ghostwriter/coding-standard/tools/phpbench run --revs=2 --iterations=2 --report=aggregate';
     }
 
     /**
