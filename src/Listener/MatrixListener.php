@@ -51,10 +51,13 @@ final readonly class MatrixListener implements EventListenerInterface
             throw new RuntimeException('Could not get current working directory');
         }
 
+        $composerJsonPath = $this->composer->getJsonFilePath($root);
+        $composerLockPath = $this->composer->getLockFilePath($root);
+
         $composerJson = $this->composer->readJsonFile($root);
 
         $phpVersionConstraint = $composerJson->getPhpVersionConstraint();
-        
+
         /** @var string $constraints */
         $constraints = $phpVersionConstraint->getVersion();
 
@@ -80,6 +83,8 @@ final readonly class MatrixListener implements EventListenerInterface
                         $name,
                         $command,
                         [...$requiredPhpExtensions, ...$extensions],
+                        $composerJsonPath,
+                        $composerLockPath,
                         'locked',
                         PhpVersion::LATEST
                     )
@@ -101,6 +106,8 @@ final readonly class MatrixListener implements EventListenerInterface
                                 $name,
                                 $command,
                                 [...$requiredPhpExtensions, ...$extensions],
+                                $composerJsonPath,
+                                $composerLockPath,
                                 $dependency,
                                 $phpVersion,
                                 $isExperimental || $dependency === ComposerDependency::LOWEST,
