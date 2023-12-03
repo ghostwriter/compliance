@@ -47,7 +47,7 @@ final class MatrixEvent extends AbstractEvent
     {
         $matrix = $this->matrix['include'];
         if ($matrix === []) {
-            $this->include(Job::noop('Noop: success.'));
+            $this->include(Job::noop());
         }
 
         return Json::encode($this->matrix);
