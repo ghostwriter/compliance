@@ -116,6 +116,8 @@ If you discover any security related issues, please email `nathanael.esayeas@pro
 ## Credits
 
 - [Nathanael Esayeas](https://github.com/ghostwriter)
+- [`mlocati/docker-php-extension-installer`](https://github.com/mlocati/docker-php-extension-installer)
+- [`shivammathur/setup-php`](https://github.com/shivammathur/setup-php)
 - [All Contributors](https://github.com/ghostwriter/compliance/contributors)
 
 ## License
