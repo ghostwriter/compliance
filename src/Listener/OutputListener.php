@@ -6,12 +6,13 @@ namespace Ghostwriter\Compliance\Listener;
 
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Event\OutputEvent;
+use Ghostwriter\Compliance\Service\GithubActionOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class OutputListener implements EventListenerInterface
+final readonly class OutputListener implements EventListenerInterface
 {
     public function __construct(
-        private readonly SymfonyStyle $symfonyStyle
+        private SymfonyStyle $symfonyStyle,
     ) {
     }
 
