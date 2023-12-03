@@ -9,6 +9,7 @@ use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
 use Ghostwriter\EventDispatcher\Interface\EventInterface;
+use Ghostwriter\Compliance\Service\Process;
 
 function container(): ContainerInterface
 {
@@ -51,4 +52,15 @@ function error(string $message, ?string $file = null, ?int $line = null, ?int $c
 {
     githubActionOutput()
         ->error($message, $file, $line, $col);
+}
+
+function process(): Process
+{
+    return container()
+       ->get(Process::class);
+}
+
+function runCmd(array $command): array
+{
+    return process()->execute($command);
 }
