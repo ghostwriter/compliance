@@ -33,7 +33,7 @@ final readonly class Job
             name: $name,
             command: sprintf('echo "%s"', $name),
             extensions: [],
-            composerCacheFilesDirectory: container()->invoke(ComposerCacheFilesDirectoryFinder::class),
+            composerCacheFilesDirectory: '/home/runner/.cache/composer/files',
             composerJsonPath: $currentDirectory,
             composerLockPath: $currentDirectory,
             dependency: 'locked'
