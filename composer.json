@@ -42,7 +42,7 @@
         "ghostwriter/clock": "^1.1",
         "ghostwriter/config": "^0.4",
         "ghostwriter/container": "^2.0",
-        "ghostwriter/environment": "^1.1",
+        "ghostwriter/environment": "^2.0",
         "ghostwriter/event-dispatcher": "^3.0",
         "ghostwriter/json": "^1.2",
         "ghostwriter/option": "^1.5",
@@ -55,7 +55,7 @@
         "composer/composer": ">=2.6.5",
         "ghostwriter/coding-standard": "dev-main",
         "ghostwriter/psalm-plugin": "^0.2 || ^0.3 || ^1.0",
-        "symfony/var-dumper": "^6.4",
+        "symfony/var-dumper": "^7.0",
         "vimeo/psalm": "^5.16"
     },
     "minimum-stability": "stable",
