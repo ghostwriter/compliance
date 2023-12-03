@@ -12,17 +12,30 @@ on:
   workflow_dispatch:
   workflow_call:
     secrets:
-      STRYKER_DASHBOARD_API_KEY:
+      GPG_PRIVATE_KEY:
+        required: false
+      INFECTION_DASHBOARD_API_KEY:
         required: false
       CODECOV_TOKEN:
-        required: false
+        required: false # For public repositories, no token is needed
+
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  actions: write #  permits an action to cancel a workflow run.
+  checks: write # permits an action to create a check run.
+  contents: write # allows the action to create a release.
+  discussions: write # permits an action to close or delete a discussion.
+  pull-requests: write # permits an action to add a label to a pull request.
+  issues: write # permits an action to add a comment to an issue
+  packages: write # permits an action to upload and publish packages on GitHub Packages.
+  pages: write # permits an action to request a GitHub Pages build.
 
 jobs:
   matrix:
     name: Generate job matrix
     concurrency:
-     group: ${{ github.workflow }}
-     cancel-in-progress: true
+      group: ${{ github.workflow }}-${{ github.event_name }}
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
@@ -36,7 +49,7 @@ jobs:
         with:
           command: matrix
   qa:
-    name: ${{ matrix.name }} on PHP ${{ matrix.php }} with ${{ matrix.dependency }} dependencies
+    name: "[${{ matrix.os }}]${{ matrix.name }} on PHP ${{ matrix.php }} - ${{ matrix.dependency }}"
     needs: [matrix]
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental }}
@@ -49,17 +62,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup PHP ${{ matrix.php }}
+      - name: Setup PHP ${{ matrix.php }} with ${{ matrix.extensions }} extensions.
         uses: shivammathur/setup-php@v2
         with:
           coverage: pcov
           ini-values: assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On
           php-version: ${{ matrix.php }}
+          extensions: ${{ matrix.extensions }}
 
       - name: Setup problem matchers
         run: |
-            echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-            echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Get composer cache directory
         id: composer-cache
@@ -95,7 +109,7 @@ jobs:
               *) composerCommand="install" ;;
           esac
 
-          # Use the `update` if there is a composer.lock file
+          # Use `update` if there is no composer.lock file
           if [ ! -f "composer.lock" ]; then
             composerCommand="update"
           fi
@@ -111,11 +125,12 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY }}
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-        if: ${{ matrix.php == '8.2' && matrix.dependency == 'locked' }}
+        if: ${{ matrix.php == '8.3' && matrix.dependency == 'locked' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ${{ github.workspace }}/.cache/phpunit/
