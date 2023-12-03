@@ -13,29 +13,32 @@ use function realpath;
 use function implode;
 use function trim;
 use function sprintf;
+use Throwable;
 
 final readonly class ComposerCacheFilesDirectoryFinder
 {
     public function __construct(
-        private Process $process = new Process(),
-        private ComposerExecutableFinder $composerExecutableFinder = new ComposerExecutableFinder(),
-        private ComposerGlobalHomePathFinder $composerGlobalHomePathFinder = new ComposerGlobalHomePathFinder(),
+        private Process $process,
+        private ComposerExecutableFinder $composerExecutableFinder,
+        private ComposerGlobalHomePathFinder $composerGlobalHomePathFinder,
     ) {
     }
 
+    /**
+     * @throws Throwable
+     */
     public function __invoke(): string
     {
-        $composerExecutable = ($this->composerExecutableFinder)($this->process);
+        $isWindowsOS = PHP_OS_FAMILY === 'Windows';
 
-        $composerGlobalHomePath = ($this->composerGlobalHomePathFinder)($this->process, $composerExecutable);
+        $composerExecutable = ($this->composerExecutableFinder)($isWindowsOS);
 
-        $composerGlobalComposerJsonFilePath = sprintf(
-            '%s%scomposer.json',
-            $composerGlobalHomePath,
-            DIRECTORY_SEPARATOR
-        );
+        $composerGlobalHomePath = ($this->composerGlobalHomePathFinder)($composerExecutable);
 
-        if ( ! file_exists($composerGlobalComposerJsonFilePath)) {
+        $composerGlobalComposerJsonFilePath =
+            $composerGlobalHomePath . DIRECTORY_SEPARATOR . 'composer.json';
+
+        if (!file_exists($composerGlobalComposerJsonFilePath)) {
             throw new \RuntimeException(sprintf(
                 'Could not find composer global composer.json file: %s',
                 $composerGlobalComposerJsonFilePath
