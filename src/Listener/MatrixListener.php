@@ -37,6 +37,7 @@ final readonly class MatrixListener implements EventListenerInterface
         // remove the damn container im using it to get the tools that were tagged
         private ContainerInterface $container,
         private Composer           $composer,
+        private ComposerCacheFilesDirectoryFinder $composerCacheFilesDirectoryFinder = new ComposerCacheFilesDirectoryFinder(),
     )
     {
     }
@@ -52,7 +53,10 @@ final readonly class MatrixListener implements EventListenerInterface
             throw new RuntimeException('Could not get current working directory');
         }
 
-        $composerCacheFilesDirectory = (new ComposerCacheFilesDirectoryFinder)->find();
+        chdir($root);
+
+        $composerCacheFilesDirectory = ($this->composerCacheFilesDirectoryFinder)();
+
         $composerJsonPath = $this->composer->getJsonFilePath($root);
         $composerLockPath = $this->composer->getLockFilePath($root);
 
