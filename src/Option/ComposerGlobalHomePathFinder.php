@@ -5,15 +5,22 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Option;
 
 use Ghostwriter\Compliance\Service\Process;
+use Throwable;
 
 final readonly class ComposerGlobalHomePathFinder
 {
+    public function __construct(
+        private Process $process,
+    ) {
+    }
+    /**
+     * @throws Throwable
+     */
     public function __invoke(
-        Process $process,   
         string $composerExecutable,
     ): string
     {
-        [$stdout, $stderr] = $process->execute([
+        [$stdout, $stderr] = $this->process->execute([
             $composerExecutable,
             '-n',
             'config',
