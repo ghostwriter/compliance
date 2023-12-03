@@ -70,7 +70,7 @@ jobs:
           echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
 
       - name: Build and Push ${{ env.DOCKER_IMAGE }}:${{ steps.meta.outputs.version }}
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         with:
           cache-from: type=gha,scope=${{ env.DOCKER_IMAGE }}:${{ steps.meta.outputs.version }}
           cache-to: type=gha,scope=${{ env.DOCKER_IMAGE }}:${{ steps.meta.outputs.version }},mode=max
