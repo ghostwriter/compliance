@@ -52,7 +52,7 @@ abstract class AbstractCommand extends Command
      */
     public function write(string $message): int
     {
-        return $this->dispatch(
+        return $this->dispatcher->dispatch(
             new OutputEvent([
                 '::echo::on',
                 sprintf('::group::%s %s', Compliance::NAME, Compliance::BLACK_LIVES_MATTER),
@@ -60,6 +60,6 @@ abstract class AbstractCommand extends Command
                 '::endgroup::',
                 '::echo::off',
             ])
-        );
+        )->isPropagationStopped() ? self::FAILURE : self::SUCCESS;
     }
 }
