@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
-use Ghostwriter\EventDispatcher\Contract\EventInterface;
-use Ghostwriter\EventDispatcher\Traits\EventTrait;
+use Ghostwriter\EventDispatcher\Dispatcher;
+use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
+use Ghostwriter\EventDispatcher\Interface\EventInterface;
+use Ghostwriter\EventDispatcher\Trait\EventTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
@@ -21,6 +23,7 @@ abstract class AbstractEvent implements EventInterface
      * @throws Throwable
      */
     public function __construct(
+        protected readonly DispatcherInterface $dispatcher,
         protected readonly InputInterface $input,
         protected readonly SymfonyStyle $symfonyStyle
     ) {
@@ -34,5 +37,14 @@ abstract class AbstractEvent implements EventInterface
     public function getOutput(): SymfonyStyle
     {
         return $this->symfonyStyle;
+    }
+
+    public function getDispatcher(): DispatcherInterface
+    {
+        return $this->dispatcher;
+    }
+    public function dispatch(EventInterface $event): EventInterface
+    {
+        return $this->dispatcher->dispatch($event);
     }
 }
