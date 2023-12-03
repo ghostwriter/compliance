@@ -64,6 +64,7 @@ final readonly class Job
         return [
             'name' => $this->name,
             'runCommand' => $this->command,
+            'composer-cache-files-dir' => (new ComposerCacheFilesDirectoryFinder)->find(),
             'os' => $this->os,
             'php' => PhpVersion::TO_STRING[$this->php],
             'dependency' => $this->dependency,
