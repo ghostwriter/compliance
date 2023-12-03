@@ -5,22 +5,27 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Listener;
 
 use Composer\Semver\Semver;
+use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Contract\EventListenerInterface;
+use Ghostwriter\Compliance\Event\AbstractEvent;
 use Ghostwriter\Compliance\Event\MatrixEvent;
 use Ghostwriter\Compliance\Option\ComposerDependency;
 use Ghostwriter\Compliance\Option\Job;
 use Ghostwriter\Compliance\Option\PhpVersion;
 use Ghostwriter\Compliance\Service\Composer;
-use Ghostwriter\Compliance\Tool\PHPUnit;
 use Ghostwriter\Compliance\ToolInterface;
-use Ghostwriter\Container\ContainerInterface;
+use Ghostwriter\Config\Contract\ConfigInterface;
+use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Json\Json;
 use RuntimeException;
+use Symfony\Component\Console\Command\Command;
 use Throwable;
-
 use function getcwd;
+use Ghostwriter\Compliance\Service\Composer\ComposerJsonReader;
+use Ghostwriter\Compliance\Service\Composer\Extension;
+use Ghostwriter\Compliance\Tool\PHPUnit;
 
-final class MatrixListener implements EventListenerInterface
+final readonly class MatrixListener implements EventListenerInterface
 {
     /**
      * @var string[]
@@ -28,9 +33,11 @@ final class MatrixListener implements EventListenerInterface
     private const DEPENDENCIES = ['highest', 'locked', 'lowest'];
 
     public function __construct(
-        private readonly ContainerInterface $container,
-        private readonly Composer $composer
-    ) {
+        // remove the damn container im using it to get the tools that were tagged
+        private ContainerInterface $container,
+        private Composer           $composer,
+    )
+    {
     }
 
     /**
@@ -44,19 +51,22 @@ final class MatrixListener implements EventListenerInterface
             throw new RuntimeException('Could not get current working directory');
         }
 
-        $composerJson = file_get_contents(
-            $this->composer->getJsonFilePath($root)
+        $composerJson = $this->composer->readJsonFile($root);
+
+        $phpVersionConstraint = $composerJson->getPhpVersionConstraint();
+        
+        /** @var string $constraints */
+        $constraints = $phpVersionConstraint->getVersion();
+
+        $requiredPhpExtensions = array_map(
+            fn (Extension $extension) => (string) $extension,
+            iterator_to_array($composerJson->getRequiredPhpExtensions())
         );
 
-        if ($composerJson === false) {
-            throw new RuntimeException('Could not find composer.json');
-        }
-
-        /** @var string $constraints */
-        $constraints = Json::decode($composerJson)[Composer::REQUIRE][Composer::PHP] ?? '*';
+        $oss = ['macos-latest','ubuntu-latest','windows-latest'];
 
         foreach ($this->container->tagged(ToolInterface::class) as $tool) {
-            if (! $tool->isPresent()) {
+            if (!$tool->isPresent()) {
                 continue;
             }
 
@@ -64,39 +74,73 @@ final class MatrixListener implements EventListenerInterface
             $command = $tool->command();
             $extensions = $tool->extensions();
 
-            // if (! $tool instanceof PHPUnit) {
-            //     $generateMatrixEvent->include(
-            //         new Job(
-            //             $name,
-            //             $command,
-            //             $extensions,
-            //             'locked',
-            //             PhpVersion::LATEST
-            //         )
-            //     );
-            //     continue;
-            // }
+            if (! $tool instanceof PHPUnit) {
+                $generateMatrixEvent->include(
+                    new Job(
+                        $name,
+                        $command,
+                        [...$requiredPhpExtensions, ...$extensions],
+                        'locked',
+                        PhpVersion::LATEST
+                    )
+                );
+                continue;
+            }
 
             foreach (PhpVersion::SUPPORTED as $phpVersion) {
-                if (! Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
+                if (!Semver::satisfies(PhpVersion::TO_STRING[$phpVersion], $constraints)) {
                     continue;
                 }
 
                 $isExperimental = $phpVersion >= PhpVersion::DEV;
 
                 foreach (ComposerDependency::SUPPORTED as $dependency) {
-                    $generateMatrixEvent->include(
-                        new Job(
-                            $name,
-                            $command,
-                            $extensions,
-                            $dependency,
-                            $phpVersion,
-                            $isExperimental || $dependency === ComposerDependency::LOWEST
-                        )
-                    );
+                    foreach($oss as $os){
+                        $generateMatrixEvent->include(
+                            new Job(
+                                $name,
+                                $command,
+                                [...$requiredPhpExtensions, ...$extensions],
+                                $dependency,
+                                $phpVersion,
+                                $isExperimental || $dependency === ComposerDependency::LOWEST,
+                                $os
+                            )
+                        );
+                    }
                 }
             }
         }
+
+        $gitHubOutput = getenv('GITHUB_OUTPUT') ?: tempnam(
+            sys_get_temp_dir(),
+            'GITHUB_OUTPUT'
+        );
+
+        if (!is_string($gitHubOutput)) {
+            dispatchOutputEvent('GITHUB_OUTPUT environment variable not set.');
+
+            $generateMatrixEvent->stopPropagation();
+
+            return;
+        }
+
+        $matrix = sprintf('matrix=%s' . PHP_EOL, $generateMatrixEvent->getMatrix());
+
+        file_put_contents(
+            $gitHubOutput,
+            $matrix,
+            FILE_APPEND
+        );
+
+        dispatchOutputEvent($matrix);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function write(string $message): int
+    {
+        return dispatchOutputEvent($message)->isPropagationStopped() ? Command::FAILURE : Command::SUCCESS;
     }
 }
