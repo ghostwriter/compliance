@@ -28,7 +28,7 @@ final readonly class ComposerGlobalComposerJsonFilePathFinder
 
         if (trim($stderr) !== '') {
             throw new \RuntimeException(sprintf(
-                'Could not find composer global home path: %s%s%s',
+                'Could not find global composer json file path: %s%s%s%s',
                 PHP_EOL,
                 $stderr,
                 PHP_EOL,
