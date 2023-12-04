@@ -4,7 +4,6 @@ namespace Ghostwriter\Compliance\Factory;
 
 use Composer\InstalledVersions;
 use Ghostwriter\Compliance\Compliance;
-use Ghostwriter\Config\Contract\ConfigInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\FactoryInterface;
 use RuntimeException;
