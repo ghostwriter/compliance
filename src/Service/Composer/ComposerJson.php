@@ -13,11 +13,12 @@ use Composer\InstalledVersions;
 
 final readonly class ComposerJson {
     private Package $package;
-    private DependencyVersion $version;
-
     public function getVersion(): DependencyVersion
     {
-        return $this->version;
+        return new DependencyVersion(
+            $this->contents['version'] ??
+            InstalledVersions::getPrettyVersion($this->contents['name'])
+        );
     }
 
     private PhpVersionConstraint $phpVersionConstraint;
@@ -31,11 +32,6 @@ final readonly class ComposerJson {
         private array $contents,
     ) {
         $dependencyName = new DependencyName($contents['name']);
-
-        $this->version = new DependencyVersion(
-            $contents['version'] ??
-            InstalledVersions::getPrettyVersion($dependencyName->__toString())
-        );
 
         $this->package = new Package($dependencyName, $this->version);
 
