@@ -35,6 +35,9 @@
     </UnusedClass>
   </file>
   <file src="src/Compliance.php">
+    <PossiblyNullArgument>
+      <code>InstalledVersions::getPrettyVersion(self::PACKAGE)</code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>main</code>
     </PossiblyUnusedMethod>
@@ -86,6 +89,12 @@
     <UnusedClass>
       <code>ConfigEvent</code>
     </UnusedClass>
+  </file>
+  <file src="src/Event/GitHubEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
   </file>
   <file src="src/Event/MatrixEvent.php">
     <InvalidPropertyAssignmentValue>
@@ -159,7 +168,30 @@
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Listener/GitHubListener.php">
+    <MissingThrowsDocblock>
+      <code>getArgument</code>
+      <code>getArgument</code>
+    </MissingThrowsDocblock>
+    <MixedArgument>
+      <code>$eventName</code>
+      <code>$payload</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$eventName</code>
+      <code>$payload</code>
+    </MixedAssignment>
+    <UnusedClass>
+      <code>GitHubListener</code>
+    </UnusedClass>
+  </file>
   <file src="src/Listener/MatrixListener.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[tempnam(sys_get_temp_dir(),'GITHUB_OUTPUT')]]></code>
+    </ArgumentTypeCoercion>
+    <PossiblyFalseArgument>
+      <code><![CDATA[tempnam(sys_get_temp_dir(),'GITHUB_OUTPUT')]]></code>
+    </PossiblyFalseArgument>
     <UnnecessaryVarAnnotation>
       <code>string</code>
     </UnnecessaryVarAnnotation>
@@ -284,7 +316,6 @@
       <code>delete</code>
       <code>exists</code>
       <code>glob</code>
-      <code>missing</code>
       <code>move</code>
       <code>prepend</code>
     </PossiblyUnusedMethod>
@@ -303,17 +334,19 @@
       <code><![CDATA[$contents['name']]]></code>
       <code><![CDATA[$contents['require']]]></code>
       <code><![CDATA[$contents['require-dev']]]></code>
-      <code><![CDATA[$contents['version']]]></code>
       <code><![CDATA[$this->contents['license']]]></code>
+      <code><![CDATA[$this->contents['name']]]></code>
+      <code><![CDATA[$this->contents['version']]]></code>
     </InvalidArrayOffset>
     <MixedArgument>
       <code><![CDATA[$contents['name']]]></code>
       <code><![CDATA[$contents['require']['php'] ?? '*']]></code>
-      <code><![CDATA[$contents['version'] ??
-            InstalledVersions::getPrettyVersion($dependencyName->__toString())]]></code>
       <code>$name</code>
       <code>$name</code>
       <code><![CDATA[$this->contents['license']]]></code>
+      <code><![CDATA[$this->contents['name']]]></code>
+      <code><![CDATA[$this->contents['version'] ??
+            InstalledVersions::getPrettyVersion($this->contents['name'])]]></code>
       <code>$version</code>
       <code>$version</code>
     </MixedArgument>
@@ -337,8 +370,8 @@
       <code>$version</code>
     </MixedAssignment>
     <PossiblyNullArgument>
-      <code><![CDATA[$contents['version'] ??
-            InstalledVersions::getPrettyVersion($dependencyName->__toString())]]></code>
+      <code><![CDATA[$this->contents['version'] ??
+            InstalledVersions::getPrettyVersion($this->contents['name'])]]></code>
     </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>getComposerJsonPath</code>
@@ -504,6 +537,14 @@
     <ArgumentTypeCoercion>
       <code>$service</code>
     </ArgumentTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/SingleCommandApplicationDispatcher.php">
+    <MissingThrowsDocblock>
+      <code>dispatch</code>
+    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
