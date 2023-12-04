@@ -54,10 +54,12 @@ final readonly class MatrixListener implements EventListenerInterface
 
         $composerCacheFilesDirectory = '/home/runner/.cache/composer/files';
 
-        print_r([
-            $composerCacheFilesDirectory,
-            ($this->composerCacheFilesDirectoryFinder)()
-        ]);
+        //TODO: fix this ^^^^^
+        
+        // print_r([
+        //     $composerCacheFilesDirectory,
+        //     ($this->composerCacheFilesDirectoryFinder)()
+        // ]);
 
         $composerJsonPath = $this->composer->getJsonFilePath($root);
         $composerLockPath = $this->composer->getLockFilePath($root);
