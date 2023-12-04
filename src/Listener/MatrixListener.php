@@ -114,6 +114,9 @@ final readonly class MatrixListener implements EventListenerInterface
                 $isExperimental = $phpVersion >= PhpVersion::DEV;
 
                 foreach (ComposerDependency::SUPPORTED as $dependency) {
+                    
+                    $isExperimental = $isExperimental || $dependency === ComposerDependency::LOWEST;
+
                     foreach($oss as $os){
                         $generateMatrixEvent->include(
                             new Job(
@@ -125,7 +128,7 @@ final readonly class MatrixListener implements EventListenerInterface
                                 $composerLockPath,
                                 $dependency,
                                 $phpVersion,
-                                $isExperimental || $dependency === ComposerDependency::LOWEST,
+                                $isExperimental,
                                 $os
                             )
                         );
