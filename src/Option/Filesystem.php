@@ -210,7 +210,9 @@ final readonly class Filesystem
 
         chgrp($path, $group);
     }
-
+    /**
+     * @return bool
+     */
     public function glob(string $pattern, int $flags = 0): array
     {
         $paths = glob($pattern, $flags);
@@ -241,7 +243,9 @@ final readonly class Filesystem
             return is_file($directory . DIRECTORY_SEPARATOR . $file);
         });
     }
-
+    /**
+     * @return array<<missing>|array-key,<missing>>
+     */
     public function allFiles(string $directory): array
     {
         $files = [];
