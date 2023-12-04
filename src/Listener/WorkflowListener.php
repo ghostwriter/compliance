@@ -11,7 +11,6 @@ use Ghostwriter\Config\Contract\ConfigInterface;
 use Throwable;
 use function file_get_contents;
 use function file_put_contents;
-use function realpath;
 
 final readonly class WorkflowListener implements EventListenerInterface
 {
