@@ -21,7 +21,7 @@ final readonly class Job
         private string $dependency,
         private int    $php = PhpVersion::LATEST,
         private bool   $experimental = false,
-        private string $os = 'ubuntu-latest',
+        private string $os = 'ubuntu',
     ) {
     }
 
