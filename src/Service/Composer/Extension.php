@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Service\Composer;
 
-use Ghostwriter\Json\Json;
 
 final readonly class Extension implements \JsonSerializable, \Stringable, Dependency
 {
