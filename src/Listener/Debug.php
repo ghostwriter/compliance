@@ -14,7 +14,9 @@ final readonly class Debug implements EventListenerInterface
         private SymfonyStyle $symfonyStyle
     ) {
     }
-
+    /**
+     * @param EventInterface<bool> $event
+     */
     public function __invoke(EventInterface $event): void
     {
         $this->symfonyStyle->section($event::class);
