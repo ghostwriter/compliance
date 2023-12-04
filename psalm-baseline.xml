@@ -82,7 +82,7 @@
       <code>getOutput</code>
     </PossiblyUnusedMethod>
     <PossiblyUnusedReturnValue>
-      <code>EventInterface</code>
+      <code><![CDATA[EventInterface<bool>]]></code>
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Event/ConfigEvent.php">
@@ -90,11 +90,284 @@
       <code>ConfigEvent</code>
     </UnusedClass>
   </file>
-  <file src="src/Event/GitHubEvent.php">
+  <file src="src/Event/GitHub/GitHubCreateEvent.php">
     <MissingTemplateParam>
       <code>EventInterface</code>
       <code>EventTrait</code>
     </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubDeleteEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubDeploymentEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubDeploymentStatusEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubForkEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubGollumEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubIssueCommentEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubIssuesEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubLabelEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubMergeGroupEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubMilestoneEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubPageBuildEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubProjectCardEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubProjectColumnEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubProjectEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubPublicEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubPullRequestCommentEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubPullRequestEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubPullRequestReviewCommentEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubPullRequestReviewEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubPullRequestTargetEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubPushEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubRegistryPackageEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubReleaseEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubRepositoryDispatchEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubScheduleEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubStatusEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubWatchEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubWorkflowCallEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubWorkflowDispatchEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Event/GitHub/GitHubWorkflowRunEvent.php">
+    <MissingTemplateParam>
+      <code>EventInterface</code>
+      <code>EventTrait</code>
+    </MissingTemplateParam>
+    <UnusedProperty>
+      <code>$content</code>
+    </UnusedProperty>
   </file>
   <file src="src/Event/MatrixEvent.php">
     <InvalidPropertyAssignmentValue>
@@ -168,23 +441,6 @@
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Listener/GitHubListener.php">
-    <MissingThrowsDocblock>
-      <code>getArgument</code>
-      <code>getArgument</code>
-    </MissingThrowsDocblock>
-    <MixedArgument>
-      <code>$eventName</code>
-      <code>$payload</code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code>$eventName</code>
-      <code>$payload</code>
-    </MixedAssignment>
-    <UnusedClass>
-      <code>GitHubListener</code>
-    </UnusedClass>
-  </file>
   <file src="src/Listener/MatrixListener.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[tempnam(sys_get_temp_dir(),'GITHUB_OUTPUT')]]></code>
@@ -223,9 +479,14 @@
   </file>
   <file src="src/Option/Filesystem.php">
     <ArgumentTypeCoercion>
-      <code>$flags</code>
       <code>$levels</code>
     </ArgumentTypeCoercion>
+    <InvalidDocblock>
+      <code>public function allFiles(string $directory): array</code>
+    </InvalidDocblock>
+    <MismatchingDocblockReturnType>
+      <code>bool</code>
+    </MismatchingDocblockReturnType>
     <MissingThrowsDocblock>
       <code><![CDATA[throw new \RuntimeException(sprintf(
                 'Filesystem::append() failed to write to path: %s',
@@ -272,10 +533,6 @@
                 $directory
             ));]]></code>
       <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::glob() failed to glob pattern: %s',
-                $pattern
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
                 'Filesystem::move() failed because the source path does not exist: %s',
                 $source
             ));]]></code>
@@ -299,6 +556,9 @@
       <code>$directory</code>
       <code>$file</code>
     </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>bool</code>
+    </MixedInferredReturnType>
     <MixedOperand>
       <code>$file</code>
     </MixedOperand>
@@ -319,6 +579,10 @@
       <code>move</code>
       <code>prepend</code>
     </PossiblyUnusedMethod>
+    <UnusedParam>
+      <code>$flags</code>
+      <code>$pattern</code>
+    </UnusedParam>
   </file>
   <file src="src/Service/Composer.php">
     <PossiblyUnusedMethod>
@@ -544,7 +808,18 @@
   <file src="src/SingleCommandApplicationDispatcher.php">
     <MissingThrowsDocblock>
       <code>dispatch</code>
+      <code>getArgument</code>
+      <code>getArgument</code>
     </MissingThrowsDocblock>
+    <MixedArgument>
+      <code>$eventName</code>
+      <code>$eventName</code>
+      <code>$payload</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$eventName</code>
+      <code>$payload</code>
+    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
