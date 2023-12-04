@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Command;
 
 use Ghostwriter\Compliance\Compliance;
-use Ghostwriter\Compliance\Event\ConfigEvent;
 use Ghostwriter\Compliance\Event\OutputEvent;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
