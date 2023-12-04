@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Command;
 
-use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Event\MatrixEvent;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
