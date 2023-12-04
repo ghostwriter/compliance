@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Option;
 
 use Ghostwriter\Compliance\Service\Process;
-use function compact;
-use Ghostwriter\Compliance\Option\ComposerGlobalHomePathFinder;
-use function file_exists;
-use function getenv;
-use function realpath;
-use function implode;
 use function trim;
 use function sprintf;
 use Throwable;
