@@ -33,7 +33,7 @@ final readonly class ComposerJson {
     ) {
         $dependencyName = new DependencyName($contents['name']);
 
-        $this->package = new Package($dependencyName, $this->version);
+        $this->package = new Package($dependencyName, new DependencyVersion('dev-main'));
 
         $require = $contents['require'] ?? [];
 
