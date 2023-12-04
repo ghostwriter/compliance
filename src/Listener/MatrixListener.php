@@ -77,7 +77,7 @@ final readonly class MatrixListener implements EventListenerInterface
             iterator_to_array($composerJson->getRequiredPhpExtensions())
         );
 
-        $oss = ['macos-latest','ubuntu-latest','windows-latest'];
+        $oss = ['macos','ubuntu','windows'];
 
         foreach ($this->container->tagged(ToolInterface::class) as $tool) {
             if (!$tool->isPresent()) {
