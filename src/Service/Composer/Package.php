@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Service\Composer;
 
-use Ghostwriter\Compliance\Service\Composer\Version;
 use Ghostwriter\Json\Json;
 
 final readonly class Package implements \JsonSerializable, \Stringable, Dependency
