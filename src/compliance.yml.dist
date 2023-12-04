@@ -1,15 +1,19 @@
 name: Automation
 
 on:
-  pull_request:
-  push:
-    branches:
-      - "main"
-      - "[0-9]+.[0-9]+.x"
-      - "v[0-9]+"
+  # pull_request:
+  # push:
+  #   branches:
+  #     - "main"
+  #     - "[0-9]+.[0-9]+.x"
+  #     - "v[0-9]+"
   schedule:
     - cron: "0 * * * *" # Runs hourly
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Docker Build"]
+    types:
+      - completed
   workflow_call:
     secrets:
       GPG_PRIVATE_KEY:
@@ -49,9 +53,9 @@ jobs:
         with:
           command: matrix
   qa:
-    name: "${{ matrix.name }} on PHP ${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency }}"
+    name: "${{ matrix.name }} on ${{ matrix.os }} with PHP ${{ matrix.php }} and Composer ${{ matrix.dependency }}"
     needs: [matrix]
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}-latest
     continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental }}
     strategy:
       fail-fast: false
@@ -75,14 +79,10 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache dependencies
+      - name: Cache composer dependencies
         uses: actions/cache@v3
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
+          path: ${{ matrix.composerCacheFilesDirectory }}
           key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-
 
@@ -98,9 +98,8 @@ jobs:
         run: ${{ matrix.runCommand }}
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY }}
+          INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY || secrets.STRYKER_DASHBOARD_API_KEY }}
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
