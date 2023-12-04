@@ -53,9 +53,9 @@ jobs:
         with:
           command: matrix
   qa:
-    name: "${{ matrix.name }} | php-${{ matrix.php }}-${{ matrix.dependency }}-${{ matrix.os }}]"
+    name: "${{ matrix.name }} [${{ matrix.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}]"
     needs: [matrix]
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}-latest
     continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental }}
     strategy:
       fail-fast: false
