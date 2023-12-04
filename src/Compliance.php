@@ -4,11 +4,19 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance;
 
+use Composer\InstalledVersions;
+use Ghostwriter\Compliance\Event\GitHubEvent;
 use Ghostwriter\Compliance\ServiceProvider\ApplicationServiceProvider;
 use Ghostwriter\Container\Container;
+use Ghostwriter\Environment\EnvironmentVariables;
+use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\SingleCommandApplication;
 use Throwable;
 
 final class Compliance
@@ -59,8 +67,7 @@ CODE_SAMPLE;
     public static function main(
         ?InputInterface $input = null,
         ?OutputInterface $output = null,
-    ): void
-    {
+    ): void {
         $container = Container::getInstance();
 
         $container->provide(ApplicationServiceProvider::class);
@@ -74,6 +81,27 @@ CODE_SAMPLE;
         }
 
         $container->get(Application::class)
-                ->run($container->get(InputInterface::class), $container->get(OutputInterface::class));
+            ->run($container->get(InputInterface::class), $container->get(OutputInterface::class));
+
+        // wip
+        $environmentVariables = $container->get(EnvironmentVariables::class);
+        (new SingleCommandApplication(self::NAME))
+            ->setVersion(InstalledVersions::getPrettyVersion(self::PACKAGE))
+            ->addArgument('event', InputArgument::REQUIRED, 'The name of the event that triggered the workflow.')
+            ->addArgument('payload', InputArgument::REQUIRED, 'The path to the file on the runner that contains the full event webhook payload.')
+            ->setCode(
+                // static fn(InputInterface $input, OutputInterface $output) => $container->get(DispatcherInterface::class)
+                //     ->dispatch(new GitHubEvent($input, $output))
+                //     ->isPropagationStopped() ? Command::FAILURE : Command::SUCCESS
+                $container->get(SingleCommandApplicationDispatcher::class)
+            )
+            ->run(
+                new ArrayInput([
+                    'event' => $environmentVariables->get('GITHUB_EVENT_NAME', 'testing'),
+                    'payload' => $environmentVariables->get('GITHUB_EVENT_PATH', '/github/workflow/event.json')
+                ]),
+                $container->get(OutputInterface::class)
+            );
+        // end wip
     }
 }
