@@ -8,8 +8,6 @@ use Ghostwriter\Compliance\Service\Finder;
 use Ghostwriter\Compliance\ToolInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ServiceProviderInterface;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use function dirname;
 use function sprintf;
 use function str_contains;
