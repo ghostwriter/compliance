@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Option;
 
-use Ghostwriter\Compliance\Option\ComposerCacheFilesDirectoryFinder;
 
 final readonly class Job
 {
