@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
-use Ghostwriter\EventDispatcher\Dispatcher;
 use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
 use Ghostwriter\EventDispatcher\Interface\EventInterface;
 use Ghostwriter\EventDispatcher\Trait\EventTrait;
@@ -43,6 +42,10 @@ abstract class AbstractEvent implements EventInterface
     {
         return $this->dispatcher;
     }
+    /**
+     * @return EventInterface<bool>
+     * @param EventInterface<bool> $event
+     */
     public function dispatch(EventInterface $event): EventInterface
     {
         return $this->dispatcher->dispatch($event);
