@@ -108,7 +108,7 @@
             "@putenv XDEBUG_MODE=coverage",
             "vendor/ghostwriter/coding-standard/tools/infection --verbose"
         ],
-        "missing-returntypes": "vendor/ghostwriter/coding-standard/tools/psalm --alter --issues=MissingReturnType",
+        "missing-return-types": "vendor/ghostwriter/coding-standard/tools/psalm --alter --issues=MissingReturnType",
         "normalize": "vendor/ghostwriter/coding-standard/tools/composer-normalize --no-check-lock",
         "phpbench": "vendor/ghostwriter/coding-standard/tools/phpbench run",
         "phpunit": "vendor/ghostwriter/coding-standard/tools/phpunit --colors=always --do-not-cache-result",
