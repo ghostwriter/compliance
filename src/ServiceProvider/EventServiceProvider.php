@@ -6,7 +6,6 @@ namespace Ghostwriter\Compliance\ServiceProvider;
 
 use Ghostwriter\Compliance\Extension\ListenerProviderExtension;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\ExceptionInterface;
 use Ghostwriter\Container\Interface\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
 use Ghostwriter\EventDispatcher\Interface\ListenerProviderInterface;
