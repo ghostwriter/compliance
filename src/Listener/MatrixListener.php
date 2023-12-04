@@ -25,6 +25,7 @@ use Ghostwriter\Compliance\Service\Composer\ComposerJsonReader;
 use Ghostwriter\Compliance\Service\Composer\Extension;
 use Ghostwriter\Compliance\Tool\PHPUnit;
 use Ghostwriter\Compliance\Option\ComposerCacheFilesDirectoryFinder;
+use Ghostwriter\Environment\EnvironmentVariables;
 
 final readonly class MatrixListener implements EventListenerInterface
 {
@@ -38,6 +39,7 @@ final readonly class MatrixListener implements EventListenerInterface
         private ContainerInterface $container,
         private Composer           $composer,
         private ComposerCacheFilesDirectoryFinder $composerCacheFilesDirectoryFinder,
+        private EnvironmentVariables $environmentVariables,
     )
     {
     }
@@ -132,18 +134,7 @@ final readonly class MatrixListener implements EventListenerInterface
             }
         }
 
-        $gitHubOutput = getenv('GITHUB_OUTPUT') ?: tempnam(
-            sys_get_temp_dir(),
-            'GITHUB_OUTPUT'
-        );
-
-        if (!is_string($gitHubOutput)) {
-            dispatchOutputEvent('GITHUB_OUTPUT environment variable not set.');
-
-            $generateMatrixEvent->stopPropagation();
-
-            return;
-        }
+        $gitHubOutput = $this->environmentVariables->get('GITHUB_OUTPUT', tempnam(sys_get_temp_dir(),'GITHUB_OUTPUT'));
 
         $matrix = sprintf('matrix=%s' . PHP_EOL, $generateMatrixEvent->getMatrix());
 
