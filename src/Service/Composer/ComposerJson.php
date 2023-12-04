@@ -7,7 +7,6 @@ namespace Ghostwriter\Compliance\Service\Composer;
 use Generator;
 use Ghostwriter\Compliance\Service\Composer\RequireList;
 use Ghostwriter\Compliance\Service\RequirePhp;
-use Ghostwriter\Compliance\Service\ConfigPlatformPhp;
 use Ghostwriter\Compliance\Service\PhpVersionConstraint;
 use Composer\InstalledVersions;
 
