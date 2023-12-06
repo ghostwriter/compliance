@@ -72,7 +72,7 @@ jobs:
           coverage: pcov
           ini-values: assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On
           php-version: ${{ matrix.php }}
-          extensions: ${{ join(matrix.extensions, ', ') }}
+          extensions: :php-psr, ${{ join(matrix.extensions, ', ') }}
 
       - name: Setup problem matchers
         run: |
