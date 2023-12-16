@@ -238,7 +238,7 @@ final readonly class PhpVersion
         self::PHP_81,
         self::PHP_82,
         self::PHP_83,
-        self::PHP_84,
+        // self::PHP_84,
     ];
 
     /**
