@@ -40,7 +40,7 @@
         "composer-plugin-api": "^2.2.2",
         "composer-runtime-api": "^2.2.2",
         "composer/semver": "^3.4",
-        "ghostwriter/clock": "^1.1",
+        "ghostwriter/clock": "^2.0",
         "ghostwriter/config": "^0.4",
         "ghostwriter/container": "^2.0",
         "ghostwriter/environment": "^2.0",
