@@ -6,14 +6,14 @@ namespace Ghostwriter\Compliance\Service\Composer;
 
 use Composer\InstalledVersions;
 use Generator;
-use Ghostwriter\Compliance\Service\PhpVersionConstraint;
+use Ghostwriter\Compliance\Service\PhpVersionConstraintInterface;
 use Ghostwriter\Compliance\Service\RequirePhp;
 
 final readonly class ComposerJson
 {
     private Package $package;
 
-    private PhpVersionConstraint $phpVersionConstraint;
+    private PhpVersionConstraintInterface $phpVersionConstraint;
 
     private RequireList $require;
 
@@ -66,7 +66,7 @@ final readonly class ComposerJson
         return $this->package;
     }
 
-    public function getPhpVersionConstraint(): PhpVersionConstraint
+    public function getPhpVersionConstraint(): PhpVersionConstraintInterface
     {
         return $this->phpVersionConstraint;
     }
