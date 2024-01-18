@@ -110,6 +110,9 @@ final readonly class MatrixListener implements EventListenerInterface
                 }
 
                 $isPhpVersionExperimental = PhpVersion::isExperimental($phpVersion);
+                if ($isPhpVersionExperimental) {
+                    continue;
+                }
 
                 foreach (ComposerDependency::cases() as $composerDependency) {
                     $isComposerDependencyExperimental = $isPhpVersionExperimental
