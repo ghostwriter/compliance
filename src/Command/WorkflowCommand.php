@@ -10,12 +10,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Throwable;
 
-#[AsCommand(
-    name: 'workflow',
-    description: 'Creates a "automation.yml" workflow file.',
-)]
+#[AsCommand(name: 'workflow', description: 'Creates a "automation.yml" workflow file.',)]
 final class WorkflowCommand extends AbstractCommand
 {
     protected function configure(): void
@@ -37,8 +33,6 @@ final class WorkflowCommand extends AbstractCommand
 
     /**
      * Execute the command.
-     *
-     * @throws Throwable
      *
      * @return int 0 if everything went fine, or an exit code
      */
