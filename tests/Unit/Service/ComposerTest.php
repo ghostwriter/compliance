@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Tests\Unit\Service;
+namespace Ghostwriter\ComplianceTests\Unit\Service;
 
 use Ghostwriter\Compliance\Service\Composer;
-use Ghostwriter\Compliance\Tests\Unit\AbstractTestCase;
+use Ghostwriter\ComplianceTests\Unit\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use function getcwd;
 
