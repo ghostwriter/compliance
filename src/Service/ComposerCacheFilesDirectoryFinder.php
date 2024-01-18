@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Option;
+namespace Ghostwriter\Compliance\Service;
 
-use Ghostwriter\Compliance\Service\Process;
-use function trim;
+use RuntimeException;
+use const PHP_EOL;
 use function sprintf;
-use Throwable;
+use function trim;
 
 final readonly class ComposerCacheFilesDirectoryFinder
 {
@@ -18,22 +18,19 @@ final readonly class ComposerCacheFilesDirectoryFinder
     ) {
     }
 
-    /**
-     * @throws Throwable
-     */
     public function __invoke(): string
     {
-        [$stdout, $stderr] = $this->process->execute([
-            ($this->composerExecutableFinder)(), 
-            'config', 
+        [$exitCode, $stdout, $stderr] = $this->process->execute([
+            ($this->composerExecutableFinder)(),
+            'config',
             'cache-files-dir',
             '--no-interaction',
         ]);
 
         $output = trim($stdout);
 
-        if ($output === '') {
-            throw new \RuntimeException(sprintf(
+        if ($exitCode !== 0 || $output === '') {
+            throw new RuntimeException(sprintf(
                 'Could not find composer cache files directory: %s%s',
                 PHP_EOL,
                 $stderr,
