@@ -4,36 +4,56 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Tool;
 
+use Ghostwriter\Compliance\EnvironmentVariables;
+use Ghostwriter\Compliance\Service\Filesystem;
 use Ghostwriter\Compliance\ToolInterface;
-use Symfony\Component\Finder\Finder;
 use function getcwd;
-use function getenv;
+use function in_array;
+use function mb_strtolower;
+use function preg_replace;
+use function str_replace;
 
 abstract class AbstractTool implements ToolInterface
 {
     public function __construct(
-        private Finder $finder
+        private Filesystem $filesystem,
+        private EnvironmentVariables $environmentVariables
     ) {
-        $this->finder = clone $finder;
     }
 
-    abstract public function configuration(): array;
+    public function command(): string
+    {
+        return 'composer ' . str_replace(
+            'p-h-p-',
+            'php',
+            mb_strtolower(preg_replace('#([a-zA-Z])(?=[A-Z])#', '$1-', $this->name()))
+        );
+    }
 
     public function extensions(): array
     {
-        return ['xdebug'];
+        return ['pcov'];
     }
 
     public function isPresent(): bool
     {
-        $path = getenv('GITHUB_WORKSPACE') ?: getcwd();
+        $configuration = $this->configuration();
 
-        return $this->finder->files()
-            ->in($path)
-            ->depth(0)
-            ->sortByName()
-            ->name($this->configuration())
-            ->hasResults();
+        foreach ($this->filesystem->findIn(
+            $this->environmentVariables->get('GITHUB_WORKSPACE', getcwd())
+        ) as $file) {
+            if (! $file->isFile()) {
+                continue;
+            }
+
+            if (! in_array($file->getFilename(), $configuration, true)) {
+                continue;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     public function name(): string
@@ -41,18 +61,5 @@ abstract class AbstractTool implements ToolInterface
         return str_replace(__NAMESPACE__ . '\\', '', static::class);
     }
 
-    public function command(): string
-    {
-        return 'composer ' . str_replace(
-                'p-h-p-',
-                'php',
-                mb_strtolower(
-                    preg_replace(
-                    '#([a-zA-Z])(?=[A-Z])#',
-                    '$1-',
-                    $this->name()
-                )
-            )
-        );
-    }
+    abstract public function configuration(): array;
 }
