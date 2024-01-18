@@ -19,7 +19,6 @@ final readonly class ComposerExecutableFinderFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, array $arguments = []): ComposerExecutableFinder
     {
         return new ComposerExecutableFinder(
-            $container->get(Process::class),
             $container->get(WhereExecutableFinder::class),
             PHP_OS_FAMILY === 'Windows'
         );
