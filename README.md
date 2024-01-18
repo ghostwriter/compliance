@@ -6,13 +6,63 @@
 [![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/compliance)](https://packagist.org/packages/ghostwriter/compliance)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/compliance?color=blue)](https://packagist.org/packages/ghostwriter/compliance)
 
-Compliance Automation for PHP - Automatically configure and execute multiple `CI/CD` & `QA Testing` tools on any platform via `GitHub Action`.
+`Compliance` - `CI/CD` & `QA Testing`  Test Automation for `PHP` via `GitHub Actions`.
 
-> **Warning**
-> 
+> [!CAUTION]
+>
 > This project is not finished yet, work in progress.
 >
 
+## Todo
+
+- check the composer scripts section to see if the commands exists,
+  - and report error/warning if not
+  - and skip the job if not
+
+- all tools should have a matching composer script name, i have already hardcoded
+  the composer script for now, but this should be configurable (kebab case)
+  - the command will be `composer compliance:composer-require-checker`
+    - or `composer compliance:phpunit`
+      - I like the `compliance:` prefix, that way if you have a `phpunit` script,
+      - it will not cause a conflict with the `compliance:phpunit` script
+
+- I will import the release automation into this project
+- we will import the `composer.json` and `composer.lock` validation into this project
+  - we will use the extensions field from the `composer.json` file to determine which PHP extensions to install
+  - pass the extensions list as an argument to the docker image/workflow via shivammathur/setup-php@v2
+     (looks like this part is already done, but we need to test it.)
+  - i did most of this... but i need to test it.
+  - we have everything we need to extract information from both composer files
+
+> [!INFO]
+>
+> Woot woot!! we did it! we have a working prototype! 🎉
+>
+
+-- we need to import gpg keys from GitHub secrets `GPG_KEY`,`GPG_FINGERPRINT`
+--- to tag the release with a gpg signature
+--- to sign binaries with a gpg signature
+--- to sign the git commit with a gpg signature (automated composer.json update, if all tests pass)
+
+
+- we need to add a command to add these commannds to the users composer.json file,
+ for each supported tools they have in their composer.json file [`require` and `require-dev`].
+ - if it does not exist, we will add it to the `scripts` section.
+ - if it exists, continue.
+
+```json
+{
+    "scripts": {
+        "compliance:composer-require-checker": [
+            "composer-require-checker check --config-file=composer-require-checker.json"
+        ],
+        "compliance:phpunit": [
+              "@phpunit --configuration=phpunit.xml --coverage-clover=coverage.xml"
+        ]
+    }
+}
+```
+  
 ## Workflow
 
 ```yml
@@ -21,13 +71,13 @@ name: Compliance
 
 on:
   pull_request:
-    branches:
-      - "**"
   push:
     branches:
       - "main"
       - "[0-9]+.[0-9]+.x" # 1.2.x
       - "v[0-9]+" # v1
+  schedule:
+    - cron: "0 * * * *" # Runs hourly
   workflow_dispatch: # Manually Trigger workflow
 
 jobs:
@@ -50,14 +100,15 @@ composer require ghostwriter/compliance --dev
 ## Usage
 
 ```bash
-# Create `.github/workflows/compliance.yml` workflow file
-compliance workflow
-
-# Create `./compliance.php` configuration file
-compliance config
-
 # Determine CI Jobs for GitHub Actions
-compliance matrix
+# compliance matrix (old)
+compliance run matrix
+compliance run check
+compliance run workflow
+
+# --workspace|w : Specify the workspace directory
+# --debug|d : Enable debug mode
+# --help|h : Display this help message
 
 # Executes a specific Job
 compliance check {job}
@@ -68,7 +119,7 @@ compliance check {job}
 ``` bash
 # Install from the command line:
 
-docker pull ghcr.io/ghostwriter/compliance:v1
+docker pull ghcr.io/ghostwriter/compliance:v2
 
 # Usage from the command line:
 
@@ -90,7 +141,6 @@ Ghostwriter\Compliance\Tool\ECS;
 Ghostwriter\Compliance\Tool\Infection;
 Ghostwriter\Compliance\Tool\PHPBench;
 Ghostwriter\Compliance\Tool\PHPCS;
-Ghostwriter\Compliance\Tool\PHPCSFixer;
 Ghostwriter\Compliance\Tool\PHPUnit;
 Ghostwriter\Compliance\Tool\Psalm;
 Ghostwriter\Compliance\Tool\Rector;
@@ -117,8 +167,10 @@ If you discover any security related issues, please email `nathanael.esayeas@pro
 ## Credits
 
 - [Nathanael Esayeas](https://github.com/ghostwriter)
+- [`composer`](https://github.com/composer)
 - [`mlocati/docker-php-extension-installer`](https://github.com/mlocati/docker-php-extension-installer)
 - [`shivammathur/setup-php`](https://github.com/shivammathur/setup-php)
+- [`symfony`](https://github.com/symfony)
 - [All Contributors](https://github.com/ghostwriter/compliance/contributors)
 
 ## License
