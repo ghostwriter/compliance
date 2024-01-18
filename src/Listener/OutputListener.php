@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Listener;
 
-use Ghostwriter\Compliance\Contract\EventListenerInterface;
 use Ghostwriter\Compliance\Event\OutputEvent;
+use Ghostwriter\Compliance\Interface\EventListenerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 final readonly class OutputListener implements EventListenerInterface
