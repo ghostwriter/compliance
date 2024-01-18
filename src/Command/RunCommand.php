@@ -49,7 +49,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\StyleInterface;
-use function getcwd;
 use function sprintf;
 
 final class RunCommand extends Command
@@ -102,7 +101,6 @@ final class RunCommand extends Command
         // This file is unique to the current step and changes for each step in a job.
         // For example, /home/runner/work/_temp/_runner_file_commands/set_env_87406d6e-4979-4d42-98e1-3dab1f48b13a.
         // For more information, see "Workflow commands for GitHub Actions."
-
     }
 
     /**
