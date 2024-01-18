@@ -6,6 +6,7 @@ namespace Ghostwriter\Compliance;
 
 use Ghostwriter\Compliance\Exception\VariableNotFoundException;
 use function array_key_exists;
+use function getenv;
 
 final readonly class EnvironmentVariables
 {
@@ -36,7 +37,7 @@ final readonly class EnvironmentVariables
             $variables[$name] = (string) $value;
         }
 
-        foreach (getenv() ?:[] as $name => $value) {
+        foreach (getenv() ?: [] as $name => $value) {
             $variables[$name] = (string) $value;
         }
 
