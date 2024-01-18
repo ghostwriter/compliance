@@ -1,33 +1,21 @@
-# Definition of the GitHub action
-# as per https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action
+# Definition of the GitHub action as per https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action
+#
+# Uses GITHUB_TOKEN, GPG_PRIVATE_KEY, INFECTION_DASHBOARD_API_KEY, CODECOV_TOKEN environment variables
+# see https://docs.github.com/en/actions/reference/environment-variables
 
 name: 'ghostwriter/compliance'
-description: 'Compliance Automation for PHP - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.'
+description: 'Compliance - CI/CD & QA Test Automation for PHP via GitHub Actions.'
 
-author: ghostwriter
+author: Nathanael Esayeas (@ghostwriter)
 
 branding:
   icon: triangle
   color: green
 
-inputs:
-  command:
-    description: |
-      Command to execute: one of
-       * `matrix`
-       * `check`
-    required: true
-  job:
-    description: 'JSON string representing the job to run.'
-    required: false
-
 outputs:
   matrix:
-    description: 'JSON string representing a job matrix for Github Actions.'
+    description: 'JSON string: Job matrix for Github Actions.'
 
 runs:
-  args:
-    - ${{ inputs.command }}
-    - ${{ inputs.job }}
   image: docker://ghcr.io/ghostwriter/compliance:v1
   using: docker
