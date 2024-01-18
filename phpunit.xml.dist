@@ -39,4 +39,10 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="CI" value="false" />
+        <env name="GITHUB_EVENT_NAME" value="schedule" />
+        <env name="GITHUB_EVENT_PATH" value="/github/workflow/event.json" />
+        <env name="GITHUB_WORKSPACE" value="/home/runner/work/ghostwriter/compliance" />
+    </php>
 </phpunit>
