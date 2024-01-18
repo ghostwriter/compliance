@@ -15,4 +15,9 @@ final readonly class RequirePhp implements PhpVersionConstraint
     {
         return $this->version;
     }
+
+    public static function new(string $phpVersion): self
+    {
+        return new self($phpVersion);
+    }
 }
