@@ -36,6 +36,10 @@ final readonly class EnvironmentVariables
             $variables[$name] = (string) $value;
         }
 
+        foreach (getenv() ?:[] as $name => $value) {
+            $variables[$name] = (string) $value;
+        }
+
         return new self($variables);
     }
 }
