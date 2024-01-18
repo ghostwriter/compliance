@@ -66,18 +66,21 @@ final class RunCommand extends Command
     protected function configure(): void
     {
         $this->setDescription('Generates a Job matrix for Github Actions.');
+
+        // 'compliance.command.matrix'
         $this->addArgument(
             'event',
             InputArgument::OPTIONAL,
             'The name of the event that triggered the workflow.',
-            $this->environmentVariables->get('GITHUB_EVENT_NAME', 'compliance.command.matrix')
+            $this->environmentVariables->get('GITHUB_EVENT_NAME')
         );
 
+        // '/github/workflow/event.json'
         $this->addArgument(
             'payload',
             InputArgument::OPTIONAL,
             'The path to the file on the runner that contains the full event webhook payload.',
-            $this->environmentVariables->get('GITHUB_EVENT_PATH', '/github/workflow/event.json')
+            $this->environmentVariables->get('GITHUB_EVENT_PATH')
         );
 
         $this->addOption(
