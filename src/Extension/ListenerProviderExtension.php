@@ -4,14 +4,21 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Extension;
 
+use Ghostwriter\Compliance\EnvironmentVariables;
+use Ghostwriter\Compliance\Interface\EventListenerInterface;
 use Ghostwriter\Compliance\Listener\Debug;
-use Ghostwriter\Compliance\Service\Finder;
-use Ghostwriter\Config\Contract\ConfigInterface;
+use Ghostwriter\Compliance\Service\Filesystem;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ExtensionInterface;
 use Ghostwriter\EventDispatcher\Interface\EventInterface;
 use Ghostwriter\EventDispatcher\ListenerProvider;
-use Throwable;
+use const DIRECTORY_SEPARATOR;
+use function dirname;
+use function is_a;
+use function sprintf;
+use function str_contains;
+use function str_ends_with;
+use function str_replace;
 
 /**
  * @implements ExtensionInterface<ListenerProvider>
@@ -19,47 +26,49 @@ use Throwable;
 final readonly class ListenerProviderExtension implements ExtensionInterface
 {
     public function __construct(
-        private Finder $finder,
+        private EnvironmentVariables $environmentVariables,
+        private Filesystem $filesystem,
     ) {
     }
+
     /**
      * @param ListenerProvider $service
-     *
-     * @throws Throwable
      */
     public function __invoke(ContainerInterface $container, object $service): ListenerProvider
     {
-        $config = $container->get(ConfigInterface::class);
-
-        $debug = (bool) $config->get('app.debug', false);
-        if ($debug) {
+        if ($this->environmentVariables->get('GITHUB_DEBUG', '0') === '1') {
             $service->bind(EventInterface::class, Debug::class);
         }
 
-        $files = $this->finder->findIn(dirname(__DIR__) . '/Listener/');
-        foreach ($files as $file) {
+        foreach ($this->filesystem->findIn(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Listener') as $file) {
             $path = $file->getPathname();
 
-            if (str_contains($path, 'Abstract') || !str_ends_with($path, 'Listener.php')) {
+            $skip = match (true) {
+                default => false,
+                ! str_ends_with($path, '.php'),
+                str_contains($path, 'Abstract'),
+                str_ends_with($path, 'Trait.php') => true,
+            };
+
+            if ($skip) {
                 continue;
             }
 
-            $service->bind(
-                sprintf(
-                    '%s%sEvent',
-                    str_replace(
-                        'Extension', 'Event', __NAMESPACE__ . '\\'
-                    ),
-                    $file->getBasename('Listener.php')
-                ),
-                sprintf(
-                    '%s\%s',
-                    str_replace(
-                        'Extension', 'Listener', __NAMESPACE__
-                    ),
-                    $file->getBasename('.php')
-                )
+            $listener = sprintf(
+                '%s\%s',
+                str_replace('Extension', 'Listener', __NAMESPACE__),
+                $file->getBasename('.php')
             );
+
+            if ($listener === Debug::class) {
+                continue;
+            }
+
+            if (! is_a($listener, EventListenerInterface::class, true)) {
+                continue;
+            }
+
+            $service->listen($listener);
         }
 
         return $service;
