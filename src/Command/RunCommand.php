@@ -85,12 +85,7 @@ final class RunCommand extends Command
             'payload',
             InputArgument::OPTIONAL,
             'The path to the file on the runner that contains the full event webhook payload.',
-            $this->environmentVariables->has('CI') ?
-                $this->environmentVariables->get('GITHUB_EVENT_PATH', '/github/workflow/event.json') :
-                $this->environmentVariables->get(
-                    'GITHUB_EVENT_PATH',
-                    dirname(__DIR__, 2) . '/tests/Fixture/payload.json'
-                )
+            $this->environmentVariables->get('GITHUB_EVENT_PATH', '/github/workflow/event.json')
         );
 
         $this->addOption(
