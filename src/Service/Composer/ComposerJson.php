@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Service\Composer;
 
-use Generator;
-use Ghostwriter\Compliance\Service\Composer\RequireList;
-use Ghostwriter\Compliance\Service\RequirePhp;
-use Ghostwriter\Compliance\Service\PhpVersionConstraint;
 use Composer\InstalledVersions;
+use Generator;
+use Ghostwriter\Compliance\Service\PhpVersionConstraint;
+use Ghostwriter\Compliance\Service\RequirePhp;
 
-final readonly class ComposerJson {
+final readonly class ComposerJson
+{
     private Package $package;
-    public function getVersion(): DependencyVersion
-    {
-        return new DependencyVersion(
-            $this->contents['version'] ??
-            InstalledVersions::getPrettyVersion($this->contents['name'])
-        );
-    }
 
     private PhpVersionConstraint $phpVersionConstraint;
-    private array $require;
-    private array $requireDev;
+
+    private RequireList $require;
+
+    private RequireDevList $requireDev;
+
     /**
      * @param array<int,mixed> $contents
      */
@@ -30,31 +26,11 @@ final readonly class ComposerJson {
         private string $path,
         private array $contents,
     ) {
-        $dependencyName = new DependencyName($contents['name']);
+        $this->package = new Package(new DependencyName($contents['name']), new DependencyVersion('dev-main'));
 
-        $this->package = new Package($dependencyName, new DependencyVersion('dev-main'));
-
-        $require = $contents['require'] ?? [];
-
-        foreach($require as $name => $version) {
-            $dependencyName = new DependencyName($name);
-            $dependencyVersion = new DependencyVersion($version);
-
-            $require[$name] = $dependencyName->isPhpExtension()
-            ? new Extension($dependencyName, $dependencyVersion)
-            : new Package($dependencyName, $dependencyVersion);
-        }
-
-        $requireDev = $contents['require-dev'] ?? [];
-
-        foreach($requireDev as $name => $version) {
-            $dependencyName = new DependencyName($name);
-            $dependencyVersion = new DependencyVersion($version);
-
-            $requireDev[$name] = $dependencyName->isPhpExtension()
-            ? new Extension($dependencyName, $dependencyVersion)
-            : new Package($dependencyName, $dependencyVersion);
-        }
+        $this->phpVersionConstraint = RequirePhp::new($contents['require']['php'] ?? '*');
+        $this->require = RequireList::new($contents['require'] ?? []);
+        $this->requireDev = RequireDevList::new($contents['require-dev'] ?? []);
 
         // $configPlatformPhp = $contents['config']['platform']['php'] ?? null;
 
@@ -62,26 +38,16 @@ final readonly class ComposerJson {
         //     ? new RequirePhp($contents['require']['php'] ?? '*')
         //     : new ConfigPlatformPhp($configPlatformPhp);
 
-        $this->phpVersionConstraint = new RequirePhp($contents['require']['php'] ?? '*');
-
-        $this->require = $require;
-        $this->requireDev = $requireDev;
-
         // dd([
         //     $this
         // ]);
     }
-    
 
-    public function getPhpVersionConstraint(): PhpVersionConstraint
-    {
-        return $this->phpVersionConstraint;
-    }
-    
     public function getComposerJsonPath(): string
     {
         return $this->path;
     }
+
     /**
      * @return array<int,mixed>
      */
@@ -90,24 +56,29 @@ final readonly class ComposerJson {
         return $this->contents;
     }
 
+    public function getLicense(): License
+    {
+        return License::new($this->contents['license']);
+    }
+
     public function getPackage(): Package
     {
         return $this->package;
     }
 
-    public function getLicense(): License
+    public function getPhpVersionConstraint(): PhpVersionConstraint
     {
-        return new License($this->contents['license']);
+        return $this->phpVersionConstraint;
     }
 
     public function getRequire(): RequireList
     {
-        return new RequireList($this->require);
+        return $this->require;
     }
 
     public function getRequireDev(): RequireDevList
     {
-        return new RequireDevList($this->requireDev);
+        return $this->requireDev;
     }
 
     /**
@@ -130,6 +101,14 @@ final readonly class ComposerJson {
 
             yield $dependency;
         }
+    }
+
+    public function getVersion(): DependencyVersion
+    {
+        return new DependencyVersion(
+            $this->contents['version'] ??
+            InstalledVersions::getPrettyVersion($this->contents['name'])
+        );
     }
 
     // public function getAutoload(): Autoload
