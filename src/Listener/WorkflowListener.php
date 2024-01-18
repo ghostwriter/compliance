@@ -5,30 +5,35 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Listener;
 
 use Ghostwriter\Compliance\Compliance;
-use Ghostwriter\Compliance\Contract\EventListenerInterface;
+use Ghostwriter\Compliance\EnvironmentVariables;
 use Ghostwriter\Compliance\Event\WorkflowEvent;
+use Ghostwriter\Compliance\Interface\EventListenerInterface;
 use Ghostwriter\Config\Contract\ConfigInterface;
 use Throwable;
+use function dispatchOutputEvent;
+use function error;
+use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
+use function sprintf;
+use function warning;
 
 final readonly class WorkflowListener implements EventListenerInterface
 {
     public function __construct(
         private ConfigInterface $config,
+        private EnvironmentVariables $environmentVariables,
     ) {
     }
 
-    /**
-     * @throws Throwable
-     */
     public function __invoke(WorkflowEvent $workflowEvent): void
     {
         $input = $workflowEvent->getInput();
 
         $workflowPath = sprintf(
             '%s/%s',
-            $this->config->get(Compliance::CURRENT_WORKING_DIRECTORY),
+            $this->environmentVariables->get('GITHUB_WORKSPACE'),
+            //            $this->config->get(Compliance::CURRENT_WORKING_DIRECTORY),
             $input->getArgument('workflow')
         );
 
@@ -39,10 +44,7 @@ final readonly class WorkflowListener implements EventListenerInterface
         if ($workflowPathExists && ! $overwrite) {
             $workflowEvent->stopPropagation();
             error(
-                sprintf(
-                    '%s already exists; use "--overwrite|-o" to overwrite the workflow file.',
-                    $workflowPath
-                ),
+                sprintf('%s already exists; use "--overwrite|-o" to overwrite the workflow file.', $workflowPath),
                 __FILE__,
                 __LINE__
             );
@@ -50,33 +52,21 @@ final readonly class WorkflowListener implements EventListenerInterface
         }
 
         if ($workflowPathExists) {
-            warning(
-                $workflowPath . ' already exists, overwriting!',
-                __FILE__,
-                __LINE__
-            );
+            warning($workflowPath . ' already exists, overwriting!', __FILE__, __LINE__);
         }
 
         try {
             /** @var string $workflowTemplatePath */
-            $workflowTemplatePath = $this->config->get(Compliance::WORKFLOW_TEMPLATE,);
+            $workflowTemplatePath = $this->environmentVariables->get(Compliance::WORKFLOW_TEMPLATE);
         } catch (Throwable $e) {
-            error(
-                $e->getMessage(),
-                __FILE__,
-                __LINE__
-            );
+            error($e->getMessage(), __FILE__, __LINE__);
             return;
         }
 
         $workflowContents = file_get_contents($workflowTemplatePath);
         if ($workflowContents === false) {
             $workflowEvent->stopPropagation();
-            error(
-                $workflowTemplatePath . ' Failed to read data!',
-                __FILE__,
-                __LINE__
-            );
+            error($workflowTemplatePath . ' Failed to read data!', __FILE__, __LINE__);
             return;
         }
 
@@ -84,11 +74,7 @@ final readonly class WorkflowListener implements EventListenerInterface
         $result = file_put_contents($workflowPath, $workflowContents);
         if ($result === false) {
             $workflowEvent->stopPropagation();
-            error(
-                $workflowPath . ' Failed to write data!',
-                __FILE__,
-                __LINE__
-            );
+            error($workflowPath . ' Failed to write data!', __FILE__, __LINE__);
             return;
         }
 
