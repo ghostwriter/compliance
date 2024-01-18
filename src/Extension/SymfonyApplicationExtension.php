@@ -4,63 +4,61 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Extension;
 
-use Ghostwriter\Compliance\Command\MatrixCommand;
-use Ghostwriter\Compliance\Compliance;
-use Ghostwriter\Compliance\Service\Finder;
+use Ghostwriter\Compliance\Service\Filesystem;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ExtensionInterface;
 use Symfony\Component\Console\Application as SymfonyApplication;
-use Throwable;
+use Symfony\Component\Console\Command\Command;
+use const DIRECTORY_SEPARATOR;
 use function dirname;
+use function is_a;
 use function sprintf;
 use function str_contains;
 use function str_ends_with;
 use function str_replace;
 
 /**
- * @implements ExtensionInterface<Compliance>
+ * @implements ExtensionInterface<SymfonyApplication>
  */
 final readonly class SymfonyApplicationExtension implements ExtensionInterface
 {
     public function __construct(
-        private Finder $finder,
+        private Filesystem $filesystem,
     ) {
     }
+
     /**
      * @param SymfonyApplication $service
-     *
-     * @throws Throwable
      */
     public function __invoke(ContainerInterface $container, object $service): SymfonyApplication
     {
         $service->setAutoExit(false);
-        $service->setCatchExceptions(false);
 
-        $files = $this->finder->findIn(dirname(__DIR__) . '/Command/');
-        foreach ($files as $file) {
-
+        foreach ($this->filesystem->findIn(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Command') as $file) {
             $path = $file->getPathname();
 
-            if (str_contains($path, 'Abstract') || !str_ends_with($path, 'Command.php')) {
+            if (
+                str_contains($path, 'Abstract') ||
+                str_ends_with($path, 'Trait.php') ||
+                ! str_ends_with($path, 'Command.php')
+            ) {
                 continue;
             }
 
-            $service->add(
-                $container->get(
-                    sprintf(
-                        '%s%s',
-                        str_replace(
-                            'Extension',
-                            'Command',
-                            __NAMESPACE__ . '\\'
-                        ),
-                        $file->getBasename('.php')
-                    )
-                )
+            $class = sprintf(
+                '%s%s',
+                str_replace('Extension', 'Command', __NAMESPACE__ . '\\'),
+                $file->getBasename('.php')
             );
+
+            if (! is_a($class, Command::class, true)) {
+                continue;
+            }
+
+            $service->add($container->get($class));
         }
 
-        $service->setDefaultCommand(MatrixCommand::getDefaultName());
+        $service->setDefaultCommand('run');
 
         return $service;
     }
