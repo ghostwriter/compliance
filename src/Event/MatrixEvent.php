@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event;
 
-use Ghostwriter\Compliance\Option\Job;
+use Ghostwriter\Compliance\Service\Job;
 use Ghostwriter\Json\Json;
-use Throwable;
 
 final class MatrixEvent extends AbstractEvent
 {
@@ -29,9 +28,6 @@ final class MatrixEvent extends AbstractEvent
         'exclude' => [],
     ];
 
-    /**
-     * @param array $matrices
-     */
     public function exclude(array $matrices): void
     {
         /** @var string $matrix */
@@ -40,9 +36,6 @@ final class MatrixEvent extends AbstractEvent
         }
     }
 
-    /**
-     * @throws Throwable
-     */
     public function getMatrix(): string
     {
         $matrix = $this->matrix['include'];
