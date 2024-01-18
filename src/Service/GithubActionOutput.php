@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Service;
 
 use Symfony\Component\Console\Output\OutputInterface;
+use function getenv;
+use function sprintf;
+use function strtr;
 
 final class GithubActionOutput
 {
@@ -40,9 +43,9 @@ final class GithubActionOutput
      */
     public function debug(
         string $message,
-        string|null $file = null,
-        int|null $line = null,
-        int|null $col = null
+        null|string $file = null,
+        null|int $line = null,
+        null|int $col = null
     ): void {
         $this->log('debug', $message, $file, $line, $col);
     }
@@ -54,16 +57,11 @@ final class GithubActionOutput
      */
     public function error(
         string $message,
-        string|null $file = null,
-        int|null $line = null,
-        int|null $col = null
+        null|string $file = null,
+        null|int $line = null,
+        null|int $col = null
     ): void {
         $this->log('error', $message, $file, $line, $col);
-    }
-
-    public static function isGithubActionEnvironment(): bool
-    {
-        return getenv('GITHUB_ACTIONS') !== false;
     }
 
     /**
@@ -73,9 +71,9 @@ final class GithubActionOutput
      */
     public function warning(
         string $message,
-        string|null $file = null,
-        int|null $line = null,
-        int|null $col = null
+        null|string $file = null,
+        null|int $line = null,
+        null|int $col = null
     ): void {
         $this->log('warning', $message, $file, $line, $col);
     }
@@ -83,9 +81,9 @@ final class GithubActionOutput
     private function log(
         string $type,
         string $message,
-        string|null $file = null,
-        int|null $line = null,
-        int|null $col = null
+        null|string $file = null,
+        null|int $line = null,
+        null|int $col = null
     ): void {
         // Some values must be encoded.
         $message = strtr($message, self::ESCAPED_DATA);
@@ -112,5 +110,10 @@ final class GithubActionOutput
             strtr((string) ($col ?? 0), self::ESCAPED_PROPERTIES),
             $message
         ));
+    }
+
+    public static function isGithubActionEnvironment(): bool
+    {
+        return getenv('GITHUB_ACTIONS') !== false;
     }
 }
