@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Extension;
 
 use Ghostwriter\Compliance\Compliance;
+use Ghostwriter\Compliance\EnvironmentVariables;
 use Ghostwriter\Config\Config;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ExtensionInterface;
@@ -21,12 +22,16 @@ use function sprintf;
  */
 final readonly class ConfigExtension implements ExtensionInterface
 {
+    public function __construct(
+        private EnvironmentVariables $environmentVariables,
+    ) {
+    }
     /**
      * @param Config $service
      */
     public function __invoke(ContainerInterface $container, object $service): Config
     {
-        $currentWorkingDirectory = getenv('GITHUB_WORKSPACE') ?: getcwd() ?: dirname(__DIR__);
+        $currentWorkingDirectory = $this->environmentVariables->get('GITHUB_WORKSPACE');
 
         $result = chdir($currentWorkingDirectory);
         if ($result === false) {
