@@ -21,7 +21,7 @@ function dispatch(EventInterface $event): EventInterface
         ->get(DispatcherInterface::class)
         ->dispatch($event);
 }
-function dispatchOutputEvent(array|string $message): OutputEvent
+function dispatchOutputEvent(string $message): OutputEvent
 {
     return \dispatch(new OutputEvent(
         [
