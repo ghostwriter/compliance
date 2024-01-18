@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Service;
 
-final readonly class RequirePhp implements PhpVersionConstraint
+final readonly class RequirePhp implements PhpVersionConstraintInterface
 {
     public function __construct(
         private string $version,
