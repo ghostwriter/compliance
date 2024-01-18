@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Service\GPG;
 
 use RuntimeException;
+use function file_exists;
+use function sprintf;
 
 final readonly class GnuPG2
 {
     public function __construct(
         private string $binary,
-    )
-    {
+    ) {
         if (! file_exists($binary)) {
             throw new RuntimeException(sprintf('GnuPG binary "%s" does not exist', $binary));
         }
@@ -22,7 +23,6 @@ final readonly class GnuPG2
         return $this->binary;
     }
 }
-
 
 // $gpg = new GnuPG2('/usr/bin/gpg');
 
