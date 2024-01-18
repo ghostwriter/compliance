@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591">
+<files psalm-version="5.20.0@3f284e96c9d9be6fe6b15c79416e1d1903dcfef4">
   <file src="src/Command/AbstractCommand.php">
     <MissingThrowsDocblock>
+      <code>build</code>
+      <code>build</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
       <code>parent::__construct(static::getDefaultName())</code>
     </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
@@ -24,6 +28,37 @@
     <MissingThrowsDocblock>
       <code>addArgument</code>
     </MissingThrowsDocblock>
+    <UnusedClass>
+      <code>MatrixCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Command/RunCommand.php">
+    <InvalidArgument>
+      <code>$payload</code>
+    </InvalidArgument>
+    <MissingThrowsDocblock>
+      <code>addArgument</code>
+      <code>addArgument</code>
+      <code>addArgument</code>
+      <code>addOption</code>
+      <code>dispatch</code>
+      <code>getArgument</code>
+      <code>getArgument</code>
+      <code><![CDATA[parent::__construct('run')]]></code>
+    </MissingThrowsDocblock>
+    <MixedArgument>
+      <code>$eventName</code>
+      <code><![CDATA[$input->getArgument('payload')]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$eventName</code>
+    </MixedAssignment>
+    <UndefinedInterfaceMethod>
+      <code>writeln</code>
+    </UndefinedInterfaceMethod>
+    <UnusedClass>
+      <code>RunCommand</code>
+    </UnusedClass>
   </file>
   <file src="src/Command/WorkflowCommand.php">
     <MissingThrowsDocblock>
@@ -35,9 +70,6 @@
     </UnusedClass>
   </file>
   <file src="src/Compliance.php">
-    <PossiblyNullArgument>
-      <code>InstalledVersions::getPrettyVersion(self::PACKAGE)</code>
-    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>main</code>
     </PossiblyUnusedMethod>
@@ -46,28 +78,77 @@
     <MissingThrowsDocblock>
       <code>throw new RuntimeException();</code>
     </MissingThrowsDocblock>
+    <MixedArgument>
+      <code>$skips[$tool][$supportedPhpVersion] ?? []</code>
+      <code>$supportedPhpVersion</code>
+      <code>ComposerDependency::OPTIONS</code>
+    </MixedArgument>
+    <MixedArrayAccess>
+      <code>PhpVersion::TO_STRING[$phpVersion]</code>
+    </MixedArrayAccess>
+    <MixedArrayOffset>
+      <code>$skips[$tool][$supportedPhpVersion]</code>
+    </MixedArrayOffset>
+    <MixedArrayTypeCoercion>
+      <code>$skips[$tool][$supportedPhpVersion]</code>
+    </MixedArrayTypeCoercion>
+    <MixedAssignment>
+      <code>$supportedPhpVersion</code>
+    </MixedAssignment>
+    <MixedOperand>
+      <code>ComposerDependency::CONFIG</code>
+      <code>ComposerDependency::CONFIG</code>
+      <code>PhpVersion::TO_STRING[$phpVersion]</code>
+    </MixedOperand>
     <PossiblyInvalidArgument>
       <code>$skips[$tool] ?? []</code>
       <code>$skips[$tool][$phpVersion]</code>
-      <code>$skips[$tool][$supportedPhpVersion] ?? []</code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidArrayAccess>
       <code>$skips[$tool][$phpVersion]</code>
       <code>$skips[$tool][$supportedPhpVersion]</code>
     </PossiblyInvalidArrayAccess>
+    <UndefinedClass>
+      <code>ComposerDependency</code>
+      <code>ComposerDependency</code>
+      <code>ComposerDependency</code>
+      <code>PhpVersion</code>
+      <code>PhpVersion</code>
+      <code>PhpVersion</code>
+      <code>PhpVersion</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass>
+      <code><![CDATA[array<ComposerDependency::*>]]></code>
+    </UndefinedDocblockClass>
     <UnusedClass>
       <code>ComplianceConfiguration</code>
     </UnusedClass>
+    <UnusedParam>
+      <code>$options</code>
+    </UnusedParam>
   </file>
-  <file src="src/Enum/OperatingSystem.php">
-    <UnusedClass>
-      <code>OperatingSystem</code>
-    </UnusedClass>
-  </file>
-  <file src="src/Enum/PhpVersion.php">
-    <UnusedClass>
-      <code>PhpVersion</code>
-    </UnusedClass>
+  <file src="src/EnvironmentVariables.php">
+    <MixedInferredReturnType>
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[match (true) {
+            array_key_exists($name, $this->variables) => $this->variables[$name],
+            $default !== null => $default,
+            default => throw new VariableNotFoundException($name),
+        }]]></code>
+      <code><![CDATA[match (true) {
+            array_key_exists($name, $this->variables) => $this->variables[$name],
+            $default !== null => $default,
+            default => throw new VariableNotFoundException($name),
+        }]]></code>
+    </MixedReturnStatement>
+    <PossiblyUnusedMethod>
+      <code>has</code>
+    </PossiblyUnusedMethod>
+    <RedundantCastGivenDocblockType>
+      <code>(string) $value</code>
+    </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Event/AbstractEvent.php">
     <MissingTemplateParam>
@@ -92,282 +173,189 @@
   </file>
   <file src="src/Event/GitHub/GitHubCreateEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubDeleteEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubDeploymentEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubDeploymentStatusEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubForkEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubGollumEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubIssueCommentEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubIssuesEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubLabelEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubMergeGroupEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubMilestoneEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubPageBuildEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubProjectCardEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubProjectColumnEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubProjectEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubPublicEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubPullRequestCommentEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubPullRequestEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubPullRequestReviewCommentEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubPullRequestReviewEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubPullRequestTargetEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubPushEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubRegistryPackageEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubReleaseEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubRepositoryDispatchEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubScheduleEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubStatusEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubWatchEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubWorkflowCallEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubWorkflowDispatchEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/GitHub/GitHubWorkflowRunEvent.php">
     <MissingTemplateParam>
-      <code>EventInterface</code>
       <code>EventTrait</code>
+      <code>GitHubEventInterface</code>
     </MissingTemplateParam>
-    <UnusedProperty>
-      <code>$content</code>
-    </UnusedProperty>
   </file>
   <file src="src/Event/MatrixEvent.php">
     <InvalidPropertyAssignmentValue>
@@ -377,77 +365,80 @@
       <code>exclude</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Extension/ConfigExtension.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Extension/ListenerProviderExtension.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[sprintf(
-                    '%s%sEvent',
-                    str_replace(
-                        'Extension', 'Event', __NAMESPACE__ . '\\'
-                    ),
-                    $file->getBasename('Listener.php')
-                )]]></code>
-      <code><![CDATA[sprintf(
-                    '%s\%s',
-                    str_replace(
-                        'Extension', 'Listener', __NAMESPACE__
-                    ),
-                    $file->getBasename('.php')
-                )]]></code>
-    </ArgumentTypeCoercion>
+    <MissingThrowsDocblock>
+      <code>bind</code>
+      <code>bind</code>
+      <code>bind</code>
+      <code>bind</code>
+      <code>bind</code>
+      <code>bind</code>
+      <code>bind</code>
+      <code>bind</code>
+      <code>bind</code>
+      <code>bind</code>
+    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Extension/SymfonyApplicationExtension.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$container->get(
-                    sprintf(
-                        '%s%s',
-                        str_replace(
-                            'Extension',
-                            'Command',
-                            __NAMESPACE__ . '\\'
-                        ),
-                        $file->getBasename('.php')
-                    )
-                )]]></code>
-      <code><![CDATA[sprintf(
-                        '%s%s',
-                        str_replace(
-                            'Extension',
-                            'Command',
-                            __NAMESPACE__ . '\\'
-                        ),
-                        $file->getBasename('.php')
-                    )]]></code>
-    </ArgumentTypeCoercion>
-    <ImplementedParamTypeMismatch>
-      <code>$service</code>
-    </ImplementedParamTypeMismatch>
-    <ImplementedReturnTypeMismatch>
-      <code>SymfonyApplication</code>
-    </ImplementedReturnTypeMismatch>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Factory/ComposerExecutableFinderFactory.php">
+    <MissingThrowsDocblock>
+      <code>get</code>
+      <code>get</code>
+    </MissingThrowsDocblock>
+  </file>
+  <file src="src/Interface/Composer/DependencyInterface.php">
+    <PossiblyUnusedMethod>
+      <code>name</code>
+      <code>version</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Listener/CheckListener.php">
+    <MissingThrowsDocblock>
+      <code>getArgument</code>
+    </MissingThrowsDocblock>
     <UnusedClass>
       <code>CheckListener</code>
     </UnusedClass>
   </file>
   <file src="src/Listener/Debug.php">
+    <PossiblyFalseOperand>
+      <code><![CDATA[mb_strrpos($event::class, '\\')]]></code>
+    </PossiblyFalseOperand>
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Listener/Logger.php">
+    <MissingThrowsDocblock>
+      <code>get</code>
+      <code>get</code>
+    </MissingThrowsDocblock>
+    <UnusedClass>
+      <code>Logger</code>
+    </UnusedClass>
+  </file>
   <file src="src/Listener/MatrixListener.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[tempnam(sys_get_temp_dir(),'GITHUB_OUTPUT')]]></code>
-    </ArgumentTypeCoercion>
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new RuntimeException('Could not get current working directory');]]></code>
+    </MissingThrowsDocblock>
     <PossiblyFalseArgument>
-      <code><![CDATA[tempnam(sys_get_temp_dir(),'GITHUB_OUTPUT')]]></code>
+      <code><![CDATA[tempnam(sys_get_temp_dir(), 'GITHUB_OUTPUT')]]></code>
     </PossiblyFalseArgument>
+    <TypeDoesNotContainType>
+      <code>$isPhpVersionExperimental</code>
+    </TypeDoesNotContainType>
     <UnnecessaryVarAnnotation>
       <code>string</code>
     </UnnecessaryVarAnnotation>
@@ -460,138 +451,16 @@
       <code>OutputListener</code>
     </UnusedClass>
   </file>
-  <file src="src/Listener/WorkflowListener.php">
-    <MixedArgument>
-      <code><![CDATA[$input->getArgument('workflow')]]></code>
-      <code><![CDATA[$this->config->get(Compliance::CURRENT_WORKING_DIRECTORY)]]></code>
-    </MixedArgument>
-    <UnusedClass>
-      <code>WorkflowListener</code>
-    </UnusedClass>
-  </file>
-  <file src="src/Option/ComposerCacheFilesDirectoryFinder.php">
-    <PossiblyUnusedMethod>
-      <code>__construct</code>
-    </PossiblyUnusedMethod>
-    <UnusedProperty>
-      <code>$filesystem</code>
-    </UnusedProperty>
-  </file>
-  <file src="src/Option/Filesystem.php">
-    <ArgumentTypeCoercion>
-      <code>$levels</code>
-    </ArgumentTypeCoercion>
-    <InvalidDocblock>
-      <code>public function allFiles(string $directory): array</code>
-    </InvalidDocblock>
-    <MismatchingDocblockReturnType>
-      <code>bool</code>
-    </MismatchingDocblockReturnType>
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::append() failed to write to path: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::chgrp() failed because the path does not exist: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::chmod() failed because the path does not exist: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::chown() failed because the path does not exist: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::copy() failed because the source path does not exist: %s',
-                $source
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::create() failed because the path already exists: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::createDirectory() failed because the path already exists: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::delete() failed because the path does not exist: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::deleteDirectory() failed because the path does not exist: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::directories() failed to scan directory: %s',
-                $directory
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::files() failed to scan directory: %s',
-                $directory
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::move() failed because the source path does not exist: %s',
-                $source
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::prepend() failed to write to path: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::read() failed to read from path: %s',
-                $path
-            ));]]></code>
-      <code><![CDATA[throw new \RuntimeException(sprintf(
-                'Filesystem::write() failed to write to path: %s',
-                $path
-            ));]]></code>
-    </MissingThrowsDocblock>
-    <MixedArgument>
-      <code>$directory</code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code>$directory</code>
-      <code>$file</code>
-    </MixedAssignment>
-    <MixedInferredReturnType>
-      <code>bool</code>
-    </MixedInferredReturnType>
-    <MixedOperand>
-      <code>$file</code>
-    </MixedOperand>
-    <PossiblyFalseArgument>
-      <code>scandir($path)</code>
-    </PossiblyFalseArgument>
-    <PossiblyUnusedMethod>
-      <code>allFiles</code>
-      <code>append</code>
-      <code>chgrp</code>
-      <code>chmod</code>
-      <code>chown</code>
-      <code>copy</code>
-      <code>createFile</code>
-      <code>delete</code>
-      <code>exists</code>
-      <code>glob</code>
-      <code>move</code>
-      <code>prepend</code>
-    </PossiblyUnusedMethod>
-    <UnusedParam>
-      <code>$flags</code>
-      <code>$pattern</code>
-    </UnusedParam>
-  </file>
   <file src="src/Service/Composer.php">
     <PossiblyUnusedMethod>
-      <code>__construct</code>
       <code>getPhpVersionConstraint</code>
       <code>getRequire</code>
       <code>getRequireDev</code>
       <code>readLockFile</code>
     </PossiblyUnusedMethod>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[getenv('COMPOSER')]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Service/Composer/ComposerJson.php">
     <InvalidArrayOffset>
@@ -604,34 +473,16 @@
     </InvalidArrayOffset>
     <MixedArgument>
       <code><![CDATA[$contents['name']]]></code>
+      <code><![CDATA[$contents['require'] ?? []]]></code>
       <code><![CDATA[$contents['require']['php'] ?? '*']]></code>
-      <code>$name</code>
-      <code>$name</code>
+      <code><![CDATA[$contents['require-dev'] ?? []]]></code>
       <code><![CDATA[$this->contents['license']]]></code>
       <code><![CDATA[$this->contents['name']]]></code>
       <code><![CDATA[$this->contents['version'] ??
             InstalledVersions::getPrettyVersion($this->contents['name'])]]></code>
-      <code>$version</code>
-      <code>$version</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$this->require]]></code>
-      <code><![CDATA[$this->requireDev]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedArrayAssignment>
-      <code>$requireDev[$name]</code>
-      <code>$require[$name]</code>
-    </MixedArrayAssignment>
     <MixedAssignment>
       <code>$dependency</code>
-      <code>$name</code>
-      <code>$name</code>
-      <code>$require</code>
-      <code>$requireDev</code>
-      <code><![CDATA[$this->require]]></code>
-      <code><![CDATA[$this->requireDev]]></code>
-      <code>$version</code>
-      <code>$version</code>
     </MixedAssignment>
     <PossiblyNullArgument>
       <code><![CDATA[$this->contents['version'] ??
@@ -647,10 +498,8 @@
   </file>
   <file src="src/Service/Composer/ComposerJsonReader.php">
     <MissingThrowsDocblock>
-      <code><![CDATA[throw new \InvalidArgumentException(
-                'Composer JSON file does not exist: ' . $composerJsonPath
-            );]]></code>
-      <code><![CDATA[throw new \InvalidArgumentException('Composer JSON file could not be read');]]></code>
+      <code><![CDATA[throw new InvalidArgumentException('Composer JSON file could not be read');]]></code>
+      <code><![CDATA[throw new InvalidArgumentException('Composer JSON file does not exist: ' . $composerJsonPath);]]></code>
     </MissingThrowsDocblock>
     <MixedArgument>
       <code>Json::decode($composerJsonContents)</code>
@@ -664,27 +513,21 @@
   </file>
   <file src="src/Service/Composer/ComposerLockReader.php">
     <MissingThrowsDocblock>
-      <code><![CDATA[throw new \InvalidArgumentException('Composer JSON file could not be read');]]></code>
-      <code><![CDATA[throw new \InvalidArgumentException('Composer JSON file does not exist');]]></code>
+      <code><![CDATA[throw new InvalidArgumentException('Composer JSON file could not be read');]]></code>
+      <code><![CDATA[throw new InvalidArgumentException('Composer JSON file does not exist');]]></code>
     </MissingThrowsDocblock>
     <MixedArgument>
       <code>Json::decode($composerJsonContents)</code>
     </MixedArgument>
   </file>
-  <file src="src/Service/Composer/Dependency.php">
-    <PossiblyUnusedMethod>
-      <code>name</code>
-      <code>version</code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Service/Composer/DependencyName.php">
     <MissingThrowsDocblock>
-      <code><![CDATA[throw new \InvalidArgumentException('Name cannot be empty');]]></code>
+      <code><![CDATA[throw new InvalidArgumentException('Name cannot be empty');]]></code>
     </MissingThrowsDocblock>
   </file>
   <file src="src/Service/Composer/DependencyVersion.php">
     <MissingThrowsDocblock>
-      <code><![CDATA[throw new \InvalidArgumentException('Version cannot be empty');]]></code>
+      <code><![CDATA[throw new InvalidArgumentException('Version cannot be empty');]]></code>
     </MissingThrowsDocblock>
   </file>
   <file src="src/Service/Composer/ExtensionFinder.php">
@@ -703,20 +546,45 @@
       <code><![CDATA[$this->jsonSerialize()]]></code>
     </MixedArgumentTypeCoercion>
   </file>
-  <file src="src/Service/Composer/License.php">
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new \InvalidArgumentException('Version cannot be empty');]]></code>
-    </MissingThrowsDocblock>
-  </file>
-  <file src="src/Service/Composer/Package.php">
-    <InvalidArrayOffset>
-      <code><![CDATA[[$this->name => $this->version]]]></code>
-    </InvalidArrayOffset>
-  </file>
   <file src="src/Service/Composer/Packages.php">
     <UnusedClass>
       <code>Packages</code>
     </UnusedClass>
+  </file>
+  <file src="src/Service/Composer/RequireDevList.php">
+    <MixedArgument>
+      <code>$version</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code>$name</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment>
+      <code>$version</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Service/Composer/RequireList.php">
+    <MixedArgument>
+      <code>$version</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code>$name</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment>
+      <code>$version</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Service/ComposerCacheFilesDirectoryFinder.php">
+    <MissingThrowsDocblock>
+      <code>throw new FailedToFindComposerCacheFilesDirectoryException($stderr);</code>
+    </MissingThrowsDocblock>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Service/ComposerExecutableFinder.php">
+    <MissingThrowsDocblock>
+      <code>throw new FailedToFindComposerExecutableException($stderr);</code>
+    </MissingThrowsDocblock>
   </file>
   <file src="src/Service/ComposerFileField.php">
     <UnusedClass>
@@ -738,10 +606,90 @@
       <code>ConfigPlatformPhp</code>
     </UnusedClass>
   </file>
-  <file src="src/Service/Finder.php">
+  <file src="src/Service/Filesystem.php">
+    <ArgumentTypeCoercion>
+      <code>$levels</code>
+    </ArgumentTypeCoercion>
+    <MismatchingDocblockReturnType>
+      <code>bool</code>
+    </MismatchingDocblockReturnType>
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new RuntimeException(sprintf(
+                'Filesystem::chgrp() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf(
+                'Filesystem::chmod() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf(
+                'Filesystem::chown() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf(
+                'Filesystem::copy() failed because the source path does not exist: %s',
+                $source
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf(
+                'Filesystem::create() failed because the path already exists: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf(
+                'Filesystem::createDirectory() failed because the path already exists: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf(
+                'Filesystem::delete() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf(
+                'Filesystem::deleteDirectory() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf(
+                'Filesystem::move() failed because the source path does not exist: %s',
+                $source
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf('Filesystem::append() failed to write to path: %s', $path));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf('Filesystem::prepend() failed to write to path: %s', $path));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf('Filesystem::read() failed to read from path: %s', $path));]]></code>
+      <code><![CDATA[throw new RuntimeException(sprintf('Filesystem::write() failed to write to path: %s', $path));]]></code>
+    </MissingThrowsDocblock>
+    <MixedAssignment>
+      <code>$file</code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>bool</code>
+    </MixedInferredReturnType>
+    <MixedOperand>
+      <code>$file</code>
+    </MixedOperand>
     <MixedReturnTypeCoercion>
       <code><![CDATA[Generator<SplFileInfo>]]></code>
     </MixedReturnTypeCoercion>
+    <PossiblyFalseArgument>
+      <code>scandir($path)</code>
+    </PossiblyFalseArgument>
+    <PossiblyUnusedMethod>
+      <code>allFiles</code>
+      <code>append</code>
+      <code>chgrp</code>
+      <code>chmod</code>
+      <code>chown</code>
+      <code>copy</code>
+      <code>createFile</code>
+      <code>delete</code>
+      <code>exists</code>
+      <code>findInRecursive</code>
+      <code>glob</code>
+      <code>missing</code>
+      <code>move</code>
+      <code>prepend</code>
+    </PossiblyUnusedMethod>
+    <UnusedParam>
+      <code>$flags</code>
+      <code>$pattern</code>
+    </UnusedParam>
   </file>
   <file src="src/Service/GPG/Fingerprint.php">
     <UnusedClass>
@@ -777,66 +725,79 @@
     </UnusedClass>
   </file>
   <file src="src/Service/GithubActionOutput.php">
+    <RiskyTruthyFalsyComparison>
+      <code>! $file</code>
+    </RiskyTruthyFalsyComparison>
     <UnusedClass>
       <code>GithubActionOutput</code>
     </UnusedClass>
   </file>
+  <file src="src/Service/Job.php">
+    <MixedArgumentTypeCoercion>
+      <code>$extensions</code>
+    </MixedArgumentTypeCoercion>
+    <RiskyTruthyFalsyComparison>
+      <code>getcwd()</code>
+    </RiskyTruthyFalsyComparison>
+  </file>
   <file src="src/Service/Process.php">
+    <LessSpecificReturnStatement>
+      <code>[proc_close($process), ...$result]</code>
+    </LessSpecificReturnStatement>
     <MissingThrowsDocblock>
-      <code><![CDATA[throw new RuntimeException('Failed to execute command: ' . implode(' ', $command));]]></code>
-      <code><![CDATA[throw new RuntimeException('proc_open is not available');]]></code>
+      <code><![CDATA[throw new FailedToExecuteCommandException(implode(' ', $command));]]></code>
+      <code>throw new FailedToWriteToStdinException();</code>
+      <code>throw new ProcOpenFunctionDoesNotExistException();</code>
     </MissingThrowsDocblock>
-    <PossiblyUndefinedIntArrayOffset>
-      <code>$pipes[0]</code>
-      <code>$pipes[1]</code>
-      <code>$pipes[2]</code>
-    </PossiblyUndefinedIntArrayOffset>
+    <MoreSpecificReturnType>
+      <code>array{int,string,string}</code>
+    </MoreSpecificReturnType>
+  </file>
+  <file src="src/ServiceProvider/ApplicationServiceProvider.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/ServiceProvider/ConfigServiceProvider.php">
+    <MissingThrowsDocblock>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+    </MissingThrowsDocblock>
+    <UnusedClass>
+      <code>ConfigServiceProvider</code>
+    </UnusedClass>
   </file>
   <file src="src/ServiceProvider/ConsoleServiceProvider.php">
-    <InvalidArgument>
-      <code>extend</code>
-    </InvalidArgument>
-  </file>
-  <file src="src/ServiceProvider/MatrixServiceProvider.php">
-    <ArgumentTypeCoercion>
-      <code>$service</code>
-    </ArgumentTypeCoercion>
-    <PossiblyUnusedMethod>
-      <code>__construct</code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/SingleCommandApplicationDispatcher.php">
     <MissingThrowsDocblock>
-      <code>dispatch</code>
-      <code>getArgument</code>
-      <code>getArgument</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
     </MissingThrowsDocblock>
-    <MixedArgument>
-      <code>$eventName</code>
-      <code>$eventName</code>
-      <code>$payload</code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code>$eventName</code>
-      <code>$payload</code>
-    </MixedAssignment>
-    <PossiblyUnusedMethod>
-      <code>__construct</code>
-    </PossiblyUnusedMethod>
+    <UnusedClass>
+      <code>ConsoleServiceProvider</code>
+    </UnusedClass>
+  </file>
+  <file src="src/ServiceProvider/EventServiceProvider.php">
+    <MissingThrowsDocblock>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+      <code>alias</code>
+    </MissingThrowsDocblock>
+    <UnusedClass>
+      <code>EventServiceProvider</code>
+    </UnusedClass>
   </file>
   <file src="src/Tool/AbstractTool.php">
-    <MissingThrowsDocblock>
-      <code>in</code>
-    </MissingThrowsDocblock>
-    <PossiblyFalseArgument>
-      <code>$path</code>
-    </PossiblyFalseArgument>
     <PossiblyNullArgument>
-      <code><![CDATA[preg_replace(
-                    '#([a-zA-Z])(?=[A-Z])#',
-                    '$1-',
-                    $this->name()
-                )]]></code>
+      <code><![CDATA[preg_replace('#([a-zA-Z])(?=[A-Z])#', '$1-', $this->name())]]></code>
     </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>__construct</code>
@@ -867,17 +828,14 @@
       <code>Psalm</code>
     </UnusedClass>
   </file>
-  <file src="tests/Unit/AbstractTestCase.php">
-    <PossiblyUnusedMethod>
-      <code>setUp</code>
-    </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code>TestCase</code>
-    </UndefinedClass>
-  </file>
   <file src="tests/Unit/Service/ComposerTest.php">
-    <MissingDependency>
-      <code>AbstractTestCase</code>
-    </MissingDependency>
+    <PossiblyFalseArgument>
+      <code>$root</code>
+      <code>$root</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand>
+      <code>$root</code>
+      <code>$root</code>
+    </PossiblyFalseOperand>
   </file>
 </files>
