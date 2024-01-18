@@ -10,14 +10,10 @@ use Ghostwriter\Config\ConfigFactory;
 use Ghostwriter\Config\Contract\ConfigFactoryInterface;
 use Ghostwriter\Config\Contract\ConfigInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\ExceptionInterface;
 use Ghostwriter\Container\Interface\ServiceProviderInterface;
 
 final readonly class ConfigServiceProvider implements ServiceProviderInterface
 {
-    /**
-     * @throws ExceptionInterface
-     */
     public function __invoke(ContainerInterface $container): void
     {
         $container->alias(ConfigInterface::class, Config::class);
