@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Service\Composer;
 
-final readonly class ComposerLock {
+final readonly class ComposerLock
+{
     /**
      * @param array<int,mixed> $contents
      */
@@ -18,6 +19,7 @@ final readonly class ComposerLock {
     {
         return $this->path;
     }
+
     /**
      * @return array<int,mixed>
      */
