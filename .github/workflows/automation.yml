@@ -38,7 +38,7 @@ jobs:
   matrix:
     name: Generate job matrix
     concurrency:
-      group: ${{ github.workflow }}-${{ github.event_name }}
+      group: ${{ github.event_name }}-${{ github.sha }}-${{ github.workflow }}
       cancel-in-progress: false
     runs-on: ubuntu-latest
     outputs:
@@ -47,11 +47,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # - name: Determine CI Jobs (dev)
+      #   id: matrix
+      #   if: github.event_name == 'push' || github.event_name == 'pull_request'
+      #   uses: ghostwriter/compliance@v1
+      #   with:
+      #     command: matrix
+
       - name: Determine CI Jobs
         id: matrix
+        # if: github.event_name != 'push' && github.event_name != 'pull_request'
         uses: docker://ghcr.io/ghostwriter/compliance:v1
         with:
-          command: matrix
+          command: run
   qa:
     name: "${{ matrix.name }} on ${{ matrix.os }} with PHP ${{ matrix.php }} and Composer ${{ matrix.dependency }}"
     needs: [matrix]
