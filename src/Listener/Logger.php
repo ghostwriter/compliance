@@ -7,16 +7,14 @@ namespace Ghostwriter\Compliance\Listener;
 use Ghostwriter\Compliance\Event\GitHubEventInterface;
 use Ghostwriter\Compliance\Event\MatrixEvent;
 use Ghostwriter\Compliance\Interface\EventListenerInterface;
-use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use function container;
+use function dispatch;
 use function sprintf;
 
 final readonly class Logger implements EventListenerInterface
 {
     public function __construct(
-        private ContainerInterface $container,
-        private DispatcherInterface $dispatcher,
         private SymfonyStyle $symfonyStyle,
     ) {
     }
@@ -36,6 +34,6 @@ final readonly class Logger implements EventListenerInterface
             $event->payload()
         ));
 
-        $this->dispatcher->dispatch($this->container->get(MatrixEvent::class));
+        dispatch(container()->get(MatrixEvent::class));
     }
 }
