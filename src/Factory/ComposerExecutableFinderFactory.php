@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Factory;
 
 use Ghostwriter\Compliance\Service\ComposerExecutableFinder;
-use Ghostwriter\Compliance\Service\Process;
 use Ghostwriter\Compliance\Service\WhereExecutableFinder;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\FactoryInterface;
