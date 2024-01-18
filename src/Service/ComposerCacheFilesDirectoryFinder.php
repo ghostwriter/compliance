@@ -4,23 +4,19 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Service;
 
-use RuntimeException;
-use const PHP_EOL;
-use function sprintf;
+use Ghostwriter\Compliance\Exception\FailedToFindComposerCacheFilesDirectoryException;
 use function trim;
 
 final readonly class ComposerCacheFilesDirectoryFinder
 {
     public function __construct(
-        private Process $process,
         private ComposerExecutableFinder $composerExecutableFinder,
-        private Filesystem $filesystem,
     ) {
     }
 
     public function __invoke(): string
     {
-        [$exitCode, $stdout, $stderr] = $this->process->execute([
+        [$exitCode, $stdout, $stderr] = Process::execute([
             ($this->composerExecutableFinder)(),
             'config',
             'cache-files-dir',
@@ -30,11 +26,7 @@ final readonly class ComposerCacheFilesDirectoryFinder
         $output = trim($stdout);
 
         if ($exitCode !== 0 || $output === '') {
-            throw new RuntimeException(sprintf(
-                'Could not find composer cache files directory: %s%s',
-                PHP_EOL,
-                $stderr,
-            ));
+            throw new FailedToFindComposerCacheFilesDirectoryException($stderr);
         }
 
         return $output;
