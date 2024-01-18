@@ -9,12 +9,8 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Throwable;
 
-#[AsCommand(
-    name: 'matrix',
-    description: 'Generates a job matrix for Github Actions.',
-)]
+#[AsCommand(name: 'matrix', description: 'Generates a job matrix for Github Actions.',)]
 final class MatrixCommand extends AbstractCommand
 {
     protected function configure(): void
@@ -24,8 +20,6 @@ final class MatrixCommand extends AbstractCommand
 
     /**
      * Execute the command.
-     *
-     * @throws Throwable
      *
      * @return int 0 if everything went fine, or an exit code
      */
