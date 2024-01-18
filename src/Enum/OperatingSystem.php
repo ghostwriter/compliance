@@ -6,7 +6,12 @@ namespace Ghostwriter\Compliance\Enum;
 
 enum OperatingSystem: string
 {
-    case macos = 'macos-latest';
-    case ubuntu = 'ubuntu-latest';
-    case windows = 'windows-latest';
+    case MACOS = 'macos';
+    case UBUNTU = 'ubuntu';
+    case WINDOWS = 'windows';
+
+    public function toString(): string
+    {
+        return $this->value;
+    }
 }
