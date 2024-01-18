@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Service\Composer;
 
 use Generator;
+use Ghostwriter\Json\Json;
 use InvalidArgumentException;
 use IteratorAggregate;
 use JsonSerializable;
 use Stringable;
-
 use function array_map;
-use Ghostwriter\Json\Json;
 
 /**
  * @implements IteratorAggregate<Package>
@@ -25,10 +24,15 @@ final readonly class Packages implements IteratorAggregate, JsonSerializable, St
         private array $packages
     ) {
         foreach ($packages as $package) {
-            if (!$package instanceof Package) {
+            if (! $package instanceof Package) {
                 throw new InvalidArgumentException('Packages must be an array of Package objects');
             }
         }
+    }
+
+    public function __toString(): string
+    {
+        return Json::encode($this);
     }
 
     /**
@@ -41,14 +45,6 @@ final readonly class Packages implements IteratorAggregate, JsonSerializable, St
 
     public function jsonSerialize(): array
     {
-        return array_map(
-            fn (Package $package): string => Json::encode($package),
-            $this->packages
-        );
-    }
-
-    public function __toString(): string
-    {
-        return Json::encode($this);
+        return array_map(static fn (Package $package): string => Json::encode($package), $this->packages);
     }
 }
