@@ -4,14 +4,20 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Event\GitHub;
 
-use Ghostwriter\EventDispatcher\Interface\EventInterface;
+use Ghostwriter\Compliance\Event\GitHubEventInterface;
 use Ghostwriter\EventDispatcher\Trait\EventTrait;
 
-final class GitHubRegistryPackageEvent implements EventInterface
+final class GitHubRegistryPackageEvent implements GitHubEventInterface
 {
     use EventTrait;
 
-    public function __construct(private string $content)
+    public function __construct(
+        private string $content
+    ) {
+    }
+
+    public function payload(): string
     {
+        return $this->content;
     }
 }
