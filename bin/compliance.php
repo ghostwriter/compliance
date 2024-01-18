@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 
 declare(strict_types=1);
@@ -6,8 +5,10 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance;
 
 use Throwable;
+use const PHP_EOL;
 use const STDERR;
 use function dirname;
+use function file_exists;
 use function fwrite;
 use function sprintf;
 
@@ -22,22 +23,20 @@ use function sprintf;
         exit(1);
     }
 
-    require $composerAutoloadPath;
+    require_once $composerAutoloadPath;
 
-    /**
-     * #BlackLivesMatter.
-     */
     try {
+        /** #BlackLivesMatter */
         Compliance::main();
     } catch (Throwable $throwable) {
         fwrite(STDERR, sprintf(
-            '[%s] %s%s%s'.PHP_EOL,
+            '[%s] %s%s%s' . PHP_EOL,
             $throwable::class,
             $throwable->getMessage(),
             PHP_EOL,
             $throwable->getTraceAsString(),
         ));
 
-        exit(1);
+        exit(2);
     }
 })($_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php');
