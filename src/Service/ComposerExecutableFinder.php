@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Option;
+namespace Ghostwriter\Compliance\Service;
 
-use Ghostwriter\Compliance\Service\Process;
-use Throwable;
+use RuntimeException;
+use const PHP_EOL;
+use function sprintf;
+use function trim;
 
 final readonly class ComposerExecutableFinder
 {
@@ -15,18 +17,16 @@ final readonly class ComposerExecutableFinder
         private bool $isWindowsOsFamily,
     ) {
     }
-    /**
-     * @throws Throwable
-     */
+
     public function __invoke(): string
     {
-        [$stdout, $stderr] = $this->process->execute([
+        [$exitCode, $stdout, $stderr] = $this->process->execute([
             ($this->whereExecutableFinder)($this->isWindowsOsFamily),
-            'composer'
+            'composer',
         ]);
 
-        if (trim($stderr) !== '') {
-            throw new \RuntimeException(sprintf(
+        if ($exitCode !== 0 || trim($stderr) !== '') {
+            throw new RuntimeException(sprintf(
                 'Could not find composer executable: %s%s%s%s',
                 PHP_EOL,
                 $stderr,
