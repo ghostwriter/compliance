@@ -13,7 +13,8 @@ final readonly class CheckListener implements EventListenerInterface
     public function __invoke(CheckEvent $checkEvent): void
     {
         /** @var string $job */
-        $job = $checkEvent->getInput()->getArgument('job');
+        $job = $checkEvent->getInput()
+            ->getArgument('job');
 
         $checkEvent->dispatch(new OutputEvent($job));
     }
