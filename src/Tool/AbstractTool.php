@@ -7,7 +7,6 @@ namespace Ghostwriter\Compliance\Tool;
 use Ghostwriter\Compliance\EnvironmentVariables;
 use Ghostwriter\Compliance\Service\Filesystem;
 use Ghostwriter\Compliance\ToolInterface;
-use function getcwd;
 use function in_array;
 use function mb_strtolower;
 use function preg_replace;
@@ -39,9 +38,7 @@ abstract class AbstractTool implements ToolInterface
     {
         $configuration = $this->configuration();
 
-        foreach ($this->filesystem->findIn(
-            $this->environmentVariables->get('GITHUB_WORKSPACE')
-        ) as $file) {
+        foreach ($this->filesystem->findIn($this->environmentVariables->get('GITHUB_WORKSPACE')) as $file) {
             if (! $file->isFile()) {
                 continue;
             }
