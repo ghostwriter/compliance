@@ -4,51 +4,66 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Service;
 
-use RuntimeException;
+use Ghostwriter\Compliance\Exception\FailedToClosePipeException;
+use Ghostwriter\Compliance\Exception\FailedToExecuteCommandException;
+use Ghostwriter\Compliance\Exception\FailedToWriteToStdinException;
+use Ghostwriter\Compliance\Exception\ProcOpenFunctionDoesNotExistException;
 use function fclose;
 use function function_exists;
+use function fwrite;
 use function implode;
 use function proc_close;
-use function stream_get_contents;
 use function proc_open;
+use function stream_get_contents;
 
-final class Process
+final readonly class Process
 {
     /**
      * @param list<string> $command
-     * @return array{string,string}
+     *
+     * @return array{int,string,string}
      */
-    public static function execute(array $command): array
-    {
-        if (!function_exists('proc_open')) {
-            throw new RuntimeException('proc_open is not available');
+    public static function execute(
+        array $command,
+        ?string $currentWorkingDirectory = null,
+        ?array $environmentVariables = null,
+        ?string $input = null,
+    ): array {
+        if (! function_exists('proc_open')) {
+            throw new ProcOpenFunctionDoesNotExistException();
         }
 
         $pipes = [];
 
-        $process = proc_open(
-            $command,
-            [
-                ['pipe', 'rb'],
-                ['pipe', 'wb'], // stdout
-                ['pipe', 'wb'], // stderr
-            ],
-            $pipes
-        );
+        $descriptor_spec = [
+            0 => ['pipe', 'rb'], // STDIN
+            1 => ['pipe', 'wb'], // STDOUT
+            2 => ['pipe', 'wb'], // STDERR
+        ];
 
-        if (false === $process)
-        {
-            throw new RuntimeException('Failed to execute command: ' . implode(' ', $command));
+        $process = proc_open($command, $descriptor_spec, $pipes, $currentWorkingDirectory, $environmentVariables);
+
+        if ($process === false) {
+            throw new FailedToExecuteCommandException(implode(' ', $command));
         }
 
-        fclose($pipes[0]);
+        /** @var array{0:resource,1:resource,2:resource} $pipes */
+        if ($input !== null) {
+            $bytesWritten = fwrite($pipes[0], $input);
 
-        $stdout = (string) stream_get_contents($pipes[1]);
-        $stderr = (string) stream_get_contents($pipes[2]);
+            if ($bytesWritten === false) {
+                throw new FailedToWriteToStdinException();
+            }
+        }
 
-        proc_close($process);
+        $result = [stream_get_contents($pipes[1]), stream_get_contents($pipes[2])];
 
-        return [$stdout, $stderr];
+        foreach ($pipes as $pipe) {
+            if (! fclose($pipe)) {
+                throw new FailedToClosePipeException();
+            }
+        }
+
+        return [proc_close($process), ...$result];
     }
 }
-
