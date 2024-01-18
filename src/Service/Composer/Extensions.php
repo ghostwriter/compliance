@@ -9,7 +9,6 @@ use InvalidArgumentException;
 use IteratorAggregate;
 use JsonSerializable;
 use Stringable;
-
 use function array_map;
 use function implode;
 
@@ -29,10 +28,15 @@ final readonly class Extensions implements IteratorAggregate, JsonSerializable, 
         }
 
         foreach ($extensions as $extension) {
-            if (!$extension instanceof Extension) {
+            if (! $extension instanceof Extension) {
                 throw new InvalidArgumentException('Extensions must be an array of Extension objects');
             }
         }
+    }
+
+    public function __toString(): string
+    {
+        return implode(', ', $this->jsonSerialize());
     }
 
     /**
@@ -45,14 +49,6 @@ final readonly class Extensions implements IteratorAggregate, JsonSerializable, 
 
     public function jsonSerialize(): array
     {
-        return array_map(
-            fn (Extension $extension): string => (string) $extension,
-            $this->extensions
-        );
-    }
-
-    public function __toString(): string
-    {
-        return  implode(', ', $this->jsonSerialize());
+        return array_map(static fn (Extension $extension): string => (string) $extension, $this->extensions);
     }
 }
