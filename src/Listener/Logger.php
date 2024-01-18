@@ -24,15 +24,19 @@ final readonly class Logger implements EventListenerInterface
      */
     public function __invoke(GitHubEventInterface $event): void
     {
-        $this->symfonyStyle->info(sprintf(
-            '<fg=white;bg=black;options=bold>Event Class:</> <info>%s</info>',
-            $event::class
-        ));
+        $this->symfonyStyle->info('Event Class:</> <info>'.$event::class.'</info>');
+        $this->symfonyStyle->info('Event Payload: '.$event->payload());
 
-        $this->symfonyStyle->info(sprintf(
-            '<fg=white;bg=black;options=bold>Event Payload:</> <info>%s</info>',
-            $event->payload()
-        ));
+
+//        $this->symfonyStyle->info(sprintf(
+//            '<fg=white;bg=black;options=bold>Event Class:</> <info>%s</info>',
+//            $event::class
+//        ));
+//
+//        $this->symfonyStyle->info(sprintf(
+//            '<fg=white;bg=black;options=bold>Event Payload:</> <info>%s</info>',
+//            $event->payload()
+//        ));
 
         dispatch(container()->get(MatrixEvent::class));
     }
