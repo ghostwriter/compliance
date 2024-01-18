@@ -1,22 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ghostwriter\Compliance\Factory;
 
-use Ghostwriter\Compliance\Option\ComposerExecutableFinder;
-use Ghostwriter\Compliance\Option\WhereExecutableFinder;
+use Ghostwriter\Compliance\Service\ComposerExecutableFinder;
 use Ghostwriter\Compliance\Service\Process;
+use Ghostwriter\Compliance\Service\WhereExecutableFinder;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\FactoryInterface;
-use Throwable;
+use const PHP_OS_FAMILY;
 
 /**
  * @implements FactoryInterface<ComposerExecutableFinder>
  */
 final readonly class ComposerExecutableFinderFactory implements FactoryInterface
 {
-    /**
-     * @throws Throwable
-     */
     public function __invoke(ContainerInterface $container, array $arguments = []): ComposerExecutableFinder
     {
         return new ComposerExecutableFinder(
