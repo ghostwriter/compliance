@@ -10,11 +10,8 @@ use Ghostwriter\Config\Config;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ExtensionInterface;
 use function chdir;
-use function dirname;
 use function error;
 use function error_get_last;
-use function getcwd;
-use function getenv;
 use function sprintf;
 
 /**
@@ -26,6 +23,7 @@ final readonly class ConfigExtension implements ExtensionInterface
         private EnvironmentVariables $environmentVariables,
     ) {
     }
+
     /**
      * @param Config $service
      */
