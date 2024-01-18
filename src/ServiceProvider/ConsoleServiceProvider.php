@@ -15,18 +15,17 @@ use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Throwable;
+use Symfony\Component\Console\Style\StyleInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 final readonly class ConsoleServiceProvider implements ServiceProviderInterface
 {
-    /**
-     * @throws Throwable
-     */
     public function __invoke(ContainerInterface $container): void
     {
         $container->alias(InputInterface::class, ArgvInput::class);
-        $container->alias(OutputInterface::class, ConsoleOutput::class);
         $container->alias(OutputFormatterInterface::class, OutputFormatter::class);
+        $container->alias(OutputInterface::class, ConsoleOutput::class);
+        $container->alias(StyleInterface::class, SymfonyStyle::class);
         $container->extend(Application::class, SymfonyApplicationExtension::class);
         $container->factory(Application::class, SymfonyApplicationFactory::class);
     }
