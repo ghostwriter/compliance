@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Configuration;
 
-use Ghostwriter\Compliance\ToolInterface;
 use Ghostwriter\Compliance\Option\ComposerDependency;
 use Ghostwriter\Compliance\Option\PhpVersion;
+use Ghostwriter\Compliance\ToolInterface;
 use Ghostwriter\Config\Contract\ConfigInterface;
 use RuntimeException;
-
 use function array_key_exists;
+use function in_array;
 
 final readonly class ComplianceConfiguration
 {
@@ -19,6 +19,7 @@ final readonly class ComplianceConfiguration
     ) {
         $this->config->set(ComposerDependency::CONFIG . '.php', PhpVersion::LATEST);
     }
+
     /**
      * @param array<class-string<ToolInterface>,array<int,list<string>>>                       $checks
      * @param array<class-string<ToolInterface>|int|string,array<int,list<string>>|int|string> $skips
@@ -34,10 +35,7 @@ final readonly class ComplianceConfiguration
                                 continue;
                             }
 
-                            $this->config->set(
-                                $this->getKey($tool, $supportedPhpVersion, $dependency),
-                                true
-                            );
+                            $this->config->set($this->getKey($tool, $supportedPhpVersion, $dependency), true);
                         }
                     }
                     continue;
@@ -50,10 +48,7 @@ final readonly class ComplianceConfiguration
                         }
                     }
 
-                    $this->config->set(
-                        $this->getKey($tool, $phpVersion, $dependency),
-                        true
-                    );
+                    $this->config->set($this->getKey($tool, $phpVersion, $dependency), true);
                 }
             }
         }
