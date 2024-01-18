@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Option;
+namespace Ghostwriter\Compliance\Service;
 
 final readonly class WhereExecutableFinder
 {
