@@ -46,7 +46,7 @@ final readonly class Composer
             : $composerJsonPath . '.lock';
     }
 
-    public function getPhpVersionConstraint(string $path): PhpVersionConstraint
+    public function getPhpVersionConstraint(string $path): PhpVersionConstraintInterface
     {
         return $this->readJsonFile($path)
             ->getPhpVersionConstraint();
