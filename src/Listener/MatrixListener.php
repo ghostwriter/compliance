@@ -105,18 +105,19 @@ final readonly class MatrixListener implements EventListenerInterface
             }
 
             foreach (PhpVersion::cases() as $phpVersion) {
-                if (! Semver::satisfies($phpVersion->toString(), $constraints)) {
-                    continue;
-                }
-
                 $isPhpVersionExperimental = PhpVersion::isExperimental($phpVersion);
                 if ($isPhpVersionExperimental) {
                     continue;
                 }
 
+                if (! Semver::satisfies($phpVersion->toString(), $constraints)) {
+                    continue;
+                }
+
                 foreach (ComposerDependency::cases() as $composerDependency) {
-                    $isComposerDependencyExperimental = $isPhpVersionExperimental
-                        || ComposerDependency::isExperimental($composerDependency);
+                    $isComposerDependencyExperimental = ComposerDependency::isExperimental(
+                        $composerDependency
+                    );
 
                     foreach (OperatingSystem::cases() as $operatingSystem) {
                         $generateMatrixEvent->include(
