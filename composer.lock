@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c7bcf2e8ca3191726045565bed793ff",
+    "content-hash": "5ef788835b89427da7472059ad6c6f8a",
     "packages": [
         {
             "name": "composer/semver",
@@ -325,24 +325,25 @@
         },
         {
             "name": "ghostwriter/json",
-            "version": "1.2.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/json.git",
-                "reference": "b00252cb2e1b11916b660654cd0f50945f0cf28d"
+                "reference": "6d455b12ed1fe1c827c9d5aa2470a57e92bb709d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/json/zipball/b00252cb2e1b11916b660654cd0f50945f0cf28d",
-                "reference": "b00252cb2e1b11916b660654cd0f50945f0cf28d",
+                "url": "https://api.github.com/repos/ghostwriter/json/zipball/6d455b12ed1fe1c827c9d5aa2470a57e92bb709d",
+                "reference": "6d455b12ed1fe1c827c9d5aa2470a57e92bb709d",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=8.2"
+                "php": ">=8.3"
             },
             "require-dev": {
-                "ghostwriter/coding-standard": "dev-main"
+                "ghostwriter/coding-standard": "dev-main",
+                "ghostwriter/psalm-plugin": "^0.1 || ^0.2 || ^1.0"
             },
             "type": "library",
             "autoload": {
@@ -381,7 +382,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-16T02:37:05+00:00"
+            "time": "2023-12-09T20:39:27+00:00"
         },
         {
             "name": "ghostwriter/option",
