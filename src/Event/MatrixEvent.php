@@ -43,7 +43,7 @@ final class MatrixEvent extends AbstractEvent
             $this->include(Job::noop());
         }
 
-        return Json::encode($this->matrix);
+        return (new Json())->encode($this->matrix);
     }
 
     public function include(Job $job): void
