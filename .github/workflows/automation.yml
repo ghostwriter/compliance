@@ -38,7 +38,7 @@ jobs:
   matrix:
     name: Generate job matrix
     concurrency:
-      group: ${{ github.event_name }}-${{ github.sha }}-${{ github.workflow }}
+      group: ${{ github.event_name }}-${{ github.workflow }}
       cancel-in-progress: false
     runs-on: ubuntu-latest
     outputs:
