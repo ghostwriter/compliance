@@ -33,7 +33,7 @@ final readonly class Logger implements EventListenerInterface
         $this->symfonyStyle->info('Event Payload: ' . $event->payload());
 
         $stop = match (true) {
-//            $event instanceof GitHubPullRequestEvent,
+            //            $event instanceof GitHubPullRequestEvent,
             $event instanceof GitHubWorkflowCallEvent,
             $event instanceof GitHubWorkflowDispatchEvent,
             $event instanceof GitHubScheduleEvent,
@@ -48,15 +48,14 @@ final readonly class Logger implements EventListenerInterface
 
         dispatch(container()->get(MatrixEvent::class));
 
-
-//        $this->symfonyStyle->info(sprintf(
-//            '<fg=white;bg=black;options=bold>Event Class:</> <info>%s</info>',
-//            $event::class
-//        ));
-//
-//        $this->symfonyStyle->info(sprintf(
-//            '<fg=white;bg=black;options=bold>Event Payload:</> <info>%s</info>',
-//            $event->payload()
-//        ));
+        //        $this->symfonyStyle->info(sprintf(
+        //            '<fg=white;bg=black;options=bold>Event Class:</> <info>%s</info>',
+        //            $event::class
+        //        ));
+        //
+        //        $this->symfonyStyle->info(sprintf(
+        //            '<fg=white;bg=black;options=bold>Event Payload:</> <info>%s</info>',
+        //            $event->payload()
+        //        ));
     }
 }
