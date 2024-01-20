@@ -32,7 +32,7 @@ final readonly class Packages implements IteratorAggregate, JsonSerializable, St
 
     public function __toString(): string
     {
-        return Json::encode($this);
+        return (new Json())->encode($this);
     }
 
     /**
@@ -45,6 +45,6 @@ final readonly class Packages implements IteratorAggregate, JsonSerializable, St
 
     public function jsonSerialize(): array
     {
-        return array_map(static fn (Package $package): string => Json::encode($package), $this->packages);
+        return array_map(static fn (Package $package): string => (new Json())->encode($package), $this->packages);
     }
 }
