@@ -361,11 +361,8 @@
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$this->matrix]]></code>
     </InvalidPropertyAssignmentValue>
-    <InvalidStaticInvocation>
-      <code><![CDATA[Json::encode($this->matrix)]]></code>
-    </InvalidStaticInvocation>
     <MissingThrowsDocblock>
-      <code><![CDATA[Json::encode($this->matrix)]]></code>
+      <code>encode</code>
     </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code>exclude</code>
@@ -500,16 +497,13 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Service/Composer/ComposerJsonReader.php">
-    <InvalidStaticInvocation>
-      <code>Json::decode($composerJsonContents)</code>
-    </InvalidStaticInvocation>
     <MissingThrowsDocblock>
-      <code>Json::decode($composerJsonContents)</code>
+      <code>decode</code>
       <code><![CDATA[throw new InvalidArgumentException('Composer JSON file could not be read');]]></code>
       <code><![CDATA[throw new InvalidArgumentException('Composer JSON file does not exist: ' . $composerJsonPath);]]></code>
     </MissingThrowsDocblock>
     <NoValue>
-      <code>Json::decode($composerJsonContents)</code>
+      <code><![CDATA[(new Json())->decode($composerJsonContents)]]></code>
     </NoValue>
   </file>
   <file src="src/Service/Composer/ComposerLock.php">
@@ -519,16 +513,13 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Service/Composer/ComposerLockReader.php">
-    <InvalidStaticInvocation>
-      <code>Json::decode($composerJsonContents)</code>
-    </InvalidStaticInvocation>
     <MissingThrowsDocblock>
-      <code>Json::decode($composerJsonContents)</code>
+      <code>decode</code>
       <code><![CDATA[throw new InvalidArgumentException('Composer JSON file could not be read');]]></code>
       <code><![CDATA[throw new InvalidArgumentException('Composer JSON file does not exist');]]></code>
     </MissingThrowsDocblock>
     <NoValue>
-      <code>Json::decode($composerJsonContents)</code>
+      <code><![CDATA[(new Json())->decode($composerJsonContents)]]></code>
     </NoValue>
   </file>
   <file src="src/Service/Composer/DependencyName.php">
@@ -558,20 +549,13 @@
     </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Service/Composer/Package.php">
-    <InvalidStaticInvocation>
-      <code>Json::encode($this)</code>
-    </InvalidStaticInvocation>
     <MissingThrowsDocblock>
-      <code>Json::encode($this)</code>
+      <code>encode</code>
     </MissingThrowsDocblock>
   </file>
   <file src="src/Service/Composer/Packages.php">
-    <InvalidStaticInvocation>
-      <code>Json::encode($package)</code>
-      <code>Json::encode($this)</code>
-    </InvalidStaticInvocation>
     <MissingThrowsDocblock>
-      <code>Json::encode($this)</code>
+      <code>encode</code>
     </MissingThrowsDocblock>
     <UnusedClass>
       <code>Packages</code>
