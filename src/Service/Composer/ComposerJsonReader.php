@@ -23,6 +23,6 @@ final readonly class ComposerJsonReader
             throw new InvalidArgumentException('Composer JSON file could not be read');
         }
 
-        return new ComposerJson($composerJsonPath, Json::decode($composerJsonContents));
+        return new ComposerJson($composerJsonPath, (new Json())->decode($composerJsonContents));
     }
 }
