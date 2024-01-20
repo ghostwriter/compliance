@@ -23,6 +23,6 @@ final readonly class ComposerLockReader
             throw new InvalidArgumentException('Composer JSON file could not be read');
         }
 
-        return new ComposerLock($composerJsonPath, Json::decode($composerJsonContents));
+        return new ComposerLock($composerJsonPath, (new Json())->decode($composerJsonContents));
     }
 }
