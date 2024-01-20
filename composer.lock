@@ -1643,17 +1643,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "3fe6039a799910a660622994cd87459e2c57b6d0"
+                "reference": "444a1a612eed6d6e1191050d0ac8e91a360e8418"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/3fe6039a799910a660622994cd87459e2c57b6d0",
-                "reference": "3fe6039a799910a660622994cd87459e2c57b6d0",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/444a1a612eed6d6e1191050d0ac8e91a360e8418",
+                "reference": "444a1a612eed6d6e1191050d0ac8e91a360e8418",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1",
-                "phpunit/phpunit": "^10.5.7",
+                "phpunit/phpunit": "^10.5.8",
                 "vimeo/psalm": "^5.20.0"
             },
             "default-branch": true,
@@ -1707,7 +1707,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-18T22:46:26+00:00"
+            "time": "2024-01-19T13:50:37+00:00"
         },
         {
             "name": "ghostwriter/psalm-plugin",
@@ -2598,16 +2598,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.7",
+            "version": "10.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "e5c5b397a95cb0db013270a985726fcae93e61b8"
+                "reference": "08f4fa74d5fbfff1ef22abffee47aaedcaea227e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e5c5b397a95cb0db013270a985726fcae93e61b8",
-                "reference": "e5c5b397a95cb0db013270a985726fcae93e61b8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/08f4fa74d5fbfff1ef22abffee47aaedcaea227e",
+                "reference": "08f4fa74d5fbfff1ef22abffee47aaedcaea227e",
                 "shasum": ""
             },
             "require": {
@@ -2679,7 +2679,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.7"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.8"
             },
             "funding": [
                 {
@@ -2695,7 +2695,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-14T16:40:30+00:00"
+            "time": "2024-01-19T07:07:27+00:00"
         },
         {
             "name": "psr/log",
