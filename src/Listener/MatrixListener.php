@@ -115,9 +115,7 @@ final readonly class MatrixListener implements EventListenerInterface
                 }
 
                 foreach (ComposerDependency::cases() as $composerDependency) {
-                    $isComposerDependencyExperimental = ComposerDependency::isExperimental(
-                        $composerDependency
-                    );
+                    $isComposerDependencyExperimental = ComposerDependency::isExperimental($composerDependency);
 
                     foreach (OperatingSystem::cases() as $operatingSystem) {
                         $generateMatrixEvent->include(
