@@ -398,12 +398,6 @@
       <code>get</code>
     </MissingThrowsDocblock>
   </file>
-  <file src="src/Factory/SymfonyApplicationFactory.php">
-    <MixedArgument>
-      <code><![CDATA[InstalledVersions::getPrettyVersion(Compliance::PACKAGE) ??
-            throw new RuntimeException('Unable to determine version!')]]></code>
-    </MixedArgument>
-  </file>
   <file src="src/Interface/Composer/DependencyInterface.php">
     <PossiblyUnusedMethod>
       <code>name</code>
@@ -480,12 +474,17 @@
       <code><![CDATA[$contents['require']['php'] ?? '*']]></code>
       <code><![CDATA[$contents['require-dev'] ?? []]]></code>
       <code><![CDATA[$this->contents['license']]]></code>
+      <code><![CDATA[$this->contents['name']]]></code>
       <code><![CDATA[$this->contents['version'] ??
             InstalledVersions::getPrettyVersion($this->contents['name'])]]></code>
     </MixedArgument>
     <MixedAssignment>
       <code>$dependency</code>
     </MixedAssignment>
+    <PossiblyNullArgument>
+      <code><![CDATA[$this->contents['version'] ??
+            InstalledVersions::getPrettyVersion($this->contents['name'])]]></code>
+    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code>getComposerJsonPath</code>
       <code>getContents</code>
