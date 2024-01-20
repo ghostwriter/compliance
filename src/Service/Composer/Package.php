@@ -17,7 +17,7 @@ final readonly class Package implements DependencyInterface
 
     public function __toString(): string
     {
-        return Json::encode($this);
+        return (new Json())->encode($this);
     }
 
     public function jsonSerialize(): array
