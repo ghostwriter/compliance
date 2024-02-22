@@ -125,7 +125,7 @@ final readonly class Job
             composerDependency: ComposerDependency::LOCKED,
             phpVersion: PhpVersion::latest(),
             operatingSystem: OperatingSystem::UBUNTU,
-            experimental: false,
+            experimental: true,
         );
     }
 }
