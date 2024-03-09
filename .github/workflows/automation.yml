@@ -98,7 +98,7 @@ jobs:
 
       - name: Install ${{ matrix.dependency }} dependencies
         working-directory: ${{ github.workspace }}
-        run: ${{ matrix.installCommand }}
+        run: composer config --no-plugins allow-plugins.ghostwriter/coding-standard true; ${{ matrix.installCommand }}
 
       - name: Run ${{ matrix.name }} command
         run: ${{ matrix.runCommand }}
