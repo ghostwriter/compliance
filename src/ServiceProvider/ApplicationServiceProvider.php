@@ -28,35 +28,16 @@ final readonly class ApplicationServiceProvider implements ServiceProviderInterf
 
     public function __invoke(ContainerInterface $container): void
     {
-        $this->registerServiceProviders($container);
+        $container->set(EnvironmentVariables::class, EnvironmentVariables::new());
+
+        $container->provide(EventServiceProvider::class);
+        $container->provide(ConsoleServiceProvider::class);
+        $container->provide(ConfigServiceProvider::class);
+
+        // $this->registerServiceProviders($container);
         $this->registerTools($container);
 
-        $container->set(EnvironmentVariables::class, EnvironmentVariables::new());
         $container->factory(ComposerExecutableFinder::class, ComposerExecutableFinderFactory::class);
-    }
-
-    private function registerServiceProviders(ContainerInterface $container): void
-    {
-        // Autoload ServiceProvider classes.
-        foreach ($this->filesystem->findIn(__DIR__) as $file) {
-            $path = $file->getPathname();
-
-            if (str_contains($path, 'Abstract') || ! str_ends_with($path, 'ServiceProvider.php')) {
-                continue;
-            }
-
-            $class = sprintf('%s\%s', __NAMESPACE__, $file->getBasename('.php'));
-
-            if ($class === self::class) {
-                continue;
-            }
-
-            if (! is_a($class, ServiceProviderInterface::class, true)) {
-                continue;
-            }
-
-            $container->provide($class);
-        }
     }
 
     private function registerTools(ContainerInterface $container): void
@@ -64,8 +45,11 @@ final readonly class ApplicationServiceProvider implements ServiceProviderInterf
         // Tag the CLI tools we support.
         foreach ($this->filesystem->findIn(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Tool') as $file) {
             $path = $file->getPathname();
+            if (str_contains($path, 'Abstract')) {
+                continue;
+            }
 
-            if (str_contains($path, 'Abstract') || ! str_ends_with($path, '.php')) {
+            if (! str_ends_with($path, '.php')) {
                 continue;
             }
 
