@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.22.2@d768d914152dbbf3486c36398802f74e80cfde48">
+<files psalm-version="5.23.0@005e3184fb6de4350a873b9b8c4dc3cede9db762">
   <file src="src/Command/AbstractCommand.php">
     <MissingThrowsDocblock>
       <code><![CDATA[build]]></code>
@@ -145,10 +145,8 @@
     </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code><![CDATA[has]]></code>
+      <code><![CDATA[set]]></code>
     </PossiblyUnusedMethod>
-    <RedundantCastGivenDocblockType>
-      <code><![CDATA[(string) $value]]></code>
-    </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Event/AbstractEvent.php">
     <MissingTemplateParam>
@@ -171,192 +169,6 @@
       <code><![CDATA[ConfigEvent]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Event/GitHub/GitHubCreateEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubDeleteEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubDeploymentEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubDeploymentStatusEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubForkEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubGollumEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubIssueCommentEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubIssuesEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubLabelEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubMergeGroupEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubMilestoneEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubPageBuildEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubProjectCardEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubProjectColumnEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubProjectEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubPublicEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubPullRequestCommentEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubPullRequestEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubPullRequestReviewCommentEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubPullRequestReviewEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubPullRequestTargetEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubPushEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubRegistryPackageEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubReleaseEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubRepositoryDispatchEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubScheduleEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubStatusEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubWatchEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubWorkflowCallEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubWorkflowDispatchEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Event/GitHub/GitHubWorkflowRunEvent.php">
-    <MissingTemplateParam>
-      <code><![CDATA[EventTrait]]></code>
-      <code><![CDATA[GitHubEventInterface]]></code>
-    </MissingTemplateParam>
-  </file>
   <file src="src/Event/MatrixEvent.php">
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$this->matrix]]></code>
@@ -376,15 +188,6 @@
   <file src="src/Extension/ListenerProviderExtension.php">
     <MissingThrowsDocblock>
       <code><![CDATA[bind]]></code>
-      <code><![CDATA[bind]]></code>
-      <code><![CDATA[bind]]></code>
-      <code><![CDATA[bind]]></code>
-      <code><![CDATA[bind]]></code>
-      <code><![CDATA[bind]]></code>
-      <code><![CDATA[bind]]></code>
-      <code><![CDATA[bind]]></code>
-      <code><![CDATA[bind]]></code>
-      <code><![CDATA[bind]]></code>
     </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
@@ -400,6 +203,12 @@
       <code><![CDATA[get]]></code>
       <code><![CDATA[get]]></code>
     </MissingThrowsDocblock>
+  </file>
+  <file src="src/Factory/SymfonyApplicationFactory.php">
+    <MixedArgument>
+      <code><![CDATA[InstalledVersions::getPrettyVersion(Compliance::PACKAGE) ??
+            throw new RuntimeException('Unable to determine version!')]]></code>
+    </MixedArgument>
   </file>
   <file src="src/Interface/Composer/DependencyInterface.php">
     <PossiblyUnusedMethod>
@@ -477,17 +286,12 @@
       <code><![CDATA[$contents['require']['php'] ?? '*']]></code>
       <code><![CDATA[$contents['require-dev'] ?? []]]></code>
       <code><![CDATA[$this->contents['license']]]></code>
-      <code><![CDATA[$this->contents['name']]]></code>
       <code><![CDATA[$this->contents['version'] ??
             InstalledVersions::getPrettyVersion($this->contents['name'])]]></code>
     </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$dependency]]></code>
     </MixedAssignment>
-    <PossiblyNullArgument>
-      <code><![CDATA[$this->contents['version'] ??
-            InstalledVersions::getPrettyVersion($this->contents['name'])]]></code>
-    </PossiblyNullArgument>
     <PossiblyUnusedMethod>
       <code><![CDATA[getComposerJsonPath]]></code>
       <code><![CDATA[getContents]]></code>
@@ -502,9 +306,6 @@
       <code><![CDATA[throw new InvalidArgumentException('Composer JSON file could not be read');]]></code>
       <code><![CDATA[throw new InvalidArgumentException('Composer JSON file does not exist: ' . $composerJsonPath);]]></code>
     </MissingThrowsDocblock>
-    <NoValue>
-      <code><![CDATA[(new Json())->decode($composerJsonContents)]]></code>
-    </NoValue>
   </file>
   <file src="src/Service/Composer/ComposerLock.php">
     <PossiblyUnusedMethod>
@@ -518,9 +319,6 @@
       <code><![CDATA[throw new InvalidArgumentException('Composer JSON file could not be read');]]></code>
       <code><![CDATA[throw new InvalidArgumentException('Composer JSON file does not exist');]]></code>
     </MissingThrowsDocblock>
-    <NoValue>
-      <code><![CDATA[(new Json())->decode($composerJsonContents)]]></code>
-    </NoValue>
   </file>
   <file src="src/Service/Composer/DependencyName.php">
     <MissingThrowsDocblock>
@@ -761,6 +559,14 @@
     </MoreSpecificReturnType>
   </file>
   <file src="src/ServiceProvider/ApplicationServiceProvider.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[provide]]></code>
+      <code><![CDATA[provide]]></code>
+      <code><![CDATA[provide]]></code>
+      <code><![CDATA[provide]]></code>
+      <code><![CDATA[provide]]></code>
+      <code><![CDATA[provide]]></code>
+    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -772,9 +578,6 @@
       <code><![CDATA[alias]]></code>
       <code><![CDATA[alias]]></code>
     </MissingThrowsDocblock>
-    <UnusedClass>
-      <code><![CDATA[ConfigServiceProvider]]></code>
-    </UnusedClass>
   </file>
   <file src="src/ServiceProvider/ConsoleServiceProvider.php">
     <MissingThrowsDocblock>
@@ -787,9 +590,6 @@
       <code><![CDATA[alias]]></code>
       <code><![CDATA[alias]]></code>
     </MissingThrowsDocblock>
-    <UnusedClass>
-      <code><![CDATA[ConsoleServiceProvider]]></code>
-    </UnusedClass>
   </file>
   <file src="src/ServiceProvider/EventServiceProvider.php">
     <MissingThrowsDocblock>
@@ -798,9 +598,6 @@
       <code><![CDATA[alias]]></code>
       <code><![CDATA[alias]]></code>
     </MissingThrowsDocblock>
-    <UnusedClass>
-      <code><![CDATA[EventServiceProvider]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Tool/AbstractTool.php">
     <PossiblyNullArgument>
@@ -834,6 +631,173 @@
     <UnusedClass>
       <code><![CDATA[Psalm]]></code>
     </UnusedClass>
+  </file>
+  <file src="src/Workspace.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$levels]]></code>
+    </ArgumentTypeCoercion>
+    <ForbiddenCode>
+      <code><![CDATA[\var_dump(...$args)]]></code>
+      <code><![CDATA[\var_dump(...$args)]]></code>
+    </ForbiddenCode>
+    <InvalidOperand>
+      <code><![CDATA[\time()]]></code>
+    </InvalidOperand>
+    <MismatchingDocblockReturnType>
+      <code><![CDATA[bool]]></code>
+    </MismatchingDocblockReturnType>
+    <MissingConstructor>
+      <code><![CDATA[$character]]></code>
+      <code><![CDATA[$contentChanges]]></code>
+      <code><![CDATA[$document]]></code>
+      <code><![CDATA[$end]]></code>
+      <code><![CDATA[$line]]></code>
+      <code><![CDATA[$start]]></code>
+    </MissingConstructor>
+    <MissingParamType>
+      <code><![CDATA[$args]]></code>
+      <code><![CDATA[$args]]></code>
+    </MissingParamType>
+    <MissingTemplateParam>
+      <code><![CDATA[IteratorAggregate]]></code>
+    </MissingTemplateParam>
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new Exception('Failed to save file ' . $documentUri->toString());]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf(
+                'Filesystem::chgrp() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf(
+                'Filesystem::chmod() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf(
+                'Filesystem::chown() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf(
+                'Filesystem::copy() failed because the source path does not exist: %s',
+                $source
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf(
+                'Filesystem::create() failed because the path already exists: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf(
+                'Filesystem::createDirectory() failed because the path already exists: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf(
+                'Filesystem::delete() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf(
+                'Filesystem::deleteDirectory() failed because the path does not exist: %s',
+                $path
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf(
+                'Filesystem::move() failed because the source path does not exist: %s',
+                $source
+            ));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf('Filesystem::append() failed to write to path: %s', $path));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf('Filesystem::prepend() failed to write to path: %s', $path));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf('Filesystem::read() failed to read from path: %s', $path));]]></code>
+      <code><![CDATA[throw new RuntimeException(\sprintf('Filesystem::write() failed to write to path: %s', $path));]]></code>
+    </MissingThrowsDocblock>
+    <MixedArgument>
+      <code><![CDATA[$documentUri->toString()]]></code>
+      <code><![CDATA[$path]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$file]]></code>
+      <code><![CDATA[$path]]></code>
+      <code><![CDATA[$splFileInfo]]></code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code><![CDATA[TextDocument]]></code>
+      <code><![CDATA[TextDocument]]></code>
+      <code><![CDATA[TextDocument]]></code>
+      <code><![CDATA[bool]]></code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code><![CDATA[getPathname]]></code>
+      <code><![CDATA[isFile]]></code>
+      <code><![CDATA[toString]]></code>
+      <code><![CDATA[toString]]></code>
+    </MixedMethodCall>
+    <MixedOperand>
+      <code><![CDATA[$documentUri->toString()]]></code>
+      <code><![CDATA[$file]]></code>
+    </MixedOperand>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->textDocuments->offsetGet($uri) ?? $this->createTextDocument($uri)]]></code>
+      <code><![CDATA[$this->textDocuments->offsetGet($uri) ?? $this->createTextDocument($uri)]]></code>
+      <code><![CDATA[$this->textDocuments->offsetGet($uri) ?? throw new Exception('Document not found')]]></code>
+      <code><![CDATA[match (true) {
+            $this->textDocuments->offsetExists($documentUri) => $this->textDocuments->offsetGet($documentUri),
+            default => $this->createTextDocument($documentUri),
+        }]]></code>
+      <code><![CDATA[match (true) {
+            $this->textDocuments->offsetExists($documentUri) => $this->textDocuments->offsetGet($documentUri),
+            default => $this->createTextDocument($documentUri),
+        }]]></code>
+    </MixedReturnStatement>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[Generator<SplFileInfo>]]></code>
+    </MixedReturnTypeCoercion>
+    <PossiblyFalseArgument>
+      <code><![CDATA[$tempUri]]></code>
+      <code><![CDATA[$tempUri]]></code>
+      <code><![CDATA[$tempUri]]></code>
+      <code><![CDATA[\file_get_contents($path)]]></code>
+      <code><![CDATA[\scandir($path)]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyInvalidDocblockTag>
+      <code><![CDATA[@var WeakMap<DocumentUri,TextDocument>]]></code>
+    </PossiblyInvalidDocblockTag>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[allFiles]]></code>
+      <code><![CDATA[append]]></code>
+      <code><![CDATA[chgrp]]></code>
+      <code><![CDATA[chmod]]></code>
+      <code><![CDATA[chown]]></code>
+      <code><![CDATA[copy]]></code>
+      <code><![CDATA[createFile]]></code>
+      <code><![CDATA[delete]]></code>
+      <code><![CDATA[delete]]></code>
+      <code><![CDATA[directories]]></code>
+      <code><![CDATA[exists]]></code>
+      <code><![CDATA[files]]></code>
+      <code><![CDATA[getTextDocument]]></code>
+      <code><![CDATA[glob]]></code>
+      <code><![CDATA[hasTextDocument]]></code>
+      <code><![CDATA[missing]]></code>
+      <code><![CDATA[move]]></code>
+      <code><![CDATA[onDidChangeTextDocument]]></code>
+      <code><![CDATA[openTextDocument]]></code>
+      <code><![CDATA[prepend]]></code>
+      <code><![CDATA[saveTextDocument]]></code>
+      <code><![CDATA[setTextDocument]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$character]]></code>
+      <code><![CDATA[$languageId]]></code>
+      <code><![CDATA[$line]]></code>
+      <code><![CDATA[$version]]></code>
+    </PossiblyUnusedProperty>
+    <UnusedClass>
+      <code><![CDATA[Range]]></code>
+      <code><![CDATA[TextDocumentChangeEvent]]></code>
+    </UnusedClass>
+    <UnusedParam>
+      <code><![CDATA[$callback]]></code>
+      <code><![CDATA[$flags]]></code>
+      <code><![CDATA[$pattern]]></code>
+    </UnusedParam>
+    <UnusedProperty>
+      <code><![CDATA[$filesystem]]></code>
+      <code><![CDATA[$rootPath]]></code>
+    </UnusedProperty>
   </file>
   <file src="tests/Unit/Service/ComposerTest.php">
     <PossiblyFalseArgument>
