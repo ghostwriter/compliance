@@ -53,7 +53,8 @@
     "require-dev": {
         "ghostwriter/coding-standard": "dev-main",
         "ghostwriter/psalm-plugin": "^0.2.0",
-        "rector/rector": "^1.0.2"
+        "rector/rector": "^1.0.2",
+        "vimeo/psalm": "^5.23.0"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
