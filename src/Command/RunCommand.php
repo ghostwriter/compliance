@@ -40,7 +40,7 @@ use Ghostwriter\Compliance\Event\GitHub\GitHubWorkflowRunEvent;
 use Ghostwriter\Compliance\Event\MatrixEvent;
 use Ghostwriter\Compliance\Event\WorkflowEvent;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
+use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use RuntimeException;
 use SplFileInfo;
 use Symfony\Component\Console\Command\Command;
@@ -55,7 +55,7 @@ final class RunCommand extends Command
 {
     public function __construct(
         private readonly ContainerInterface $container,
-        private readonly DispatcherInterface $dispatcher,
+        private readonly EventDispatcherInterface $dispatcher,
         private readonly EnvironmentVariables $environmentVariables,
         private readonly StyleInterface $symfonyStyle,
     ) {
