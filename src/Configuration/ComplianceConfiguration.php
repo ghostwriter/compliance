@@ -38,6 +38,7 @@ final readonly class ComplianceConfiguration
                             $this->config->set($this->getKey($tool, $supportedPhpVersion, $dependency), true);
                         }
                     }
+
                     continue;
                 }
 
