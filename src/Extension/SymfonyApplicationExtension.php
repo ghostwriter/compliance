@@ -13,9 +13,9 @@ use const DIRECTORY_SEPARATOR;
 use function dirname;
 use function is_a;
 use function sprintf;
-use function str_contains;
 use function str_ends_with;
 use function str_replace;
+use function str_starts_with;
 
 /**
  * @implements ExtensionInterface<SymfonyApplication>
