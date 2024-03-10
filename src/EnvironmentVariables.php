@@ -8,7 +8,7 @@ use Ghostwriter\Compliance\Exception\VariableNotFoundException;
 use function array_key_exists;
 use function getenv;
 
-final readonly class EnvironmentVariables
+final class EnvironmentVariables
 {
     private function __construct(
         private array $variables = [],
@@ -29,6 +29,17 @@ final readonly class EnvironmentVariables
         return array_key_exists($name, $this->variables);
     }
 
+    public function set(string $name, string $value): void
+    {
+        $this->variables[$name] = $value;
+
+        $_ENV[$name] = $value;
+
+        $_SERVER[$name] = $value;
+
+        // putenv($name . '=' . $value);
+    }
+
     public static function new(): self
     {
         $variables = [];
@@ -38,7 +49,7 @@ final readonly class EnvironmentVariables
         }
 
         foreach (getenv() ?: [] as $name => $value) {
-            $variables[$name] = (string) $value;
+            $variables[$name] = $value;
         }
 
         return new self($variables);
