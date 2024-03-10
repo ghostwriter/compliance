@@ -35,21 +35,17 @@ final readonly class SymfonyApplicationExtension implements ExtensionInterface
         $service->setAutoExit(false);
 
         foreach ($this->filesystem->findIn(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Command') as $file) {
-            $path = $file->getPathname();
+            $path = $file->getBasename('.php');
 
-            if (
-                str_contains($path, 'Abstract') ||
-                str_ends_with($path, 'Trait.php') ||
-                ! str_ends_with($path, 'Command.php')
-            ) {
+            if (str_starts_with($path, 'Abstract')) {
                 continue;
             }
 
-            $class = sprintf(
-                '%s%s',
-                str_replace('Extension', 'Command', __NAMESPACE__ . '\\'),
-                $file->getBasename('.php')
-            );
+            if (! str_ends_with($path, 'Command')) {
+                continue;
+            }
+
+            $class = sprintf('%s%s', str_replace('Extension', 'Command', __NAMESPACE__ . '\\'), $path);
 
             if (! is_a($class, Command::class, true)) {
                 continue;
