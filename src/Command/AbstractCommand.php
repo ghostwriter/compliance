@@ -7,7 +7,7 @@ namespace Ghostwriter\Compliance\Command;
 use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Event\OutputEvent;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
+use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use Ghostwriter\EventDispatcher\Interface\EventInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -19,7 +19,7 @@ abstract class AbstractCommand extends Command
 {
     public function __construct(
         protected ContainerInterface $container,
-        protected DispatcherInterface $dispatcher,
+        protected EventDispatcherInterface $dispatcher,
         protected SymfonyStyle $symfonyStyle
     ) {
         parent::__construct(static::getDefaultName());
