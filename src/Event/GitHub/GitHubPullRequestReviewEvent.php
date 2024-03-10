@@ -7,8 +7,14 @@ namespace Ghostwriter\Compliance\Event\GitHub;
 use Ghostwriter\Compliance\Event\GitHubEventInterface;
 use Ghostwriter\EventDispatcher\Trait\EventTrait;
 
+/**
+ * @implements GitHubEventInterface<bool>
+ */
 final class GitHubPullRequestReviewEvent implements GitHubEventInterface
 {
+    /**
+     * @use EventTrait<bool>
+     */
     use EventTrait;
 
     public function __construct(
