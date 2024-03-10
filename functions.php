@@ -8,19 +8,21 @@ use Ghostwriter\Compliance\Service\GithubActionOutput;
 use Ghostwriter\Compliance\Service\Process;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\EventDispatcher\Interface\DispatcherInterface;
+use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use Ghostwriter\EventDispatcher\Interface\EventInterface;
 
 function container(): ContainerInterface
 {
     return Container::getInstance();
 }
+
 function dispatch(EventInterface $event): EventInterface
 {
     return \container()
-        ->get(DispatcherInterface::class)
+        ->get(EventDispatcherInterface::class)
         ->dispatch($event);
 }
+
 function dispatchOutputEvent(string $message): OutputEvent
 {
     return \dispatch(new OutputEvent(
@@ -33,21 +35,25 @@ function dispatchOutputEvent(string $message): OutputEvent
         ]
     ));
 }
+
 function githubActionOutput(): GithubActionOutput
 {
     return \container()
         ->get(GithubActionOutput::class);
 }
+
 function debug(string $message, ?string $file = null, ?int $line = null, ?int $col = null): void
 {
     \githubActionOutput()
         ->debug($message, $file, $line, $col);
 }
+
 function warning(string $message, ?string $file = null, ?int $line = null, ?int $col = null): void
 {
     \githubActionOutput()
         ->warning($message, $file, $line, $col);
 }
+
 function error(string $message, ?string $file = null, ?int $line = null, ?int $col = null): void
 {
     \githubActionOutput()
