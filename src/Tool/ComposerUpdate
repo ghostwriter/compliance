@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Ghostwriter\Compliance\Tool;
+
+final class ComposerUpdate extends AbstractTool
+{
+    public function command(): string
+    {
+        return 'composer update && git add composer.json && git add composer.lock && git commit -m "Update composer files" && git push;';
+    }
+
+    /**
+     * @return string[]
+     */
+    public function configuration(): array
+    {
+        if ($_ENV['GITHUB_REPOSITORY'] === 'ghostwriter/wip') {
+            return ['composer.json'];
+        }
+        return ['ComposerUpdate.json'];
+    }
+}
