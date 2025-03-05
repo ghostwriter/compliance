@@ -37,7 +37,7 @@
         "#StandWithUkraine"
     ],
     "require": {
-        "php": ">=8.4",
+        "php": "^8.4",
         "ext-json": "*",
         "ext-mbstring": "*",
         "composer-plugin-api": "^2.6.0",
@@ -47,8 +47,8 @@
         "ghostwriter/clock": "^3.0.1",
         "ghostwriter/collection": "^2.0.0",
         "ghostwriter/config": "^1.0.0",
-        "ghostwriter/container": "^4.0.5",
-        "ghostwriter/event-dispatcher": "^5.0.2",
+        "ghostwriter/container": "^5.0.0",
+        "ghostwriter/event-dispatcher": "^5.0.3",
         "ghostwriter/filesystem": "^0.1.1",
         "ghostwriter/json": "^3.0.0",
         "ghostwriter/shell": "^0.1.0",
