@@ -44,7 +44,7 @@ abstract class AbstractTestCase extends TestCase
     #[Override]
     protected function tearDown(): void
     {
-        $this->container->purge();
+        $this->container->clear();
 
         parent::tearDown();
     }
