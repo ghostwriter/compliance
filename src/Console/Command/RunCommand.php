@@ -6,10 +6,15 @@ namespace Ghostwriter\Compliance\Console\Command;
 
 use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\EventDispatcher\Event\CopyWorkflowEvent;
+use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubBranchProtectionRuleEvent;
+use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubCheckRunEvent;
+use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubCheckSuiteEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubCreateEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubDeleteEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubDeploymentEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubDeploymentStatusEvent;
+use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubDiscussionCommentEvent;
+use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubDiscussionEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubForkEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubGollumEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubIssueCommentEvent;
@@ -144,12 +149,17 @@ final class RunCommand extends Command
                             '<comment>GitHub Event "%s" is not Supported.</comment>',
                             $eventName
                         )),
+                        'branch_protection_rule' => new GitHubBranchProtectionRuleEvent($payload),
+                        'check_run' => new GitHubCheckRunEvent($payload),
+                        'check_suite' => new GitHubCheckSuiteEvent($payload),
                         'compliance.command.matrix' => $this->container->get(MatrixEvent::class),
                         'compliance.command.workflow' => $this->container->get(CopyWorkflowEvent::class),
                         'create' => new GitHubCreateEvent($payload),
                         'delete' => new GitHubDeleteEvent($payload),
-                        'deployment_status' => new GitHubDeploymentStatusEvent($payload),
                         'deployment' => new GitHubDeploymentEvent($payload),
+                        'deployment_status' => new GitHubDeploymentStatusEvent($payload),
+                        'discussion' => new GitHubDiscussionEvent($payload),
+                        'discussion_comment' => new GitHubDiscussionCommentEvent($payload),
                         'fork' => new GitHubForkEvent($payload),
                         'gollum' => new GitHubGollumEvent($payload),
                         'issue_comment' => new GitHubIssueCommentEvent($payload),
@@ -158,15 +168,15 @@ final class RunCommand extends Command
                         'merge_group' => new GitHubMergeGroupEvent($payload),
                         'milestone' => new GitHubMilestoneEvent($payload),
                         'page_build' => new GitHubPageBuildEvent($payload),
+                        'project' => new GitHubProjectEvent($payload),
                         'project_card' => new GitHubProjectCardEvent($payload),
                         'project_column' => new GitHubProjectColumnEvent($payload),
-                        'project' => new GitHubProjectEvent($payload),
                         'public' => new GitHubPublicEvent($payload),
-                        'pull_request_comment' => new GitHubPullRequestCommentEvent($payload),
-                        'pull_request_review_comment' => new GitHubPullRequestReviewCommentEvent($payload),
-                        'pull_request_review' => new GitHubPullRequestReviewEvent($payload),
-                        'pull_request_target' => new GitHubPullRequestTargetEvent($payload),
                         'pull_request' => new GitHubPullRequestEvent($payload),
+                        'pull_request_comment' => new GitHubPullRequestCommentEvent($payload),
+                        'pull_request_review' => new GitHubPullRequestReviewEvent($payload),
+                        'pull_request_review_comment' => new GitHubPullRequestReviewCommentEvent($payload),
+                        'pull_request_target' => new GitHubPullRequestTargetEvent($payload),
                         'push' => new GitHubPushEvent($payload),
                         'registry_package' => new GitHubRegistryPackageEvent($payload),
                         'release' => new GitHubReleaseEvent($payload),
