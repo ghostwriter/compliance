@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c0874436211075a799294b1ac2e6fd8",
+    "content-hash": "53a049838d27267d67b72f467ab92705",
     "packages": [
         {
             "name": "composer/semver",
@@ -337,25 +337,23 @@
         },
         {
             "name": "ghostwriter/container",
-            "version": "4.0.5",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/container.git",
-                "reference": "a0aa3c884e1b8e4bb1b044c72ebac74675a45bf6"
+                "reference": "e92b51b825b9b3883bfab6d1077e050bd8035d78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/container/zipball/a0aa3c884e1b8e4bb1b044c72ebac74675a45bf6",
-                "reference": "a0aa3c884e1b8e4bb1b044c72ebac74675a45bf6",
+                "url": "https://api.github.com/repos/ghostwriter/container/zipball/e92b51b825b9b3883bfab6d1077e050bd8035d78",
+                "reference": "e92b51b825b9b3883bfab6d1077e050bd8035d78",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.3"
+                "php": ">=8.4"
             },
             "require-dev": {
-                "ghostwriter/coding-standard": "@dev",
-                "ghostwriter/psalm-plugin": "@dev",
-                "ghostwriter/testify": "@dev"
+                "ghostwriter/coding-standard": "dev-main"
             },
             "type": "library",
             "autoload": {
@@ -393,25 +391,25 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-02T00:23:20+00:00"
+            "time": "2025-02-21T19:09:09+00:00"
         },
         {
             "name": "ghostwriter/event-dispatcher",
-            "version": "5.0.2",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/event-dispatcher.git",
-                "reference": "3fd8e9b0714298930b2a250a4c369c05c614a33a"
+                "reference": "71cb9a58f959130dc41573e2f31d84aaf07d4f9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/3fd8e9b0714298930b2a250a4c369c05c614a33a",
-                "reference": "3fd8e9b0714298930b2a250a4c369c05c614a33a",
+                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/71cb9a58f959130dc41573e2f31d84aaf07d4f9d",
+                "reference": "71cb9a58f959130dc41573e2f31d84aaf07d4f9d",
                 "shasum": ""
             },
             "require": {
-                "ghostwriter/container": "^4.0.2",
-                "php": ">=8.3"
+                "ghostwriter/container": "^5.0.0",
+                "php": ">=8.4"
             },
             "require-dev": {
                 "ghostwriter/coding-standard": "dev-main"
@@ -435,13 +433,12 @@
                 }
             ],
             "description": "Event Dispatcher implementation.",
+            "homepage": "https://github.com/ghostwriter/event-dispatcher",
             "keywords": [
                 "event-dispatcher",
                 "ghostwriter"
             ],
             "support": {
-                "docs": "https://github.com/ghostwriter/event-dispatcher",
-                "forum": "https://github.com/ghostwriter/event-dispatcher/discussions",
                 "issues": "https://github.com/ghostwriter/event-dispatcher/issues",
                 "rss": "https://github.com/ghostwriter/event-dispatcher/releases.atom",
                 "security": "https://github.com/ghostwriter/event-dispatcher/security/advisories/new",
@@ -453,7 +450,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-15T22:32:15+00:00"
+            "time": "2025-02-21T19:18:04+00:00"
         },
         {
             "name": "ghostwriter/filesystem",
@@ -1551,16 +1548,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.8.5",
+            "version": "2.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "ae208dc1e182bd45d99fcecb956501da212454a1"
+                "reference": "937c775a644bd7d2c3dfbb352747488463a6e673"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/ae208dc1e182bd45d99fcecb956501da212454a1",
-                "reference": "ae208dc1e182bd45d99fcecb956501da212454a1",
+                "url": "https://api.github.com/repos/composer/composer/zipball/937c775a644bd7d2c3dfbb352747488463a6e673",
+                "reference": "937c775a644bd7d2c3dfbb352747488463a6e673",
                 "shasum": ""
             },
             "require": {
@@ -1645,7 +1642,7 @@
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
                 "security": "https://github.com/composer/composer/security/policy",
-                "source": "https://github.com/composer/composer/tree/2.8.5"
+                "source": "https://github.com/composer/composer/tree/2.8.6"
             },
             "funding": [
                 {
@@ -1661,7 +1658,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-21T14:23:40+00:00"
+            "time": "2025-02-25T12:03:50+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -1963,18 +1960,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "809a732740176b20ea3f74aa5e1fe6c205baa81e"
+                "reference": "966a4f98c459c0f1c6bc3acf338ba5d19df2fa19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/809a732740176b20ea3f74aa5e1fe6c205baa81e",
-                "reference": "809a732740176b20ea3f74aa5e1fe6c205baa81e",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/966a4f98c459c0f1c6bc3acf338ba5d19df2fa19",
+                "reference": "966a4f98c459c0f1c6bc3acf338ba5d19df2fa19",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^2.6.0",
                 "composer-runtime-api": "^2.2.2",
-                "composer/composer": "^2.8.5",
+                "composer/composer": "^2.8.6",
                 "composer/semver": "^3.4.3",
                 "ext-ctype": "*",
                 "ext-curl": "*",
@@ -1999,15 +1996,16 @@
                 "ext-xmlwriter": "*",
                 "ext-zlib": "*",
                 "mockery/mockery": "^1.6.12",
-                "php": "^8.2",
-                "phpunit/phpunit": "^12.0.2",
+                "php": "^8.4",
+                "phpunit/phpunit": "^12.0.5",
                 "symfony/var-dumper": "^7.2.3"
             },
             "conflict": {
                 "vimeo/psalm": "<6.0"
             },
             "require-dev": {
-                "ghostwriter/container": "^4.0.5",
+                "ghostwriter/case-converter": "^2.0.0",
+                "ghostwriter/container": "^5.0.0",
                 "ghostwriter/filesystem": "^0.1.1",
                 "ghostwriter/json": "^3.0.0",
                 "ghostwriter/shell": "^0.1.0"
@@ -2027,7 +2025,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Ghostwriter\\CodingStandard\\": "src"
+                    "Ghostwriter\\CodingStandard\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2063,7 +2061,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-08T17:01:17+00:00"
+            "time": "2025-03-05T07:28:11+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -2266,16 +2264,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.12.1",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "123267b2c49fbf30d78a7b2d333f6be754b94845"
+                "reference": "024473a478be9df5fdaca2c793f2232fe788e414"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/123267b2c49fbf30d78a7b2d333f6be754b94845",
-                "reference": "123267b2c49fbf30d78a7b2d333f6be754b94845",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/024473a478be9df5fdaca2c793f2232fe788e414",
+                "reference": "024473a478be9df5fdaca2c793f2232fe788e414",
                 "shasum": ""
             },
             "require": {
@@ -2314,7 +2312,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.12.1"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.0"
             },
             "funding": [
                 {
@@ -2322,7 +2320,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-08T17:47:46+00:00"
+            "time": "2025-02-12T12:17:51+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2502,16 +2500,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "12.0.2",
+            "version": "12.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "69dde560510151f7d04315fac6c72016cc5d7bc8"
+                "reference": "79e5ef5897068689c7c325554d6df905480ce942"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/69dde560510151f7d04315fac6c72016cc5d7bc8",
-                "reference": "69dde560510151f7d04315fac6c72016cc5d7bc8",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/79e5ef5897068689c7c325554d6df905480ce942",
+                "reference": "79e5ef5897068689c7c325554d6df905480ce942",
                 "shasum": ""
             },
             "require": {
@@ -2567,7 +2565,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.0.2"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.0.4"
             },
             "funding": [
                 {
@@ -2575,7 +2573,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-08T09:08:00+00:00"
+            "time": "2025-02-25T13:27:48+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2824,16 +2822,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.0.2",
+            "version": "12.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6301fe5c1f5f34192ffd650a87fe055677a32212"
+                "reference": "0f177d7316ba155d36337c3811b11993b54dae32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6301fe5c1f5f34192ffd650a87fe055677a32212",
-                "reference": "6301fe5c1f5f34192ffd650a87fe055677a32212",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0f177d7316ba155d36337c3811b11993b54dae32",
+                "reference": "0f177d7316ba155d36337c3811b11993b54dae32",
                 "shasum": ""
             },
             "require": {
@@ -2843,11 +2841,11 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
-                "myclabs/deep-copy": "^1.12.1",
+                "myclabs/deep-copy": "^1.13.0",
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.3",
-                "phpunit/php-code-coverage": "^12.0.2",
+                "phpunit/php-code-coverage": "^12.0.3",
                 "phpunit/php-file-iterator": "^6.0.0",
                 "phpunit/php-invoker": "^6.0.0",
                 "phpunit/php-text-template": "^5.0.0",
@@ -2901,7 +2899,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.0.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.0.5"
             },
             "funding": [
                 {
@@ -2917,7 +2915,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-08T09:18:47+00:00"
+            "time": "2025-02-25T06:13:04+00:00"
         },
         {
             "name": "psr/log",
@@ -4645,7 +4643,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.4",
+        "php": "^8.4",
         "ext-json": "*",
         "ext-mbstring": "*",
         "composer-plugin-api": "^2.6.0",
