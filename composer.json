@@ -76,7 +76,7 @@
             "tests/bootstrap.php"
         ],
         "exclude-from-classmap": [
-            "tests/fixture/"
+            "tests/Fixture/"
         ]
     },
     "bin": [
