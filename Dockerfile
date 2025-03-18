@@ -6,7 +6,7 @@ LABEL "org.opencontainers.image.description"="Compliance Automation for PHP - Au
 LABEL "org.opencontainers.image.authors"="Nathanael Esayeas <nathanael.esayeas@protonmail.com>, github.com/ghostwriter"
 LABEL "org.opencontainers.image.source"="https://github.com/ghostwriter/compliance"
 LABEL "org.opencontainers.image.url"="https://github.com/ghostwriter/compliance"
-LABEL "org.opencontainers.image.licenses"="BSD-3-Clause"
+LABEL "org.opencontainers.image.licenses"="BSD-4-Clause"
 
 WORKDIR /srv/workspace
 

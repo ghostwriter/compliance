@@ -1,7 +1,7 @@
 {
     "name": "ghostwriter/compliance",
     "description": "Compliance - CI/CD & QA Test Automation for PHP via GitHub Actions.",
-    "license": "BSD-3-Clause",
+    "license": "BSD-4-Clause",
     "type": "project",
     "keywords": [
         "ghostwriter",
