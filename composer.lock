@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d130db2316e5d4ecfc72ab75c1da1e4",
+    "content-hash": "51fa33a49e03b82d9b8846476ef33095",
     "packages": [
         {
             "name": "composer/semver",
@@ -3156,12 +3156,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "ea3f2cd6f5487370fd10e8e7e3a9dc507e674410"
+                "reference": "e61fcd5e61886f1fd635b73a85c69701e8cde4cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/ea3f2cd6f5487370fd10e8e7e3a9dc507e674410",
-                "reference": "ea3f2cd6f5487370fd10e8e7e3a9dc507e674410",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/e61fcd5e61886f1fd635b73a85c69701e8cde4cd",
+                "reference": "e61fcd5e61886f1fd635b73a85c69701e8cde4cd",
                 "shasum": ""
             },
             "require": {
@@ -3196,7 +3196,7 @@
                 "php": "^8.2",
                 "phpunit/phpunit": "~11.5.14 || ~12.0.9",
                 "symfony/var-dumper": "~7.2.3",
-                "vimeo/psalm": "~6.9.1"
+                "vimeo/psalm": "~6.9.4"
             },
             "conflict": {
                 "pestphp/pest": "*",
@@ -3306,7 +3306,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-21T03:55:37+00:00"
+            "time": "2025-03-21T22:50:06+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -7603,7 +7603,7 @@
         "composer-plugin-api": "^2.6.0",
         "composer-runtime-api": "^2.2.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.4.999"
     },
