@@ -3,6 +3,7 @@
 namespace Ghostwriter\Compliance\EventDispatcher\Event\GitHub;
 
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHubEventInterface;
+use Override;
 
 /**
  * @implements GitHubEventInterface<bool>
