@@ -11,7 +11,7 @@ final class Infection extends AbstractTool
     #[Override]
     public function command(): string
     {
-        return 'composer ghostwriter:infection:run';
+        return 'composer infection';
     }
 
     /**
