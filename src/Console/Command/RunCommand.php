@@ -149,11 +149,11 @@ final class RunCommand extends Command
                             '<comment>GitHub Event "%s" is not Supported.</comment>',
                             $eventName
                         )),
+                        'compliance.command.matrix' => $this->container->get(MatrixEvent::class),
+                        'compliance.command.workflow' => $this->container->get(CopyWorkflowEvent::class),
                         'branch_protection_rule' => new GitHubBranchProtectionRuleEvent($payload),
                         'check_run' => new GitHubCheckRunEvent($payload),
                         'check_suite' => new GitHubCheckSuiteEvent($payload),
-                        'compliance.command.matrix' => $this->container->get(MatrixEvent::class),
-                        'compliance.command.workflow' => $this->container->get(CopyWorkflowEvent::class),
                         'create' => new GitHubCreateEvent($payload),
                         'delete' => new GitHubDeleteEvent($payload),
                         'deployment' => new GitHubDeploymentEvent($payload),
