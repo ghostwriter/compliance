@@ -24,6 +24,7 @@ use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Throwable;
 
+use const DIRECTORY_SEPARATOR;
 use const FILE_APPEND;
 use const PHP_EOL;
 
@@ -62,7 +63,10 @@ final readonly class MatrixListener implements ListenerInterface
             $composerJson = $this->composer->readJsonFile($currentWorkingDirectory);
         } catch (Throwable $exception) {
             if ($this->filesystem->missing($currentWorkingDirectory . DIRECTORY_SEPARATOR . 'composer.json')) {
-                 $generateMatrixEvent->include(Job::noop());
+                $generateMatrixEvent->include(Job::noop());
+
+                $this->publish($generateMatrixEvent);
+
                 return;
             }
 
@@ -186,6 +190,12 @@ final readonly class MatrixListener implements ListenerInterface
                 }
             }
         }
+
+        $this->publish($generateMatrixEvent);
+    }
+
+    private function publish(MatrixEvent $generateMatrixEvent): void
+    {
 
         $gitHubOutput = $this->environmentVariables->get(
             'GITHUB_OUTPUT',
