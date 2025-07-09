@@ -58,7 +58,17 @@ final readonly class MatrixListener implements ListenerInterface
 
         chdir($currentWorkingDirectory);
 
-        $composerJson = $this->composer->readJsonFile($currentWorkingDirectory);
+        try {
+            $composerJson = $this->composer->readJsonFile($currentWorkingDirectory);
+        } catch (Throwable $exception) {
+            if ($this->filesystem->missing($currentWorkingDirectory . DIRECTORY_SEPARATOR . 'composer.json')) {
+                 $generateMatrixEvent->include(Job::noop());
+                return;
+            }
+
+            throw $exception;
+        }
+
         $requiredPhpExtensions = array_map(
             static fn (Extension $extension): string => (string) $extension,
             iterator_to_array($composerJson->getRequiredPhpExtensions())
@@ -95,8 +105,7 @@ final readonly class MatrixListener implements ListenerInterface
             $operatingSystems[$automation->name] = $automation;
         }
 
-        $constraints = $composerJson->getPhpVersionConstraint()
-            ->getVersion();
+        $constraints = $composerJson->getPhpVersionConstraint()->getVersion();
         $composerCacheFilesDirectory = ($this->composerCacheFilesDirectoryFinder)();
         $composerJsonPath = $this->composer->getJsonFilePath($currentWorkingDirectory);
         $composerLockPath = $this->composer->getLockFilePath($currentWorkingDirectory);
