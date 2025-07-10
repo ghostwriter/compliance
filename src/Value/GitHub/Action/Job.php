@@ -133,7 +133,7 @@ final readonly class Job
             'composer config --no-plugins allow-plugins.ghostwriter/coding-standard true',
             $this->composerCommand(),
             'composer config --global --auth --unset github-oauth.github.com'
-        ]) . '";';
+        ]);
     }
 
     private function composerCommand(): string
