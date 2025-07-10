@@ -76,27 +76,6 @@ final readonly class Job
      */
     public function toArray(): array
     {
-        $composerOptions = ['--no-interaction', '--no-progress', '--ansi'];
-
-        $composerCommand = match ($this->composerStrategy) {
-            ComposerStrategy::LOCKED => 'install',
-            default => 'update',
-        };
-
-        if (ComposerStrategy::LOWEST === $this->composerStrategy) {
-            $composerOptions[] = '--prefer-lowest';
-            $composerOptions[] = '--prefer-stable';
-        }
-
-        if (! file_exists($this->composerLockPath)) {
-            $composerCommand = 'update';
-        }
-
-        $validateCommand = file_exists($this->composerJsonPath)
-            // 'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict' :
-            ? 'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict || exit 0;'
-            : 'echo "composer.json does not exist" && exit 1;';
-
         return [
             'name' => $this->name,
             'runCommand' => $this->command,
@@ -106,8 +85,8 @@ final readonly class Job
             'dependency' => $this->composerStrategy->toString(),
             'experimental' => $this->experimental,
             'extensions' => $this->extensions,
-            'validateCommand' => $validateCommand,
-            'installCommand' => sprintf('composer %s %s', $composerCommand, implode(' ', $composerOptions)),
+            'validateCommand' => $this->validateCommand(),
+            'installCommand' => $this->installCommand(),
         ];
     }
 
@@ -130,5 +109,51 @@ final readonly class Job
             operatingSystem: OperatingSystem::UBUNTU,
             experimental: true,
         );
+    }
+
+    /**
+     * @return string
+     */
+    private function validateCommand(): string
+    {
+        return file_exists($this->composerJsonPath)
+            // 'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict' :
+            ? 'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict || exit 0;'
+            : 'echo "composer.json does not exist" && exit 0;';
+    }
+
+    private function installCommand(): string
+    {
+        if (! file_exists($this->composerJsonPath)) {
+            return 'echo "composer.json does not exist" && exit 0;';
+        }
+
+        return implode(' && ', [
+            'composer config --global github-oauth.github.com ${GITHUB_TOKEN};',
+            'composer config --no-plugins allow-plugins.ghostwriter/coding-standard true',
+            $this->composerCommand(),
+            'composer config --global --auth --unset github-oauth.github.com'
+        ]) . ';';
+    }
+
+    private function composerCommand(): string
+    {
+        $composerOptions = ['--no-interaction', '--no-progress', '--ansi'];
+
+        $composerCommand = match ($this->composerStrategy) {
+            ComposerStrategy::LOCKED => 'install',
+            default => 'update',
+        };
+
+        if (ComposerStrategy::LOWEST === $this->composerStrategy) {
+            $composerOptions[] = '--prefer-lowest';
+            $composerOptions[] = '--prefer-stable';
+        }
+
+        if (! file_exists($this->composerLockPath)) {
+            $composerCommand = 'update';
+        }
+
+        return sprintf('composer %s %s', $composerCommand, implode(' ', $composerOptions));
     }
 }
