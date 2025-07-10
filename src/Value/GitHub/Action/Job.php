@@ -143,10 +143,10 @@ final readonly class Job
         return sprintf('(%s)', implode(') && (', [
             'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict || exit 0',
             implode(' && ', [
-                'composer config --global github-oauth.github.com ' . (getenv('GITHUB_TOKEN') ?: ''),
+//                'composer config --global github-oauth.github.com ' . (getenv('GITHUB_TOKEN') ?: ''),
                 'composer config --no-plugins allow-plugins.ghostwriter/coding-standard true',
                 $this->composerInstallCommand(),
-                'composer config --global --auth --unset github-oauth.github.com',
+//                'composer config --global --auth --unset github-oauth.github.com',
             ]),
             $this->command,
         ]));
