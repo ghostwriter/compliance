@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance;
 
-use Ghostwriter\Compliance\Container\ServiceProvider;
+use Ghostwriter\Compliance\Container\ComplianceServiceProvider;
 use Ghostwriter\Container\Attribute\Provider;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
-#[Provider(ServiceProvider::class)]
+#[Provider(ComplianceServiceProvider::class)]
 final readonly class Compliance
 {
     /**
