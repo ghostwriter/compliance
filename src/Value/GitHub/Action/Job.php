@@ -78,7 +78,6 @@ final readonly class Job
     {
         return [
             'name' => $this->name,
-            'runCommand' => $this->command,
             'composerCacheFilesDirectory' => $this->composerCacheFilesDirectory,
             'os' => $this->operatingSystem->toString(),
             'php' => $this->phpVersion->toString(),
@@ -87,6 +86,7 @@ final readonly class Job
             'extensions' => $this->extensions,
             'validateCommand' => $this->validateCommand(),
             'installCommand' => $this->installCommand(),
+            'runCommand' => $this->command,
         ];
     }
 
@@ -118,8 +118,8 @@ final readonly class Job
     {
         return file_exists($this->composerJsonPath)
             // 'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict' :
-            ? 'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict || exit 0;'
-            : 'echo "composer.json does not exist" && exit 0;';
+            ? 'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict || exit 0'
+            : 'echo "composer.json does not exist" && exit 0';
     }
 
     private function installCommand(): string
