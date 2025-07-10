@@ -129,7 +129,7 @@ final readonly class Job
         }
 
         return implode(' && ', [
-            'composer config --global github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}',
+            'composer config --global github-oauth.github.com "${{ secrets.GITHUB_TOKEN }}"',
             'composer config --no-plugins allow-plugins.ghostwriter/coding-standard true',
             $this->composerCommand(),
             'composer config --global --auth --unset github-oauth.github.com'
