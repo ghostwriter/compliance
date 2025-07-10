@@ -61,16 +61,10 @@ final readonly class MatrixListener implements ListenerInterface
 
         try {
             $composerJson = $this->composer->readJsonFile($currentWorkingDirectory);
-        } catch (Throwable $exception) {
-            if ($this->filesystem->missing($currentWorkingDirectory . DIRECTORY_SEPARATOR . 'composer.json')) {
-                $generateMatrixEvent->include(Job::noop());
+        } catch (Throwable) {
+            $this->publish($generateMatrixEvent);
 
-                $this->publish($generateMatrixEvent);
-
-                return;
-            }
-
-            throw $exception;
+            return;
         }
 
         $requiredPhpExtensions = array_map(
@@ -196,7 +190,6 @@ final readonly class MatrixListener implements ListenerInterface
 
     private function publish(MatrixEvent $generateMatrixEvent): void
     {
-
         $gitHubOutput = $this->environmentVariables->get(
             'GITHUB_OUTPUT',
             tempnam(sys_get_temp_dir(), 'GITHUB_OUTPUT')
