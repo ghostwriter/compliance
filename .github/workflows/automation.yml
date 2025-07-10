@@ -136,4 +136,7 @@ jobs:
 
       - name: Run ${{ matrix.name }}
         working-directory: ${{ github.workspace }}
-        run: ${{ matrix.command }};
+        run:  |
+          composer config --global github-oauth.github.com ${{secrets.GITHUB_TOKEN}};
+          ${{ matrix.command }};
+          composer config --global --auth --unset github-oauth.github.com
