@@ -44,7 +44,7 @@ use const DIRECTORY_SEPARATOR;
 
 use function getcwd;
 
-final readonly class ServiceProvider implements ServiceProviderInterface
+final readonly class ComplianceServiceProvider implements ServiceProviderInterface
 {
     public const array ALIASES = [
         ArgvInput::class => InputInterface::class,
