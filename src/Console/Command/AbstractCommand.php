@@ -10,8 +10,10 @@ use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Throwable;
 
 use function mb_strtolower;
+use function sprintf;
 use function str_replace;
 
 abstract class AbstractCommand extends Command
@@ -26,27 +28,18 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * @param class-string $event
-     *
-     * @return int 0 if everything went fine, or an exit code
-     */
-    public function dispatchClass(string $event): int
-    {
-        return $this->dispatch($this->container->get($event));
-    }
-
-    /**
      * Dispatch an event.
      *
      * @param object $event The event to dispatch
+     *
      * @return int 0 if everything went fine, or 1 if an error occurred
      */
     public function dispatch(object $event): int
     {
         try {
             $this->eventDispatcher->dispatch($event);
-        } catch (\Throwable $throwable) {
-            $this->symfonyStyle->error(sprintf("[%s] %s", $throwable::class, $throwable->getMessage()));
+        } catch (Throwable $throwable) {
+            $this->symfonyStyle->error(sprintf('[%s] %s', $throwable::class, $throwable->getMessage()));
 
             $this->symfonyStyle->error($throwable->getTraceAsString());
 
@@ -54,6 +47,16 @@ abstract class AbstractCommand extends Command
         }
 
         return self::SUCCESS;
+    }
+
+    /**
+     * @param class-string $event
+     *
+     * @return int 0 if everything went fine, or an exit code
+     */
+    public function dispatchClass(string $event): int
+    {
+        return $this->dispatch($this->container->get($event));
     }
 
     #[Override]
