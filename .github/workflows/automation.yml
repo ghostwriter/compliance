@@ -147,17 +147,3 @@ jobs:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY || secrets.STRYKER_DASHBOARD_API_KEY }}
           XDEBUG_MODE: coverage
-
-#      - name: Upload coverage to Codecov
-#        uses: codecov/codecov-action@v5
-#        if: ${{ matrix.name == 'PHPUnit' }}
-#        with:
-#          directory: ${{ github.workspace }}/.cache/phpunit/
-#          verbose: true
-#
-#      - name: Upload test results to Codecov
-#        if: ${{ matrix.name == 'PHPUnit' }}
-#        uses: codecov/test-results-action@v1
-#        with:
-#          directory: ${{ github.workspace }}/.cache/phpunit/
-#          verbose: true
