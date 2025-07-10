@@ -10,6 +10,7 @@ use Ghostwriter\Compliance\Enum\PhpVersion;
 
 use function file_exists;
 use function filesystem;
+use function getenv;
 use function implode;
 use function sprintf;
 
@@ -22,7 +23,7 @@ final readonly class Job
         private string $name,
         private string $command,
         private array $extensions,
-        private string $composerCacheFilesDirectory,
+        private string $cacheDirectory,
         private string $composerJsonPath,
         private string $composerLockPath,
         private ComposerStrategy $composerStrategy,
@@ -50,7 +51,7 @@ final readonly class Job
             name: $name,
             command: $command,
             extensions: $extensions,
-            composerCacheFilesDirectory: $composerCacheFilesDirectory,
+            cacheDirectory: $composerCacheFilesDirectory,
             composerJsonPath: $composerJsonPath,
             composerLockPath: $composerLockPath,
             composerStrategy: $composerStrategy,
@@ -78,65 +79,17 @@ final readonly class Job
     {
         return [
             'name' => $this->name,
-            'composerCacheFilesDirectory' => $this->composerCacheFilesDirectory,
-            'os' => $this->operatingSystem->toString(),
-            'php' => $this->phpVersion->toString(),
-            'dependency' => $this->composerStrategy->toString(),
-            'experimental' => $this->experimental,
             'extensions' => $this->extensions,
-            'validateCommand' => $this->validateCommand(),
-            'installCommand' => $this->installCommand(),
-            'runCommand' => $this->command,
+            'experimental' => $this->experimental,
+            'cacheDirectory' => $this->cacheDirectory,
+            'php' => $this->phpVersion->toString(),
+            'os' => $this->operatingSystem->toString(),
+            'dependency' => $this->composerStrategy->toString(),
+            'command' => $this->command(),
         ];
     }
 
-    public static function noop(): self
-    {
-        $name = 'Noop';
-
-        $currentDirectory = filesystem()
-            ->currentWorkingDirectory();
-
-        return new self(
-            name: $name,
-            command: sprintf('echo "%s"', $name),
-            extensions: [],
-            composerCacheFilesDirectory: '/home/runner/.cache/composer/files',
-            composerJsonPath: $currentDirectory,
-            composerLockPath: $currentDirectory,
-            composerStrategy: ComposerStrategy::LOCKED,
-            phpVersion: PhpVersion::latest(),
-            operatingSystem: OperatingSystem::UBUNTU,
-            experimental: true,
-        );
-    }
-
-    /**
-     * @return string
-     */
-    private function validateCommand(): string
-    {
-        return file_exists($this->composerJsonPath)
-            // 'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict' :
-            ? 'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict || exit 0'
-            : 'echo "composer.json does not exist" && exit 0';
-    }
-
-    private function installCommand(): string
-    {
-        if (! file_exists($this->composerJsonPath)) {
-            return 'echo "composer.json does not exist" && exit 0;';
-        }
-
-        return implode(' && ', [
-            'composer config --global github-oauth.github.com ' . (getenv('GITHUB_TOKEN')?:''),
-            'composer config --no-plugins allow-plugins.ghostwriter/coding-standard true',
-            $this->composerCommand(),
-            'composer config --global --auth --unset github-oauth.github.com'
-        ]);
-    }
-
-    private function composerCommand(): string
+    private function composerInstallCommand(): string
     {
         $composerOptions = ['--no-interaction', '--no-progress', '--ansi'];
 
@@ -155,5 +108,47 @@ final readonly class Job
         }
 
         return sprintf('composer %s %s', $composerCommand, implode(' ', $composerOptions));
+    }
+
+    public static function noop(): self
+    {
+        $name = 'Noop';
+
+        $currentDirectory = filesystem()
+            ->currentWorkingDirectory();
+
+        return new self(
+            name: $name,
+            command: sprintf('echo "%s"', $name),
+            extensions: [],
+            cacheDirectory: '/home/runner/.cache/composer/files',
+            composerJsonPath: $currentDirectory,
+            composerLockPath: $currentDirectory,
+            composerStrategy: ComposerStrategy::LOCKED,
+            phpVersion: PhpVersion::latest(),
+            operatingSystem: OperatingSystem::UBUNTU,
+            experimental: true,
+        );
+    }
+
+    /**
+     * @return string
+     */
+    private function command(): string
+    {
+        if (! file_exists($this->composerJsonPath)) {
+            return 'echo "composer.json does not exist" && exit 0;';
+        }
+
+        return sprintf('(%s)', implode(') && (', [
+            'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict || exit 0',
+            implode(' && ', [
+                'composer config --global github-oauth.github.com ' . (getenv('GITHUB_TOKEN') ?: ''),
+                'composer config --no-plugins allow-plugins.ghostwriter/coding-standard true',
+                $this->composerInstallCommand(),
+                'composer config --global --auth --unset github-oauth.github.com',
+            ]),
+            $this->command,
+        ]));
     }
 }
