@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use Ghostwriter\Compliance\Container\ServiceProvider;
+use Ghostwriter\Compliance\Container\ComplianceServiceProvider;
 use Ghostwriter\Compliance\Value\Composer\Composer;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
@@ -31,7 +31,7 @@ abstract class AbstractTestCase extends TestCase
 
         $this->container = Container::getInstance();
 
-        $this->container->provide(ServiceProvider::class);
+        $this->container->provide(ComplianceServiceProvider::class);
 
         $this->composer = $this->container->get(Composer::class);
 
