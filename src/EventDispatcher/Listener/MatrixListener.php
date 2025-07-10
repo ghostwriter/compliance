@@ -24,7 +24,6 @@ use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Throwable;
 
-use const DIRECTORY_SEPARATOR;
 use const FILE_APPEND;
 use const PHP_EOL;
 
