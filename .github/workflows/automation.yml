@@ -93,6 +93,12 @@ jobs:
     needs: [matrix]
     runs-on: ${{ matrix.os }}-latest
     continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental }}
+    env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY || secrets.STRYKER_DASHBOARD_API_KEY }}
+        XDEBUG_MODE: coverage
+
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
