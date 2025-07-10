@@ -28,6 +28,6 @@ final class MatrixCommand extends AbstractCommand
     #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->dispatch(MatrixEvent::class);
+        return $this->dispatchClass(MatrixEvent::class);
     }
 }
