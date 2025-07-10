@@ -188,6 +188,9 @@ final readonly class MatrixListener implements ListenerInterface
         $this->publish($generateMatrixEvent);
     }
 
+    /**
+     * @throws Throwable
+     */
     private function publish(MatrixEvent $generateMatrixEvent): void
     {
         $gitHubOutput = $this->environmentVariables->get(
