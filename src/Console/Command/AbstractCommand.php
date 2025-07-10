@@ -30,9 +30,27 @@ abstract class AbstractCommand extends Command
      *
      * @return int 0 if everything went fine, or an exit code
      */
-    public function dispatch(string $event): int
+    public function dispatchClass(string $event): int
     {
-        $this->eventDispatcher->dispatch($this->container->get($event));
+        return $this->dispatch($this->container->get($event));
+    }
+
+    /**
+     * @param class-string $event
+     *
+     * @return int 0 if everything went fine, or an exit code
+     */
+    public function dispatch(object $event): int
+    {
+        try {
+            $this->eventDispatcher->dispatch($event);
+        } catch (\Throwable $throwable) {
+            $this->symfonyStyle->error(sprintf("[%s] %s", $throwable::class, $throwable->getMessage()));
+
+            $this->symfonyStyle->error($throwable->getTraceAsString());
+
+            return self::FAILURE;
+        }
 
         return self::SUCCESS;
     }
