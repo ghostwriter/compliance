@@ -25,7 +25,7 @@ final readonly class ComposerCacheFilesDirectoryFinder
     {
         $result = $this->shell->execute(
             ($this->composerExecutableFinder)(),
-            ['config', 'cache-files-dir', '--no-interaction']
+            ['--no-ansi', '--no-interaction', '--no-plugins', '--no-scripts', 'config', 'cache-files-dir'],
         );
 
         $output = mb_trim($result->stdout());
