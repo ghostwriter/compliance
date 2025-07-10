@@ -36,9 +36,10 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * @param class-string $event
+     * Dispatch an event.
      *
-     * @return int 0 if everything went fine, or an exit code
+     * @param object $event The event to dispatch
+     * @return int 0 if everything went fine, or 1 if an error occurred
      */
     public function dispatch(object $event): int
     {
