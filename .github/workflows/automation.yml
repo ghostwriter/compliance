@@ -76,8 +76,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         
-      - name: Install nix
-        uses: cachix/install-nix-action@v31
+      # - name: Install nix
+      #   uses: cachix/install-nix-action@v31
+      #   with:
+      #     github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      #     install_options: --no-daemon
 
       # - name: Determine CI Jobs (dev)
       #   id: matrix
@@ -115,9 +118,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-        
-      - name: Install nix
-        uses: cachix/install-nix-action@v31
+
+      # - name: Install nix
+      #   uses: cachix/install-nix-action@v31
+      #   with:
+      #     github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      #     install_options: --no-daemon
 
       - name: Setup PHP ${{ matrix.php }} with ${{ join(matrix.extensions, ', ') }} extensions.
         uses: shivammathur/setup-php@v2
