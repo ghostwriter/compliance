@@ -3,7 +3,6 @@
   "description": "[WIP] Compliance - CI/CD & QA Test Automation for PHP via GitHub Actions"
   "homepage": "https://github.com/ghostwriter/compliance"
   "topics": "automation, compliance, compliance-automation, continuous-integration, ghostwriter, github-actions, php"
-  "private": false
   "has_issues": true
   "has_projects": false
   "has_wiki": false
