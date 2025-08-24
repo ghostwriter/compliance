@@ -3081,12 +3081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "07f534f5b0f05eb6e3f62445b33dc08b7d3e0a5f"
+                "reference": "083ab94f59a73b08e73c4923f86df06032cf034a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/07f534f5b0f05eb6e3f62445b33dc08b7d3e0a5f",
-                "reference": "07f534f5b0f05eb6e3f62445b33dc08b7d3e0a5f",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/083ab94f59a73b08e73c4923f86df06032cf034a",
+                "reference": "083ab94f59a73b08e73c4923f86df06032cf034a",
                 "shasum": ""
             },
             "require": {
@@ -3126,11 +3126,10 @@
                 "ghostwriter/option": "~2.0.0",
                 "ghostwriter/result": "~2.0.0",
                 "ghostwriter/shell": "~0.1.0",
-                "php": "~8.4.0"
+                "php": "~8.4.0 || ~8.5.0"
             },
             "conflict": {
-                "pestphp/pest": "*",
-                "phpunit/phpunit": "<11.5.14"
+                "pestphp/pest": "*"
             },
             "require-dev": {
                 "ext-xdebug": "*",
@@ -3142,8 +3141,17 @@
             },
             "default-branch": true,
             "bin": [
+                "tools/phar/composer",
+                "tools/phar/composer-normalize",
+                "tools/phar/composer-require-checker",
+                "tools/phar/composer-unused",
+                "tools/phar/infection",
                 "tools/phar/phive",
-                "tools/phar/phpactor"
+                "tools/phar/phpactor",
+                "tools/phar/phpbench",
+                "tools/phar/phpdocumentor",
+                "tools/phar/phpunit",
+                "tools/phar/psalm"
             ],
             "type": "composer-plugin",
             "extra": {
@@ -3235,7 +3243,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-23T10:07:13+00:00"
+            "time": "2025-08-24T02:19:44+00:00"
         },
         {
             "name": "ghostwriter/option",
