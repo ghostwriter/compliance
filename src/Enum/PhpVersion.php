@@ -23,6 +23,7 @@ enum PhpVersion: int
     case PHP_83 = 80300;
     case PHP_84 = 80400;
     case PHP_85 = 80500;
+    // case PHP_86 = 80600;
     // case PHP_90 = 90000;
 
     public function toString(): string
@@ -40,6 +41,7 @@ enum PhpVersion: int
             self::PHP_83 => '8.3',
             self::PHP_84 => '8.4',
             self::PHP_85 => '8.5',
+            // self::PHP_86 => '8.6',
             // self::PHP_90 => '9.0',
         };
     }
@@ -49,19 +51,17 @@ enum PhpVersion: int
         return self::from(PHP_MAJOR_VERSION * 10000 + PHP_MINOR_VERSION * 100);
     }
 
-    public static function experimental(): self
+    public static function highest(): self
     {
         return self::PHP_85;
     }
 
-    public static function highest(): self
-    {
-        return self::PHP_84;
-    }
-
     public static function isExperimental(self $phpVersion): bool
     {
-        return self::experimental()->value <= $phpVersion->value;
+        return match ($phpVersion) {
+            self::PHP_85 => true,
+            default => false
+        };
     }
 
     public static function latest(): self
@@ -76,6 +76,17 @@ enum PhpVersion: int
 
     public static function supported(): array
     {
+        //        $currentValue = self::current()->value;
+        //        $highestValue = self::highest()->value;
+        //        $lowestValue = self::lowest()->value;
+        //
+        //        return array_filter(
+        //            self::cases(),
+        //            static fn(self $phpVersion): bool => match (true) {
+        //                $lowestValue <= $phpVersion->value => $highestValue >= $phpVersion->value,
+        //                default => false,
+        //            }
+        //        );
         return array_filter(
             self::cases(),
             static fn (self $phpVersion): bool

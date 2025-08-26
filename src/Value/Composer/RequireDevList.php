@@ -10,7 +10,7 @@ use IteratorAggregate;
 use Override;
 
 /**
- * @implements IteratorAggregate<Package|Extension>
+ * @implements IteratorAggregate<Extension|Package>
  */
 final readonly class RequireDevList implements IteratorAggregate
 {

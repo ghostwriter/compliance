@@ -144,9 +144,9 @@ final readonly class MatrixListener implements ListenerInterface
 
             foreach ($phpVersions as $phpVersion) {
                 $isPhpVersionExperimental = PhpVersion::isExperimental($phpVersion);
-                if ($isPhpVersionExperimental) {
-                    continue;
-                }
+                //                if ($isPhpVersionExperimental) {
+                //                    continue;
+                //                }
 
                 if (! Semver::satisfies($phpVersion->toString(), $constraints)) {
                     continue;
@@ -176,7 +176,7 @@ final readonly class MatrixListener implements ListenerInterface
                                 $phpVersion,
                                 $composerStrategy,
                                 $operatingSystem,
-                                $isComposerDependencyLowest || $isNotUbuntu,
+                                $isPhpVersionExperimental || $isComposerDependencyLowest || $isNotUbuntu,
                             )
                         );
                     }

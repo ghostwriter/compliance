@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Value\Composer;
 
+use InvalidArgumentException;
 use Override;
 
 use function mb_trim;

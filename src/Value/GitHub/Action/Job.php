@@ -68,7 +68,7 @@ final readonly class Job
      *     installCommand:string,
      *     validateCommand:string,
      *     composerCacheFilesDirectory:string,
-     *     extensions:array<string>,
+     *     extensions:list<string>,
      *     os:string,
      *     php:string,
      *     dependency:string,
@@ -87,6 +87,25 @@ final readonly class Job
             'dependency' => $this->composerStrategy->toString(),
             'command' => $this->command(),
         ];
+    }
+
+    /**
+     * @return string
+     */
+    private function command(): string
+    {
+        if (! file_exists($this->composerJsonPath)) {
+            return 'echo "composer.json does not exist" && exit 0;';
+        }
+
+        return $this->wrap([
+            'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict',
+            // 'composer config --global github-oauth.github.com ' . (getenv('GITHUB_TOKEN') ?: ''),
+            'composer config --no-plugins allow-plugins.ghostwriter/coding-standard false',
+            $this->composerInstallCommand(),
+            // 'composer config --global --auth --unset github-oauth.github.com',
+            $this->command,
+        ]);
     }
 
     private function composerInstallCommand(): string
@@ -110,6 +129,11 @@ final readonly class Job
         return sprintf('composer %s %s', $composerCommand, implode(' ', $composerOptions));
     }
 
+    private function wrap(array $commands): string
+    {
+        return implode(' && ', $commands);
+    }
+
     public static function noop(): self
     {
         $name = 'Noop';
@@ -129,26 +153,5 @@ final readonly class Job
             operatingSystem: OperatingSystem::UBUNTU,
             experimental: true,
         );
-    }
-
-    /**
-     * @return string
-     */
-    private function command(): string
-    {
-        if (! file_exists($this->composerJsonPath)) {
-            return 'echo "composer.json does not exist" && exit 0;';
-        }
-
-        return sprintf('(%s)', implode(') && (', [
-            'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict || exit 0',
-            implode(' && ', [
-//                'composer config --global github-oauth.github.com ' . (getenv('GITHUB_TOKEN') ?: ''),
-                'composer config --no-plugins allow-plugins.ghostwriter/coding-standard true',
-                $this->composerInstallCommand(),
-//                'composer config --global --auth --unset github-oauth.github.com',
-            ]),
-            $this->command,
-        ]));
     }
 }
