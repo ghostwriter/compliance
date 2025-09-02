@@ -89,8 +89,7 @@
     ],
     "config": {
         "allow-plugins": {
-            "ghostwriter/coding-standard": true,
-            "ghostwriter/workbench": true
+            "ghostwriter/coding-standard": true
         },
         "bump-after-update": false,
         "classmap-authoritative": false,
