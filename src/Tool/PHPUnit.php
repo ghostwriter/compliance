@@ -11,7 +11,7 @@ final class PHPUnit extends AbstractTool
     #[Override]
     public function command(): string
     {
-        return 'composer phpunit';
+        return 'phpunit';
     }
 
     /**
