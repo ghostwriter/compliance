@@ -129,9 +129,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           coverage: xdebug
+          extensions: pcov,xdebug,:php-psr,ctype,curl,dom,filter,gd,hash,iconv,intl,json,libxml,mbstring,openssl,pcntl,phar,readline,session,simplexml,sodium,sockets,tokenizer,xml,xmlwriter,zlib,${{ join(matrix.extensions, ', ') }}
           ini-values: assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On
           php-version: ${{ matrix.php }}
-          extensions: pcov,xdebug,:php-psr,ctype,curl,dom,filter,gd,hash,iconv,intl,json,libxml,mbstring,openssl,pcntl,phar,readline,session,simplexml,sodium,sockets,tokenizer,xml,xmlwriter,zlib,${{ join(matrix.extensions, ', ') }}
+          tools: infection, phpunit, psalm
 
       - name: Setup problem matchers
         run: |
@@ -141,8 +142,8 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@v4
         with:
-          path: ${{ matrix.cacheDirectory }}
           key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-${{ hashFiles('composer.lock') }}
+          path: ${{ matrix.cacheDirectory }}
           restore-keys: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-
 
       - name: Run ${{ matrix.name }}
