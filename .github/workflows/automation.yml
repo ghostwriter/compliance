@@ -12,7 +12,7 @@ on:
       ## v1 - e.g. GitHub Actions Versioning
       - "v[0-9]+"
   schedule:
-    - cron: "0 * * * *" # Runs hourly
+    - cron: "*/15 * * * *"
   workflow_dispatch:
   workflow_run:
     workflows: [ "Docker Build" ]
