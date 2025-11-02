@@ -1975,12 +1975,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "3ae3e7ee0910cfee6f848a5e2328672f378adcb6"
+                "reference": "304b3fc8b0e3937a3987aa068e52760d79c94c11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/3ae3e7ee0910cfee6f848a5e2328672f378adcb6",
-                "reference": "3ae3e7ee0910cfee6f848a5e2328672f378adcb6",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/304b3fc8b0e3937a3987aa068e52760d79c94c11",
+                "reference": "304b3fc8b0e3937a3987aa068e52760d79c94c11",
                 "shasum": ""
             },
             "require": {
@@ -2010,16 +2010,6 @@
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
                 "ext-zlib": "*",
-                "ghostwriter/case-converter": "^2.1.0",
-                "ghostwriter/clock": "^3.0.1",
-                "ghostwriter/config": "^1.0.0",
-                "ghostwriter/container": "^5.0.1",
-                "ghostwriter/event-dispatcher": "^5.0.3",
-                "ghostwriter/filesystem": "^0.1.1",
-                "ghostwriter/json": "^3.0.0",
-                "ghostwriter/option": "^2.0.0",
-                "ghostwriter/result": "^2.0.0",
-                "ghostwriter/shell": "^0.1.0",
                 "php": "~8.4.0 || ~8.5.0",
                 "symfony/console": "^7.3.5"
             },
@@ -2136,124 +2126,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-30T17:11:59+00:00"
-        },
-        {
-            "name": "ghostwriter/option",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ghostwriter/option.git",
-                "reference": "2435e779fbfb04b4d234e19392ff6f10e5eb3550"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/option/zipball/2435e779fbfb04b4d234e19392ff6f10e5eb3550",
-                "reference": "2435e779fbfb04b4d234e19392ff6f10e5eb3550",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.4"
-            },
-            "require-dev": {
-                "ghostwriter/coding-standard": "dev-main"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ghostwriter\\Option\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nathanael Esayeas",
-                    "email": "nathanael.esayeas@protonmail.com",
-                    "homepage": "https://github.com/ghostwriter",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Provides an Option type implementation for PHP",
-            "homepage": "https://github.com/ghostwriter/option",
-            "keywords": [
-                "ghostwriter",
-                "option"
-            ],
-            "support": {
-                "issues": "https://github.com/ghostwriter/option/issues",
-                "rss": "https://github.com/ghostwriter/option/releases.atom",
-                "security": "https://github.com/ghostwriter/option/security/advisories/new",
-                "source": "https://github.com/ghostwriter/option"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/ghostwriter",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-02-06T05:11:03+00:00"
-        },
-        {
-            "name": "ghostwriter/result",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ghostwriter/result.git",
-                "reference": "108e5bad16769b8d5a73c68481b4c2afe53627c4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/result/zipball/108e5bad16769b8d5a73c68481b4c2afe53627c4",
-                "reference": "108e5bad16769b8d5a73c68481b4c2afe53627c4",
-                "shasum": ""
-            },
-            "require": {
-                "ghostwriter/option": "^2.0.0",
-                "php": ">=8.4"
-            },
-            "require-dev": {
-                "ghostwriter/coding-standard": "dev-main"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ghostwriter\\Result\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nathanael Esayeas",
-                    "email": "nathanael.esayeas@protonmail.com",
-                    "homepage": "https://github.com/ghostwriter",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Provides a Result type implementation for PHP",
-            "homepage": "https://github.com/ghostwriter/result",
-            "keywords": [
-                "ghostwriter",
-                "result"
-            ],
-            "support": {
-                "issues": "https://github.com/ghostwriter/result/issues",
-                "rss": "https://github.com/ghostwriter/result/releases.atom",
-                "security": "https://github.com/ghostwriter/result/security/advisories/new",
-                "source": "https://github.com/ghostwriter/result"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/ghostwriter",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-02-10T06:12:07+00:00"
+            "time": "2025-11-02T03:40:48+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
