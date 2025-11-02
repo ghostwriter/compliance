@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Container\Extension;
+namespace Ghostwriter\Compliance\Container\Extension\Ghostwriter\Config;
 
 use Ghostwriter\Compliance\Value\EnvironmentVariables;
-use Ghostwriter\Config\Config;
+use Ghostwriter\Config\Configuration;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ExtensionInterface;
 use Override;
@@ -17,21 +17,26 @@ use function error_get_last;
 use function sprintf;
 
 /**
- * @implements ExtensionInterface<Config>
+ * @see ConfigurationExtensionTest
+ *
+ * @implements ExtensionInterface<Configuration>
  */
-final readonly class ConfigExtension implements ExtensionInterface
+final readonly class ConfigurationExtension implements ExtensionInterface
 {
     public function __construct(
         private EnvironmentVariables $environmentVariables,
     ) {}
 
     /**
-     * @param Config $service
+     * Returns the provided service, unmodified.
+     *
+     * @param ContainerInterface $container the container instance
+     * @param Configuration      $service   the service instance to be extended
      *
      * @throws Throwable
      */
     #[Override]
-    public function __invoke(ContainerInterface $container, object $service): Config
+    public function __invoke(ContainerInterface $container, object $service): Configuration
     {
         $currentWorkingDirectory = $this->environmentVariables->get('GITHUB_WORKSPACE');
 

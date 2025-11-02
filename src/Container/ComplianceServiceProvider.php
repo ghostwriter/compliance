@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Container;
 
-use Ghostwriter\Compliance\Container\Extension\ConfigExtension;
+use Ghostwriter\Compliance\Container\Extension\Ghostwriter\Config\ConfigurationExtension;
 use Ghostwriter\Compliance\Container\Extension\ListenerProviderExtension;
 use Ghostwriter\Compliance\Container\Extension\SymfonyApplicationExtension;
+use Ghostwriter\Compliance\Container\Factory\Ghostwriter\Config\ConfigurationFactory;
 use Ghostwriter\Compliance\Container\Factory\SymfonyApplicationFactory;
 use Ghostwriter\Compliance\Enum\Tool;
 use Ghostwriter\Compliance\Interface\ToolInterface;
 use Ghostwriter\Compliance\Value\EnvironmentVariables;
-use Ghostwriter\Config\Config;
-use Ghostwriter\Config\ConfigFactory;
-use Ghostwriter\Config\ConfigFactoryInterface;
-use Ghostwriter\Config\ConfigInterface;
+use Ghostwriter\Config\Configuration;
+use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\EventDispatcher;
@@ -48,8 +47,7 @@ final readonly class ComplianceServiceProvider implements ServiceProviderInterfa
 {
     public const array ALIASES = [
         ArgvInput::class => InputInterface::class,
-        Config::class => ConfigInterface::class,
-        ConfigFactory::class => ConfigFactoryInterface::class,
+        Configuration::class => ConfigurationInterface::class,
         ConsoleOutput::class => OutputInterface::class,
         EventDispatcher::class => EventDispatcherInterface::class,
         Filesystem::class => FilesystemInterface::class,
@@ -63,12 +61,13 @@ final readonly class ComplianceServiceProvider implements ServiceProviderInterfa
 
     public const array EXTENSIONS = [
         Application::class => SymfonyApplicationExtension::class,
-        Config::class => ConfigExtension::class,
+        Configuration::class => ConfigurationExtension::class,
         ListenerProvider::class => ListenerProviderExtension::class,
     ];
 
     public const array FACTORIES = [
         Application::class => SymfonyApplicationFactory::class,
+        Configuration::class => ConfigurationFactory::class,
     ];
 
     #[Override]
