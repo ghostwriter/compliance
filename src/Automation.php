@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance;
 
-use Ghostwriter\Compliance\Container\Factory\AutomationFactory;
 use Ghostwriter\Compliance\Enum\ComposerStrategy;
 use Ghostwriter\Compliance\Enum\OperatingSystem;
 use Ghostwriter\Compliance\Enum\PhpVersion;
 use Ghostwriter\Compliance\Enum\Tool;
-use Ghostwriter\Container\Attribute\Factory;
-
 use function array_filter;
 use function array_merge;
 
-#[Factory(AutomationFactory::class)]
 final readonly class Automation
 {
     public function __construct(

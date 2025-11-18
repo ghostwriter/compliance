@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Container\Extension;
+namespace Ghostwriter\Compliance\Container\Service\Extension;
 
 use Ghostwriter\Compliance\Console\Command\CheckCommand;
 use Ghostwriter\Compliance\Console\Command\MatrixCommand;
 use Ghostwriter\Compliance\Console\Command\RunCommand;
 use Ghostwriter\Compliance\Console\Command\WorkflowCommand;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\ExtensionInterface;
+use Ghostwriter\Container\Interface\Service\ExtensionInterface;
 use Override;
 use Symfony\Component\Console\Application as SymfonyApplication;
 
@@ -29,7 +29,7 @@ final readonly class SymfonyApplicationExtension implements ExtensionInterface
      * @param SymfonyApplication $service
      */
     #[Override]
-    public function __invoke(ContainerInterface $container, object $service): SymfonyApplication
+    public function __invoke(ContainerInterface $container, object $service): void
     {
         $service->setAutoExit(false);
         $service->setCatchErrors(false);
@@ -41,6 +41,5 @@ final readonly class SymfonyApplicationExtension implements ExtensionInterface
 
         $service->setDefaultCommand('run');
 
-        return $service;
     }
 }

@@ -2,20 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Container\Factory;
+namespace Ghostwriter\Compliance\Container\Service\Factory;
 
 use Ghostwriter\Compliance\Automation;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\FactoryInterface;
+use Ghostwriter\Container\Interface\Service\FactoryInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Override;
 use RuntimeException;
 use Throwable;
-
-use const DIRECTORY_SEPARATOR;
-
 use function is_file;
 use function sprintf;
+use const DIRECTORY_SEPARATOR;
 
 /**
  * @implements FactoryInterface<Automation>

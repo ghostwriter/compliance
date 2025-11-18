@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Service;
 
-use Ghostwriter\Compliance\Container\ComplianceServiceProvider;
+use Ghostwriter\Compliance\Container\Service\Definition\ComplianceDefinition;
 use Ghostwriter\Compliance\Value\Composer\Composer;
 use Ghostwriter\Compliance\Value\Composer\Json\ComposerJsonReader;
 use Ghostwriter\Compliance\Value\Composer\Lock\ComposerLockReader;
@@ -20,7 +20,7 @@ use const DIRECTORY_SEPARATOR;
 #[UsesClass(ComposerJsonReader::class)]
 #[UsesClass(ComposerLockReader::class)]
 #[UsesClass(EnvironmentVariables::class)]
-#[UsesClass(ComplianceServiceProvider::class)]
+#[UsesClass(ComplianceDefinition::class)]
 final class ComposerTest extends AbstractTestCase
 {
     /**

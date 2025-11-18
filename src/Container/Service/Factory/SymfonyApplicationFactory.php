@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Container\Factory;
+namespace Ghostwriter\Compliance\Container\Service\Factory;
 
 use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Value\Composer\Resolver\InstalledVersionsResolver;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\FactoryInterface;
+use Ghostwriter\Container\Interface\Service\FactoryInterface;
 use Override;
 use Symfony\Component\Console\Application;
 use Throwable;

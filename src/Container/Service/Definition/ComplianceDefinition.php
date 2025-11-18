@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Container;
+namespace Ghostwriter\Compliance\Container\Service\Definition;
 
-use Ghostwriter\Compliance\Container\Extension\Ghostwriter\Config\ConfigurationExtension;
-use Ghostwriter\Compliance\Container\Extension\ListenerProviderExtension;
-use Ghostwriter\Compliance\Container\Extension\SymfonyApplicationExtension;
-use Ghostwriter\Compliance\Container\Factory\Ghostwriter\Config\ConfigurationFactory;
-use Ghostwriter\Compliance\Container\Factory\SymfonyApplicationFactory;
-use Ghostwriter\Compliance\Enum\Tool;
-use Ghostwriter\Compliance\Interface\ToolInterface;
+use Ghostwriter\Compliance\Automation;
+use Ghostwriter\Compliance\Container\Service\Extension\Ghostwriter\Config\ConfigurationExtension;
+use Ghostwriter\Compliance\Container\Service\Extension\ListenerProviderExtension;
+use Ghostwriter\Compliance\Container\Service\Extension\SymfonyApplicationExtension;
+use Ghostwriter\Compliance\Container\Service\Factory\AutomationFactory;
+use Ghostwriter\Compliance\Container\Service\Factory\Ghostwriter\Config\ConfigurationFactory;
+use Ghostwriter\Compliance\Container\Service\Factory\SymfonyApplicationFactory;
 use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Config\Configuration;
 use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\ServiceProviderInterface;
 use Ghostwriter\EventDispatcher\EventDispatcher;
 use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use Ghostwriter\EventDispatcher\Interface\ListenerProviderInterface;
@@ -38,12 +37,10 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\StyleInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-
+use function getcwd;
 use const DIRECTORY_SEPARATOR;
 
-use function getcwd;
-
-final readonly class ComplianceServiceProvider implements ServiceProviderInterface
+final readonly class ComplianceDefinition implements \Ghostwriter\Container\Interface\Service\DefinitionInterface
 {
     public const array ALIASES = [
         ArgvInput::class => InputInterface::class,
@@ -68,6 +65,7 @@ final readonly class ComplianceServiceProvider implements ServiceProviderInterfa
     public const array FACTORIES = [
         Application::class => SymfonyApplicationFactory::class,
         Configuration::class => ConfigurationFactory::class,
+        Automation::class => AutomationFactory::class,
     ];
 
     #[Override]
@@ -94,8 +92,8 @@ final readonly class ComplianceServiceProvider implements ServiceProviderInterfa
             $container->factory($service, $factory);
         }
 
-        foreach (Tool::cases() as $tool) {
-            $container->tag($tool->value, [ToolInterface::class]);
-        }
+//        foreach (Tool::cases() as $tool) {
+//            $container->tag($tool->value, [ToolInterface::class]);
+//        }
     }
 }

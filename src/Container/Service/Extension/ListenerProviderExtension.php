@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Container\Extension;
+namespace Ghostwriter\Compliance\Container\Service\Extension;
 
 use Ghostwriter\Compliance\EventDispatcher\Event\CheckEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\CopyWorkflowEvent;
@@ -17,11 +17,10 @@ use Ghostwriter\Compliance\EventDispatcher\Listener\MatrixListener;
 use Ghostwriter\Compliance\EventDispatcher\Listener\OutputListener;
 use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\ExtensionInterface;
+use Ghostwriter\Container\Interface\Service\ExtensionInterface;
 use Ghostwriter\EventDispatcher\Interface\ExceptionInterface;
 use Ghostwriter\EventDispatcher\ListenerProvider;
 use Override;
-
 use function array_key_exists;
 use function spl_object_id;
 
@@ -52,15 +51,22 @@ final readonly class ListenerProviderExtension implements ExtensionInterface
      * @throws ExceptionInterface
      */
     #[Override]
-    public function __invoke(ContainerInterface $container, object $service): ListenerProvider
+    public function __invoke(ContainerInterface $container, object $service): void
     {
+//        dump([
+//            'file' => __FILE__,
+//            'line' => __LINE__,
+//            'container' => debug_backtrace(),
+//        ]);
         /** @var array<int,bool> $cache */
         static $cache = [];
 
-        $objectId = spl_object_id($this);
+        dump(['ListenerProviderExtension invoked', $cache]);
+        $objectId = spl_object_id($service);
         if (array_key_exists($objectId, $cache)) {
-            return $service;
+            return;
         }
+
 
         $cache[$objectId] = true;
 
@@ -75,7 +81,5 @@ final readonly class ListenerProviderExtension implements ExtensionInterface
                 $service->bind($event, $listener);
             }
         }
-
-        return $service;
     }
 }

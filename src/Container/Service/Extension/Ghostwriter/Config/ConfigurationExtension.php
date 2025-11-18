@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Container\Extension\Ghostwriter\Config;
+namespace Ghostwriter\Compliance\Container\Service\Extension\Ghostwriter\Config;
 
 use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Config\Configuration;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\ExtensionInterface;
+use Ghostwriter\Container\Interface\Service\ExtensionInterface;
 use Override;
 use Throwable;
-
 use function chdir;
 use function error;
 use function error_get_last;
@@ -36,8 +35,13 @@ final readonly class ConfigurationExtension implements ExtensionInterface
      * @throws Throwable
      */
     #[Override]
-    public function __invoke(ContainerInterface $container, object $service): Configuration
+    public function __invoke(ContainerInterface $container, object $service): void
     {
+        dump([
+            'file' => __FILE__,
+            'line' => __LINE__,
+            'message' => 'ConfigurationExtension invoked',
+        ]);
         $currentWorkingDirectory = $this->environmentVariables->get('GITHUB_WORKSPACE');
 
         $result = chdir($currentWorkingDirectory);
@@ -60,6 +64,6 @@ final readonly class ConfigurationExtension implements ExtensionInterface
         //     $service->set(Compliance::WORKFLOW_TEMPLATE, realpath($complianceWorkflowTemplate));
         // }
 
-        return $service;
+//        return $service;
     }
 }

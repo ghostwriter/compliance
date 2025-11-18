@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Container\Factory\Ghostwriter\Config;
+namespace Ghostwriter\Compliance\Container\Service\Factory\Ghostwriter\Config;
 
 use Ghostwriter\Config\Configuration;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\FactoryInterface;
+use Ghostwriter\Container\Interface\Service\FactoryInterface;
 use Override;
 use Throwable;
 
