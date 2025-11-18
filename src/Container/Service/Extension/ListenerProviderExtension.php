@@ -53,23 +53,6 @@ final readonly class ListenerProviderExtension implements ExtensionInterface
     #[Override]
     public function __invoke(ContainerInterface $container, object $service): void
     {
-//        dump([
-//            'file' => __FILE__,
-//            'line' => __LINE__,
-//            'container' => debug_backtrace(),
-//        ]);
-        /** @var array<int,bool> $cache */
-        static $cache = [];
-
-        dump(['ListenerProviderExtension invoked', $cache]);
-        $objectId = spl_object_id($service);
-        if (array_key_exists($objectId, $cache)) {
-            return;
-        }
-
-
-        $cache[$objectId] = true;
-
         $events = self::EVENTS;
 
         if ($this->environmentVariables->get('GITHUB_DEBUG', '0') === '1') {
