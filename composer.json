@@ -49,7 +49,7 @@
         "ghostwriter/collection": "^2.0.0",
         "ghostwriter/config": "^2.0.1",
         "ghostwriter/container": "^6.0.1",
-        "ghostwriter/event-dispatcher": "^6.0.0",
+        "ghostwriter/event-dispatcher": "^6.0.1",
         "ghostwriter/filesystem": "^0.1.2",
         "ghostwriter/json": "^3.0.0",
         "ghostwriter/shell": "^0.1.0",
