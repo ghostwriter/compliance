@@ -13,6 +13,7 @@ WORKDIR /srv/workspace
 COPY functions.php /srv/workspace/
 COPY composer.* /srv/workspace/
 COPY bin /srv/workspace/bin/
+COPY config /srv/workspace/config/
 COPY src /srv/workspace/src/
 # COPY tools /srv/workspace/tools/
 
