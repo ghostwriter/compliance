@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70c2c774cc4e4ab8d9d7413c292f0229",
+    "content-hash": "e3366002e37722088342b3d684455e5e",
     "packages": [
         {
             "name": "composer/semver",
@@ -419,16 +419,16 @@
         },
         {
             "name": "ghostwriter/event-dispatcher",
-            "version": "6.0.1",
+            "version": "6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/event-dispatcher.git",
-                "reference": "3eeba274f9f4be110f028ffca3e14ace4c69b8ce"
+                "reference": "812d1be3c2850d9901a1e471dd2c0e20bbd15b2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/3eeba274f9f4be110f028ffca3e14ace4c69b8ce",
-                "reference": "3eeba274f9f4be110f028ffca3e14ace4c69b8ce",
+                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/812d1be3c2850d9901a1e471dd2c0e20bbd15b2a",
+                "reference": "812d1be3c2850d9901a1e471dd2c0e20bbd15b2a",
                 "shasum": ""
             },
             "require": {
@@ -450,7 +450,7 @@
             "extra": {
                 "ghostwriter": {
                     "container": {
-                        "definition": "Ghostwriter\\EventDispatcher\\Container\\Service\\Definition\\EventDispatcherDefinition"
+                        "definition": "Ghostwriter\\EventDispatcher\\Container\\EventDispatcherDefinition"
                     }
                 }
             },
@@ -492,7 +492,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-23T02:58:39+00:00"
+            "time": "2025-11-23T22:18:37+00:00"
         },
         {
             "name": "ghostwriter/filesystem",
