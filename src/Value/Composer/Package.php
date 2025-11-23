@@ -25,9 +25,7 @@ final readonly class Package implements DependencyInterface
         return new self($dependencyName, $dependencyVersion, $json);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function __toString(): string
     {

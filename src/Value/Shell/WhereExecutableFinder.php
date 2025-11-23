@@ -18,9 +18,7 @@ final readonly class WhereExecutableFinder
         private ShellInterface $shell,
     ) {}
 
-    /**
-     * @throws FailedToFindExecutableException
-     */
+    /** @throws FailedToFindExecutableException */
     public function __invoke(string $executable): string
     {
         /** @var ?non-empty-string $where */

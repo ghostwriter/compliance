@@ -12,9 +12,7 @@ final readonly class ComposerExecutableFinder
         private WhereExecutableFinder $whereExecutableFinder,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function __invoke(): string
     {
         return ($this->whereExecutableFinder)('composer');

@@ -16,9 +16,7 @@ use function sprintf;
 
 final readonly class Job
 {
-    /**
-     * @param list<string> $extensions
-     */
+    /** @param list<string> $extensions */
     public function __construct(
         private string $name,
         private string $command,
@@ -32,9 +30,7 @@ final readonly class Job
         private bool $experimental,
     ) {}
 
-    /**
-     * @param list<string> $extensions
-     */
+    /** @param list<string> $extensions */
     public static function new(
         string $name,
         string $command,
@@ -89,9 +85,7 @@ final readonly class Job
         ];
     }
 
-    /**
-     * @return string
-     */
+    /** @return string */
     private function command(): string
     {
         if (! file_exists($this->composerJsonPath)) {

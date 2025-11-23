@@ -14,9 +14,7 @@ final class Psalm extends AbstractTool
         return 'composer psalm';
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     #[Override]
     public function configuration(): array
     {

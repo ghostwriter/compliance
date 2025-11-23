@@ -14,9 +14,7 @@ use Override;
  */
 final readonly class RequireDevList implements IteratorAggregate
 {
-    /**
-     * @param list<Extension|Package> $requireDevList
-     */
+    /** @param list<Extension|Package> $requireDevList */
     public function __construct(
         private array $requireDevList,
     ) {}

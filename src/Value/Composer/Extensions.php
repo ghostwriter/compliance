@@ -19,9 +19,7 @@ use function implode;
  */
 final readonly class Extensions implements IteratorAggregate, JsonSerializable, Stringable
 {
-    /**
-     * @param list<Extension> $extensions
-     */
+    /** @param list<Extension> $extensions */
     public function __construct(
         private array $extensions
     ) {
@@ -42,9 +40,7 @@ final readonly class Extensions implements IteratorAggregate, JsonSerializable, 
         return implode(', ', $this->jsonSerialize());
     }
 
-    /**
-     * @return Generator<Extension>
-     */
+    /** @return Generator<Extension> */
     #[Override]
     public function getIterator(): Generator
     {

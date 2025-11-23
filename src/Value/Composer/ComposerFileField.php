@@ -6,28 +6,18 @@ namespace Ghostwriter\Compliance\Value\Composer;
 
 final readonly class ComposerFileField
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string DESCRIPTION = 'description';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string LICENSE = 'license';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string NAME = 'name';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string REQUIRE = 'require';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string VERSION = 'version';
 }

@@ -12,9 +12,7 @@ final readonly class ExtensionFinder
         private Composer $composer,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function find(string $composerJsonPath): Extensions
     {
         $extensions = [];

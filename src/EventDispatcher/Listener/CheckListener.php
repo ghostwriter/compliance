@@ -15,9 +15,7 @@ final readonly class CheckListener implements ListenerInterface
         private EventDispatcherInterface $eventDispatcher
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function __invoke(CheckEvent $checkEvent): void
     {
         $this->eventDispatcher->dispatch(OutputEvent::new($checkEvent->input()->getArgument('job')));

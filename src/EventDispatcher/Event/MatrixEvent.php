@@ -25,9 +25,7 @@ final readonly class MatrixEvent
         $this->matrix->exclude($matrices);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function getMatrix(): string
     {
         return $this->matrix->toString();

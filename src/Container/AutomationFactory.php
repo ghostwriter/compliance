@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Compliance\Container\Service\Factory;
+namespace Ghostwriter\Compliance\Container;
 
 use Ghostwriter\Compliance\Automation;
 use Ghostwriter\Container\Interface\ContainerInterface;
@@ -11,9 +11,11 @@ use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Override;
 use RuntimeException;
 use Throwable;
+
+use const DIRECTORY_SEPARATOR;
+
 use function is_file;
 use function sprintf;
-use const DIRECTORY_SEPARATOR;
 
 /**
  * @implements FactoryInterface<Automation>
@@ -43,9 +45,7 @@ final readonly class AutomationFactory implements FactoryInterface
         private FilesystemInterface $filesystem,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function __invoke(ContainerInterface $container): Automation
     {

@@ -15,9 +15,7 @@ enum Tool: string
     case PHPUnit = PHPUnit::class;
     case Psalm = Psalm::class;
 
-    /**
-     * @return class-string<ToolInterface>
-     */
+    /** @return class-string<ToolInterface> */
     public function toString(): string
     {
         /** @var class-string<ToolInterface> $this->value */

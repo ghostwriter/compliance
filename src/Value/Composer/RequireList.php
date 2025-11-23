@@ -14,16 +14,12 @@ use Override;
  */
 final readonly class RequireList implements IteratorAggregate
 {
-    /**
-     * @param list<Extension|Package> $requireList
-     */
+    /** @param list<Extension|Package> $requireList */
     public function __construct(
         private array $requireList,
     ) {}
 
-    /**
-     * @param array<string,string> $require
-     */
+    /** @param array<string,string> $require */
     public static function new(array $require, JsonInterface $json): self
     {
         $requireList = [];

@@ -28,9 +28,7 @@ final readonly class ComposerJson
 
     private RequireList $requireList;
 
-    /**
-     * @param array<int,mixed> $contents
-     */
+    /** @param array<int,mixed> $contents */
     public function __construct(
         private string $path,
         private array $contents,
@@ -63,9 +61,7 @@ final readonly class ComposerJson
         return $this->path;
     }
 
-    /**
-     * @return array<int,mixed>
-     */
+    /** @return array<int,mixed> */
     public function getContents(): array
     {
         return $this->contents;
@@ -96,9 +92,7 @@ final readonly class ComposerJson
         return $this->requireDevList;
     }
 
-    /**
-     * @return Generator<Extension>
-     */
+    /** @return Generator<Extension> */
     public function getRequiredPhpExtensions(): Generator
     {
         foreach ($this->requireList as $dependency) {

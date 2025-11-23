@@ -17,9 +17,7 @@ final readonly class GitHubListener implements ListenerInterface
         private EventDispatcherInterface $eventDispatcher,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function __invoke(GitHubEventInterface $gitHubEvent): void
     {
         $this->eventDispatcher->dispatch($this->container->build(MatrixEvent::class));

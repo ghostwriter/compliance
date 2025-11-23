@@ -14,14 +14,10 @@ use Throwable;
 
 final readonly class Compliance
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string BLACK_LIVES_MATTER = '<fg=white;bg=black;options=bold>#Black<fg=red;bg=black;options=bold>Lives</>Matter</>';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string LOGO = <<<'EOD'
         <fg=red;bg=black;options=bold>
           ____                      _ _
@@ -33,14 +29,10 @@ final readonly class Compliance
         </>%s
         EOD;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string NAME = '<info>Compliance - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.</info>';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string PACKAGE = 'ghostwriter/compliance';
 
     public function __construct(
@@ -48,17 +40,13 @@ final readonly class Compliance
         private ContainerInterface $container,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public static function new(): self
     {
         return Container::getInstance()->get(self::class);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function run(array $arguments = []): int
     {
         $this->container->set(ArgvInput::class, new ArgvInput($arguments));

@@ -14,9 +14,7 @@ final class Infection extends AbstractTool
         return 'composer infection';
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     #[Override]
     public function configuration(): array
     {

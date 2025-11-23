@@ -18,9 +18,7 @@ final readonly class ComposerJsonReader
         private InstalledVersionsResolver $installedVersionsResolver
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function read(string $composerJsonPath): ComposerJson
     {
         if ($this->filesystem->missing($composerJsonPath)) {

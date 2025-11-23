@@ -8,6 +8,7 @@ use Ghostwriter\Compliance\Enum\ComposerStrategy;
 use Ghostwriter\Compliance\Enum\OperatingSystem;
 use Ghostwriter\Compliance\Enum\PhpVersion;
 use Ghostwriter\Compliance\Enum\Tool;
+
 use function array_filter;
 use function array_merge;
 
@@ -104,9 +105,7 @@ final readonly class Automation
         return $self;
     }
 
-    /**
-     * @return list<ComposerStrategy|OperatingSystem|PhpVersion|Tool>
-     */
+    /** @return list<ComposerStrategy|OperatingSystem|PhpVersion|Tool> */
     public function toArray(): array
     {
         return [...$this->composerStrategies, ...$this->operatingSystems, ...$this->phpVersions, ...$this->tools];

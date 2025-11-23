@@ -23,9 +23,7 @@ use const DIRECTORY_SEPARATOR;
 #[UsesClass(ComplianceDefinition::class)]
 final class ComposerTest extends AbstractTestCase
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testGetJsonFilePath(): void
     {
         $currentWorkingDirectory = $this->filesystem->currentWorkingDirectory();
@@ -36,9 +34,7 @@ final class ComposerTest extends AbstractTestCase
         );
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testGetLockFilePath(): void
     {
         $currentWorkingDirectory = $this->filesystem->currentWorkingDirectory();

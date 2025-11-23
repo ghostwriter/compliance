@@ -31,9 +31,7 @@ final class EnvironmentVariables
         return new self($variables);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function get(string $name, ?string $default = null): string
     {
         return match (true) {

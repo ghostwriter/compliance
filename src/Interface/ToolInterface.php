@@ -8,14 +8,10 @@ interface ToolInterface
 {
     public function command(): string;
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     public function configuration(): array;
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     public function extensions(): array;
 
     public function isPresent(): bool;

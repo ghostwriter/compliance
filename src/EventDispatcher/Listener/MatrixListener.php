@@ -49,9 +49,7 @@ final readonly class MatrixListener implements ListenerInterface
         private FilesystemInterface $filesystem,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function __invoke(MatrixEvent $generateMatrixEvent): void
     {
         $currentWorkingDirectory = $this->filesystem->currentWorkingDirectory();
@@ -187,9 +185,7 @@ final readonly class MatrixListener implements ListenerInterface
         $this->publish($generateMatrixEvent);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     private function publish(MatrixEvent $generateMatrixEvent): void
     {
         $gitHubOutput = $this->environmentVariables->get(

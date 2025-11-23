@@ -105,7 +105,7 @@
     "extra": {
         "ghostwriter": {
             "container": {
-                "definition": "Ghostwriter\\Compliance\\Container\\Service\\Definition\\ComplianceDefinition"
+                "definition": "Ghostwriter\\Compliance\\Container\\ComplianceDefinition"
             }
         }
     },

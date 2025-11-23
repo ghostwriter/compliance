@@ -12,9 +12,7 @@ use function sprintf;
 
 final readonly class InstalledVersionsResolver
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function resolve(string $package): string
     {
         return InstalledVersions::getPrettyVersion($package) ?? throw new RuntimeException(sprintf(

@@ -14,9 +14,7 @@ final class PHPUnit extends AbstractTool
         return 'phpunit';
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     #[Override]
     public function configuration(): array
     {

@@ -19,9 +19,7 @@ final class Matrix
         public array $exclude = [],
     ) {}
 
-    /**
-     * @param list<string> $matrices
-     */
+    /** @param list<string> $matrices */
     public function exclude(array $matrices): void
     {
         foreach ($matrices as $matrix) {
@@ -34,9 +32,7 @@ final class Matrix
         $this->include[] = $job->toArray();
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function toString(): string
     {
         if ([] === $this->include) {

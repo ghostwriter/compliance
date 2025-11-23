@@ -16,9 +16,7 @@ final readonly class ComposerLockReader
         private JsonInterface $json
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function read(string $composerJsonPath): ComposerLock
     {
         if ($this->filesystem->missing($composerJsonPath)) {

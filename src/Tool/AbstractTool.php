@@ -63,9 +63,7 @@ abstract class AbstractTool implements ToolInterface
         return str_replace(__NAMESPACE__ . '\\', '', static::class);
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     #[Override]
     abstract public function configuration(): array;
 }

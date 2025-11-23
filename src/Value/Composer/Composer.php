@@ -27,17 +27,13 @@ final readonly class Composer
         private ComposerLockReader $composerLockReader,
     ) {}
 
-    /**
-     * Retrieve the path to composer.json file.
-     */
+    /** Retrieve the path to composer.json file. */
     public function getJsonFilePath(string $root): string
     {
         return implode(DIRECTORY_SEPARATOR, [$root, basename(mb_trim(getenv('COMPOSER') ?: ComposerFile::JSON))]);
     }
 
-    /**
-     * Retrieve the path to composer.lock file.
-     */
+    /** Retrieve the path to composer.lock file. */
     public function getLockFilePath(string $root): string
     {
         $composerJsonPath = $this->getJsonFilePath($root);
@@ -47,36 +43,28 @@ final readonly class Composer
             : $composerJsonPath . '.lock';
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function getPhpVersionConstraint(string $path): PhpVersionConstraintInterface
     {
         return $this->readJsonFile($path)
             ->getPhpVersionConstraint();
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function getRequire(string $path): RequireList
     {
         return $this->readJsonFile($path)
             ->getRequire();
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function getRequireDev(string $path): RequireDevList
     {
         return $this->readJsonFile($path)
             ->getRequireDev();
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function readJsonFile(string $path): ComposerJson
     {
         $composerJsonPath = $this->getJsonFilePath($path);
@@ -84,9 +72,7 @@ final readonly class Composer
         return $this->composerJsonReader->read($composerJsonPath);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function readLockFile(string $path): ComposerLock
     {
         $composerLockPath = $this->getLockFilePath($path);

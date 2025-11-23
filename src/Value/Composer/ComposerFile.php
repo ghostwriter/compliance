@@ -6,13 +6,9 @@ namespace Ghostwriter\Compliance\Value\Composer;
 
 interface ComposerFile
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string JSON = 'composer.json';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public const string LOCK = 'composer.lock';
 }

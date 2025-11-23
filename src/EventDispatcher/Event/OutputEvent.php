@@ -17,9 +17,7 @@ final readonly class OutputEvent extends AbstractEvent
         protected StyleInterface $style
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public static function new(array|string $message): self
     {
         return Container::getInstance()->build(self::class, [$message]);

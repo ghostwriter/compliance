@@ -36,27 +36,21 @@ final readonly class Packages implements IteratorAggregate, JsonSerializable, St
         }
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function __toString(): string
     {
         return $this->json->encode($this);
     }
 
-    /**
-     * @return Generator<Package>
-     */
+    /** @return Generator<Package> */
     #[Override]
     public function getIterator(): Generator
     {
         yield from $this->packages;
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function jsonSerialize(): array
     {

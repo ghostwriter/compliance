@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use Ghostwriter\Compliance\Container\Service\Definition\ComplianceDefinition;
+use Ghostwriter\Compliance\Container\ComplianceDefinition;
 use Ghostwriter\Compliance\Value\Composer\Composer;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
@@ -21,9 +21,7 @@ abstract class AbstractTestCase extends TestCase
 
     public FilesystemInterface $filesystem;
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     protected function setUp(): void
     {
@@ -38,9 +36,7 @@ abstract class AbstractTestCase extends TestCase
         $this->filesystem = $this->container->get(FilesystemInterface::class);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     protected function tearDown(): void
     {

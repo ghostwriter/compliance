@@ -12,9 +12,7 @@ use function sprintf;
 
 final readonly class GnuPG2
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function __construct(
         private string $binary,
     ) {
