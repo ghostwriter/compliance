@@ -107,6 +107,10 @@
             "container": {
                 "definition": "Ghostwriter\\Compliance\\Container\\ComplianceDefinition"
             }
+        },
+        "thanks": {
+            "url": "https://github.com/ghostwriter/compliance",
+            "name": "ghostwriter/compliance"
         }
     },
     "scripts": {
