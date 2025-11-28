@@ -109,8 +109,8 @@
             }
         },
         "thanks": {
-            "url": "https://github.com/ghostwriter/compliance",
-            "name": "ghostwriter/compliance"
+            "name": "ghostwriter/compliance",
+            "url": "https://github.com/ghostwriter/compliance"
         }
     },
     "scripts": {
