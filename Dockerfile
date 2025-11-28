@@ -10,7 +10,6 @@ LABEL "org.opencontainers.image.licenses"="BSD-4-Clause"
 
 WORKDIR /srv/workspace
 
-COPY functions.php /srv/workspace/
 COPY composer.* /srv/workspace/
 COPY bin /srv/workspace/bin/
 COPY config /srv/workspace/config/
