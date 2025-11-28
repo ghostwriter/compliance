@@ -6,11 +6,13 @@ namespace Ghostwriter\Compliance\EventDispatcher\Listener;
 
 use Composer\Semver\Semver;
 use Ghostwriter\Compliance\Automation;
+use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Enum\ComposerStrategy;
 use Ghostwriter\Compliance\Enum\OperatingSystem;
 use Ghostwriter\Compliance\Enum\PhpVersion;
 use Ghostwriter\Compliance\Enum\Tool;
 use Ghostwriter\Compliance\EventDispatcher\Event\MatrixEvent;
+use Ghostwriter\Compliance\EventDispatcher\Event\OutputEvent;
 use Ghostwriter\Compliance\Interface\ToolInterface;
 use Ghostwriter\Compliance\Tool\Infection;
 use Ghostwriter\Compliance\Tool\PHPUnit;
@@ -21,6 +23,7 @@ use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Compliance\Value\GitHub\Action\Job;
 use Ghostwriter\Compliance\Value\Shell\ComposerCacheFilesDirectoryFinder;
 use Ghostwriter\Container\Interface\ContainerInterface;
+use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Throwable;
 
@@ -30,7 +33,6 @@ use const PHP_EOL;
 use function array_map;
 use function array_unique;
 use function chdir;
-use function dispatchOutputEvent;
 use function file_put_contents;
 use function iterator_to_array;
 use function sprintf;
@@ -47,6 +49,7 @@ final readonly class MatrixListener implements ListenerInterface
         private ComposerCacheFilesDirectoryFinder $composerCacheFilesDirectoryFinder,
         private EnvironmentVariables $environmentVariables,
         private FilesystemInterface $filesystem,
+        private EventDispatcherInterface $eventDispatcher,
     ) {}
 
     /** @throws Throwable */
@@ -186,6 +189,18 @@ final readonly class MatrixListener implements ListenerInterface
     }
 
     /** @throws Throwable */
+    private function dispatchOutputEvent(string $message): void
+    {
+        $this->eventDispatcher->dispatch(OutputEvent::new([
+            '::echo::on',
+            sprintf('::group::%s %s', Compliance::NAME, Compliance::BLACK_LIVES_MATTER),
+            $message,
+            '::endgroup::',
+            '::echo::off',
+        ]));
+    }
+
+    /** @throws Throwable */
     private function publish(MatrixEvent $generateMatrixEvent): void
     {
         $gitHubOutput = $this->environmentVariables->get(
@@ -197,6 +212,6 @@ final readonly class MatrixListener implements ListenerInterface
 
         file_put_contents($gitHubOutput, $matrix, FILE_APPEND);
 
-        dispatchOutputEvent($matrix);
+        $this->dispatchOutputEvent($matrix);
     }
 }

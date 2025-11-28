@@ -7,7 +7,6 @@ namespace Ghostwriter\Compliance\Console\Command;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
-use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
@@ -59,7 +58,6 @@ abstract class AbstractCommand extends Command
         return $this->dispatch($this->container->get($event));
     }
 
-    #[Override]
     public static function getDefaultName(): string
     {
         return mb_strtolower(str_replace([__NAMESPACE__ . '\\', 'Command'], '', static::class));

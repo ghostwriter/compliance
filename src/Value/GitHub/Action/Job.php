@@ -7,9 +7,9 @@ namespace Ghostwriter\Compliance\Value\GitHub\Action;
 use Ghostwriter\Compliance\Enum\ComposerStrategy;
 use Ghostwriter\Compliance\Enum\OperatingSystem;
 use Ghostwriter\Compliance\Enum\PhpVersion;
+use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 
 use function file_exists;
-use function filesystem;
 use function getenv;
 use function implode;
 use function sprintf;
@@ -128,12 +128,11 @@ final readonly class Job
         return implode(' && ', $commands);
     }
 
-    public static function noop(): self
+    public static function noop(FilesystemInterface $filesystem): self
     {
-        $name = 'Noop';
+        $currentDirectory = $filesystem->currentWorkingDirectory();
 
-        $currentDirectory = filesystem()
-            ->currentWorkingDirectory();
+        $name = 'Noop';
 
         return new self(
             name: $name,

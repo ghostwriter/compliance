@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Compliance\Compliance;
 use Ghostwriter\Compliance\Console\Command\CheckCommand;
 use Ghostwriter\Compliance\Console\Command\MatrixCommand;
 use Ghostwriter\Compliance\Console\Command\RunCommand;
@@ -22,11 +23,16 @@ use Symfony\Component\Console\Command\Command;
  */
 return [
     'name' => 'Compliance',
-    'package' => 'ghostwriter/compliance',
+    'package' => Compliance::PACKAGE,
     'auto_exit'       => false,
     'single_command'       => false,
     'default_command'  => 'run',
     'catch_errors'     => true,
     'catch_exceptions' => true,
-    'commands' => [CheckCommand::class, MatrixCommand::class, RunCommand::class, WorkflowCommand::class],
+    'commands' => [
+        'check' => CheckCommand::class,
+        'matrix' => MatrixCommand::class,
+        'run' => RunCommand::class,
+        'workflow' => WorkflowCommand::class,
+    ],
 ];

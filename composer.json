@@ -48,13 +48,13 @@
         "ghostwriter/clock": "^3.0.1",
         "ghostwriter/collection": "^2.0.0",
         "ghostwriter/config": "^2.0.1",
+        "ghostwriter/console": "^0.1.2",
         "ghostwriter/container": "^6.0.1",
         "ghostwriter/event-dispatcher": "^6.0.2",
         "ghostwriter/filesystem": "^0.1.2",
         "ghostwriter/json": "^3.0.1",
         "ghostwriter/shell": "^0.1.1",
-        "ghostwriter/uuid": "^1.0.3",
-        "symfony/console": "^8.0.0"
+        "ghostwriter/uuid": "^1.0.3"
     },
     "require-dev": {
         "ext-xdebug": "*",
@@ -67,10 +67,7 @@
     "autoload": {
         "psr-4": {
             "Ghostwriter\\Compliance\\": "src"
-        },
-        "files": [
-            "functions.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Container\Ghostwriter\EventDispatcher;
 
-use Ghostwriter\Compliance\Container\Ghostwriter\Config\ConfigurationExtension;
 use Ghostwriter\Compliance\EventDispatcher\Listener\Debug;
 use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Config\Interface\ConfigurationInterface;
@@ -37,19 +36,9 @@ final readonly class ListenerProviderExtension implements ExtensionInterface
             return;
         }
 
-        $configuration = $container->get(ConfigurationInterface::class)->wrap(ConfigurationExtension::class);
+        $listen = $container->get(ConfigurationInterface::class)->get('ghostwriter.event-dispatcher.listen', []);
 
-        // Load ghostwriter/event-dispatcher config
-        $config = $configuration->wrap('ghostwriter/event-dispatcher', [
-            'listen' => [],
-        ]);
-
-        /** @var array<class-string,list<class-string>> $listen */
-        $listen = $config->get('listen', []);
-
-        $environmentVariables = $container->get(EnvironmentVariables::class);
-
-        if ($environmentVariables->get('GITHUB_DEBUG', '0') === '1') {
+        if ($container->get(EnvironmentVariables::class)->get('GITHUB_DEBUG', '0') === '1') {
             $listen['object'][] = Debug::class;
         }
 

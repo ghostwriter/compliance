@@ -37,14 +37,9 @@ final readonly class ComplianceDefinition implements DefinitionInterface
 
         $container->extend(ConfigurationInterface::class, ConfigurationExtension::class);
 
-        $configuration = $container->get(ConfigurationInterface::class)->wrap(ConfigurationExtension::class);
+        $configuration = $container->get(ConfigurationInterface::class);
 
-        $containerConfiguration = $configuration->wrap('ghostwriter/container', [
-            'alias' => [],
-            'define' => [],
-            'extend' => [],
-            'factory' => [],
-        ]);
+        $containerConfiguration = $configuration->wrap('ghostwriter/container');
 
         foreach ($containerConfiguration->get('alias', []) as $alias => $service) {
             $container->alias($service, $alias);

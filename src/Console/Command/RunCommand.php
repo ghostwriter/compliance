@@ -50,6 +50,7 @@ use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Override;
 use RuntimeException;
 use SplFileInfo;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -62,6 +63,7 @@ use const PHP_EOL;
 
 use function sprintf;
 
+#[AsCommand(name: 'run', description: 'Runs the compliance checks based on GitHub Events.')]
 final class RunCommand extends Command
 {
     public function __construct(
@@ -71,43 +73,45 @@ final class RunCommand extends Command
         private readonly EnvironmentVariables $environmentVariables,
         private readonly StyleInterface $symfonyStyle,
     ) {
-        parent::__construct('run');
+        parent::__construct();
     }
 
+    /** @throws Throwable */
     #[Override]
     protected function configure(): void
     {
-        $this->setDescription('Generates a Job matrix for Github Actions.');
-
         // 'compliance.command.matrix'
         $this->addArgument(
-            'event',
-            InputArgument::OPTIONAL,
-            'The name of the event that triggered the workflow.',
-            $this->environmentVariables->get('GITHUB_EVENT_NAME', 'compliance.command.matrix')
+            name: 'event',
+            mode: InputArgument::OPTIONAL,
+            description: 'The name of the event that triggered the workflow.',
+            default: $this->environmentVariables->get(name: 'GITHUB_EVENT_NAME', default: 'compliance.command.matrix')
         );
 
         // '/github/workflow/event.json'
         $this->addArgument(
-            'payload',
-            InputArgument::OPTIONAL,
-            'The path to the file on the runner that contains the full event webhook payload.',
-            $this->environmentVariables->get('GITHUB_EVENT_PATH', 'tests/Fixture/payload.json')
+            name: 'payload',
+            mode: InputArgument::OPTIONAL,
+            description: 'The path to the file on the runner that contains the full event webhook payload.',
+            default: $this->environmentVariables->get(name: 'GITHUB_EVENT_PATH', default: 'tests/Fixture/payload.json')
         );
 
         $this->addOption(
-            'debug',
-            'd',
-            InputOption::VALUE_REQUIRED,
-            'Enable debugging or verbose logging in job steps (one of "0" or "1").',
-            $this->environmentVariables->get('RUNNER_DEBUG', '0')
+            name: 'debug',
+            shortcut: 'd',
+            mode: InputOption::VALUE_REQUIRED,
+            description: 'Enable debugging or verbose logging in job steps (one of "0" or "1").',
+            default: $this->environmentVariables->get(name: 'RUNNER_DEBUG', default: '0')
         );
 
         $this->addArgument(
-            'workspace',
-            InputArgument::OPTIONAL,
-            'The default working directory on the GitHub runner.',
-            $this->environmentVariables->get('GITHUB_WORKSPACE', $this->filesystem->currentWorkingDirectory())
+            name: 'workspace',
+            mode: InputArgument::OPTIONAL,
+            description: 'The default working directory on the GitHub runner.',
+            default: $this->environmentVariables->get(
+                name: 'GITHUB_WORKSPACE',
+                default: $this->filesystem->currentWorkingDirectory()
+            )
         );
 
         // GITHUB_ENV	The path on the runner to the file that sets variables from workflow commands.

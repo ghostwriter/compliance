@@ -12,6 +12,7 @@ use Throwable;
 
 use const DIRECTORY_SEPARATOR;
 
+use function assert;
 use function dirname;
 use function implode;
 
@@ -30,10 +31,8 @@ final readonly class ConfigurationExtension implements ExtensionInterface
     #[Override]
     public function __invoke(ContainerInterface $container, object $service): void
     {
-        $configuration = Configuration::new();
+        assert($service instanceof Configuration);
 
-        $configuration->mergeDirectory(implode(DIRECTORY_SEPARATOR, [dirname(__DIR__, 4), 'config']));
-
-        $service->set(self::class, $configuration->toArray());
+        $service->mergeDirectory(implode(DIRECTORY_SEPARATOR, [dirname(__DIR__, 4), 'config']));
     }
 }

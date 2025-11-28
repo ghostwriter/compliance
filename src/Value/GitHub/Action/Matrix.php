@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Value\GitHub\Action;
 
+use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Ghostwriter\Json\Interface\JsonInterface;
 use Throwable;
 
@@ -14,6 +15,7 @@ final class Matrix
      * @param list<string>                                                                                                             $exclude
      */
     public function __construct(
+        public FilesystemInterface $filesystem,
         public JsonInterface $json,
         public array $include = [],
         public array $exclude = [],
@@ -36,7 +38,7 @@ final class Matrix
     public function toString(): string
     {
         if ([] === $this->include) {
-            $this->include(Job::noop());
+            $this->include(Job::noop($this->filesystem));
         }
 
         return $this->json->encode([
