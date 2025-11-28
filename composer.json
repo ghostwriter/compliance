@@ -54,7 +54,7 @@
         "ghostwriter/json": "^3.0.1",
         "ghostwriter/shell": "^0.1.1",
         "ghostwriter/uuid": "^1.0.3",
-        "symfony/console": "^7.3.6"
+        "symfony/console": "^8.0.0"
     },
     "require-dev": {
         "ext-xdebug": "*",
