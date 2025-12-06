@@ -11,7 +11,7 @@ final class Psalm extends AbstractTool
     #[Override]
     public function command(): string
     {
-        return 'composer psalm';
+        return 'psalm';
     }
 
     /** @return list<string> */

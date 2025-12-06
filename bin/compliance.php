@@ -24,6 +24,15 @@ use function sprintf;
 
 /** @var ?string $_composer_autoload_path */
 (static function (string $composerAutoloadPath): void {
+    if (! file_exists($composerAutoloadPath)) {
+        fwrite(
+            STDERR,
+            sprintf('[ERROR]Failed to locate "%s"\n please run "composer install"\n', $composerAutoloadPath)
+        );
+
+        exit(1);
+    }
+
     set_error_handler(
         // Convert PHP errors to exceptions,
         static function (int $severity, string $message, string $file, int $line): void {
@@ -37,15 +46,6 @@ use function sprintf;
         // reports all errors except E_USER_DEPRECATED, E_DEPRECATED, E_STRICT, and E_NOTICE
         E_ALL & ~E_USER_DEPRECATED & ~E_DEPRECATED & ~E_NOTICE
     );
-
-    if (! file_exists($composerAutoloadPath)) {
-        fwrite(
-            STDERR,
-            sprintf('[ERROR]Failed to locate "%s"\n please run "composer install"\n', $composerAutoloadPath)
-        );
-
-        exit(1);
-    }
 
     require_once $composerAutoloadPath;
 

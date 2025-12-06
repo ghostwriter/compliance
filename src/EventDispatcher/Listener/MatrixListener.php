@@ -133,7 +133,7 @@ final readonly class MatrixListener implements ListenerInterface
                         $composerCacheFilesDirectory,
                         $composerJsonPath,
                         $composerLockPath,
-                        $tool instanceof Psalm ? PhpVersion::PHP_83 : PhpVersion::latest(),
+                        $tool instanceof Psalm ? PhpVersion::PHP_84 : PhpVersion::latest(),
                         ComposerStrategy::LOCKED,
                         OperatingSystem::UBUNTU,
                         $tool instanceof Infection, // infection tool is experimental
