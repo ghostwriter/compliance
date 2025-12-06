@@ -129,7 +129,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           coverage: xdebug
-          extensions: pcov,xdebug,:php-psr,ctype,curl,dom,filter,gd,hash,iconv,intl,json,libxml,mbstring,openssl,pcntl,phar,readline,session,simplexml,sodium,sockets,tokenizer,xml,xmlwriter,zlib,${{ join(matrix.extensions, ', ') }}
+          extensions: pcov, xdebug, :php-psr, xdebug, :php-psr, apcu, bcmath, ctype, curl, dom, ds, event, exif, fileinfo, filter, gd, gettext, hash, iconv, igbinary, intl, json, libxml, mbstring, memcache, mysqli, openssl, pcntl, pdo, pdo_mysql, pdo_pgsql, pdo_sqlite, pgsql, phar, posix, protobuf, readline, redis, session, simplexml, sockets, sodium, sqlite3, tokenizer, xml, xmlreader, xmlwriter, xsl, yaml, zend-opcache, zip, zlib, ${{ join(matrix.extensions, ', ') }}
           ini-values: assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On
           php-version: ${{ matrix.php }}
           tools: infection, phpunit, psalm
