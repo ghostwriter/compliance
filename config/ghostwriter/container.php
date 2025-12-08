@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 use Ghostwriter\Compliance\Automation;
 use Ghostwriter\Compliance\Container\AutomationFactory;
+use Ghostwriter\Compliance\Container\EnvironmentVariablesFactory;
 use Ghostwriter\Compliance\Container\Ghostwriter\Config\ConfigurationExtension;
 use Ghostwriter\Compliance\Container\Ghostwriter\EventDispatcher\ListenerProviderExtension;
+use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\Service\DefinitionInterface;
 use Ghostwriter\Container\Interface\Service\ExtensionInterface;
@@ -29,5 +31,6 @@ return [
     ],
     'factory' => [
         Automation::class => AutomationFactory::class,
+        EnvironmentVariables::class => EnvironmentVariablesFactory::class,
     ],
 ];

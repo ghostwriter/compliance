@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance;
 
 use ErrorException;
+use Ghostwriter\Container\Container;
+use Symfony\Component\Console\Application;
 use Throwable;
 
 use const E_ALL;
@@ -18,6 +20,7 @@ use function dirname;
 use function error_reporting;
 use function file_exists;
 use function fwrite;
+use function implode;
 use function restore_error_handler;
 use function set_error_handler;
 use function sprintf;
@@ -49,33 +52,8 @@ use function sprintf;
 
     require_once $composerAutoloadPath;
 
-    /** #BlackLivesMatter */
-    try {
-        $exitCode = Compliance::new()->run($_SERVER['argv'] ?? []);
-    } catch (Throwable $throwable) {
-        fwrite(
-            STDERR,
-            sprintf(
-                '[%s] %s%s%s' . PHP_EOL,
-                $throwable::class,
-                $throwable->getMessage(),
-                PHP_EOL . PHP_EOL,
-                $throwable->getTraceAsString(),
-            )
-        );
+    restore_error_handler();
 
-        $exitCode = $throwable->getCode();
-    } finally {
-        restore_error_handler();
-        //    000: Success.
-        //    126: Permission denied or command not executable.
-        //    127: Command not found.
-        //    128: Invalid argument to command.
-        //    130: Command terminated by Ctrl+C (SIGINT).
-        //    137: Command terminated by Ctrl+C (SIGKILL).
-        //    139: Segmentation fault (core dumped).
-        //    141: Memory access violation.
-        //    255: Generic error indicating unspecified problem.
-        exit($exitCode ?? 255);
-    }
-})($_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php');
+    /** #BlackLivesMatter */
+    exit(Container::getInstance()->get(Application::class)->run());
+})($_composer_autoload_path ?? implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'vendor', 'autoload.php']));

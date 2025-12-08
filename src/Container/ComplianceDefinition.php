@@ -27,13 +27,10 @@ final readonly class ComplianceDefinition implements DefinitionInterface
     public function __invoke(ContainerInterface $container): void
     {
         $_ENV['GITHUB_EVENT_NAME'] ??= 'compliance.command.matrix';
-        $_ENV['GITHUB_EVENT_PATH'] ??= 'tests' . DIRECTORY_SEPARATOR . 'fixture' . DIRECTORY_SEPARATOR . 'payload.json';
+        $_ENV['GITHUB_EVENT_PATH'] ??= implode(DIRECTORY_SEPARATOR, ['tests', 'Fixture', 'payload.json']);
         $_ENV['GITHUB_TOKEN'] ??= 'github-token';
         $_ENV['GITHUB_WORKSPACE'] ??= getcwd();
         $_ENV['RUNNER_DEBUG'] ??= 1;
-
-        $container->set(EnvironmentVariables::class, EnvironmentVariables::new());
-        $container->set(Shell::class, Shell::new());
 
         $container->extend(ConfigurationInterface::class, ConfigurationExtension::class);
 
