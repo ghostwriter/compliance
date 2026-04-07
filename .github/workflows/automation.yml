@@ -156,5 +156,6 @@ jobs:
         working-directory: ${{ github.workspace }}
         run:  |
           composer config --global github-oauth.github.com ${{secrets.GITHUB_TOKEN}};
+          composer config platform.php ${{ matrix.php }}.999
           ${{ matrix.command }};
           composer config --global --auth --unset github-oauth.github.com
