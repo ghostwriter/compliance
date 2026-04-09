@@ -6,12 +6,16 @@ namespace Ghostwriter\Compliance\Tool;
 
 use Override;
 
+use const DIRECTORY_SEPARATOR;
+
+use function implode;
+
 final class PHPUnit extends AbstractTool
 {
     #[Override]
     public function command(): string
     {
-        return 'phpunit';
+        return implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'phpunit']);
     }
 
     /** @return list<string> */

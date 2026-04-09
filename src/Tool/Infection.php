@@ -6,12 +6,16 @@ namespace Ghostwriter\Compliance\Tool;
 
 use Override;
 
+use const DIRECTORY_SEPARATOR;
+
+use function implode;
+
 final class Infection extends AbstractTool
 {
     #[Override]
     public function command(): string
     {
-        return 'infection';
+        return implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'infection']);
     }
 
     /** @return list<string> */
