@@ -12,6 +12,7 @@ use Throwable;
 
 /**
  * @see EnvironmentVariablesFactoryTest
+ *
  * @implements FactoryInterface<EnvironmentVariables>
  */
 final readonly class EnvironmentVariablesFactory implements FactoryInterface

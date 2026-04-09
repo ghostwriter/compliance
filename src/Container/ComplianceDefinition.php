@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Container;
 
 use Ghostwriter\Compliance\Container\Ghostwriter\Config\ConfigurationExtension;
-use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\Service\DefinitionInterface;
-use Ghostwriter\Shell\Shell;
 use Override;
 use Throwable;
 
 use const DIRECTORY_SEPARATOR;
 
 use function getcwd;
+use function implode;
 
 /**
  * @see ComplianceDefinitionTest

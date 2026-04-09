@@ -7,13 +7,12 @@ namespace Ghostwriter\Compliance;
 use ErrorException;
 use Ghostwriter\Container\Container;
 use Symfony\Component\Console\Application;
-use Throwable;
 
+use const DIRECTORY_SEPARATOR;
 use const E_ALL;
 use const E_DEPRECATED;
 use const E_NOTICE;
 use const E_USER_DEPRECATED;
-use const PHP_EOL;
 use const STDERR;
 
 use function dirname;
