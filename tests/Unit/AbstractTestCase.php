@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use Ghostwriter\Compliance\Container\ComplianceDefinition;
 use Ghostwriter\Compliance\Value\Composer\Composer;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
@@ -28,8 +27,6 @@ abstract class AbstractTestCase extends TestCase
         parent::setUp();
 
         $this->container = Container::getInstance();
-
-        $this->container->define(ComplianceDefinition::class);
 
         $this->composer = $this->container->get(Composer::class);
 
