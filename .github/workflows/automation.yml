@@ -100,9 +100,6 @@ jobs:
         uses: docker://ghcr.io/ghostwriter/compliance:v1
 
   qa:
-    concurrency:
-      group: ${{ github.head_ref || github.ref }}-${{ github.event_name }}-${{ github.workflow }}
-      cancel-in-progress: true
     defaults:
       run:
         shell: bash
