@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7336668bdc141962f3263983a072a78b",
+    "content-hash": "708429fc480ac959c9221cc0ffbd3c8c",
     "packages": [
         {
             "name": "composer/semver",
@@ -378,22 +378,22 @@
         },
         {
             "name": "ghostwriter/console",
-            "version": "0.2.0",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/console.git",
-                "reference": "f8a00e1d5a8ebc72bfc421d97eb7e5cdfe561b11"
+                "reference": "de63839d21eb9ed8632ed9b03dccfc9f85e15404"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/console/zipball/f8a00e1d5a8ebc72bfc421d97eb7e5cdfe561b11",
-                "reference": "f8a00e1d5a8ebc72bfc421d97eb7e5cdfe561b11",
+                "url": "https://api.github.com/repos/ghostwriter/console/zipball/de63839d21eb9ed8632ed9b03dccfc9f85e15404",
+                "reference": "de63839d21eb9ed8632ed9b03dccfc9f85e15404",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "ghostwriter/config": "^2.1.0",
-                "ghostwriter/container": "^6.1.1",
+                "ghostwriter/config": "^2.1.1",
+                "ghostwriter/container": "^7.0.0",
                 "php": "~8.4.0 || ~8.5.0",
                 "symfony/console": "^8.0.8"
             },
@@ -401,7 +401,7 @@
                 "ext-xdebug": "*",
                 "ghostwriter/coding-standard": "dev-main",
                 "mockery/mockery": "^1.6.12",
-                "phpunit/phpunit": "^13.1.3",
+                "phpunit/phpunit": "^13.1.7",
                 "symfony/var-dumper": "^8.0.8"
             },
             "type": "library",
@@ -453,20 +453,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-14T14:51:32+00:00"
+            "time": "2026-04-20T16:54:31+00:00"
         },
         {
             "name": "ghostwriter/container",
-            "version": "6.1.1",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/container.git",
-                "reference": "478b61f4b95ea95969e6552f29d539c81fed10d6"
+                "reference": "1931a1175deb24d0e5901a689054be8227144b3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/container/zipball/478b61f4b95ea95969e6552f29d539c81fed10d6",
-                "reference": "478b61f4b95ea95969e6552f29d539c81fed10d6",
+                "url": "https://api.github.com/repos/ghostwriter/container/zipball/1931a1175deb24d0e5901a689054be8227144b3d",
+                "reference": "1931a1175deb24d0e5901a689054be8227144b3d",
                 "shasum": ""
             },
             "require": {
@@ -480,7 +480,7 @@
                 "ext-xdebug": "*",
                 "ghostwriter/coding-standard": "dev-main",
                 "mockery/mockery": "^1.6.12",
-                "phpunit/phpunit": "^13.1.3",
+                "phpunit/phpunit": "^13.1.7",
                 "symfony/var-dumper": "^8.0.8"
             },
             "type": "library",
@@ -532,24 +532,24 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-14T14:00:13+00:00"
+            "time": "2026-04-20T15:01:26+00:00"
         },
         {
             "name": "ghostwriter/event-dispatcher",
-            "version": "6.1.0",
+            "version": "6.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/event-dispatcher.git",
-                "reference": "acdf7450096767814e716906dc453cfd0c24c1e8"
+                "reference": "57bb48498db6ae8f297353ae19394fa23c7689c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/acdf7450096767814e716906dc453cfd0c24c1e8",
-                "reference": "acdf7450096767814e716906dc453cfd0c24c1e8",
+                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/57bb48498db6ae8f297353ae19394fa23c7689c3",
+                "reference": "57bb48498db6ae8f297353ae19394fa23c7689c3",
                 "shasum": ""
             },
             "require": {
-                "ghostwriter/container": "^6.1.1",
+                "ghostwriter/container": "^7.0.0",
                 "php": "~8.4.0 || ~8.5.0",
                 "psr/event-dispatcher": "^1.0.0"
             },
@@ -560,7 +560,7 @@
                 "ext-xdebug": "*",
                 "ghostwriter/coding-standard": "dev-main",
                 "mockery/mockery": "^1.6.12",
-                "phpunit/phpunit": "^13.1.3",
+                "phpunit/phpunit": "^13.1.7",
                 "symfony/var-dumper": "^8.0.8"
             },
             "type": "library",
@@ -613,7 +613,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-14T16:31:20+00:00"
+            "time": "2026-04-20T15:26:22+00:00"
         },
         {
             "name": "ghostwriter/filesystem",
@@ -1167,7 +1167,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.35.0",
+            "version": "v1.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -1226,7 +1226,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.35.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.36.0"
             },
             "funding": [
                 {
@@ -1250,7 +1250,7 @@
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
-            "version": "v1.35.0",
+            "version": "v1.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
@@ -1308,7 +1308,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.35.0"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.36.0"
             },
             "funding": [
                 {
@@ -1332,7 +1332,7 @@
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.35.0",
+            "version": "v1.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
@@ -1393,7 +1393,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.35.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.36.0"
             },
             "funding": [
                 {
@@ -1417,7 +1417,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.35.0",
+            "version": "v1.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -1478,7 +1478,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.35.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.36.0"
             },
             "funding": [
                 {
