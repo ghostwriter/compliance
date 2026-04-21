@@ -122,7 +122,7 @@
         "cache:clear": "rm -rf ./.cache/*",
         "check": [
             "@cache:clear",
-            "tools/phar/composer validate",
+            "vendor/bin/composer validate",
             "@test"
         ],
         "docker": [
@@ -134,9 +134,9 @@
         "git:submodule:update": "git submodule update --depth=1 --init --recursive --recommend-shallow --remote",
         "infection": [
             "@xdebug",
-            "tools/phar/infection --min-covered-msi=0 --min-msi=0 --show-mutations --threads=max"
+            "vendor/bin/infection --min-covered-msi=0 --min-msi=0 --show-mutations --threads=max"
         ],
-        "phpbench": "tools/phar/phpbench run --report='extends:aggregate,cols:[benchmark,subject,revs,its,mem_peak,mode,rstdev]' --time-unit=milliseconds ./tests/Benchmark",
+        "phpbench": "vendor/bin/phpbench run --report='extends:aggregate,cols:[benchmark,subject,revs,its,mem_peak,mode,rstdev]' --time-unit=milliseconds ./tests/Benchmark",
         "phpunit": [
             "@xdebug",
             "vendor/bin/phpunit --do-not-cache-result --colors=always"
@@ -145,7 +145,7 @@
             "@phpunit",
             "@infection"
         ],
-        "unused": "tools/phar/composer-unused --no-interaction --ansi",
+        "unused": "vendor/bin/composer-unused --no-interaction --ansi",
         "xdebug": "@putenv XDEBUG_MODE=coverage"
     }
 }
