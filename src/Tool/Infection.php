@@ -15,7 +15,8 @@ final class Infection extends AbstractTool
     #[Override]
     public function command(): string
     {
-        return implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'infection']);
+        return 'infection';
+        //implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'infection']);
     }
 
     /** @return list<string> */
