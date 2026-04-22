@@ -16,7 +16,7 @@ final class Psalm extends AbstractTool
     public function command(): string
     {
         return 'psalm';
-        return implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'psalm']);
+        //return implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'psalm']);
     }
 
     /** @return list<string> */
