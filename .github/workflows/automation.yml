@@ -163,3 +163,10 @@ jobs:
           composer config platform.php ${{ matrix.php }}.999
           ${{ matrix.command }};
           composer config --global --auth --unset github-oauth.github.com
+
+      - name: Clean Workflow Run History
+        uses: yanovation/delete-old-actions@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          days-ago: 30
+          keep-latest: 5
