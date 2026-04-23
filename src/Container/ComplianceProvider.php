@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Container;
 
+use Ghostwriter\Compliance\Automation;
 use Ghostwriter\Compliance\Container\Ghostwriter\Config\ConfigurationExtension;
+use Ghostwriter\Compliance\Container\Ghostwriter\EventDispatcher\ListenerProviderExtension;
+use Ghostwriter\Compliance\Container\Symfony\Console\ApplicationFactory;
+use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\BuilderInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
+use Ghostwriter\Container\Interface\Service\ExtensionInterface;
+use Ghostwriter\Container\Interface\Service\FactoryInterface;
 use Ghostwriter\Container\Interface\Service\ProviderInterface;
+use Ghostwriter\Container\Service\Provider\AbstractProvider;
+use Ghostwriter\EventDispatcher\Interface\ListenerProviderInterface;
 use Override;
+use Symfony\Component\Console\Application;
 use Throwable;
 
 use const DIRECTORY_SEPARATOR;
@@ -20,30 +29,34 @@ use function implode;
 /**
  * @see ComplianceProviderTest
  */
-final class ComplianceProvider implements ProviderInterface
+final class ComplianceProvider extends AbstractProvider
 {
-    /** @throws Throwable */
-    #[Override]
-    public function boot(ContainerInterface $container): void
-    {
-        $configuration = $container->get(ConfigurationInterface::class);
+    /**
+     * alias => service.
+     *
+     * @var array<class-string,class-string>
+     */
+    public const array ALIAS = [];
 
-        $containerConfiguration = $configuration->wrap('ghostwriter/container');
+    /**
+     * service => [extension, ...].
+     *
+     * @var array<class-string,list<class-string<ExtensionInterface>>>
+     */
+    public const array EXTEND = [
+        ListenerProviderInterface::class => [ListenerProviderExtension::class],
+    ];
 
-        foreach ($containerConfiguration->get('alias', []) as $alias => $service) {
-            $container->alias($alias, $service);
-        }
-
-        foreach ($containerConfiguration->get('extend', []) as $service => $extensions) {
-            foreach ($extensions as $extension) {
-                $container->extend($service, $extension);
-            }
-        }
-
-        foreach ($containerConfiguration->get('factory', []) as $service => $factory) {
-            $container->factory($service, $factory);
-        }
-    }
+    /**
+     * service => factory.
+     *
+     * @var array<class-string,class-string<FactoryInterface>>
+     */
+    public const array FACTORY = [
+        Application::class => ApplicationFactory::class,
+        Automation::class => AutomationFactory::class,
+        EnvironmentVariables::class => EnvironmentVariablesFactory::class,
+    ];
 
     /** @throws Throwable */
     #[Override]
@@ -55,6 +68,6 @@ final class ComplianceProvider implements ProviderInterface
         $_ENV['GITHUB_WORKSPACE'] ??= getcwd();
         $_ENV['RUNNER_DEBUG'] ??= 1;
 
-        $builder->extend(ConfigurationInterface::class, ConfigurationExtension::class);
+        parent::register($builder);
     }
 }
