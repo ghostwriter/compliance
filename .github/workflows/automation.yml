@@ -102,7 +102,13 @@ jobs:
       - name: Determine CI Jobs
         id: matrix
         uses: docker://ghcr.io/ghostwriter/compliance:v1
-
+      
+      - name: Clean Workflow Run History
+        uses: yanovation/delete-old-actions@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          days-ago: 7
+          keep-latest: 5
   qa:
     defaults:
       run:
@@ -163,10 +169,3 @@ jobs:
           composer config platform.php ${{ matrix.php }}.999
           ${{ matrix.command }};
           composer config --global --auth --unset github-oauth.github.com
-
-      - name: Clean Workflow Run History
-        uses: yanovation/delete-old-actions@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          days-ago: 30
-          keep-latest: 5
