@@ -107,7 +107,7 @@ jobs:
         uses: yanovation/delete-old-actions@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          days-ago: 7
+          days-ago: 0
           keep-latest: 5
   qa:
     defaults:
