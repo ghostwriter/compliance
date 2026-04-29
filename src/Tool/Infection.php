@@ -16,13 +16,14 @@ final class Infection extends AbstractTool
     public function command(): string
     {
         return 'infection';
-        //implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'infection']);
+        // implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'infection']);
     }
 
     /** @return list<string> */
     #[Override]
     public function configuration(): array
     {
-        return ['infection.json5', 'infection.json', 'infection.json.dist', 'infection.json5.dist'];
+        return [];
+        // return ['infection.json5', 'infection.json', 'infection.json.dist', 'infection.json5.dist'];
     }
 }
