@@ -104,6 +104,7 @@ jobs:
         uses: docker://ghcr.io/ghostwriter/compliance:v1
       
       - name: Clean Workflow Run History
+        continue-on-error: true
         uses: yanovation/delete-old-actions@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
