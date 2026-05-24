@@ -8,13 +8,6 @@
 "repository":
   "name": "compliance"
   "description": "[WIP] Compliance - CI/CD & QA Test Automation for PHP via GitHub Actions"
-  "topics":
-    - "ghostwriter"
-    - "compliance"
-    - "php"
-    - "compliance-automation"
-    - "continuous-integration"
-    - "github-actions"
   "homepage": "https://github.com/ghostwriter/compliance"
   "default_branch": "v1"
   "allow_auto_merge": true
