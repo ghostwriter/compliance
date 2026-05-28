@@ -15,7 +15,13 @@ final class PHPUnit extends AbstractTool
     #[Override]
     public function command(): string
     {
-        return implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'phpunit']);
+        $path = realpath(implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', 'phpunit']));
+
+        if ($path === false) {
+            return 'phpunit';  
+        }
+
+        return $path;
     }
 
     /** @return list<string> */
