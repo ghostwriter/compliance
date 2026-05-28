@@ -18,6 +18,7 @@ final class Infection extends AbstractTool
     #[Override]
     public function configuration(): array
     {
-        return ['infection.json5', 'infection.json', 'infection.json.dist', 'infection.json5.dist'];
+        return [];
+        // return ['infection.json5', 'infection.json', 'infection.json.dist', 'infection.json5.dist'];
     }
 }
