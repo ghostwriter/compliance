@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Container;
 
 use Ghostwriter\Compliance\Automation;
-use Ghostwriter\Compliance\Container\Ghostwriter\Config\ConfigurationExtension;
 use Ghostwriter\Compliance\Container\Ghostwriter\EventDispatcher\ListenerProviderExtension;
 use Ghostwriter\Compliance\Container\Symfony\Console\ApplicationFactory;
 use Ghostwriter\Compliance\Value\EnvironmentVariables;
-use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\BuilderInterface;
-use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\Service\ExtensionInterface;
 use Ghostwriter\Container\Interface\Service\FactoryInterface;
-use Ghostwriter\Container\Interface\Service\ProviderInterface;
 use Ghostwriter\Container\Service\Provider\AbstractProvider;
 use Ghostwriter\EventDispatcher\Interface\ListenerProviderInterface;
 use Override;

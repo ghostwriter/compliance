@@ -16,7 +16,6 @@ use Ghostwriter\Compliance\EventDispatcher\Listener\GitHubListener;
 use Ghostwriter\Compliance\EventDispatcher\Listener\MatrixListener;
 use Ghostwriter\Compliance\EventDispatcher\Listener\OutputListener;
 use Ghostwriter\Compliance\Value\EnvironmentVariables;
-use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\Service\ExtensionInterface;
 use Ghostwriter\EventDispatcher\Interface\ListenerProviderInterface;
@@ -45,6 +44,7 @@ final readonly class ListenerProviderExtension implements ExtensionInterface
         OutputEvent::class => [OutputListener::class],
         CopyWorkflowEvent::class => [Debug::class, CopyWorkflowListener::class],
     ];
+
     /**
      * @param ListenerProviderInterface $service
      *

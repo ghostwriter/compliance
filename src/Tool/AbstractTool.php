@@ -9,9 +9,13 @@ use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Override;
 
+use const DIRECTORY_SEPARATOR;
+
+use function implode;
 use function in_array;
 use function mb_strtolower;
 use function preg_replace;
+use function realpath;
 use function str_replace;
 
 abstract class AbstractTool implements ToolInterface
@@ -61,6 +65,22 @@ abstract class AbstractTool implements ToolInterface
     public function name(): string
     {
         return str_replace(__NAMESPACE__ . '\\', '', static::class);
+    }
+
+    public function path(string $tool): string
+    {
+        $path = realpath(implode(DIRECTORY_SEPARATOR, [
+            $this->environmentVariables->get('GITHUB_WORKSPACE', $this->filesystem->currentWorkingDirectory()),
+            'vendor',
+            'bin',
+            $tool,
+        ]));
+
+        if (false === $path) {
+            return $tool;
+        }
+
+        return $path;
     }
 
     /** @return list<string> */
