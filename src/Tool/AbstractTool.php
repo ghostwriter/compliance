@@ -69,14 +69,16 @@ abstract class AbstractTool implements ToolInterface
 
     public function path(string $tool): string
     {
-        $path = realpath(implode(DIRECTORY_SEPARATOR, [
+        $path = implode(DIRECTORY_SEPARATOR, [
             $this->environmentVariables->get('GITHUB_WORKSPACE', $this->filesystem->currentWorkingDirectory()),
             'vendor',
             'bin',
             $tool,
-        ]));
+        ]);
 
-        if (false === $path) {
+        return sprintf('(%s || %s)', $path, $tool);
+
+        if (false === realpath($path)) {
             return $tool;
         }
 
