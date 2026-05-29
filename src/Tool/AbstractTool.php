@@ -69,8 +69,15 @@ abstract class AbstractTool implements ToolInterface
 
     public function path(string $tool): string
     {
+        # /home/runner/work/compliance/compliance
+        // $path = implode(DIRECTORY_SEPARATOR, [
+        //     $this->environmentVariables->get('GITHUB_WORKSPACE', $this->filesystem->currentWorkingDirectory()),
+        //     'vendor',
+        //     'bin',
+        //     $tool,
+        // ]);
+        
         $path = implode(DIRECTORY_SEPARATOR, [
-            $this->environmentVariables->get('GITHUB_WORKSPACE', $this->filesystem->currentWorkingDirectory()),
             'vendor',
             'bin',
             $tool,
