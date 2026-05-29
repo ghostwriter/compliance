@@ -166,10 +166,16 @@ jobs:
           path: ${{ matrix.cacheDirectory }}
           restore-keys: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-
 
+      # - name: Run ${{ matrix.name }}
+      #   working-directory: ${{ github.workspace }}
+      #   run:  |
+      #     composer config --global github-oauth.github.com ${{secrets.GITHUB_TOKEN}};
+      #     composer config platform.php ${{ matrix.php }}.999
+      #     ${{ matrix.command }};
+      #     composer config --global --auth --unset github-oauth.github.com
+      
       - name: Run ${{ matrix.name }}
         working-directory: ${{ github.workspace }}
         run:  |
-          composer config --global github-oauth.github.com ${{secrets.GITHUB_TOKEN}};
           composer config platform.php ${{ matrix.php }}.999
-          ${{ matrix.command }};
-          composer config --global --auth --unset github-oauth.github.com
+          ${{ matrix.command }}
