@@ -66,9 +66,9 @@ jobs:
     name: Generate job matrix
     container:
       image: ghcr.io/ghostwriter/php:8.5
-    concurrency:
-      group: ${{ github.head_ref || github.ref }}-${{ github.event_name }}-${{ github.workflow }}
-      cancel-in-progress: true
+    # concurrency:
+    #   group: ${{ github.head_ref || github.ref }}-${{ github.event_name }}-${{ github.workflow }}
+    #   cancel-in-progress: true
     defaults:
       run:
         shell: bash
