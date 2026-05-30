@@ -1,7 +1,8 @@
 name: Automation
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}-${{ github.event_name }}
+  # group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}-${{ github.event_name }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 on:
