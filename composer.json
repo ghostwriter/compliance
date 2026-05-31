@@ -39,7 +39,7 @@
         "#StopGenocide"
     ],
     "require": {
-        "php": "~8.5.0",
+        "php": "~8.4.0 || ~8.5.0 || ~8.6.0",
         "ext-json": "*",
         "ext-mbstring": "*",
         "composer-plugin-api": "~2.9.0",
@@ -98,10 +98,28 @@
         "platform": {
             "php": "8.5.999"
         },
-        "preferred-install": "dist",
+        "policy": {
+            "advisories": {
+                "block": true,
+                "audit": "fail"
+            },
+            "malware": {
+                "block": true,
+                "block-scope": "all",
+                "audit": "fail"
+            },
+            "abandoned": {
+                "block": true,
+                "audit": "fail"
+            }
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
         "prepend-autoloader": true,
         "process-timeout": 5000,
         "sort-packages": true,
+        "strict-psr-autoloader": true,
         "use-parent-dir": false
     },
     "extra": {
@@ -124,21 +142,14 @@
         "cache:clear": "rm -rf ./.cache/*",
         "check": [
             "@cache:clear",
-            "vendor/bin/composer validate",
+            "@composer validate",
             "@test"
         ],
-        "docker": [
-            "@docker:build",
-            "@docker:run"
-        ],
-        "docker:build": "docker buildx build --pull --tag workspace .",
-        "docker:run": "docker run -v $(PWD):/github/workspace -w=/github/workspace -e GITHUB_DEBUG=1 -e GITHUB_WORKSPACE=/github/workspace -e GITHUB_TOKEN=github-token -e SIGNING_SECRET_KEY=secret-key workspace",
-        "git:submodule:update": "git submodule update --depth=1 --init --recursive --recommend-shallow --remote",
         "infection": [
             "@xdebug",
-            "vendor/bin/infection --min-covered-msi=0 --min-msi=0 --show-mutations --threads=max"
+            "vendor/ghostwriter/coding-standard/tools/phar/infection --min-covered-msi=0 --min-msi=0 --show-mutations --threads=max"
         ],
-        "phpbench": "vendor/bin/phpbench run --report='extends:aggregate,cols:[benchmark,subject,revs,its,mem_peak,mode,rstdev]' --time-unit=milliseconds ./tests/Benchmark",
+        "phpbench": "vendor/ghostwriter/coding-standard/tools/phar/phpbench run --report='extends:aggregate,cols:[benchmark,subject,revs,its,mem_peak,mode,rstdev]' --time-unit=milliseconds ./tests/Benchmark",
         "phpunit": [
             "@xdebug",
             "vendor/bin/phpunit --do-not-cache-result --colors=always"
@@ -147,7 +158,6 @@
             "@phpunit",
             "@infection"
         ],
-        "unused": "vendor/bin/composer-unused --no-interaction --ansi",
         "xdebug": "@putenv XDEBUG_MODE=coverage"
     }
 }
