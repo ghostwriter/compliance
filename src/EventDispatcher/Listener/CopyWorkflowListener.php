@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\EventDispatcher\Listener;
 
 use Ghostwriter\Compliance\EventDispatcher\Event\CopyWorkflowEvent;
+use Ghostwriter\Compliance\Interface\EventDispatcher\ListenerInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 

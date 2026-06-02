@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance;
 
+use Ghostwriter\Compliance\Interface\ComplianceInterface;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Symfony\Component\Console\Application;
@@ -12,10 +13,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
-final readonly class Compliance
+final readonly class Compliance implements ComplianceInterface
 {
     /** @var string */
     public const string BLACK_LIVES_MATTER = '<fg=white;bg=black;options=bold>#Black<fg=red;bg=black;options=bold>Lives</>Matter</>';
+
+    /** @var string */
+    public const string DESCRIPTION = 'Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.';
 
     /** @var string */
     public const string LOGO = <<<'EOD'
@@ -30,7 +34,7 @@ final readonly class Compliance
         EOD;
 
     /** @var string */
-    public const string NAME = '<info>Compliance - Automatically configure and execute multiple CI/CD & QA Tests via GitHub Actions.</info>';
+    public const string NAME = 'Compliance';
 
     /** @var string */
     public const string PACKAGE = 'ghostwriter/compliance';

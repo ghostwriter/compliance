@@ -7,21 +7,22 @@ namespace Ghostwriter\Compliance\EventDispatcher\Listener;
 use Composer\Semver\Semver;
 use Ghostwriter\Compliance\Automation;
 use Ghostwriter\Compliance\Compliance;
+use Ghostwriter\Compliance\Composer\ComposerManager;
+use Ghostwriter\Compliance\Composer\Extension;
 use Ghostwriter\Compliance\Enum\ComposerStrategy;
 use Ghostwriter\Compliance\Enum\OperatingSystem;
 use Ghostwriter\Compliance\Enum\PhpVersion;
 use Ghostwriter\Compliance\Enum\Tool;
+use Ghostwriter\Compliance\EnvironmentVariables;
 use Ghostwriter\Compliance\EventDispatcher\Event\MatrixEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\OutputEvent;
+use Ghostwriter\Compliance\GitHub\Action\Job;
+use Ghostwriter\Compliance\Interface\EventDispatcher\ListenerInterface;
 use Ghostwriter\Compliance\Interface\ToolInterface;
+use Ghostwriter\Compliance\Shell\ComposerCacheFilesDirectoryFinder;
 use Ghostwriter\Compliance\Tool\Infection;
 use Ghostwriter\Compliance\Tool\PHPUnit;
 use Ghostwriter\Compliance\Tool\Psalm;
-use Ghostwriter\Compliance\Value\Composer\Composer;
-use Ghostwriter\Compliance\Value\Composer\Extension;
-use Ghostwriter\Compliance\Value\EnvironmentVariables;
-use Ghostwriter\Compliance\Value\GitHub\Action\Job;
-use Ghostwriter\Compliance\Value\Shell\ComposerCacheFilesDirectoryFinder;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
@@ -45,7 +46,7 @@ final readonly class MatrixListener implements ListenerInterface
         private Automation $automation,
         // TODO: remove the damn container im using it to get the tools that were tagged
         private ContainerInterface $container,
-        private Composer $composer,
+        private ComposerManager $composerManager,
         private ComposerCacheFilesDirectoryFinder $composerCacheFilesDirectoryFinder,
         private EnvironmentVariables $environmentVariables,
         private FilesystemInterface $filesystem,
@@ -60,7 +61,7 @@ final readonly class MatrixListener implements ListenerInterface
         chdir($currentWorkingDirectory);
 
         try {
-            $composerJson = $this->composer->readJsonFile($currentWorkingDirectory);
+            $composerJson = $this->composerManager->readJsonFile($currentWorkingDirectory);
         } catch (Throwable) {
             $this->publish($generateMatrixEvent);
 
@@ -105,8 +106,8 @@ final readonly class MatrixListener implements ListenerInterface
 
         $constraints = $composerJson->getPhpVersionConstraint()->getVersion();
         $composerCacheFilesDirectory = ($this->composerCacheFilesDirectoryFinder)();
-        $composerJsonPath = $this->composer->getJsonFilePath($currentWorkingDirectory);
-        $composerLockPath = $this->composer->getLockFilePath($currentWorkingDirectory);
+        $composerJsonPath = $this->composerManager->getJsonFilePath($currentWorkingDirectory);
+        $composerLockPath = $this->composerManager->getLockFilePath($currentWorkingDirectory);
         foreach ($tools as $toolEnum) {
             $tool = $this->container->get($toolEnum->toString());
             if (! $tool instanceof ToolInterface) {
@@ -154,7 +155,7 @@ final readonly class MatrixListener implements ListenerInterface
                 }
 
                 foreach ($composerStrategies as $composerStrategy) {
-                    if ($tool instanceof Psalm && ComposerStrategy::LOCKED !== $composerStrategy) {
+                    if ($tool instanceof Psalm && ! $composerStrategy->isLocked()) {
                         continue;
                     }
 
@@ -193,7 +194,7 @@ final readonly class MatrixListener implements ListenerInterface
     {
         $this->eventDispatcher->dispatch(OutputEvent::new([
             '::echo::on',
-            sprintf('::group::%s %s', Compliance::NAME, Compliance::BLACK_LIVES_MATTER),
+            sprintf('::group::%s - %s - %s', Compliance::NAME, Compliance::DESCRIPTION, Compliance::BLACK_LIVES_MATTER),
             $message,
             '::endgroup::',
             '::echo::off',
@@ -211,6 +212,7 @@ final readonly class MatrixListener implements ListenerInterface
         $matrix = sprintf('matrix=%s' . PHP_EOL, $generateMatrixEvent->getMatrix());
 
         file_put_contents($gitHubOutput, $matrix, FILE_APPEND);
+        // $this->filesystem->append($gitHubOutput, $matrix);
 
         $this->dispatchOutputEvent($matrix);
     }

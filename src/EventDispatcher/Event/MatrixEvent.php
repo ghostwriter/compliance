@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\EventDispatcher\Event;
 
-use Ghostwriter\Compliance\Value\GitHub\Action\Job;
-use Ghostwriter\Compliance\Value\GitHub\Action\Matrix;
+use Ghostwriter\Compliance\GitHub\Action\Job;
+use Ghostwriter\Compliance\GitHub\Action\Matrix;
+use Ghostwriter\Compliance\Interface\EventDispatcher\EventInterface;
 use Ghostwriter\Container\Container;
 use Throwable;
 
-final readonly class MatrixEvent
+final readonly class MatrixEvent implements EventInterface
 {
     public function __construct(
         private Matrix $matrix,

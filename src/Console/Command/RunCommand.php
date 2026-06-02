@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Compliance\Console\Command;
 
 use Ghostwriter\Compliance\Compliance;
+use Ghostwriter\Compliance\EnvironmentVariables;
 use Ghostwriter\Compliance\EventDispatcher\Event\CopyWorkflowEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubBranchProtectionRuleEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubCheckRunEvent;
@@ -43,7 +44,6 @@ use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubWorkflowCallEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubWorkflowDispatchEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\GitHub\GitHubWorkflowRunEvent;
 use Ghostwriter\Compliance\EventDispatcher\Event\MatrixEvent;
-use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
@@ -130,75 +130,79 @@ final class RunCommand extends Command
     {
         $this->symfonyStyle->writeln(sprintf(Compliance::LOGO, Compliance::BLACK_LIVES_MATTER, ''));
 
-        $this->symfonyStyle->title(Compliance::NAME);
+        $this->symfonyStyle->title(sprintf(
+            '<info>%s</info> - <info>%s</info>',
+            Compliance::NAME,
+            Compliance::DESCRIPTION
+        ));
 
         $payload = (new SplFileInfo($input->getArgument('payload')))->getRealPath();
         if (false === $payload) {
-            $output->writeln(
-                sprintf('GitHub Payload: <error>%s File does not exist.</error>', $input->getArgument('payload'))
-            );
+            $this->symfonyStyle->text(sprintf(
+                '<info>GitHub Payload:</info> <error>%s File does not exist.</error>',
+                $input->getArgument('payload')
+            ));
 
             return Command::INVALID;
         }
 
         $eventName = $input->getArgument('event');
 
-        $this->symfonyStyle->info(sprintf('GitHub Event: <comment>%s</comment>', $eventName));
+        $this->symfonyStyle->text(sprintf('<info>GitHub Event:</info> <error>%s</error>' . PHP_EOL, $eventName));
 
         try {
-            $this->eventDispatcher
-                ->dispatch(
-                    match ($eventName) {
-                        default => throw new RuntimeException(sprintf(
-                            '<comment>GitHub Event "%s" is not Supported.</comment>',
-                            $eventName
-                        )),
-                        'compliance.command.matrix' => $this->container->get(MatrixEvent::class),
-                        'compliance.command.workflow' => $this->container->get(CopyWorkflowEvent::class),
-                        'branch_protection_rule' => new GitHubBranchProtectionRuleEvent($payload),
-                        'check_run' => new GitHubCheckRunEvent($payload),
-                        'check_suite' => new GitHubCheckSuiteEvent($payload),
-                        'create' => new GitHubCreateEvent($payload),
-                        'delete' => new GitHubDeleteEvent($payload),
-                        'deployment' => new GitHubDeploymentEvent($payload),
-                        'deployment_status' => new GitHubDeploymentStatusEvent($payload),
-                        'discussion' => new GitHubDiscussionEvent($payload),
-                        'discussion_comment' => new GitHubDiscussionCommentEvent($payload),
-                        'fork' => new GitHubForkEvent($payload),
-                        'gollum' => new GitHubGollumEvent($payload),
-                        'issue_comment' => new GitHubIssueCommentEvent($payload),
-                        'issues' => new GitHubIssuesEvent($payload),
-                        'label' => new GitHubLabelEvent($payload),
-                        'merge_group' => new GitHubMergeGroupEvent($payload),
-                        'milestone' => new GitHubMilestoneEvent($payload),
-                        'page_build' => new GitHubPageBuildEvent($payload),
-                        'project' => new GitHubProjectEvent($payload),
-                        'project_card' => new GitHubProjectCardEvent($payload),
-                        'project_column' => new GitHubProjectColumnEvent($payload),
-                        'public' => new GitHubPublicEvent($payload),
-                        'pull_request' => new GitHubPullRequestEvent($payload),
-                        'pull_request_comment' => new GitHubPullRequestCommentEvent($payload),
-                        'pull_request_review' => new GitHubPullRequestReviewEvent($payload),
-                        'pull_request_review_comment' => new GitHubPullRequestReviewCommentEvent($payload),
-                        'pull_request_target' => new GitHubPullRequestTargetEvent($payload),
-                        'push' => new GitHubPushEvent($payload),
-                        'registry_package' => new GitHubRegistryPackageEvent($payload),
-                        'release' => new GitHubReleaseEvent($payload),
-                        'repository_dispatch' => new GitHubRepositoryDispatchEvent($payload),
-                        'schedule' => new GitHubScheduleEvent($payload),
-                        'status' => new GitHubStatusEvent($payload),
-                        'watch' => new GitHubWatchEvent($payload),
-                        'workflow_call' => new GitHubWorkflowCallEvent($payload),
-                        'workflow_dispatch' => new GitHubWorkflowDispatchEvent($payload),
-                        'workflow_run' => new GitHubWorkflowRunEvent($payload),
-                    }
-                );
+            $this->eventDispatcher->dispatch(match ($eventName) {
+                default => throw new RuntimeException(sprintf(
+                    '<comment>GitHub Event "%s" is not Supported.</comment>',
+                    $eventName
+                )),
+                'compliance.command.matrix' => $this->container->get(MatrixEvent::class),
+                'compliance.command.workflow' => $this->container->get(CopyWorkflowEvent::class),
+                'branch_protection_rule' => new GitHubBranchProtectionRuleEvent($payload),
+                'check_run' => new GitHubCheckRunEvent($payload),
+                'check_suite' => new GitHubCheckSuiteEvent($payload),
+                'create' => new GitHubCreateEvent($payload),
+                'delete' => new GitHubDeleteEvent($payload),
+                'deployment' => new GitHubDeploymentEvent($payload),
+                'deployment_status' => new GitHubDeploymentStatusEvent($payload),
+                'discussion' => new GitHubDiscussionEvent($payload),
+                'discussion_comment' => new GitHubDiscussionCommentEvent($payload),
+                'fork' => new GitHubForkEvent($payload),
+                'gollum' => new GitHubGollumEvent($payload),
+                'issue_comment' => new GitHubIssueCommentEvent($payload),
+                'issues' => new GitHubIssuesEvent($payload),
+                'label' => new GitHubLabelEvent($payload),
+                'merge_group' => new GitHubMergeGroupEvent($payload),
+                'milestone' => new GitHubMilestoneEvent($payload),
+                'page_build' => new GitHubPageBuildEvent($payload),
+                'project' => new GitHubProjectEvent($payload),
+                'project_card' => new GitHubProjectCardEvent($payload),
+                'project_column' => new GitHubProjectColumnEvent($payload),
+                'public' => new GitHubPublicEvent($payload),
+                'pull_request' => new GitHubPullRequestEvent($payload),
+                'pull_request_comment' => new GitHubPullRequestCommentEvent($payload),
+                'pull_request_review' => new GitHubPullRequestReviewEvent($payload),
+                'pull_request_review_comment' => new GitHubPullRequestReviewCommentEvent($payload),
+                'pull_request_target' => new GitHubPullRequestTargetEvent($payload),
+                'push' => new GitHubPushEvent($payload),
+                'registry_package' => new GitHubRegistryPackageEvent($payload),
+                'release' => new GitHubReleaseEvent($payload),
+                'repository_dispatch' => new GitHubRepositoryDispatchEvent($payload),
+                'schedule' => new GitHubScheduleEvent($payload),
+                'status' => new GitHubStatusEvent($payload),
+                'watch' => new GitHubWatchEvent($payload),
+                'workflow_call' => new GitHubWorkflowCallEvent($payload),
+                'workflow_dispatch' => new GitHubWorkflowDispatchEvent($payload),
+                'workflow_run' => new GitHubWorkflowRunEvent($payload),
+            });
         } catch (Throwable $throwable) {
             $this->symfonyStyle->error(
                 sprintf(
-                    '[%s] %s%s%s' . PHP_EOL,
+                    '[%s] %s in %s on line %d.%s%s' . PHP_EOL,
                     $throwable::class,
                     $throwable->getMessage(),
+                    $throwable->getFile(),
+                    $throwable->getLine(),
                     PHP_EOL . PHP_EOL,
                     $throwable->getTraceAsString(),
                 )

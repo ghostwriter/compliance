@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Tool;
 
+use Ghostwriter\Compliance\EnvironmentVariables;
 use Ghostwriter\Compliance\Interface\ToolInterface;
-use Ghostwriter\Compliance\Value\EnvironmentVariables;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Override;
 
@@ -15,7 +15,7 @@ use function implode;
 use function in_array;
 use function mb_strtolower;
 use function preg_replace;
-use function realpath;
+use function sprintf;
 use function str_replace;
 
 abstract class AbstractTool implements ToolInterface
@@ -46,7 +46,9 @@ abstract class AbstractTool implements ToolInterface
     {
         $configuration = $this->configuration();
 
-        foreach ($this->filesystem->listDirectory($this->environmentVariables->get('GITHUB_WORKSPACE')) as $file) {
+        $path = $this->environmentVariables->get('GITHUB_WORKSPACE');
+
+        foreach ($this->filesystem->listDirectory($path) as $file) {
             if (! $file->isFile()) {
                 continue;
             }
@@ -69,27 +71,9 @@ abstract class AbstractTool implements ToolInterface
 
     public function path(string $tool): string
     {
-        # /home/runner/work/compliance/compliance
-        // $path = implode(DIRECTORY_SEPARATOR, [
-        //     $this->environmentVariables->get('GITHUB_WORKSPACE', $this->filesystem->currentWorkingDirectory()),
-        //     'vendor',
-        //     'bin',
-        //     $tool,
-        // ]);
-        
-        $path = implode(DIRECTORY_SEPARATOR, [
-            'vendor',
-            'bin',
-            $tool,
-        ]);
+        $path = implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', $tool]);
 
         return sprintf('(%s || %s)', $path, $tool);
-
-        if (false === realpath($path)) {
-            return $tool;
-        }
-
-        return $path;
     }
 
     /** @return list<string> */

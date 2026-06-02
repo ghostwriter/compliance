@@ -62,47 +62,47 @@ final readonly class Automation
 
     public function skip(ComposerStrategy|OperatingSystem|PhpVersion|Tool ...$exclusions): self
     {
-        $self = $this;
+        $instance = $this;
 
         foreach ($exclusions as $exclusion) {
-            $self = match (true) {
+            $instance = match (true) {
                 $exclusion instanceof ComposerStrategy => new self(
                     array_filter(
-                        $self->composerStrategies,
+                        $instance->composerStrategies,
                         static fn (ComposerStrategy $composerStrategy): bool => $composerStrategy !== $exclusion,
                     ),
-                    $self->operatingSystems,
-                    $self->phpVersions,
-                    $self->tools,
+                    $instance->operatingSystems,
+                    $instance->phpVersions,
+                    $instance->tools,
                 ),
                 $exclusion instanceof OperatingSystem => new self(
-                    $self->composerStrategies,
+                    $instance->composerStrategies,
                     array_filter(
-                        $self->operatingSystems,
+                        $instance->operatingSystems,
                         static fn (OperatingSystem $operatingSystem): bool => $operatingSystem !== $exclusion,
                     ),
-                    $self->phpVersions,
-                    $self->tools,
+                    $instance->phpVersions,
+                    $instance->tools,
                 ),
                 $exclusion instanceof PhpVersion => new self(
-                    $self->composerStrategies,
-                    $self->operatingSystems,
+                    $instance->composerStrategies,
+                    $instance->operatingSystems,
                     array_filter(
-                        $self->phpVersions,
+                        $instance->phpVersions,
                         static fn (PhpVersion $phpVersion): bool => $phpVersion !== $exclusion,
                     ),
-                    $self->tools,
+                    $instance->tools,
                 ),
                 default => new self(
-                    $self->composerStrategies,
-                    $self->operatingSystems,
-                    $self->phpVersions,
-                    array_filter($self->tools, static fn (Tool $tool): bool => $tool !== $exclusion),
+                    $instance->composerStrategies,
+                    $instance->operatingSystems,
+                    $instance->phpVersions,
+                    array_filter($instance->tools, static fn (Tool $tool): bool => $tool !== $exclusion),
                 ),
             };
         }
 
-        return $self;
+        return $instance;
     }
 
     /** @return list<ComposerStrategy|OperatingSystem|PhpVersion|Tool> */

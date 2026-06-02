@@ -24,6 +24,7 @@ enum PhpVersion: int
     case PHP_84 = 80400;
     case PHP_85 = 80500;
     case PHP_86 = 80600;
+
     // case PHP_90 = 90000;
 
     public function toString(): string
@@ -74,6 +75,7 @@ enum PhpVersion: int
         return self::PHP_54;
     }
 
+    /** @return PhpVersion[] */
     public static function supported(): array
     {
         //        $currentValue = self::current()->value;

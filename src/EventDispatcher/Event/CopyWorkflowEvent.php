@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\EventDispatcher\Event;
 
-final readonly class CopyWorkflowEvent
+use Ghostwriter\Compliance\Interface\EventDispatcher\EventInterface;
+
+final readonly class CopyWorkflowEvent implements EventInterface
 {
     private const string WORKFLOW_FILE = __DIR__ . '/../../automation.yml.dist';
 

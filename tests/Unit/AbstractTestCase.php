@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use Ghostwriter\Compliance\Value\Composer\Composer;
+use Ghostwriter\Compliance\Composer\ComposerManager;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
@@ -14,7 +14,7 @@ use Throwable;
 
 abstract class AbstractTestCase extends TestCase
 {
-    public Composer $composer;
+    public ComposerManager $composer;
 
     public ContainerInterface $container;
 
@@ -28,7 +28,7 @@ abstract class AbstractTestCase extends TestCase
 
         $this->container = Container::getInstance();
 
-        $this->composer = $this->container->get(Composer::class);
+        $this->composer = $this->container->get(ComposerManager::class);
 
         $this->filesystem = $this->container->get(FilesystemInterface::class);
     }

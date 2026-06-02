@@ -15,6 +15,21 @@ enum Tool: string
     case PHPUnit = PHPUnit::class;
     case Psalm = Psalm::class;
 
+    public function isInfection(): bool
+    {
+        return self::Infection === $this;
+    }
+
+    public function isPHPUnit(): bool
+    {
+        return self::PHPUnit === $this;
+    }
+
+    public function isPsalm(): bool
+    {
+        return self::Psalm === $this;
+    }
+
     /** @return class-string<ToolInterface> */
     public function toString(): string
     {
