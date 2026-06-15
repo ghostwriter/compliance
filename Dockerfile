@@ -10,14 +10,13 @@ LABEL "org.opencontainers.image.licenses"="BSD-3-Clause"
 
 WORKDIR /srv/workspace
 
-# COPY config /srv/workspace/config/
-# COPY tools /srv/workspace/tools/
 COPY bin /srv/workspace/bin/
 COPY composer.* /srv/workspace/
+COPY LICENSE /srv/workspace/LICENSE
 COPY src /srv/workspace/src/
 
-RUN composer install --no-autoloader --no-cache --no-dev --no-interaction  --verbose \
-&& composer dump-autoload --classmap-authoritative --no-cache --no-dev --no-interaction --verbose
+RUN composer install --no-autoloader --no-cache --no-dev --no-interaction --no-plugins --no-scripts --verbose \
+&& composer dump-autoload --classmap-authoritative --no-cache --no-dev --no-interaction --no-plugins --no-scripts --verbose
 
 # VERBOSITY = DEBUG
 ENV SHELL_VERBOSITY=3

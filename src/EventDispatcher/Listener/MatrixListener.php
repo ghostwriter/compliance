@@ -145,6 +145,15 @@ final readonly class MatrixListener implements ListenerInterface
             }
 
             foreach ($phpVersions as $phpVersion) {
+                if (! $phpVersion instanceof PhpVersion) {
+                    continue;
+                }
+
+                if ($phpVersion === PhpVersion::PHP_86) {
+                    // PHP 8.6 is not released yet
+                    continue;
+                }
+
                 $isPhpVersionExperimental = PhpVersion::isExperimental($phpVersion);
                 //                if ($isPhpVersionExperimental) {
                 //                    continue;
