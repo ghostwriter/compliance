@@ -58,7 +58,7 @@
         "ghostwriter/event-dispatcher": "^6.1.3",
         "ghostwriter/filesystem": "^0.2.1",
         "ghostwriter/json": "^3.0.3",
-        "ghostwriter/shell": "^0.1.5",
+        "ghostwriter/shell": "^0.1.6",
         "ghostwriter/uuid": "^1.0.3"
     },
     "require-dev": {
