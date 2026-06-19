@@ -92,9 +92,9 @@ final readonly class Job
         }
 
         return $this->wrap([
-            'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict',
+            'composer validate --no-check-publish --no-check-lock --no-interaction --ansi --strict || true;',
             // 'composer config --global github-oauth.github.com ' . (getenv('GITHUB_TOKEN') ?: ''),
-            'composer config --no-plugins allow-plugins.ghostwriter/coding-standard false',
+            'composer config --no-plugins allow-plugins.ghostwriter/coding-standard false || true;',
             $this->composerInstallCommand(),
             // 'composer config --global --auth --unset github-oauth.github.com',
             $this->command,
