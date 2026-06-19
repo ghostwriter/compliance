@@ -178,5 +178,5 @@ jobs:
       - name: Run ${{ matrix.name }}
         working-directory: ${{ github.workspace }}
         run:  |
-          composer config platform.php ${{ matrix.php }}.999
+          composer config platform.php ${{ matrix.php }}.999 || true;
           ${{ matrix.command }}
