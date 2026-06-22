@@ -1877,16 +1877,16 @@
     "packages-dev": [
         {
             "name": "boundwize/structarmed",
-            "version": "0.13.4",
+            "version": "0.13.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boundwize/structarmed.git",
-                "reference": "934668b7ee85fac57536c9bca6446981e8291da8"
+                "reference": "583f435e8b63c253f7b9cc80f93db472dacc5e2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/934668b7ee85fac57536c9bca6446981e8291da8",
-                "reference": "934668b7ee85fac57536c9bca6446981e8291da8",
+                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/583f435e8b63c253f7b9cc80f93db472dacc5e2e",
+                "reference": "583f435e8b63c253f7b9cc80f93db472dacc5e2e",
                 "shasum": ""
             },
             "require": {
@@ -1896,6 +1896,7 @@
                 "php": "^8.2"
             },
             "require-dev": {
+                "boundwize/pyrameter": "^0.3",
                 "laminas/laminas-coding-standard": "^3.1",
                 "phpstan/phpstan": "^2.2",
                 "phpunit/phpunit": "^11.5",
@@ -1940,7 +1941,7 @@
             ],
             "support": {
                 "issues": "https://github.com/boundwize/structarmed/issues",
-                "source": "https://github.com/boundwize/structarmed/tree/0.13.4"
+                "source": "https://github.com/boundwize/structarmed/tree/0.13.7"
             },
             "funding": [
                 {
@@ -1948,7 +1949,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-13T21:07:09+00:00"
+            "time": "2026-06-21T11:13:01+00:00"
         },
         {
             "name": "fidry/cpu-core-counter",
