@@ -147,7 +147,7 @@ jobs:
       #     install_options: --no-daemon
 
       - name: Setup PHP ${{ matrix.php }} with ${{ join(matrix.extensions, ', ') }} extensions.
-        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+        uses: shivammathur/setup-php@2.37.2 # 2.37.2
         with:
           coverage: xdebug
           extensions: pcov, xdebug, :php-psr, apcu, bcmath, ctype, curl, dom, ds, event, exif, fileinfo, filter, gd, gettext, hash, iconv, igbinary, intl, json, libxml, mbstring, memcached, mysqli, openssl, pcntl, pdo, pdo_mysql, pdo_pgsql, pdo_sqlite, pgsql, phar, posix, protobuf, readline, redis, session, simplexml, sockets, sodium, sqlite3, tokenizer, xml, xmlreader, xmlwriter, xsl, yaml, zend-opcache, zip, zlib, ${{ join(matrix.extensions, ', ') }}
