@@ -149,15 +149,7 @@ final readonly class MatrixListener implements ListenerInterface
                     continue;
                 }
 
-                if ($phpVersion === PhpVersion::PHP_86) {
-                    // PHP 8.6 is not released yet
-                    continue;
-                }
-
                 $isPhpVersionExperimental = PhpVersion::isExperimental($phpVersion);
-                //                if ($isPhpVersionExperimental) {
-                //                    continue;
-                //                }
 
                 if (! Semver::satisfies($phpVersion->toString(), $constraints)) {
                     continue;
