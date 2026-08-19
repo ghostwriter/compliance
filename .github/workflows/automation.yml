@@ -108,7 +108,7 @@ jobs:
       
       - name: Clean Workflow Run History
         continue-on-error: true
-        uses: yanovation/delete-old-actions@v1.0.7 # v1.0.7
+        uses: yanovation/delete-old-actions@76d880c1e674aa4a279379e215fb6e4fe5cebe8a # 1.0.7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           days-ago: 1
