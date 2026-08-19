@@ -84,7 +84,7 @@ jobs:
           persist-credentials: false
       
       # - name: Set up editorconfig-checker
-      #   uses: editorconfig-checker/action-editorconfig-checker@840e866d93b8e032123c23bac69dece044d4d84c # v2.2.0
+      #   uses: editorconfig-checker/action-editorconfig-checker@840e866d93b8e032123c23bac69dece044d4d84c # 2.2.0
 
       # - name: Run editorconfig-checker
       #   run: editorconfig-checker
