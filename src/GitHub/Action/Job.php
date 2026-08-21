@@ -16,7 +16,7 @@ use function sprintf;
 final readonly class Job
 {
     /** @param list<string> $extensions */
-    public function __construct(
+    private function __construct(
         private string $name,
         private string $command,
         private array $extensions,
@@ -52,7 +52,7 @@ final readonly class Job
             composerStrategy: $composerStrategy,
             phpVersion: $phpVersion,
             operatingSystem: $operatingSystem,
-            experimental: $experimental,
+            experimental: $experimental
         );
     }
 
