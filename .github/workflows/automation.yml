@@ -2,7 +2,7 @@ name: Automation
 
 concurrency:
   group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.head_ref || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 on:
   pull_request:
