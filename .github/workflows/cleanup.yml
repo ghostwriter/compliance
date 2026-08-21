@@ -2,8 +2,10 @@ name: cleanup
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 * * * *" # Runs every hour.
+  workflow_run:
+    workflows: ['Docker Build']
+    types:
+      - completed
 
 permissions:
   packages: write
