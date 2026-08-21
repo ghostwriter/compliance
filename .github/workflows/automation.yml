@@ -96,7 +96,7 @@ jobs:
       # - name: Determine CI Jobs (dev)
       #   id: matrix
       #   if: github.event_name == 'push' || github.event_name == 'pull_request'
-      #   uses: ghostwriter/compliance@v1 # 0.1.0
+      #   uses: ghostwriter/compliance@dc5d992eb84863700afa33e426c52e9ed89533b5 # v1
       #   with:
       #     command: matrix
 
