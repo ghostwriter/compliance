@@ -118,7 +118,7 @@ jobs:
     name: '[PHP${{ matrix.php }}][${{ matrix.dependency }}]${{ matrix.name }} on ${{ matrix.os }}'
     needs: [matrix]
     runs-on: ${{ matrix.os }}-latest
-    continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental == 'true' }}
+    continue-on-error: ${{ matrix.experimental }}
     env:
       GITHUB_EVENT_NAME: ${{ github.event_name }}
       GITHUB_EVENT_PATH: ${{ github.event_path }}
