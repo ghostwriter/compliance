@@ -10,17 +10,17 @@ on:
   push:
     branches:
       # Default branch
-      - "main"
+      - 'main'
       # Release branches
       ## 1.2.x - e.g. Semantic Versioning
-      - "[0-9]+.[0-9]+.x"
+      - '[0-9]+.[0-9]+.x'
       ## v1 - e.g. GitHub Actions Versioning
-      - "v[0-9]+"
+      - 'v[0-9]+'
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: '*/15 * * * *'
   workflow_dispatch:
   workflow_run:
-    workflows: [ "Docker Build" ]
+    workflows: ['Docker Build']
     types:
       - completed
   workflow_call:
@@ -29,7 +29,6 @@ on:
         required: false
       INFECTION_DASHBOARD_API_KEY:
         required: false
-
 
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
 # values: read, write, none
@@ -82,13 +81,13 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # 7.0.1
         with:
           persist-credentials: false
-      
+
       # - name: Set up editorconfig-checker
       #   uses: editorconfig-checker/action-editorconfig-checker@840e866d93b8e032123c23bac69dece044d4d84c # 2.2.0
 
       # - name: Run editorconfig-checker
       #   run: editorconfig-checker
-        
+
       # - name: Install nix
       #   uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # 31.11.1
       #   with:
@@ -105,7 +104,7 @@ jobs:
       - name: Determine CI Jobs
         id: matrix
         uses: docker://ghcr.io/ghostwriter/compliance:v1
-      
+
       - name: Clean Workflow Run History
         continue-on-error: true
         uses: yanovation/delete-old-actions@76d880c1e674aa4a279379e215fb6e4fe5cebe8a # 1.0.7
@@ -117,10 +116,10 @@ jobs:
     defaults:
       run:
         shell: bash
-    name: "[PHP${{ matrix.php }}][${{ matrix.dependency }}]${{ matrix.name }} on ${{ matrix.os }}"
-    needs: [ matrix ]
+    name: '[PHP${{ matrix.php }}][${{ matrix.dependency }}]${{ matrix.name }} on ${{ matrix.os }}'
+    needs: [matrix]
     runs-on: ${{ matrix.os }}-latest
-    continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental }}
+    continue-on-error: ${{ matrix.dependency == 'lowest' || matrix.experimental == 'true' }}
     env:
       GITHUB_EVENT_NAME: ${{ github.event_name }}
       GITHUB_EVENT_PATH: ${{ github.event_path }}
@@ -140,20 +139,14 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      # - name: Install nix
-      #   uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # 31.11.1
-      #   with:
-      #     github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      #     install_options: --no-daemon
-
       - name: Setup PHP ${{ matrix.php }} with ${{ join(matrix.extensions, ', ') }} extensions.
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
         with:
           coverage: xdebug
-          extensions: pcov, xdebug, :php-psr, apcu, bcmath, ctype, curl, dom, ds, event, exif, fileinfo, filter, gd, gettext, hash, iconv, igbinary, intl, json, libxml, mbstring, memcached, mysqli, openssl, pcntl, pdo, pdo_mysql, pdo_pgsql, pdo_sqlite, pgsql, phar, posix, protobuf, readline, redis, session, simplexml, sockets, sodium, sqlite3, tokenizer, xml, xmlreader, xmlwriter, xsl, yaml, zend-opcache, zip, zlib, ${{ join(matrix.extensions, ', ') }}
-          ini-values: assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On
-          php-version: ${{ matrix.php }}
-          tools: infection, phpunit, psalm
+          extensions: "xdebug, :php-psr, apcu, bcmath, ctype, curl, dom, ds, event, exif, fileinfo, filter, gd, gettext, hash, iconv, igbinary, intl, json, libxml, mbstring, memcached, mysqli, openssl, pcntl, pdo, pdo_mysql, pdo_pgsql, pdo_sqlite, pgsql, phar, posix, protobuf, readline, redis, session, simplexml, sockets, sodium, sqlite3, tokenizer, xml, xmlreader, xmlwriter, xsl, yaml, zend-opcache, zip, zlib, ${{ join(matrix.extensions, ', ') }}"
+          ini-values: 'assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On'
+          php-version: '${{ matrix.php }}'
+          tools: 'composer, infection, phpunit, psalm'
 
       - name: Setup problem matchers
         run: |
@@ -167,16 +160,10 @@ jobs:
           path: ${{ matrix.cacheDirectory }}
           restore-keys: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.dependency }}-
 
-      # - name: Run ${{ matrix.name }}
-      #   working-directory: ${{ github.workspace }}
-      #   run:  |
-      #     composer config --global github-oauth.github.com ${{secrets.GITHUB_TOKEN}};
-      #     composer config platform.php ${{ matrix.php }}.999
-      #     ${{ matrix.command }};
-      #     composer config --global --auth --unset github-oauth.github.com
-      
       - name: Run ${{ matrix.name }}
         working-directory: ${{ github.workspace }}
-        run:  |
+        run: |
+          # composer config --global github-oauth.github.com ${{secrets.GITHUB_TOKEN}};
           composer config platform.php ${{ matrix.php }}.999 || true;
           ${{ matrix.command }}
+          # composer config --global --auth --unset github-oauth.github.com
