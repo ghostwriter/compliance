@@ -81,28 +81,12 @@ jobs:
         with:
           persist-credentials: false
 
-      # - name: Set up editorconfig-checker
-      #   uses: editorconfig-checker/action-editorconfig-checker@840e866d93b8e032123c23bac69dece044d4d84c # 2.2.0
-
-      # - name: Run editorconfig-checker
-      #   run: editorconfig-checker
-
-      # - name: Install nix
-      #   uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # 31.11.1
-      #   with:
-      #     github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      #     install_options: --no-daemon
-
-      # - name: Determine CI Jobs (dev)
-      #   id: matrix
-      #   if: github.event_name == 'push' || github.event_name == 'pull_request'
-      #   uses: ghostwriter/compliance@dc5d992eb84863700afa33e426c52e9ed89533b5 # v1
-      #   with:
-      #     command: matrix
-
       - name: Determine CI Jobs
         id: matrix
-        uses: docker://ghcr.io/ghostwriter/compliance:v1
+        uses: docker://ghcr.io/ghostwriter/compliance:v1 # ghostwriter/compliance@v1
+      #   if: github.event_name == 'push' || github.event_name == 'pull_request'
+      #   with:
+      #     command: matrix
 
       - name: Clean Workflow Run History
         continue-on-error: true
