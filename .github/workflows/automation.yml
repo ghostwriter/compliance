@@ -61,20 +61,17 @@ permissions:
 
 jobs:
   matrix:
-    name: Generate job matrix
     container:
       image: ghcr.io/ghostwriter/php:8.5
-    # concurrency:
-    #   group: ${{ github.head_ref || github.ref }}-${{ github.event_name }}-${{ github.workflow }}
-    #   cancel-in-progress: true
     defaults:
       run:
         shell: bash
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    runs-on: ubuntu-latest
+    name: Generate job matrix
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # 7.0.1
@@ -95,14 +92,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           days-ago: 1
           keep-latest: 0
+    timeout-minutes: 6
   qa:
+    continue-on-error: ${{ matrix.experimental }}
     defaults:
       run:
         shell: bash
-    name: '[PHP${{ matrix.php }}][${{ matrix.dependency }}]${{ matrix.name }} on ${{ matrix.os }}'
-    needs: [matrix]
-    runs-on: ${{ matrix.os }}-latest
-    continue-on-error: ${{ matrix.experimental }}
     env:
       GITHUB_EVENT_NAME: ${{ github.event_name }}
       GITHUB_EVENT_PATH: ${{ github.event_path }}
@@ -111,10 +106,9 @@ jobs:
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
       INFECTION_DASHBOARD_API_KEY: ${{ secrets.INFECTION_DASHBOARD_API_KEY || secrets.STRYKER_DASHBOARD_API_KEY }}
       XDEBUG_MODE: coverage
-
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+    name: '[PHP${{ matrix.php }}][${{ matrix.dependency }}]${{ matrix.name }} on ${{ matrix.os }}'
+    needs: [matrix]
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # 7.0.1
@@ -150,3 +144,7 @@ jobs:
           composer config platform.php ${{ matrix.php }}.999 || true;
           ${{ matrix.command }}
           # composer config --global --auth --unset github-oauth.github.com
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+    timeout-minutes: 6
