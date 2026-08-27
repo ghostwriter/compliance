@@ -16,15 +16,15 @@ final readonly class Extension implements DependencyInterface
         private DependencyVersion $dependencyVersion
     ) {}
 
-    public static function new(DependencyName $dependencyName, DependencyVersion $dependencyVersion): self
-    {
-        return new self($dependencyName, $dependencyVersion);
-    }
-
     #[Override]
     public function __toString(): string
     {
         return mb_substr((string) $this->dependencyName, 4);
+    }
+
+    public static function new(DependencyName $dependencyName, DependencyVersion $dependencyVersion): self
+    {
+        return new self($dependencyName, $dependencyVersion);
     }
 
     #[Override]

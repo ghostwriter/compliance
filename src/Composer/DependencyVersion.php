@@ -21,15 +21,15 @@ final readonly class DependencyVersion implements JsonSerializable, Stringable
         }
     }
 
-    public static function new(string $content): self
-    {
-        return new self($content);
-    }
-
     #[Override]
     public function __toString(): string
     {
         return $this->content;
+    }
+
+    public static function new(string $content): self
+    {
+        return new self($content);
     }
 
     #[Override]

@@ -21,18 +21,18 @@ final readonly class License implements JsonSerializable, Stringable
         }
     }
 
+    #[Override]
+    public function __toString(): string
+    {
+        return $this->content;
+    }
+
     public static function new(?string $content): self
     {
         return match (true) {
             null === $content => throw new InvalidArgumentException('License cannot be null'),
             default => new self($content)
         };
-    }
-
-    #[Override]
-    public function __toString(): string
-    {
-        return $this->content;
     }
 
     #[Override]

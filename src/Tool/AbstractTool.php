@@ -13,9 +13,9 @@ use const DIRECTORY_SEPARATOR;
 
 use function implode;
 use function in_array;
+use function mb_strrchr;
 use function mb_strtolower;
 use function preg_replace;
-use function sprintf;
 use function str_replace;
 
 abstract class AbstractTool implements ToolInterface
@@ -66,14 +66,18 @@ abstract class AbstractTool implements ToolInterface
     #[Override]
     public function name(): string
     {
-        return str_replace(__NAMESPACE__ . '\\', '', static::class);
+        return mb_strrchr(static::class, '\\') ?: static::class;
     }
 
     public function path(string $tool): string
     {
         $path = implode(DIRECTORY_SEPARATOR, ['vendor', 'bin', $tool]);
 
-        return sprintf('(%s || %s)', $path, $tool);
+        if ($this->filesystem->missing($path)) {
+            return $tool;
+        }
+
+        return $path;
     }
 
     /** @return list<string> */

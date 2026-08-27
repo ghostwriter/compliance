@@ -17,19 +17,19 @@ final readonly class Package implements DependencyInterface
         private JsonInterface $json
     ) {}
 
+    /** @throws Throwable */
+    #[Override]
+    public function __toString(): string
+    {
+        return $this->json->encode($this);
+    }
+
     public static function new(
         DependencyName $dependencyName,
         DependencyVersion $dependencyVersion,
         JsonInterface $json
     ): self {
         return new self($dependencyName, $dependencyVersion, $json);
-    }
-
-    /** @throws Throwable */
-    #[Override]
-    public function __toString(): string
-    {
-        return $this->json->encode($this);
     }
 
     #[Override]

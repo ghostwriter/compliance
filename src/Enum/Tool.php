@@ -33,7 +33,6 @@ enum Tool: string
     /** @return class-string<ToolInterface> */
     public function toString(): string
     {
-        /** @var class-string<ToolInterface> $this->value */
         return $this->value;
     }
 }

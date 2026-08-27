@@ -92,8 +92,7 @@ enum PhpVersion: int
         //        );
         return array_filter(
             self::cases(),
-            static fn (self $phpVersion): bool
-            => (self::lowest()->value <= $phpVersion->value && self::highest()->value >= $phpVersion->value)
+            static fn (self $phpVersion): bool => (self::lowest()->value <= $phpVersion->value && self::highest()->value >= $phpVersion->value)
             && self::current()->value >= $phpVersion->value
         );
     }

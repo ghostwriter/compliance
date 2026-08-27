@@ -28,6 +28,8 @@ final class MatrixCommand extends AbstractCommand
     #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->shell->execute('composer', ['install'], $this->filesystem->currentWorkingDirectory());
+
         return $this->dispatchClass(MatrixEvent::class);
     }
 }

@@ -7,6 +7,7 @@ namespace Ghostwriter\Compliance\Console\Command;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
+use Ghostwriter\Shell\Interface\ShellInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
@@ -21,6 +22,7 @@ abstract class AbstractCommand extends Command
         protected ContainerInterface $container,
         protected EventDispatcherInterface $eventDispatcher,
         protected FilesystemInterface $filesystem,
+        protected ShellInterface $shell,
         protected SymfonyStyle $symfonyStyle,
     ) {
         parent::__construct(static::getDefaultName());
@@ -29,9 +31,8 @@ abstract class AbstractCommand extends Command
     /**
      * Dispatch an event.
      *
-     * @param object $event The event to dispatch
-     *
-     * @return int 0 if everything went fine, or 1 if an error occurred
+     * @param  object $event The event to dispatch
+     * @return int    0 if everything went fine, or 1 if an error occurred
      */
     public function dispatch(object $event): int
     {
@@ -49,9 +50,8 @@ abstract class AbstractCommand extends Command
     }
 
     /**
-     * @param class-string $event
-     *
-     * @return int 0 if everything went fine, or an exit code
+     * @param  class-string $event
+     * @return int          0 if everything went fine, or an exit code
      */
     public function dispatchClass(string $event): int
     {

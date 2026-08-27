@@ -22,15 +22,15 @@ final readonly class DependencyName implements JsonSerializable, Stringable
         }
     }
 
-    public static function new(string $name): self
-    {
-        return new self($name);
-    }
-
     #[Override]
     public function __toString(): string
     {
         return $this->content;
+    }
+
+    public static function new(string $name): self
+    {
+        return new self($name);
     }
 
     public function isPhpExtension(): bool

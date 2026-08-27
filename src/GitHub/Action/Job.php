@@ -9,6 +9,8 @@ use Ghostwriter\Compliance\Enum\OperatingSystem;
 use Ghostwriter\Compliance\Enum\PhpVersion;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 
+use const DIRECTORY_SEPARATOR;
+
 use function file_exists;
 use function implode;
 use function sprintf;
@@ -139,8 +141,8 @@ final readonly class Job
             command: sprintf('echo "%s"', $name),
             extensions: [],
             cacheDirectory: '/home/runner/.cache/composer/files',
-            composerJsonPath: $currentDirectory . \DIRECTORY_SEPARATOR . 'composer.json',
-            composerLockPath: $currentDirectory . \DIRECTORY_SEPARATOR . 'composer.lock',
+            composerJsonPath: $currentDirectory . DIRECTORY_SEPARATOR . 'composer.json',
+            composerLockPath: $currentDirectory . DIRECTORY_SEPARATOR . 'composer.lock',
             composerStrategy: ComposerStrategy::LOCKED,
             phpVersion: PhpVersion::latest(),
             operatingSystem: OperatingSystem::UBUNTU,
