@@ -64,18 +64,8 @@ use const PHP_EOL;
 use function sprintf;
 
 #[AsCommand(name: 'run', description: 'Runs the compliance checks based on GitHub Events.')]
-final class RunCommand extends Command
+final class RunCommand extends AbstractCommand
 {
-    public function __construct(
-        private readonly ContainerInterface $container,
-        private readonly FilesystemInterface $filesystem,
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly EnvironmentVariables $environmentVariables,
-        private readonly StyleInterface $symfonyStyle,
-    ) {
-        parent::__construct();
-    }
-
     /** @throws Throwable */
     #[Override]
     protected function configure(): void
@@ -149,6 +139,8 @@ final class RunCommand extends Command
         $eventName = $input->getArgument('event');
 
         $this->symfonyStyle->text(sprintf('<info>GitHub Event:</info> <error>%s</error>' . PHP_EOL, $eventName));
+
+        $this->shell->execute('composer', ['install'], $this->filesystem->currentWorkingDirectory());
 
         try {
             $this->eventDispatcher->dispatch(match ($eventName) {

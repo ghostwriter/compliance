@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Compliance\Console\Command;
 
+use Ghostwriter\Compliance\EnvironmentVariables;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\EventDispatcher\Interface\EventDispatcherInterface;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Ghostwriter\Shell\Interface\ShellInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Style\StyleInterface;
 use Throwable;
 
 use function mb_strtolower;
@@ -19,11 +20,12 @@ use function str_replace;
 abstract class AbstractCommand extends Command
 {
     public function __construct(
-        protected ContainerInterface $container,
-        protected EventDispatcherInterface $eventDispatcher,
-        protected FilesystemInterface $filesystem,
-        protected ShellInterface $shell,
-        protected SymfonyStyle $symfonyStyle,
+        protected readonly ContainerInterface $container,
+        protected readonly EnvironmentVariables $environmentVariables,
+        protected readonly EventDispatcherInterface $eventDispatcher,
+        protected readonly FilesystemInterface $filesystem,
+        protected readonly ShellInterface $shell,
+        protected readonly StyleInterface $symfonyStyle,
     ) {
         parent::__construct(static::getDefaultName());
     }
