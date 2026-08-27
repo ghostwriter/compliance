@@ -66,7 +66,7 @@ abstract class AbstractTool implements ToolInterface
     #[Override]
     public function name(): string
     {
-        return mb_strrchr(static::class, '\\') ?: static::class;
+        return mb_trim(mb_strrchr(static::class, '\\') ?: static::class, '\\');
     }
 
     public function path(string $tool): string
