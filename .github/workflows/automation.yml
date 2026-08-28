@@ -84,14 +84,6 @@ jobs:
       #   if: github.event_name == 'push' || github.event_name == 'pull_request'
       #   with:
       #     command: matrix
-
-      # - name: Clean Workflow Run History
-      #   continue-on-error: true
-      #   uses: yanovation/delete-old-actions@76d880c1e674aa4a279379e215fb6e4fe5cebe8a # 1.0.7
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     days-ago: 1
-      #     keep-latest: 0
     timeout-minutes: 6
   qa:
     continue-on-error: ${{ matrix.experimental }}
@@ -123,7 +115,7 @@ jobs:
           extensions: "xdebug, :php-psr, apcu, bcmath, ctype, curl, dom, ds, event, exif, fileinfo, filter, gd, gettext, hash, iconv, igbinary, intl, json, libxml, mbstring, memcached, mysqli, openssl, pcntl, pdo, pdo_mysql, pdo_pgsql, pdo_sqlite, pgsql, phar, posix, protobuf, readline, redis, session, simplexml, sockets, sodium, sqlite3, tokenizer, xml, xmlreader, xmlwriter, xsl, yaml, zend-opcache, zip, zlib, ${{ join(matrix.extensions, ', ') }}"
           ini-values: 'assert.exception=1, zend.assertions=1, error_reporting=-1, log_errors_max_len=0, display_errors=On'
           php-version: '${{ matrix.php }}'
-          tools: 'composer:2.10.3, infection:0.35.2, phpunit:13.3.2, psalm:6.16.1'
+          tools: 'composer:2.10.3, infection:0.35.3, phpunit:13.3.2, psalm:6.16.1'
 
       - name: Setup problem matchers
         run: |
